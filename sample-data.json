@@ -1,0 +1,141 @@
+{
+  "favorites": [
+    {
+      "id": 1,
+      "label": "Google",
+      "url": "https://google.com",
+      "icon": "fab fa-google"
+    },
+    {
+      "id": 2,
+      "label": "GitHub",
+      "url": "https://github.com",
+      "icon": "fab fa-github"
+    },
+    {
+      "id": 3,
+      "label": "Stack Overflow",
+      "url": "https://stackoverflow.com",
+      "icon": "fab fa-stack-overflow"
+    },
+    {
+      "id": 4,
+      "label": "YouTube",
+      "url": "https://youtube.com",
+      "icon": "fab fa-youtube"
+    },
+    {
+      "id": 5,
+      "label": "Reddit",
+      "url": "https://reddit.com",
+      "icon": "fab fa-reddit"
+    },
+    {
+      "id": 6,
+      "label": "Twitter",
+      "url": "https://twitter.com",
+      "icon": "fab fa-twitter"
+    }
+  ],
+  "notes": [
+    {
+      "id": 1,
+      "title": "Welcome to Your Homepage",
+      "content": "This is your personal homepage dashboard. You can:\n\n• Add and manage favorite links\n• Create notes and tasks\n• Import browser bookmarks\n• View cybersecurity news feeds\n• Toggle between light and dark themes\n\nEverything is stored locally in your browser!",
+      "createdAt": "2024-09-14"
+    },
+    {
+      "id": 2,
+      "title": "Cybersecurity Resources",
+      "content": "Important security resources to bookmark:\n\n• NIST Cybersecurity Framework\n• OWASP Top 10\n• CVE Database\n• Security advisories from major vendors\n• Incident response playbooks",
+      "createdAt": "2024-09-14"
+    },
+    {
+      "id": 3,
+      "title": "Development Tools",
+      "content": "Useful development and security tools:\n\n• Burp Suite for web application testing\n• Wireshark for network analysis\n• Nmap for network discovery\n• Git for version control\n• Docker for containerization",
+      "createdAt": "2024-09-14"
+    }
+  ],
+  "todos": [
+    {
+      "id": 1,
+      "text": "Review security policies and procedures",
+      "dueDate": "2024-09-20",
+      "completed": false,
+      "createdAt": "2024-09-14"
+    },
+    {
+      "id": 2,
+      "text": "Update system patches and security software",
+      "dueDate": "2024-09-16",
+      "completed": false,
+      "createdAt": "2024-09-14"
+    },
+    {
+      "id": 3,
+      "text": "Complete security awareness training",
+      "dueDate": "2024-09-25",
+      "completed": false,
+      "createdAt": "2024-09-14"
+    },
+    {
+      "id": 4,
+      "text": "Backup important project files",
+      "dueDate": null,
+      "completed": true,
+      "createdAt": "2024-09-13"
+    },
+    {
+      "id": 5,
+      "text": "Set up two-factor authentication on all accounts",
+      "dueDate": "2024-09-18",
+      "completed": false,
+      "createdAt": "2024-09-14"
+    }
+  ],
+  "bookmarks": [
+    {
+      "id": 1,
+      "title": "Krebs on Security",
+      "url": "https://krebsonsecurity.com",
+      "folder": "Security News",
+      "favicon": "https://krebsonsecurity.com/favicon.ico"
+    },
+    {
+      "id": 2,
+      "title": "The Hacker News",
+      "url": "https://thehackernews.com",
+      "folder": "Security News",
+      "favicon": "https://thehackernews.com/favicon.ico"
+    },
+    {
+      "id": 3,
+      "title": "OWASP",
+      "url": "https://owasp.org",
+      "folder": "Security Resources",
+      "favicon": "https://owasp.org/favicon.ico"
+    },
+    {
+      "id": 4,
+      "title": "NIST Cybersecurity Framework",
+      "url": "https://www.nist.gov/cyberframework",
+      "folder": "Security Resources",
+      "favicon": "https://www.nist.gov/favicon.ico"
+    },
+    {
+      "id": 5,
+      "title": "GitHub",
+      "url": "https://github.com",
+      "folder": "Development",
+      "favicon": "https://github.com/favicon.ico"
+    },
+    {
+      "id": 6,
+      "title": "Stack Overflow",
+      "url": "https://stackoverflow.com",
+      "folder": "Development",
+      "favicon": "https://stackoverflow.com/favicon.ico"
+    }
+  ]
+}

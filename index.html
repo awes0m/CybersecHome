@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awes0m Cybersecurity Homepage</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body data-theme="light">
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo"><i class="fas fa-shield-halved"></i> Awes0m's CyberHome</div>
+            <nav class="nav" id="mainNav">
+                <a href="#home" class="nav-link active" data-page="homePage">Home</a>
+                <a href="#bookmarks" class="nav-link" data-page="bookmarksPage">Bookmarks</a>
+                <a href="#feeds" class="nav-link" data-page="feedsPage">Feeds</a>
+            </nav>
+            <div class="header-controls">
+                <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+                <button class="theme-toggle" id="changeWallpaperBtn" title="Change wallpaper"><i class="fas fa-image"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Home Page -->
+        <div id="homePage" class="page active">
+             <section class="section" id="favoritesSection">
+                <div class="section-header">
+                    <h2 class="section-title"><i class="fas fa-star"></i> Favorites</h2>
+                    <button class="btn btn-primary" id="addFavoriteBtn"><i class="fas fa-plus"></i> Add Favorite</button>
+                </div>
+                <div class="favorites-grid" id="favoritesGrid"></div>
+            </section>
+            <section class="section">
+                <div class="notes-todos">
+                    <div class="notes-container">
+                        <div class="section-header">
+                            <h3 class="section-title"><i class="fas fa-note-sticky"></i> Notes</h3>
+                             <button class="btn btn-primary btn-small" id="addNoteBtn"><i class="fas fa-plus"></i> Add</button>
+                        </div>
+                        <div id="notesList"></div>
+                    </div>
+                    <div class="todos-container">
+                        <div class="section-header">
+                            <h3 class="section-title"><i class="fas fa-check-square"></i> Tasks</h3>
+                            <button class="btn btn-primary btn-small" id="addTodoBtn"><i class="fas fa-plus"></i> Add</button>
+                        </div>
+                        <div id="todosList"></div>
+                    </div>
+                </div>
+            </section>
+             <section class="section">
+                <div class="section-header">
+                    <h2 class="section-title"><i class="fas fa-rss"></i> Recent News</h2>
+                    <button class="btn btn-secondary" id="refreshFeedsBtnHome"><i class="fa-solid fa-arrows-rotate"></i> Refresh</button>
+                </div>
+                <div class="feed-grid" id="feedGridHome"></div>
+            </section>
+        </div>
+
+        <!-- Bookmarks Page -->
+        <div id="bookmarksPage" class="page">
+            <div class="bookmarks-page-header">
+                <h1 class="section-title">My Bookmarks</h1>
+                <div class="bookmarks-upload-container">
+                    <div class="bookmarks-upload" id="bookmarksUpload">
+                        <i class="fas fa-upload"></i> Import
+                        <input type="file" id="bookmarksInput" accept=".html" style="display: none;">
+                    </div>
+                    <button class="btn btn-primary" id="addFolderBtn"><i class="fas fa-folder-plus"></i> New Folder</button>
+                </div>
+            </div>
+            <div id="bookmarksContainer"></div>
+        </div>
+
+        <!-- Feeds Page -->
+        <div id="feedsPage" class="page">
+             <div class="section-header">
+                <h1 class="section-title">Cybersecurity News Feeds</h1>
+                <div style="display:flex;gap:0.5rem;align-items:center;">
+                    <button class="btn btn-primary" id="addFeedBtn"><i class="fas fa-plus"></i> Add Feed</button>
+                    <button class="btn btn-secondary" id="refreshFeedsBtnPage"><i class="fa-solid fa-arrows-rotate"></i> Refresh Feeds</button>
+                </div>
+            </div>
+            <div class="feed-grid" id="feedGridPage"></div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal-overlay" id="favoriteModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Add Favorite</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="favoriteForm">
+                <div class="form-group"><label class="form-label">Label</label><input type="text" class="form-input" id="favoriteLabel" required></div>
+                <div class="form-group"><label class="form-label">URL</label><input type="url" class="form-input" id="favoriteUrl" required></div>
+                <div class="form-group"><label class="form-label">Icon (Font Awesome)</label><input type="text" class="form-input" id="favoriteIcon" placeholder="fas fa-globe"></div>
+                <button type="submit" class="btn btn-primary">Add Favorite</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Add Feed Modal -->
+    <div class="modal-overlay" id="feedModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Add RSS Feed</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="feedForm">
+                <div class="form-group"><label class="form-label">Name</label><input type="text" class="form-input" id="feedNameInput" required></div>
+                <div class="form-group"><label class="form-label">RSS URL</label><input type="url" class="form-input" id="feedUrlInput" placeholder="https://example.com/feed" required></div>
+                <div class="form-group"><label class="form-label">Icon URL (optional)</label><input type="url" class="form-input" id="feedIconInput" placeholder="https://example.com/favicon.ico"></div>
+                <div id="feedPreviewArea" style="margin-bottom:0.75rem;display:none;">
+                    <div id="feedPreviewTitle" style="font-weight:600;margin-bottom:0.25rem;"></div>
+                    <div id="feedPreviewItems" style="font-size:0.9rem;color:var(--text-secondary);"></div>
+                </div>
+                <div id="feedPreviewError" style="color:var(--danger-color);margin-bottom:0.5rem;display:none;"></div>
+                <button type="submit" class="btn btn-primary" id="saveFeedBtn" disabled>Save Feed</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Wallpaper Modal -->
+    <div class="modal-overlay" id="wallpaperModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Set Wallpaper</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="wallpaperForm">
+                <div class="form-group"><label class="form-label">Image URL</label><input type="url" class="form-input" id="wallpaperUrlInput" placeholder="https://...jpg"></div>
+                <div id="wallpaperPreviewArea" style="display:none;margin-bottom:0.5rem;">
+                    <img id="wallpaperPreviewImg" src="" alt="preview" style="max-width:100%;border-radius:6px;display:block;margin-bottom:0.5rem;">
+                    <div id="wallpaperPreviewMsg" style="font-size:0.9rem;color:var(--text-secondary);"></div>
+                </div>
+                <div style="display:flex;gap:0.5rem;align-items:center;">
+                    <button type="submit" class="btn btn-primary" id="setWallpaperBtn" disabled>Set Wallpaper</button>
+                    <button type="button" class="btn btn-secondary" id="clearWallpaperBtn">Clear</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="noteModal">
+         <div class="modal">
+            <div class="modal-header"><h3 class="modal-title">Add Note</h3><button class="modal-close">&times;</button></div>
+            <form id="noteForm">
+                <div class="form-group"><label class="form-label">Title</label><input type="text" class="form-input" id="noteTitle" required></div>
+                <div class="form-group"><label class="form-label">Content</label><textarea class="form-input" id="noteContent" rows="6" required></textarea></div>
+                <button type="submit" class="btn btn-primary">Save Note</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="modal-overlay" id="todoModal">
+         <div class="modal">
+            <div class="modal-header"><h3 class="modal-title">Add Task</h3><button class="modal-close">&times;</button></div>
+            <form id="todoForm">
+                <div class="form-group"><label class="form-label">Task</label><input type="text" class="form-input" id="todoText" required></div>
+                <div class="form-group"><label class="form-label">Due Date</label><input type="date" class="form-input" id="todoDueDate"></div>
+                <button type="submit" class="btn btn-primary">Add Task</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="modal-overlay" id="folderModal">
+         <div class="modal">
+            <div class="modal-header"><h3 class="modal-title" id="folderModalTitle">New Folder</h3><button class="modal-close">&times;</button></div>
+            <form id="folderForm">
+                <input type="hidden" id="folderIdInput">
+                <div class="form-group"><label class="form-label">Folder Name</label><input type="text" class="form-input" id="folderNameInput" required></div>
+                <button type="submit" class="btn btn-primary">Save Folder</button>
+            </form>
+        </div>
+    </div>
+    
+     <div class="modal-overlay" id="bookmarkModal">
+         <div class="modal">
+            <div class="modal-header"><h3 class="modal-title" id="bookmarkModalTitle">New Bookmark</h3><button class="modal-close">&times;</button></div>
+            <form id="bookmarkForm">
+                <input type="hidden" id="bookmarkIdInput">
+                <input type="hidden" id="bookmarkFolderIdInput">
+                <div class="form-group"><label class="form-label">Title</label><input type="text" class="form-input" id="bookmarkTitleInput" required></div>
+                <div class="form-group"><label class="form-label">URL</label><input type="url" class="form-input" id="bookmarkUrlInput" required></div>
+                <button type="submit" class="btn btn-primary">Save Bookmark</button>
+            </form>
+        </div>
+    </div>
+
+ <script src="script.js"></script>
+</body>
+</html>
