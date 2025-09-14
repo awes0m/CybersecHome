@@ -272,6 +272,45 @@ body {
   position: relative;
 }
 
+/* Notes & Todos tweaks */
+.note-item .note-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.note-item .note-title {
+  font-weight: 600;
+}
+.note-item .note-content {
+  color: var(--text-color);
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+}
+.todo-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.todo-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.todo-due {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+.todo-item.completed .todo-text {
+  text-decoration: line-through;
+  color: var(--text-secondary);
+}
+
 /* Bookmarks Page */
 .bookmarks-page-header {
   display: flex;

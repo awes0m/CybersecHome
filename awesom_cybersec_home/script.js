@@ -267,13 +267,80 @@ class HomepageApp {
         this.saveData('notes', this.notes);
         this.renderNotes();
     }
-    renderNotes() { /* Logic similar to others */ }
+
+    // Basic escaping to avoid injecting HTML via note/task text
+    escapeHtml(str) {
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/\"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }
+
+    renderNotes() {
+        const list = document.getElementById('notesList');
+        if (!this.notes || this.notes.length === 0) {
+            list.innerHTML = `<p class="empty-state">No notes yet.</p>`;
+            return;
+        }
+        list.innerHTML = this.notes.map(n => `
+                <div class="note-item">
+                    <div class="note-header">
+                        <div class="note-title">${this.escapeHtml(n.title)}</div>
+                        <button class="btn-icon" title="Delete" onclick="app.removeNote(${n.id})"><i class="fas fa-trash"></i></button>
+                    </div>
+                    <div class="note-content">${this.escapeHtml(n.content).replace(/\n/g, '<br>')}</div>
+                </div>
+            `).join('');
+    }
 
     // --- TODOS ---
-    addTodo() { /* Logic similar to others */ }
-    removeTodo(id) { /* Logic similar to others */ }
-    toggleTodo(id) { /* Logic similar to others */ }
-    renderTodos() { /* Logic similar to others */ }
+    addTodo() {
+        const text = document.getElementById('todoText').value.trim();
+        const dueDate = document.getElementById('todoDueDate').value;
+        if (!text) return;
+        const todo = { id: Date.now(), text, dueDate: dueDate || '', completed: false };
+        this.todos.unshift(todo);
+        this.saveData('todos', this.todos);
+        this.renderTodos();
+        this.closeModal('todoModal');
+    }
+    removeTodo(id) {
+        this.todos = this.todos.filter(t => t.id !== id);
+        this.saveData('todos', this.todos);
+        this.renderTodos();
+    }
+    toggleTodo(id) {
+        const t = this.todos.find(t => t.id === id);
+        if (t) {
+            t.completed = !t.completed;
+            this.saveData('todos', this.todos);
+            this.renderTodos();
+        }
+    }
+    renderTodos() {
+        const list = document.getElementById('todosList');
+        if (!this.todos || this.todos.length === 0) {
+            list.innerHTML = `<p class="empty-state">No tasks yet.</p>`;
+            return;
+        }
+        list.innerHTML = this.todos.map(t => {
+            const due = t.dueDate ? new Date(t.dueDate) : null;
+            const dueDisplay = due ? due.toLocaleDateString() : '';
+            return `
+                <div class="todo-item ${t.completed ? 'completed' : ''}">
+                    <div class="todo-left">
+                        <input type="checkbox" ${t.completed ? 'checked' : ''} onchange="app.toggleTodo(${t.id})" />
+                        <span class="todo-text">${this.escapeHtml(t.text)}</span>
+                    </div>
+                    <div class="todo-right">
+                        ${dueDisplay ? `<span class=\"todo-due\">${dueDisplay}</span>` : ''}
+                        <button class="btn-icon" title="Delete" onclick="app.removeTodo(${t.id})"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>`;
+        }).join('');
+    }
 
     // --- BOOKMARKS ---
     handleBookmarksFile(file) {
@@ -601,10 +668,6 @@ class HomepageApp {
         // restore body background to theme color
         document.body.style.backgroundColor = '';
     }
-
-    // Dummy render functions for notes and todos (to be implemented)
-    renderNotes() { document.getElementById('notesList').innerHTML = `<p class="empty-state">No notes yet.</p>` }
-    renderTodos() { document.getElementById('todosList').innerHTML = `<p class="empty-state">No tasks yet.</p>` }
 
 }
 
