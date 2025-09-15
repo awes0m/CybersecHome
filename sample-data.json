@@ -1,141 +1,315 @@
 {
   "favorites": [
     {
-      "id": 1,
-      "label": "Google",
-      "url": "https://google.com",
-      "icon": "fab fa-google"
+      "id": 1757950460075,
+      "label": "The Hacker News",
+      "url": "https://thehackernews.com/",
+      "icon": "fas fa-book-bookmark"
     },
     {
-      "id": 2,
-      "label": "GitHub",
-      "url": "https://github.com",
-      "icon": "fab fa-github"
-    },
-    {
-      "id": 3,
-      "label": "Stack Overflow",
-      "url": "https://stackoverflow.com",
-      "icon": "fab fa-stack-overflow"
-    },
-    {
-      "id": 4,
-      "label": "YouTube",
-      "url": "https://youtube.com",
-      "icon": "fab fa-youtube"
-    },
-    {
-      "id": 5,
-      "label": "Reddit",
-      "url": "https://reddit.com",
-      "icon": "fab fa-reddit"
-    },
-    {
-      "id": 6,
-      "label": "Twitter",
-      "url": "https://twitter.com",
-      "icon": "fab fa-twitter"
+      "id": 1757950462130,
+      "label": "Threatpost",
+      "url": "https://threatpost.com/",
+      "icon": "fas fa-book-bookmark"
     }
   ],
   "notes": [
     {
-      "id": 1,
-      "title": "Welcome to Your Homepage",
-      "content": "This is your personal homepage dashboard. You can:\n\n• Add and manage favorite links\n• Create notes and tasks\n• Import browser bookmarks\n• View cybersecurity news feeds\n• Toggle between light and dark themes\n\nEverything is stored locally in your browser!",
-      "createdAt": "2024-09-14"
-    },
-    {
-      "id": 2,
-      "title": "Cybersecurity Resources",
-      "content": "Important security resources to bookmark:\n\n• NIST Cybersecurity Framework\n• OWASP Top 10\n• CVE Database\n• Security advisories from major vendors\n• Incident response playbooks",
-      "createdAt": "2024-09-14"
-    },
-    {
-      "id": 3,
-      "title": "Development Tools",
-      "content": "Useful development and security tools:\n\n• Burp Suite for web application testing\n• Wireshark for network analysis\n• Nmap for network discovery\n• Git for version control\n• Docker for containerization",
-      "createdAt": "2024-09-14"
+      "id": 1757945378337,
+      "title": "Cow ate goat",
+      "content": "Goat can't eat cow . As goat is smaller than cow. Hence cow 8 goat!",
+      "createdAt": "2025-09-15T14:09:38.337Z",
+      "updatedAt": "2025-09-15T15:34:04.787Z"
     }
   ],
   "todos": [
     {
-      "id": 1,
-      "text": "Review security policies and procedures",
-      "dueDate": "2024-09-20",
+      "id": 1757945390248,
+      "text": "Set this as your homepage!",
+      "dueDate": "2025-09-16",
       "completed": false,
-      "createdAt": "2024-09-14"
-    },
-    {
-      "id": 2,
-      "text": "Update system patches and security software",
-      "dueDate": "2024-09-16",
-      "completed": false,
-      "createdAt": "2024-09-14"
-    },
-    {
-      "id": 3,
-      "text": "Complete security awareness training",
-      "dueDate": "2024-09-25",
-      "completed": false,
-      "createdAt": "2024-09-14"
-    },
-    {
-      "id": 4,
-      "text": "Backup important project files",
-      "dueDate": null,
-      "completed": true,
-      "createdAt": "2024-09-13"
-    },
-    {
-      "id": 5,
-      "text": "Set up two-factor authentication on all accounts",
-      "dueDate": "2024-09-18",
-      "completed": false,
-      "createdAt": "2024-09-14"
+      "createdAt": "2025-09-15T14:09:50.248Z",
+      "updatedAt": "2025-09-15T14:09:50.248Z"
     }
   ],
   "bookmarks": [
     {
-      "id": 1,
-      "title": "Krebs on Security",
-      "url": "https://krebsonsecurity.com",
-      "folder": "Security News",
-      "favicon": "https://krebsonsecurity.com/favicon.ico"
+      "id": "folder_1757950402131_24041uqcd",
+      "name": "Security News",
+      "bookmarks": [
+        {
+          "id": "bm_1757950402131_opjtj8g5j",
+          "title": "Krebs on Security",
+          "url": "https://krebsonsecurity.com/",
+          "favicon": "https://www.google.com/s2/favicons?domain=krebsonsecurity.com&sz=32",
+          "addDate": "1694000000",
+          "icon": null
+        },
+        {
+          "id": "bm_1757950402131_s26aa4whc",
+          "title": "The Hacker News",
+          "url": "https://thehackernews.com/",
+          "favicon": "https://www.google.com/s2/favicons?domain=thehackernews.com&sz=32",
+          "addDate": "1694000000",
+          "icon": null
+        },
+        {
+          "id": "bm_1757950402131_94225untj",
+          "title": "Threatpost",
+          "url": "https://threatpost.com/",
+          "favicon": "https://www.google.com/s2/favicons?domain=threatpost.com&sz=32",
+          "addDate": "1694000000",
+          "icon": null
+        },
+        {
+          "id": "bm_1757950402131_xwbthbb1w",
+          "title": "Dark Reading",
+          "url": "https://www.darkreading.com/",
+          "favicon": "https://www.google.com/s2/favicons?domain=www.darkreading.com&sz=32",
+          "addDate": "1694000000",
+          "icon": null
+        },
+        {
+          "id": "bm_1757950402131_bmdmqer5l",
+          "title": "BleepingComputer",
+          "url": "https://www.bleepingcomputer.com/",
+          "favicon": "https://www.google.com/s2/favicons?domain=www.bleepingcomputer.com&sz=32",
+          "addDate": "1694000000",
+          "icon": null
+        }
+      ],
+      "depth": 0
     },
     {
-      "id": 2,
-      "title": "The Hacker News",
-      "url": "https://thehackernews.com",
-      "folder": "Security News",
-      "favicon": "https://thehackernews.com/favicon.ico"
+      "id": "folder_1757950402131_v5ehon3ve",
+      "name": "Security Resources",
+      "bookmarks": [
+        {
+          "id": "bm_1757950402131_akvwazgre",
+          "title": "OWASP Foundation",
+          "url": "https://owasp.org/",
+          "favicon": "https://www.google.com/s2/favicons?domain=owasp.org&sz=32",
+          "addDate": "1694000000",
+          "icon": null
+        },
+        {
+          "id": "bm_1757950402131_isonjlgub",
+          "title": "NIST Cybersecurity Framework",
+          "url": "https://www.nist.gov/cyberframework",
+          "favicon": "https://www.google.com/s2/favicons?domain=www.nist.gov&sz=32",
+          "addDate": "1694000000",
+          "icon": null
+        },
+        {
+          "id": "bm_1757950402131_51t1qk93w",
+          "title": "CVE Database",
+          "url": "https://cve.mitre.org/",
+          "favicon": "https://www.google.com/s2/favicons?domain=cve.mitre.org&sz=32",
+          "addDate": "1694000000",
+          "icon": null
+        },
+        {
+          "id": "bm_1757950402131_i4m96i9bq",
+          "title": "SANS Institute",
+          "url": "https://www.sans.org/",
+          "favicon": "https://www.google.com/s2/favicons?domain=www.sans.org&sz=32",
+          "addDate": "1694000000",
+          "icon": null
+        },
+        {
+          "id": "bm_1757950402131_1dyj5rrky",
+          "title": "Center for Internet Security",
+          "url": "https://www.cisecurity.org/",
+          "favicon": "https://www.google.com/s2/favicons?domain=www.cisecurity.org&sz=32",
+          "addDate": "1694000000",
+          "icon": null
+        }
+      ],
+      "depth": 0
     },
     {
-      "id": 3,
-      "title": "OWASP",
-      "url": "https://owasp.org",
-      "folder": "Security Resources",
-      "favicon": "https://owasp.org/favicon.ico"
+      "id": "folder_1757950402131_sohc25ew8",
+      "name": "Development Tools",
+      "bookmarks": [
+        {
+          "id": "bm_1757950402131_vfnu07dzx",
+          "title": "GitHub",
+          "url": "https://github.com/",
+          "favicon": "https://www.google.com/s2/favicons?domain=github.com&sz=32",
+          "addDate": "1694000000",
+          "icon": null
+        },
+        {
+          "id": "bm_1757950402131_c50untem7",
+          "title": "GitLab",
+          "url": "https://gitlab.com/",
+          "favicon": "https://www.google.com/s2/favicons?domain=gitlab.com&sz=32",
+          "addDate": "1694000000",
+          "icon": null
+        },
+        {
+          "id": "bm_1757950402131_r9s8k3u6q",
+          "title": "Stack Overflow",
+          "url": "https://stackoverflow.com/",
+          "favicon": "https://www.google.com/s2/favicons?domain=stackoverflow.com&sz=32",
+          "addDate": "1694000000",
+          "icon": null
+        },
+        {
+          "id": "bm_1757950402131_57jhh2b66",
+          "title": "Visual Studio Code",
+          "url": "https://code.visualstudio.com/",
+          "favicon": "https://www.google.com/s2/favicons?domain=code.visualstudio.com&sz=32",
+          "addDate": "1694000000",
+          "icon": null
+        },
+        {
+          "id": "bm_1757950402131_sltxrrjey",
+          "title": "JetBrains",
+          "url": "https://www.jetbrains.com/",
+          "favicon": "https://www.google.com/s2/favicons?domain=www.jetbrains.com&sz=32",
+          "addDate": "1694000000",
+          "icon": null
+        }
+      ],
+      "depth": 0
     },
     {
-      "id": 4,
-      "title": "NIST Cybersecurity Framework",
-      "url": "https://www.nist.gov/cyberframework",
-      "folder": "Security Resources",
-      "favicon": "https://www.nist.gov/favicon.ico"
+      "id": "folder_1757950402131_zlivut9p0",
+      "name": "Security Tools",
+      "bookmarks": [
+        {
+          "id": "bm_1757950402131_4fl3axtkw",
+          "title": "Burp Suite",
+          "url": "https://portswigger.net/burp",
+          "favicon": "https://www.google.com/s2/favicons?domain=portswigger.net&sz=32",
+          "addDate": "1694000000",
+          "icon": null
+        },
+        {
+          "id": "bm_1757950402131_efbx0vdjd",
+          "title": "Wireshark",
+          "url": "https://www.wireshark.org/",
+          "favicon": "https://www.google.com/s2/favicons?domain=www.wireshark.org&sz=32",
+          "addDate": "1694000000",
+          "icon": null
+        },
+        {
+          "id": "bm_1757950402131_vokdx0njh",
+          "title": "Nmap",
+          "url": "https://nmap.org/",
+          "favicon": "https://www.google.com/s2/favicons?domain=nmap.org&sz=32",
+          "addDate": "1694000000",
+          "icon": null
+        },
+        {
+          "id": "bm_1757950402131_5vzr7nk1e",
+          "title": "Metasploit",
+          "url": "https://www.metasploit.com/",
+          "favicon": "https://www.google.com/s2/favicons?domain=www.metasploit.com&sz=32",
+          "addDate": "1694000000",
+          "icon": null
+        },
+        {
+          "id": "bm_1757950402131_6r54ehbnf",
+          "title": "Kali Linux",
+          "url": "https://www.kali.org/",
+          "favicon": "https://www.google.com/s2/favicons?domain=www.kali.org&sz=32",
+          "addDate": "1694000000",
+          "icon": null
+        }
+      ],
+      "depth": 0
     },
     {
-      "id": 5,
-      "title": "GitHub",
-      "url": "https://github.com",
-      "folder": "Development",
-      "favicon": "https://github.com/favicon.ico"
+      "id": "folder_1757950402131_r47y50kic",
+      "name": "Documentation",
+      "bookmarks": [
+        {
+          "id": "bm_1757950402131_by0kp0ft6",
+          "title": "MDN Web Docs",
+          "url": "https://developer.mozilla.org/",
+          "favicon": "https://www.google.com/s2/favicons?domain=developer.mozilla.org&sz=32",
+          "addDate": "1694000000",
+          "icon": null
+        },
+        {
+          "id": "bm_1757950402131_0zbhjhzm1",
+          "title": "W3Schools",
+          "url": "https://www.w3schools.com/",
+          "favicon": "https://www.google.com/s2/favicons?domain=www.w3schools.com&sz=32",
+          "addDate": "1694000000",
+          "icon": null
+        },
+        {
+          "id": "bm_1757950402131_o6fe4glfi",
+          "title": "Python Documentation",
+          "url": "https://docs.python.org/",
+          "favicon": "https://www.google.com/s2/favicons?domain=docs.python.org&sz=32",
+          "addDate": "1694000000",
+          "icon": null
+        },
+        {
+          "id": "bm_1757950402131_wlorvdrr0",
+          "title": "Node.js Documentation",
+          "url": "https://nodejs.org/en/docs/",
+          "favicon": "https://www.google.com/s2/favicons?domain=nodejs.org&sz=32",
+          "addDate": "1694000000",
+          "icon": null
+        }
+      ],
+      "depth": 0
     },
     {
-      "id": 6,
-      "title": "Stack Overflow",
-      "url": "https://stackoverflow.com",
-      "folder": "Development",
-      "favicon": "https://stackoverflow.com/favicon.ico"
+      "id": "folder_1757950402131_liz4rqzs5",
+      "name": "Social & Communication",
+      "bookmarks": [
+        {
+          "id": "bm_1757950402131_6avfagqjh",
+          "title": "Twitter",
+          "url": "https://twitter.com/",
+          "favicon": "https://www.google.com/s2/favicons?domain=twitter.com&sz=32",
+          "addDate": "1694000000",
+          "icon": null
+        },
+        {
+          "id": "bm_1757950402131_g8us1y0dq",
+          "title": "LinkedIn",
+          "url": "https://www.linkedin.com/",
+          "favicon": "https://www.google.com/s2/favicons?domain=www.linkedin.com&sz=32",
+          "addDate": "1694000000",
+          "icon": null
+        },
+        {
+          "id": "bm_1757950402131_kcjfjbf86",
+          "title": "Reddit",
+          "url": "https://www.reddit.com/",
+          "favicon": "https://www.google.com/s2/favicons?domain=www.reddit.com&sz=32",
+          "addDate": "1694000000",
+          "icon": null
+        },
+        {
+          "id": "bm_1757950402131_toedchvay",
+          "title": "Discord",
+          "url": "https://discord.com/",
+          "favicon": "https://www.google.com/s2/favicons?domain=discord.com&sz=32",
+          "addDate": "1694000000",
+          "icon": null
+        },
+        {
+          "id": "bm_1757950402131_i3jdxagec",
+          "title": "Slack",
+          "url": "https://slack.com/",
+          "favicon": "https://www.google.com/s2/favicons?domain=slack.com&sz=32",
+          "addDate": "1694000000",
+          "icon": null
+        }
+      ],
+      "depth": 0
     }
-  ]
+  ],
+  "customFeeds": [],
+  "theme": "dark",
+  "wallpaper": "",
+  "exportedAt": "2025-09-15T15:34:27.145Z"
 }

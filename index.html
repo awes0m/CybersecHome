@@ -12,6 +12,34 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Awes0m Cybersec Homepage</title>
+    <!--
+      Project: Awes0m Cybersec Home
+      Description: Self-contained, responsive browser homepage with Favorites, Notes, Tasks, Bookmark Import, and Cybersecurity Feeds.
+
+      Key Features
+      - Responsive layout with glass UI and theme toggle (light/dark)
+      - Favorites grid with icons, quick delete, and smooth interactions
+      - Notes and Tasks modules with CRUD and scrollable lists
+      - Bookmark import (drag & drop) of standard browser exports (HTML), grouped by folders, with favicons
+      - Feeds module uses mock in-browser data by default (no backend required); can be wired to a proxy later
+
+      Data Flow
+      1) Boot: Load persisted data from localStorage (theme, favorites, notes, todos, bookmarks) and render
+      2) Interaction: UI events update in-memory arrays and write back to localStorage
+      3) Render: Sections re-render from current state after each change
+      4) Persist: Data is saved under keys and restored on refresh
+
+      Local Storage Keys
+      - favorites: Array<{ id, label, url, icon }>
+      - notes: Array<{ id, title, content, createdAt }>
+      - todos: Array<{ id, text, dueDate, completed, createdAt }>
+      - bookmarks: Array<{ id, title, url, folder, favicon }>
+      - theme: "light" | "dark"
+
+      Customization
+      - Feeds: Update the feedSources array in the script to add custom sources
+      - Theme: Body attribute data-theme="dark|light" controls CSS variable set
+    -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"

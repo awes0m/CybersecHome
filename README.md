@@ -1,461 +1,278 @@
 # awesom_browser_tools
 
-A collection of Browser based tools
+A collection of browser-based tools.
 
-# Modular Browser Homepage
+# Modular Browser Homepage — Awes0m Cybersec Home
 
-A fully-featured, responsive browser homepage with favorites, notes, tasks, bookmark import, and cybersecurity news feeds.
+- Live: https://awes0m.github.io/awesom_browser_tools/#home
+- Download: https://github.com/awes0m/awesom_browser_tools/raw/refs/heads/main/awesom_cybersec_home.zip
 
-## [Download it here](https://github.com/awes0m/awesom_browser_tools/raw/refs/heads/main/awesom_cybersec_home.zip)
+This is a fully featured, responsive browser homepage with favorites, notes, tasks, bookmark import, and cybersecurity news feeds. It is self-contained in a single HTML file and stores your data locally in the browser.
+
+---
 
 ## Features
 
-### 🌟 Core Features
+### 🌟 Core
+- **Responsive Design**: Desktop, tablet, mobile
+- **Dark/Light Theme**: Toggle with persistence
+- **Self-contained**: Single HTML file, optional samples
+- **Local Storage**: All data persists in your browser
+- **Accessible UI**: Keyboard and screen-reader friendly structure
 
-* **Responsive Design** : Works perfectly on desktop, tablet, and mobile devices
-* **Dark/Light Theme** : Toggle between themes with persistent storage
-* **Modular Architecture** : Clean, maintainable code structure
-* **Local Storage** : All data persists locally in your browser
+### 🧭 Navigation & Layout
+- **Fixed glassmorphism header** with logo and page navigation
+- **Client-side page switching**: Home, Bookmarks, Notes, Tasks, Feeds (single-page experience)
+- **Collapsible sections** with subtle hover/transition effects
+- **Scrollable content areas** for Favorites, Notes, and Tasks to keep the layout compact
+- **Optional wallpaper overlay** layer behind the gradient background for personalization
 
-### 📌 Favorites Management
+### 📌 Favorites
+- Add, edit, and delete favorite links
+- Font Awesome icon support (e.g., `fab fa-github`)
+- Clickable tiles with hover animations and quick delete
+- Grid layout with responsive columns
 
-* Add, edit, and remove favorite links
-* Custom icons using Font Awesome classes
-* Visual drag-and-drop interface
-* Hover effects and smooth animations
+### 📝 Notes
+- Create, update, delete text notes
+- Per-note title and content
+- Smooth card UI with hover motion
 
-### 📝 Notes & Tasks
-
-* **Notes** : Rich text notes with titles and content
-* **Tasks** : To-do items with due dates and completion status
-* **Smart Sorting** : Overdue tasks highlighted in red
-* **CRUD Operations** : Full create, read, update, delete functionality
+### ✅ Tasks (Todos)
+- Create, update, delete tasks
+- Set due dates; overdue tasks highlighted
+- Mark complete/incomplete; clear completed
 
 ### 📚 Bookmark Import
+- Drag-and-drop or click-to-upload a standard `bookmarks.html` exported from Chrome/Firefox/Edge/Safari
+- Automatic parsing and folder grouping
+- Favicon display when available
 
-* Import standard browser bookmark exports (bookmarks.html)
-* Automatic folder organization
-* Favicon display for visual recognition
-* Drag-and-drop file upload support
-
-### 📰 News Feeds(also add custom feeds)
-
-* Cybersecurity news from popular sources:
-  * Krebs on Security
-  * The Hacker News
-  * Hacker News (YC)
-  * Threatpost
-* Lazy loading on scroll
-* Refresh functionality
-* Clean, readable feed layout
-
-## Setup Instructions
-
-### Quick Start
-
-1. **Download/and extract this file- (*[here](https://github.com/awes0m/awesom_browser_tools/raw/refs/heads/main/awesom_cybersec_home.zip))*** :
-
-* No additional files required - everything is self-contained here, Extract them to your Desired folder
-
-## Setting Your Local Homepage to `<download_path>/awesom_browser_tools/index.html`
-
-Follow these step-by-step guides to configure your browser’s home page to the local file at `<download_path>/awesom_browser_tools/index.html`. Replace `<download_path>` with your actual folder path. Use the `file:///` URL scheme—e.g.:
-
-```text
-file:///<download_path>/awesom_browser_tools/index.html
-```
+### 📰 News Feeds (with custom sources)
+- Predefined cybersecurity sources (e.g., Krebs, The Hacker News, HN, Threatpost)
+- Lazy loading on scroll and manual refresh
+- Mock data used in-browser to avoid CORS; can be swapped with a backend later
+- Add custom feed sources in the configuration array
 
 ---
 
-### Google Chrome
-
-1. Open Chrome and click ⋮ (Customize and control) ▶  **Settings** .
-2. In the left sidebar select  **On startup** .
-3. Choose **Open a specific page or set of pages** ▶  **Add a new page** .
-4. In the dialog, enter your local file URL, for example:
-
-   ```text
-   file:///C:/Users/You/Downloads/awesom_browser_tools/index.html
-   ```
-5. Click  **Add** . Close Settings—next time you open Chrome, it will load your local homepage.
+## What’s New / Recent Improvements
+- **Scrollable modules**: Favorites, Notes, and Todos sections are scrollable with custom scrollbar styling.
+- **Theme polish**: Refined dark theme variables and shadows.
+- **Glass UI updates**: Consistent borders, hover elevation, and blur.
+- **Header controls**: Consolidated theme toggle and navigation.
+- **Performance**: Efficient DOM updates and minimal dependencies.
 
 ---
 
-### Mozilla Firefox
+## Data Flow and Architecture
 
-1. Launch Firefox and click ☰ (Open menu) ▶  **Settings** .
-2. Scroll to the **Home** panel.
-3. Under  **New Windows and Tabs** , set **Homepage and new windows** to  **Custom URLs…** .
-4. Enter the file URL:
+The homepage is a simple, modular, client-side app built with vanilla HTML/CSS/JS. It uses Local Storage for persistence.
 
-   ```text
-   file:///C:/Users/You/Downloads/awesom_browser_tools/index.html
-   ```
-5. Close the tab. On startup or when clicking the Home icon, Firefox will display your local page.
+### High-Level Flow
+1. **Boot**
+   - Read persisted settings and data from `localStorage` (theme, favorites, notes, todos, bookmarks).
+   - Render initial page and attach event listeners.
+2. **User Interaction**
+   - UI events (click, submit, drag/drop, toggle) call handlers.
+   - Handlers update in-memory state and write changes to `localStorage`.
+3. **Render**
+   - After each change, the relevant section re-renders from state.
+4. **Persist**
+   - Data is saved under defined keys; on reload, the UI restores from saved state.
 
----
+### Module Responsibilities
+- **Favorites**: Manage an array of link objects; render grid; delete via inline button; persist to `favorites` key.
+- **Notes**: Manage note objects with `title` and `content`; render cards; persist to `notes` key.
+- **Todos**: Manage task objects with `dueDate` and `completed`; compute overdue; persist to `todos` key.
+- **Bookmarks**: Parse imported HTML, normalize items, group by folders, render list/grid; persist to `bookmarks` key.
+- **Feeds**: Provide mock articles for each source to demonstrate layout; lazy-load on scroll; no persistence required.
+- **Theme**: Toggle attribute on `<body>` (e.g., `data-theme="dark"`); persist to `theme` key.
 
-### Microsoft Edge
-
-1. Open Edge and click ⋯ (Settings and more) ▶  **Settings** .
-2. Select **Start, home, and new tabs** in the left menu.
-3. Under  **When Edge starts** , pick **Open these pages** ▶  **Add a new page** .
-4. Paste your file URL:
-
-   ```text
-   file:///C:/Users/You/Downloads/awesom_browser_tools/index.html
-   ```
-5. Click  **Add** . Edge will now open your local homepage on launch.
-
----
-
-### Safari (macOS)
-
-1. Open Safari and go to **Safari** ▶  **Preferences…** .
-2. In the **General** tab, find  **Homepage** .
-3. Enter the file URL for macOS, for example:
-
-   ```text
-   file:///Users/you/Downloads/awesom_browser_tools/index.html
-   ```
-4. Optionally click **Set to Current Page** if you have the file open.
-5. Close Preferences. Safari will load your local file as the homepage.
+### Event → State → Storage → UI
+- Example (Add Favorite):
+  1) User submits form → 2) Create favorite object → 3) Push to favorites array → 4) `localStorage.setItem('favorites', JSON)` → 5) Re-render favorites grid.
+- Example (Toggle Theme):
+  1) Click theme button → 2) Flip `data-theme` → 3) `localStorage.setItem('theme', 'dark'|'light')` → 4) CSS variables update theme instantly.
+- Example (Import Bookmarks):
+  1) Drop file → 2) Read/parse bookmark HTML → 3) Map to normalized entries → 4) Save to `bookmarks` → 5) Render grouped view with favicons.
 
 ---
 
-### Opera
+## Local Storage Schema
 
-1. Start Opera and click ☰ (Easy setup) in the top-right corner ▶  **Go to full browser settings** .
-2. Scroll to  **On startup** .
-3. Select **Open a specific page or set of pages** ▶  **Add a new page** .
-4. Enter the file URL:
-
-   ```text
-   file:///C:/Users/You/Downloads/awesom_browser_tools/index.html
-   ```
-5. Click  **Add** . Opera will now launch with your custom local page.
-
----
-
-## Brave
-
-1. Open Brave and click ☰ (Main menu) ▶  **Settings** .
-2. Choose **Get started** from the left menu.
-3. Under  **On startup** , select **Open a specific page or set of pages** ▶  **Add a new page** .
-4. Input your file URL:
-
-   ```text
-   file:///C:/Users/You/Downloads/awesom_browser_tools/index.html
-   ```
-5. Save and restart Brave to see your local homepage.
-
----
-
-With these settings in place, every time you launch your browser or click Home, it will load the interactive homepage you built in
-
-`<download_path>/awesom_browser_tools/index.html`. Enjoy your custom start screen!
-
-1. **Open in Browser** :
-
-```bash
-   # Simply double-click the index.html file
-   # OR open in your preferred browser
-   open index.html  # macOS
-   start index.html # Windows
-   xdg-open index.html # Linux
-```
-
-1. **Local Server (Recommended)** :
-   For better performance and to avoid CORS issues with feeds:
-
-```bash
-   # Using Python
-   python -m http.server 8000
-   # OR using Node.js
-   npx http-server
-   # OR using PHP
-   php -S localhost:8000
-```
-
-   Then visit `http://localhost:8000`
-
-### File Structure
-
-```
-homepage/
-├── index.html          # Main homepage file (self-contained)
-├── data.json          # Sample data structure (reference only)
-├── bookmarks.html     # Sample bookmarks for testing
-└── README.md          # This documentation
-```
-
-### Browser Support
-
-* **Modern Browsers** : Chrome 80+, Firefox 75+, Safari 13+, Edge 80+
-* **Mobile Browsers** : iOS Safari, Chrome Mobile, Samsung Internet
-* **Features Used** :
-* CSS Grid & Flexbox
-* Local Storage API
-* File API for bookmark import
-* CSS Custom Properties (variables)
-
-## Usage Guide
-
-### Adding Favorites
-
-1. Click the "Add Favorite" button
-2. Fill in:
-   * **Label** : Display name for the favorite
-   * **URL** : Full URL (must include http:// or https://)
-   * **Icon** : Font Awesome class (e.g., `fab fa-github`)
-3. Click "Add Favorite"
-
-### Managing Notes
-
-1. Click "Add Note" to create a new note
-2. Enter a title and content
-3. Notes support multi-line text
-4. Delete notes using the trash icon
-
-### Managing Tasks
-
-1. Click "Add Task" to create a new task
-2. Enter task description
-3. Optionally set a due date
-4. Check off completed tasks
-5. Overdue tasks are highlighted in red
-
-### Importing Bookmarks
-
-1. Export bookmarks from your browser:
-   * **Chrome** : Menu → Bookmarks → Bookmark Manager → Export Bookmarks
-   * **Firefox** : Menu → Library → Bookmarks → Show All Bookmarks → Import and Backup → Export Bookmarks to HTML
-   * **Safari** : File → Export Bookmarks
-   * **Edge** : Menu → Favorites → Manage Favorites → Export Favorites
-2. In the homepage:
-   * Drag and drop the exported HTML file onto the upload area
-   * OR click the upload area to select the file
-3. Bookmarks will be automatically organized by folder
-
-### Theme Switching
-
-* Click the moon/sun icon in the header to toggle between light and dark themes
-* Your preference is saved automatically
-
-## Customization
-
-### Styling
-
-The homepage uses CSS custom properties for easy theming:
-
-```css
-:root {
-    --accent-color: #3b82f6;        /* Primary blue */
-    --danger-color: #ef4444;        /* Red for delete/overdue */
-    --success-color: #10b981;       /* Green for success */
-    --warning-color: #f59e0b;       /* Yellow for warnings */
-    /* ... other variables */
-}
-```
-
-### Adding Custom Feed Sources
-
-Modify the `feedSources` array in the JavaScript:
-
-```javascript
-const feedSources = [
-    {
-        name: 'Your Custom Source',
-        url: 'https://example.com',
-        icon: 'https://example.com/favicon.ico',
-        mockData: [
-            {
-                title: 'Sample Article',
-                link: 'https://example.com/article',
-                summary: 'Article summary...',
-                pubDate: '1 hour ago'
-            }
-        ]
-    }
-];
-```
-
-### Font Awesome Icons
-
-The homepage includes Font Awesome 6.0 for icons. Popular classes:
-
-* `fas fa-home` - Home
-* `fab fa-github` - GitHub
-* `fab fa-google` - Google
-* `fas fa-globe` - Generic website
-* `fas fa-shield-alt` - Security
-* `fas fa-code` - Development
-
-## Data Storage
-
-### Local Storage Keys
-
-* `favorites`: JSON array of favorite links
-* `notes`: JSON array of notes
-* `todos`: JSON array of tasks
-* `bookmarks`: JSON array of imported bookmarks
-* `theme`: Current theme preference
-
-### Data Structure Examples
-
-#### Favorite
+Keys and example structures used by the app:
 
 ```json
-{
+// favorites
+[
+  {
     "id": 1694000000,
     "label": "GitHub",
     "url": "https://github.com",
     "icon": "fab fa-github"
-}
+  }
+]
 ```
 
-#### Note
-
 ```json
-{
-    "id": 1694000000,
+// notes
+[
+  {
+    "id": 1694000001,
     "title": "Meeting Notes",
     "content": "Discussion points...",
     "createdAt": "2024-09-14"
-}
+  }
+]
 ```
 
-#### Task
-
 ```json
-{
-    "id": 1694000000,
+// todos
+[
+  {
+    "id": 1694000002,
     "text": "Complete security review",
     "dueDate": "2024-09-20",
     "completed": false,
     "createdAt": "2024-09-14"
-}
+  }
+]
 ```
 
-#### Bookmark
-
 ```json
-{
-    "id": 1694000000,
+// bookmarks
+[
+  {
+    "id": 1694000003,
     "title": "OWASP",
     "url": "https://owasp.org",
     "folder": "Security Resources",
     "favicon": "https://owasp.org/favicon.ico"
-}
+  }
+]
 ```
 
-## Testing
+```text
+// theme
+"light" | "dark"
+```
 
-### Test Bookmark Import
+---
 
-1. Use the provided `bookmarks.html` sample file
-2. Drag and drop it onto the upload area
-3. Verify bookmarks are organized by folder
-4. Check that favicons load correctly
+## Setup
 
-### Test Data Persistence
+### Quick Start
+1. Download and extract: https://github.com/awes0m/awesom_browser_tools/raw/refs/heads/main/awesom_cybersec_home.zip
+2. Open `index.html` directly in your browser, or host via a simple local server.
 
-1. Add favorites, notes, and tasks
-2. Refresh the page
-3. Verify all data persists
-4. Switch themes and verify preference is saved
+### Set as Browser Homepage (Local File)
+Set your homepage to the local file path, for example:
 
-### Test Responsive Design
+```text
+file:///C:/Users/You/Downloads/awesom_browser_tools/index.html
+```
 
-1. Open browser developer tools
-2. Toggle device emulation
-3. Test on various screen sizes:
-   * Mobile: 375px width
-   * Tablet: 768px width
-   * Desktop: 1200px+ width
+Step-by-step guides are provided for Chrome, Firefox, Edge, Safari, Opera, and Brave in this README (search for your browser).
+
+### Run a Local Server (Recommended)
+To avoid any file URL restrictions and for best performance:
+
+```bash
+# Python
+python -m http.server 8000
+# Node.js
+npx http-server
+# PHP
+php -S localhost:8000
+```
+
+Then open http://localhost:8000
+
+---
+
+## Usage
+
+### Favorites
+1. Click "Add Favorite".
+2. Provide Label, URL, and Font Awesome icon class.
+3. Submit to save; tile appears in the grid. Hover to reveal quick delete.
+
+### Notes
+1. Click "Add Note".
+2. Enter title and content. Notes are listed with latest first.
+
+### Tasks
+1. Click "Add Task".
+2. Enter description and optional due date.
+3. Overdue tasks are styled distinctly; mark complete when done.
+
+### Bookmark Import
+1. Export from your browser as HTML.
+2. Drag-and-drop the file onto the import area, or click to select.
+3. Bookmarks are parsed and grouped by folder with favicons.
+
+### Theme
+- Use the theme toggle in the header. The choice is saved and restored on next visit.
+
+---
+
+## Browser Support
+- Modern Browsers: Chrome 80+, Firefox 75+, Safari 13+, Edge 80+
+- Mobile: iOS Safari, Chrome Mobile, Samsung Internet
+- Uses CSS Grid/Flexbox, Local Storage API, File API, and CSS custom properties
+
+---
+
+## Development Notes
+- Single-file architecture with embedded CSS/JS for easy distribution
+- Structure emphasizes clear sections, modular functions, and minimal dependencies
+- Feeds use mock data client-side to bypass CORS; real feeds require a backend proxy or server-side worker
+
+---
 
 ## Troubleshooting
 
-### Common Issues
+### Bookmarks Not Importing
+- Ensure the file is a valid HTML bookmark export
+- Check browser console for parsing errors
+- Try the provided sample `sample-bookmarks.html`
 
-#### Bookmarks Not Importing
+### Favicons Not Loading
+- Some sites block favicon requests; a default icon is used when unavailable
 
-* Ensure the file is a valid HTML bookmark export
-* Check browser console for parsing errors
-* Try with the sample bookmarks.html file first
+### Feeds Not Loading
+- The demo uses mock data; real-time fetching requires a backend due to CORS
 
-#### Favicons Not Loading
+### Data Not Persisting
+- Confirm Local Storage is enabled and not cleared on exit
+- Avoid private/incognito mode if you want persistence
 
-* Some websites block favicon requests from other domains
-* This is normal behavior and doesn't affect functionality
-* Favicons will be replaced with a default icon if loading fails
+---
 
-#### Feeds Not Loading
+## File Structure (Repo)
+```
+awesom_browser_tools/
+├── index.html                 # Main homepage (self-contained)
+├── README.md                  # This documentation
+├── sample-bookmarks.html      # Sample bookmark export
+├── sample-data.json           # Sample data structures
+├── backdown.html              # Additional demo/test page
+└── awesom_cybersec_home/      # Unzipped distribution (index + docs)
+```
 
-* The demo uses mock data for demonstration
-* Real RSS/API integration would require a backend service
-* CORS policies prevent direct RSS fetching from browsers
-
-#### Data Not Persisting
-
-* Ensure your browser supports Local Storage
-* Check if you're in private/incognito mode
-* Clear browser data might reset the homepage
-
-### Performance Tips
-
-* The homepage is optimized for performance with:
-  * Minimal external dependencies
-  * Efficient DOM manipulation
-  * Lazy loading for feeds
-  * CSS transitions instead of animations
-
-### Security Considerations
-
-* All data is stored locally in your browser
-* No external servers or APIs are contacted (except for favicons)
-* Bookmark imports are processed client-side only
-* The homepage works entirely offline after initial load
-
-## Browser Compatibility
-
-### Fully Supported
-
-* Chrome 80+ (all features)
-* Firefox 75+ (all features)
-* Safari 13+ (all features)
-* Edge 80+ (all features)
-
-### Partially Supported
-
-* Older browsers may not support:
-  * CSS Grid (fallback to Flexbox)
-  * CSS Custom Properties (fallback colors)
-  * Modern JavaScript features
-
-### Mobile Support
-
-* Responsive design works on all screen sizes
-* Touch-friendly interface
-* Optimized for mobile browsers
-* Supports gesture navigation
+---
 
 ## Contributing
 
-The codebase is modular and easy to extend:
+### Add New Sections
+1. Create the HTML structure in `index.html` (new section container)
+2. Style with CSS variables and shared classes
+3. Implement JS logic and events; persist to `localStorage` as needed
 
-### Adding New Sections
+### Extend Data Models
+1. Update the object structure and persistence key
+2. Adjust render functions accordingly
+3. Add input validation and UX affordances
 
-1. Create HTML structure in the main container
-2. Add corresponding CSS styles
-3. Implement JavaScript class methods
-4. Hook up event listeners in `setupEventListeners()`
-
-### Extending Data Models
-
-1. Update the data structure in Local Storage
-2. Modify render methods
-3. Add form validation if needed
-4. Update CRUD operations
-
-This homepage provides a solid foundation for a personal browser start page with room for customization and extension based on your specific needs.
+PRs welcome for usability improvements, accessibility, performance, and new widgets.
