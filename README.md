@@ -1,19 +1,20 @@
-# awesom_browser_tools
+# Awes0m Cybersec Home
 
-A collection of browser-based tools.
+## A Modular Browser Homepage
 
-# Modular Browser Homepage — Awes0m Cybersec Home
-
-- Live: https://awes0m.github.io/awesom_browser_tools/#home
-- Download: https://github.com/awes0m/awesom_browser_tools/raw/refs/heads/main/awesom_cybersec_home.zip
+- Live: [https://awes0m.github.io/awesom_browser_tools/#home](https://awes0m.github.io/awesom_browser_tools/#home "https://awes0m.github.io/awesom_browser_tools/#home")
+- Download: [https://github.com/awes0m/awesom_browser_tools/raw/refs/heads/main/awesom_cybersec_home.zip](https://github.com/awes0m/awesom_browser_tools/raw/refs/heads/main/awesom_cybersec_home.zip "https://github.com/awes0m/awesom_browser_tools/raw/refs/heads/main/awesom_cybersec_home.zip")
 
 This is a fully featured, responsive browser homepage with favorites, notes, tasks, bookmark import, and cybersecurity news feeds. It is self-contained in a single HTML file and stores your data locally in the browser.
 
 ---
 
+<img src="app_sc.jpg" alt="app_screenshot" width="1000" height="600">
+
 ## Features
 
 ### 🌟 Core
+
 - **Responsive Design**: Desktop, tablet, mobile
 - **Dark/Light Theme**: Toggle with persistence
 - **Self-contained**: Single HTML file, optional samples
@@ -21,6 +22,7 @@ This is a fully featured, responsive browser homepage with favorites, notes, tas
 - **Accessible UI**: Keyboard and screen-reader friendly structure
 
 ### 🧭 Navigation & Layout
+
 - **Fixed glassmorphism header** with logo and page navigation
 - **Client-side page switching**: Home, Bookmarks, Notes, Tasks, Feeds (single-page experience)
 - **Collapsible sections** with subtle hover/transition effects
@@ -28,27 +30,32 @@ This is a fully featured, responsive browser homepage with favorites, notes, tas
 - **Optional wallpaper overlay** layer behind the gradient background for personalization
 
 ### 📌 Favorites
+
 - Add, edit, and delete favorite links
 - Font Awesome icon support (e.g., `fab fa-github`)
 - Clickable tiles with hover animations and quick delete
 - Grid layout with responsive columns
 
 ### 📝 Notes
+
 - Create, update, delete text notes
 - Per-note title and content
 - Smooth card UI with hover motion
 
 ### ✅ Tasks (Todos)
+
 - Create, update, delete tasks
 - Set due dates; overdue tasks highlighted
 - Mark complete/incomplete; clear completed
 
 ### 📚 Bookmark Import
+
 - Drag-and-drop or click-to-upload a standard `bookmarks.html` exported from Chrome/Firefox/Edge/Safari
 - Automatic parsing and folder grouping
 - Favicon display when available
 
 ### 📰 News Feeds (with custom sources)
+
 - Predefined cybersecurity sources (e.g., Krebs, The Hacker News, HN, Threatpost)
 - Lazy loading on scroll and manual refresh
 - Mock data used in-browser to avoid CORS; can be swapped with a backend later
@@ -57,6 +64,7 @@ This is a fully featured, responsive browser homepage with favorites, notes, tas
 ---
 
 ## What’s New / Recent Improvements
+
 - **Scrollable modules**: Favorites, Notes, and Todos sections are scrollable with custom scrollbar styling.
 - **Theme polish**: Refined dark theme variables and shadows.
 - **Glass UI updates**: Consistent borders, hover elevation, and blur.
@@ -70,6 +78,7 @@ This is a fully featured, responsive browser homepage with favorites, notes, tas
 The homepage is a simple, modular, client-side app built with vanilla HTML/CSS/JS. It uses Local Storage for persistence.
 
 ### High-Level Flow
+
 1. **Boot**
    - Read persisted settings and data from `localStorage` (theme, favorites, notes, todos, bookmarks).
    - Render initial page and attach event listeners.
@@ -82,6 +91,7 @@ The homepage is a simple, modular, client-side app built with vanilla HTML/CSS/J
    - Data is saved under defined keys; on reload, the UI restores from saved state.
 
 ### Module Responsibilities
+
 - **Favorites**: Manage an array of link objects; render grid; delete via inline button; persist to `favorites` key.
 - **Notes**: Manage note objects with `title` and `content`; render cards; persist to `notes` key.
 - **Todos**: Manage task objects with `dueDate` and `completed`; compute overdue; persist to `todos` key.
@@ -90,6 +100,7 @@ The homepage is a simple, modular, client-side app built with vanilla HTML/CSS/J
 - **Theme**: Toggle attribute on `<body>` (e.g., `data-theme="dark"`); persist to `theme` key.
 
 ### Event → State → Storage → UI
+
 - Example (Add Favorite):
   1) User submits form → 2) Create favorite object → 3) Push to favorites array → 4) `localStorage.setItem('favorites', JSON)` → 5) Re-render favorites grid.
 - Example (Toggle Theme):
@@ -163,10 +174,12 @@ Keys and example structures used by the app:
 ## Setup
 
 ### Quick Start
+
 1. Download and extract: https://github.com/awes0m/awesom_browser_tools/raw/refs/heads/main/awesom_cybersec_home.zip
 2. Open `index.html` directly in your browser, or host via a simple local server.
 
 ### Set as Browser Homepage (Local File)
+
 Set your homepage to the local file path, for example:
 
 ```text
@@ -176,6 +189,7 @@ file:///C:/Users/You/Downloads/awesom_browser_tools/index.html
 Step-by-step guides are provided for Chrome, Firefox, Edge, Safari, Opera, and Brave in this README (search for your browser).
 
 ### Run a Local Server (Recommended)
+
 To avoid any file URL restrictions and for best performance:
 
 ```bash
@@ -194,30 +208,36 @@ Then open http://localhost:8000
 ## Usage
 
 ### Favorites
+
 1. Click "Add Favorite".
 2. Provide Label, URL, and Font Awesome icon class.
 3. Submit to save; tile appears in the grid. Hover to reveal quick delete.
 
 ### Notes
+
 1. Click "Add Note".
 2. Enter title and content. Notes are listed with latest first.
 
 ### Tasks
+
 1. Click "Add Task".
 2. Enter description and optional due date.
 3. Overdue tasks are styled distinctly; mark complete when done.
 
 ### Bookmark Import
+
 1. Export from your browser as HTML.
 2. Drag-and-drop the file onto the import area, or click to select.
 3. Bookmarks are parsed and grouped by folder with favicons.
 
 ### Theme
+
 - Use the theme toggle in the header. The choice is saved and restored on next visit.
 
 ---
 
 ## Browser Support
+
 - Modern Browsers: Chrome 80+, Firefox 75+, Safari 13+, Edge 80+
 - Mobile: iOS Safari, Chrome Mobile, Samsung Internet
 - Uses CSS Grid/Flexbox, Local Storage API, File API, and CSS custom properties
@@ -225,6 +245,7 @@ Then open http://localhost:8000
 ---
 
 ## Development Notes
+
 - Single-file architecture with embedded CSS/JS for easy distribution
 - Structure emphasizes clear sections, modular functions, and minimal dependencies
 - Feeds use mock data client-side to bypass CORS; real feeds require a backend proxy or server-side worker
@@ -234,23 +255,28 @@ Then open http://localhost:8000
 ## Troubleshooting
 
 ### Bookmarks Not Importing
+
 - Ensure the file is a valid HTML bookmark export
 - Check browser console for parsing errors
 - Try the provided sample `sample-bookmarks.html`
 
 ### Favicons Not Loading
+
 - Some sites block favicon requests; a default icon is used when unavailable
 
 ### Feeds Not Loading
+
 - The demo uses mock data; real-time fetching requires a backend due to CORS
 
 ### Data Not Persisting
+
 - Confirm Local Storage is enabled and not cleared on exit
 - Avoid private/incognito mode if you want persistence
 
 ---
 
 ## File Structure (Repo)
+
 ```
 awesom_browser_tools/
 ├── index.html                 # Main homepage (self-contained)
@@ -266,11 +292,13 @@ awesom_browser_tools/
 ## Contributing
 
 ### Add New Sections
+
 1. Create the HTML structure in `index.html` (new section container)
 2. Style with CSS variables and shared classes
 3. Implement JS logic and events; persist to `localStorage` as needed
 
 ### Extend Data Models
+
 1. Update the object structure and persistence key
 2. Adjust render functions accordingly
 3. Add input validation and UX affordances
