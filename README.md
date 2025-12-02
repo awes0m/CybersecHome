@@ -1,10 +1,8 @@
-# Awes0m Cybersec Home
+# Awes0m Cybersec Home (v3.3)
 
-
-A customizable, self-contained browser homepage tailored for cybersecurity professionals. Features favorites, notes, tasks, bookmark import, news feeds, automation flows, and a floating toolkit panel.
+A customizable, self-contained browser homepage tailored for cybersecurity professionals. Features favorites, notes, tasks, bookmark import, RSS feeds, automation flows, advanced cyber utilities, analyst whiteboard, and an expandable floating toolkit panel with links to specialized security tools and cloud documentation.
 
 [![GitHub stars](https://img.shields.io/github/stars/awes0m/awesom_browser_tools.svg)](https://github.com/awes0m/awesom_browser_tools/stargazers "Stargazers") [![GitHub forks](https://img.shields.io/github/forks/awes0m/awesom_browser_tools.svg)](https://github.com/awes0m/awesom_browser_tools/network/members "Forkers") [![License](https://img.shields.io/github/license/awes0m/awesom_browser_tools.svg)]
-
 
 <div align="center">
   <table>
@@ -39,10 +37,11 @@ A customizable, self-contained browser homepage tailored for cybersecurity profe
 ### 🧭 Navigation & Layout
 
 - **Fixed glassmorphism header** with logo and page navigation
-- **Client-side page switching**: Home, Bookmarks, Notes, Tasks, Feeds (single-page experience)
+- **Client-side page switching**: Dashboard, Bookmarks, Intel Feeds, Ops, Notes, Tasks, Tools, Whiteboard (single-page experience)
 - **Collapsible sections** with subtle hover/transition effects
 - **Scrollable content areas** for Favorites, Notes, and Tasks to keep the layout compact
 - **Optional wallpaper overlay** layer behind the gradient background for personalization
+- **Search engine toggle**: Switch between Google and Perplexity search engines
 
 ### 📌 Favorites
 
@@ -73,6 +72,7 @@ A customizable, self-contained browser homepage tailored for cybersecurity profe
 
 - Predefined cybersecurity sources (e.g., Krebs on Security, Hacker News, CISA Advisories)
 - Add custom RSS feed sources
+- get more at -[https://rss.feedspot.com/cyber_security_rss_feeds/](https://rss.feedspot.com/cyber_security_rss_feeds/ "https://rss.feedspot.com/cyber_security_rss_feeds/")
 - Real-time refresh with RSS parsing via rss2json API
 - Individual feed deletion for custom sources
 
@@ -86,16 +86,41 @@ A customizable, self-contained browser homepage tailored for cybersecurity profe
 ### 🛠️ CS Toolkit Panel
 
 - Draggable floating panel with quick access to cybersecurity tools
-- Organized categories: Reporting, Investigation Tools, Online Services
-- Tools include: Security Incident Response Generator, JSON tools, CyberChef, VirusTotal, Shodan, AlienVault OTX, and more
+- Organized categories: Reporting, Investigation Tools, OSINT & Analysis, Cloud Infrastructure Documentation
+- **Reporting**: Security Incident Response Generator
+- **Investigation Tools**: Smart JSON Formatter & Analyzer, JSON Multi Correlator, JSON Corelator Analyzer, CyberChef
+- **OSINT & Analysis**: VirusTotal, Shodan, AlienVault OTX, urlscan.io, Regex101, GTFOBins, LOLBAS
+- **Cloud Infrastructure**: AWS Docs, Azure Docs, GCP Docs, Crontab Guru, JSON Lint
 - Toggle visibility with corner button (mobile hidden by default)
+
+### 🔧 Cyber Utilities (Tools Page)
+
+- **CyberChef Lite**: Base64 encode/decode, URL encode/decode
+- **Advanced CIDR Calculator**: Network calculations (CIDR notation analysis)
+- **Unix Timestamp Converter**: Convert timestamps to human-readable format and vice versa
+- **JSON Formatter**: Prettify and format JSON data
+- **Indicators**: Defang URLs, Refang, and Check Public IP address
+- Integrated utilities for common security analysis tasks
+
+### 🎨 Analyst Whiteboard
+
+- **Drawing canvas** with grid background for network diagrams and notes
+- **Pen tool**: Freehand drawing with adjustable color and size
+- **Eraser tool**: Remove drawn elements
+- **Text tool**: Add text annotations to diagrams
+- **Save functionality**: Export whiteboard as PNG image
+- **Clear canvas**: Reset for new diagrams
 
 ---
 
 ## What's New / Recent Improvements
 
-- **Automations/Ops Flows**: Create and launch automation flows to open multiple URLs simultaneously for rapid access to grouped tools.
-- **CS Toolkit Floating Panel**: Draggable sidebar with quick links to cybersecurity investigation tools (VirusTotal, Shodan, CyberChef, etc.).
+- **Enhanced Cyber Utilities**: Added Unix Timestamp Converter and Indicators tool (Defang/Refang URLs) to the Tools page for advanced security analysis.
+- **Expanded CS Toolkit Panel**: Now includes Reporting (Security Incident Response Generator), Investigation Tools (Smart JSON Formatter & Analyzer, JSON Multi Correlator, JSON Corelator Analyzer), specialized OSINT tools (Regex101, GTFOBins, LOLBAS), and Cloud Infrastructure Documentation.
+- **Automation Export/Import**: Added ability to export and import automation flows as JSON for backup and sharing.
+- **Analyst Whiteboard**: Full-featured drawing tool with pen, eraser, text annotation, color picker, and export to PNG for network diagrams and visual notes.
+- **Search Engine Toggle**: Switch between Google and Perplexity search directly from the home page search bar.
+- **CS Toolkit Floating Panel**: Draggable sidebar with categorized quick links to cybersecurity investigation tools and cloud resources.
 - **IndexedDB Persistence**: Upgraded from localStorage to IndexedDB for better data capacity and performance.
 - **Enhanced Bookmark Management**: Organize bookmarks into folders, add from bookmarks to favorites, and search across all bookmarks.
 - **Search Filtering**: Real-time filtering across Notes, Tasks, and Bookmarks for quick information retrieval.
@@ -133,6 +158,9 @@ The homepage is a simple, modular, client-side app built with vanilla HTML/CSS/J
 - **Bookmarks**: Parse imported HTML from browsers, organize into folders, add individual bookmarks, search across all bookmarks; persist to `bookmarks` store.
 - **Feeds**: Fetch RSS feeds via rss2json API, display latest articles, manage custom feeds; persist to `feeds` store.
 - **Automations**: Create workflows with multiple URLs, launch flows to open multiple tabs; integrate with bookmarks; persist to `automations` store.
+- **Tools (Cyber Utilities)**: Provide encoding/decoding (Base64, URL), network calculations (CIDR), timestamp conversion, JSON formatting, and indicator analysis (Defang/Refang URLs, IP lookup); client-side only, no persistence.
+- **Whiteboard**: Canvas-based drawing application with pen, eraser, text tools; save as PNG; no persistence (stateless per session).
+- **Search Toggle**: Switch between Google and Perplexity search engines; toggle state managed via form submission.
 - **CS Toolkit Panel**: Draggable sidebar with organized tool links; toggle visibility; no persistence required.
 - **Theme**: Toggle attribute on `<body>` (e.g., `data-theme="dark"`); persist to `settings` store with other preferences.
 - **Database**: Export/import all data as JSON backup; migrate from older localStorage format to IndexedDB.
@@ -153,6 +181,7 @@ The homepage is a simple, modular, client-side app built with vanilla HTML/CSS/J
 The app uses **IndexedDB** for persistent storage instead of localStorage, allowing for larger data capacity and better performance. Data is organized into the following object stores:
 
 ### Favorites Store
+
 ```json
 {
   "id": 1694000000,
@@ -163,6 +192,7 @@ The app uses **IndexedDB** for persistent storage instead of localStorage, allow
 ```
 
 ### Notes Store
+
 ```json
 {
   "id": 1694000001,
@@ -172,6 +202,7 @@ The app uses **IndexedDB** for persistent storage instead of localStorage, allow
 ```
 
 ### Todos Store
+
 ```json
 {
   "id": 1694000002,
@@ -181,6 +212,7 @@ The app uses **IndexedDB** for persistent storage instead of localStorage, allow
 ```
 
 ### Bookmarks Store (Folder-based)
+
 ```json
 {
   "id": "f_1694000003",
@@ -196,6 +228,7 @@ The app uses **IndexedDB** for persistent storage instead of localStorage, allow
 ```
 
 ### Feeds Store
+
 ```json
 {
   "id": 1694000005,
@@ -205,6 +238,7 @@ The app uses **IndexedDB** for persistent storage instead of localStorage, allow
 ```
 
 ### Automations Store
+
 ```json
 {
   "id": 1694000006,
@@ -218,6 +252,7 @@ The app uses **IndexedDB** for persistent storage instead of localStorage, allow
 ```
 
 ### Settings Store
+
 ```json
 {
   "id": "preferences",
@@ -298,6 +333,7 @@ Then open http://localhost:8000
    - Select from existing bookmarks using the "Add from Bookmarks" dropdown
 5. Click "Save Flow" to create the automation.
 6. Launch the flow by clicking the "Launch" button; confirm the popup permission dialog.
+7. **Export/Import Flows**: Use the "Export" and "Import" buttons to backup or share automation flows as JSON files.
 
 ### Database Backup & Restore
 
@@ -314,6 +350,31 @@ Then open http://localhost:8000
 ### Theme
 
 - Use the theme toggle (sun icon) in the header. The choice is saved and restored on next visit.
+
+### Cyber Utilities (Tools Page)
+
+1. Click "Tools" in the navigation menu.
+2. Use any of the available utilities:
+   - **CyberChef Lite**: Paste text, choose encoding/decoding action (Base64, URL)
+   - **Advanced CIDR Calculator**: Enter CIDR notation (e.g., `192.168.1.0/24`) and click "Calculate" for network details
+   - **Unix Timestamp Converter**: Enter a timestamp or click "Now" to convert the current time
+   - **JSON Formatter**: Paste JSON, click "Prettify" for formatted output
+   - **Indicators**: Defang/Refang URLs for security analysis, or click "Check Public IP" to retrieve your current public IP
+
+### Analyst Whiteboard
+
+1. Click "Whiteboard" in the navigation menu.
+2. **Drawing**: Select the pen tool, choose a color with the color picker, adjust size with the range slider
+3. **Erasing**: Click the eraser button, then draw over areas to erase
+4. **Text**: Click the text tool, then click on the canvas to add text annotations
+5. **Save**: Click "Save Image" to export the entire whiteboard as a PNG file
+6. **Clear**: Click "Clear" to reset the canvas for a new diagram
+
+### Search Engine Toggle
+
+- On the home page, use the toggle switch (Google icon ↔ Brain icon) next to the search input to switch between:
+  - **Google**: Traditional search engine
+  - **Perplexity**: AI-powered search and reasoning engine
 
 ---
 

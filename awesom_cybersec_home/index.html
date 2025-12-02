@@ -1,304 +1,751 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Awes0m Cybersec Homepage v2.8</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <style>
-      /* --- CSS Variables & Theme --- */
-      :root {
-        --bg-primary: rgba(255, 255, 255, 0.1);
-        --bg-secondary: rgba(255, 255, 255, 0.05);
-        --bg-tertiary: rgba(255, 255, 255, 0.15);
-        --text-color: #190953;
-        --text-secondary: rgb(43, 1, 59);
-        --text-muted: rgba(0, 0, 0, 0.6);
-        --border-color: rgb(4, 3, 43);
-        --accent-color: #020b20;
-        --accent-hover: #229ce2;
-        --danger-color: #f87171;
-        --success-color: #34d399;
-        --glass-blur: 20px;
-        --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.3);
-        --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.4);
-        --border-radius: 16px;
-        --border-radius-small: 8px;
-        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      }
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Awes0m Cybersec Homepage v3.3</title>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      />
+      <style>
+        /* --- CSS Variables & Theme --- */
+        :root {
+          --bg-primary: rgba(255, 255, 255, 0.1);
+          --bg-secondary: rgba(255, 255, 255, 0.05);
+          --bg-tertiary: rgba(255, 255, 255, 0.15);
+          --text-color: #190953;
+          --text-secondary: rgb(43, 1, 59);
+          --text-muted: rgba(0, 0, 0, 0.6);
+          --border-color: rgb(4, 3, 43);
+          --accent-color: #020b20;
+          --accent-hover: #229ce2;
+          --danger-color: #f87171;
+          --success-color: #34d399;
+          --glass-blur: 20px;
+          --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.3);
+          --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.4);
+          --border-radius: 16px;
+          --border-radius-small: 8px;
+          --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-      [data-theme="dark"] {
-        --text-color: #f1f5f9;
-        --text-secondary: rgba(241, 245, 249, 0.8);
-        --text-muted: rgba(241, 245, 249, 0.5);
-        --accent-color: #60a5fa;
-        --accent-hover: #3b82f6;
-        --bg-primary: rgba(15, 23, 42, 0.8);
-        --bg-secondary: rgba(15, 23, 42, 0.6);
-        --bg-tertiary: rgba(30, 41, 59, 0.9);
-        --border-color: rgba(148, 163, 184, 0.3);
-      }
+        [data-theme="dark"] {
+          --text-color: #f1f5f9;
+          --text-secondary: rgba(241, 245, 249, 0.8);
+          --text-muted: rgba(241, 245, 249, 0.5);
+          --accent-color: #60a5fa;
+          --accent-hover: #3b82f6;
+          --bg-primary: rgba(15, 23, 42, 0.8);
+          --bg-secondary: rgba(15, 23, 42, 0.6);
+          --bg-tertiary: rgba(30, 41, 59, 0.9);
+          --border-color: rgba(148, 163, 184, 0.3);
+        }
 
-      * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
 
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        min-height: 100vh;
-        color: var(--text-color);
-        line-height: 1.6;
-        transition: var(--transition);
-        position: relative;
-        overflow-x: hidden;
-      }
+        body {
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+            sans-serif;
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          min-height: 100vh;
+          color: var(--text-color);
+          line-height: 1.6;
+          transition: var(--transition);
+          position: relative;
+          overflow-x: hidden;
+        }
 
-      body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        background: radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3), transparent 50%),
-                    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3), transparent 50%);
-        z-index: -2;
-        pointer-events: none;
-      }
+        body::before {
+          content: "";
+          position: fixed;
+          inset: 0;
+          background: radial-gradient(
+              circle at 20% 50%,
+              rgba(120, 119, 198, 0.3),
+              transparent 50%
+            ),
+            radial-gradient(
+              circle at 80% 20%,
+              rgba(255, 119, 198, 0.3),
+              transparent 50%
+            );
+          z-index: -2;
+          pointer-events: none;
+        }
 
-      .wallpaper-overlay {
-        position: fixed; inset: 0; z-index: -1;
-        background-size: cover; background-position: center;
-        transition: opacity 0.3s ease; opacity: 0;
-      }
+        .wallpaper-overlay {
+          position: fixed;
+          inset: 0;
+          z-index: -1;
+          background-size: cover;
+          background-position: center;
+          transition: opacity 0.3s ease;
+          opacity: 0;
+        }
 
-      /* --- Layout --- */
-      .header {
-        position: fixed; top: 0; left: 0; right: 0;
-        background: var(--bg-primary);
-        backdrop-filter: blur(var(--glass-blur));
-        border-bottom: 1px solid var(--border-color);
-        z-index: 1000; padding: 0.75rem 0;
-      }
+        /* --- Layout --- */
+        .header {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          background: var(--bg-primary);
+          backdrop-filter: blur(var(--glass-blur));
+          border-bottom: 1px solid var(--border-color);
+          z-index: 1000;
+          padding: 0.75rem 0;
+        }
 
-      .header-content {
-        max-width: 1400px; margin: 0 auto; padding: 0 1rem;
-        display: flex; justify-content: space-between; align-items: center;
-      }
+        .header-content {
+          max-width: 1400px;
+          margin: 0 auto;
+          padding: 0 1rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
 
-      .logo { font-size: 1.25rem; font-weight: bold; color: var(--accent-color); display: flex; align-items: center; gap: 0.5rem; }
-      
-      .nav { display: flex; gap: 0.5rem; }
-      .nav-link {
-        padding: 0.5rem 1rem; border-radius: var(--border-radius-small);
-        text-decoration: none; color: var(--text-secondary); font-weight: 500;
-        transition: var(--transition); background: var(--bg-secondary);
-        border: 1px solid var(--border-color);
-      }
-      .nav-link:hover { background: var(--bg-tertiary); color: var(--text-color); transform: translateY(-2px); }
-      .nav-link.active { background: var(--accent-color); color: white; border-color: var(--accent-color); }
+        .logo {
+          font-size: 1.25rem;
+          font-weight: bold;
+          color: var(--accent-color);
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
 
-      .header-controls { display: flex; gap: 0.5rem; align-items: center; }
+        .nav {
+          display: flex;
+          gap: 0.5rem;
+        }
+        .nav-link {
+          padding: 0.5rem 1rem;
+          border-radius: var(--border-radius-small);
+          text-decoration: none;
+          color: var(--text-secondary);
+          font-weight: 500;
+          transition: var(--transition);
+          background: var(--bg-secondary);
+          border: 1px solid var(--border-color);
+        }
+        .nav-link:hover {
+          background: var(--bg-tertiary);
+          color: var(--text-color);
+          transform: translateY(-2px);
+        }
+        .nav-link.active {
+          background: var(--accent-color);
+          color: white;
+          border-color: var(--accent-color);
+        }
 
-      .container { max-width: 1400px; margin: 0 auto; padding: 100px 1rem 2rem; }
-      .page { display: none; animation: fadeIn 0.3s ease; }
-      .page.active { display: block; }
-      @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .header-controls {
+          display: flex;
+          gap: 0.5rem;
+          align-items: center;
+        }
 
-      /* --- Components --- */
-      .section {
-        margin-bottom: 2rem; background: var(--bg-primary);
-        backdrop-filter: blur(var(--glass-blur)); border-radius: var(--border-radius);
-        padding: 2rem; border: 1px solid var(--border-color);
-        box-shadow: var(--shadow-glass); transition: var(--transition);
-      }
-      .section:hover { box-shadow: var(--shadow-hover); border-color: var(--accent-color); }
+        .container {
+          max-width: 1400px;
+          margin: 0 auto;
+          padding: 100px 1rem 2rem;
+        }
+        .page {
+          display: none;
+          animation: fadeIn 0.3s ease;
+        }
+        .page.active {
+          display: block;
+        }
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
 
-      .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
-      .section-title { font-size: 1.25rem; font-weight: 600; color: var(--text-color); display: flex; align-items: center; gap: 0.5rem; }
+        /* --- Components --- */
+        .section {
+          margin-bottom: 2rem;
+          background: var(--bg-primary);
+          backdrop-filter: blur(var(--glass-blur));
+          border-radius: var(--border-radius);
+          padding: 2rem;
+          border: 1px solid var(--border-color);
+          box-shadow: var(--shadow-glass);
+          transition: var(--transition);
+        }
+        .section:hover {
+          box-shadow: var(--shadow-hover);
+          border-color: var(--accent-color);
+        }
 
-      /* Hero Section (Clock Only) */
-      .hero-grid {
-        display: flex; justify-content: center; align-items: center; 
-        margin-bottom: 3rem; text-align: center;
-      }
-      .hero-welcome {
-        display: flex; flex-direction: column; justify-content: center; align-items: center;
-      }
-      .greeting { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; opacity: 0.9; }
-      .clock { 
-        font-size: 5rem; font-weight: 800; color: var(--accent-color); 
-        line-height: 1; margin-bottom: 0.5rem; font-variant-numeric: tabular-nums;
-        text-shadow: 0 0 30px rgba(96, 165, 250, 0.2);
-      }
-      .date-display { font-size: 1.2rem; opacity: 0.8; font-weight: 500; }
+        .section-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 1.5rem;
+        }
+        .section-title {
+          font-size: 1.25rem;
+          font-weight: 600;
+          color: var(--text-color);
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
 
-      /* Search */
-      .search-container { display: flex; justify-content: center; margin-bottom: 2rem; }
-      .search-form {
-        display: flex; align-items: center; background: var(--bg-secondary);
-        padding: 0.75rem 1.5rem; border-radius: 50px; border: 1px solid var(--border-color);
-        width: 100%; max-width: 700px; box-shadow: var(--shadow-glass);
-        transition: var(--transition);
-      }
-      .search-form:focus-within { border-color: var(--accent-color); box-shadow: 0 0 25px rgba(96, 165, 250, 0.2); transform: scale(1.01); }
-      .search-input { flex: 1; background: none; border: none; padding: 0.5rem; font-size: 1.1rem; color: var(--text-color); outline: none; }
-      
-      /* Toggles & Buttons */
-      .toggle-switch { display: flex; align-items: center; gap: 10px; padding-left: 15px; border-left: 1px solid var(--border-color); }
-      .switch { position: relative; width: 40px; height: 22px; }
-      .switch input { opacity: 0; width: 0; height: 0; }
-      .slider { position: absolute; cursor: pointer; inset: 0; background: #ccc; transition: .4s; border-radius: 34px; }
-      .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px; background: white; transition: .4s; border-radius: 50%; }
-      input:checked + .slider { background: var(--accent-color); }
-      input:checked + .slider:before { transform: translateX(18px); }
-      
-      .btn {
-        padding: 0.6rem 1.2rem; border: none; border-radius: var(--border-radius-small);
-        cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: var(--transition);
-        display: inline-flex; align-items: center; gap: 0.5rem;
-        background: var(--bg-secondary); border: 1px solid var(--border-color); color: var(--text-color);
-      }
-      .btn:hover { background: var(--bg-tertiary); transform: translateY(-2px); }
-      .btn-primary { background: var(--accent-color); color: white; border-color: transparent; }
-      .btn-primary:hover { background: var(--accent-hover); box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); }
-      .btn-icon { padding: 0.5rem; border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; }
-      .btn-danger { color: #f87171; border-color: #f87171; }
-      .btn-danger:hover { background: #f87171; color: white; }
+        /* Hero Section (Clock Only) */
+        .hero-grid {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-bottom: 3rem;
+          text-align: center;
+        }
+        .hero-welcome {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+        .greeting {
+          font-size: 1.5rem;
+          font-weight: 600;
+          margin-bottom: 0.5rem;
+          opacity: 0.9;
+        }
+        .clock {
+          font-size: 5rem;
+          font-weight: 800;
+          color: var(--accent-color);
+          line-height: 1;
+          margin-bottom: 0.5rem;
+          font-variant-numeric: tabular-nums;
+          text-shadow: 0 0 30px rgba(96, 165, 250, 0.2);
+        }
+        .date-display {
+          font-size: 1.2rem;
+          opacity: 0.8;
+          font-weight: 500;
+        }
 
-      /* Grids */
-      .favorites-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 1rem; }
-      .favorite-item {
-        display: flex; flex-direction: column; align-items: center; padding: 1.5rem;
-        background: var(--bg-secondary); border: 1px solid var(--border-color);
-        border-radius: var(--border-radius); text-decoration: none; color: var(--text-color);
-        transition: var(--transition); position: relative;
-      }
-      .favorite-item:hover { background: var(--bg-tertiary); transform: translateY(-5px); border-color: var(--accent-color); }
-      .favorite-icon { font-size: 2rem; margin-bottom: 0.75rem; color: var(--accent-color); }
-      .favorite-delete { 
-        position: absolute; top: 5px; right: 5px; background: var(--danger-color); color: white;
-        width: 20px; height: 20px; border-radius: 50%; border: none; cursor: pointer;
-        opacity: 0; transition: 0.2s; display: flex; align-items: center; justify-content: center;
-      }
-      .favorite-item:hover .favorite-delete { opacity: 1; }
+        /* Search */
+        .search-container {
+          display: flex;
+          justify-content: center;
+          margin-bottom: 2rem;
+        }
+        .search-form {
+          display: flex;
+          align-items: center;
+          background: var(--bg-secondary);
+          padding: 0.75rem 1.5rem;
+          border-radius: 50px;
+          border: 1px solid var(--border-color);
+          width: 100%;
+          max-width: 700px;
+          box-shadow: var(--shadow-glass);
+          transition: var(--transition);
+        }
+        .search-form:focus-within {
+          border-color: var(--accent-color);
+          box-shadow: 0 0 25px rgba(96, 165, 250, 0.2);
+          transform: scale(1.01);
+        }
+        .search-input {
+          flex: 1;
+          background: none;
+          border: none;
+          padding: 0.5rem;
+          font-size: 1.1rem;
+          color: var(--text-color);
+          outline: none;
+        }
 
-      /* Feeds & Bookmarks */
-      .feed-source {
-        background: var(--bg-secondary); padding: 1.5rem; border-radius: var(--border-radius);
-        border: 1px solid var(--border-color); margin-bottom: 1rem;
-      }
-      .feed-item { margin-bottom: 0.8rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.8rem; }
-      .feed-item:last-child { border-bottom: none; }
-      .feed-item a { text-decoration: none; color: var(--text-color); font-weight: 500; }
-      .feed-item a:hover { color: var(--accent-hover); }
+        /* Toggles & Buttons */
+        .toggle-switch {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding-left: 15px;
+          border-left: 1px solid var(--border-color);
+        }
+        .switch {
+          position: relative;
+          width: 40px;
+          height: 22px;
+        }
+        .switch input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+        }
+        .slider {
+          position: absolute;
+          cursor: pointer;
+          inset: 0;
+          background: #ccc;
+          transition: 0.4s;
+          border-radius: 34px;
+        }
+        .slider:before {
+          position: absolute;
+          content: "";
+          height: 16px;
+          width: 16px;
+          left: 3px;
+          bottom: 3px;
+          background: white;
+          transition: 0.4s;
+          border-radius: 50%;
+        }
+        input:checked + .slider {
+          background: var(--accent-color);
+        }
+        input:checked + .slider:before {
+          transform: translateX(18px);
+        }
 
-      .bookmark-folder { margin-bottom: 1.5rem; border: 1px solid var(--border-color); border-radius: var(--border-radius); overflow: hidden; }
-      .bookmark-folder-header {
-        background: var(--bg-tertiary); padding: 1rem; font-weight: 600;
-        display: flex; justify-content: space-between; align-items: center;
-      }
-      .bookmark-list { padding: 1rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; }
-      .bookmark-item {
-         display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem;
-         background: var(--bg-secondary); border-radius: var(--border-radius-small);
-         border: 1px solid var(--border-color); transition: var(--transition);
-      }
-      .bookmark-item:hover { background: var(--bg-tertiary); transform: translateX(5px); }
-      .bookmark-link { text-decoration: none; color: var(--text-color); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .btn {
+          padding: 0.6rem 1.2rem;
+          border: none;
+          border-radius: var(--border-radius-small);
+          cursor: pointer;
+          font-size: 0.9rem;
+          font-weight: 500;
+          transition: var(--transition);
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          background: var(--bg-secondary);
+          border: 1px solid var(--border-color);
+          color: var(--text-color);
+        }
+        .btn:hover {
+          background: var(--bg-tertiary);
+          transform: translateY(-2px);
+        }
+        .btn-primary {
+          background: var(--accent-color);
+          color: white;
+          border-color: transparent;
+        }
+        .btn-primary:hover {
+          background: var(--accent-hover);
+          box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+        .btn-icon {
+          padding: 0.5rem;
+          border-radius: 50%;
+          width: 35px;
+          height: 35px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .btn-danger {
+          color: #f87171;
+          border-color: #f87171;
+        }
+        .btn-danger:hover {
+          background: #f87171;
+          color: white;
+        }
+        .btn-sm {
+          font-size: 0.8rem;
+          padding: 0.4rem 0.8rem;
+        }
 
-      /* Notes & Todos Split */
-      .dashboard-split { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-      .list-container { max-height: 400px; overflow-y: auto; padding-right: 5px; }
-      .item-card {
-        background: var(--bg-tertiary); padding: 1rem; margin-bottom: 0.75rem;
-        border-radius: var(--border-radius-small); border: 1px solid var(--border-color);
-        display: flex; justify-content: space-between; align-items: center;
-      }
-      .item-card.completed span { text-decoration: line-through; opacity: 0.6; }
+        /* Grids & Cards */
+        .favorites-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+          gap: 1rem;
+        }
+        .favorite-item {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 1.5rem;
+          background: var(--bg-secondary);
+          border: 1px solid var(--border-color);
+          border-radius: var(--border-radius);
+          text-decoration: none;
+          color: var(--text-color);
+          transition: var(--transition);
+          position: relative;
+        }
+        .favorite-item:hover {
+          background: var(--bg-tertiary);
+          transform: translateY(-5px);
+          border-color: var(--accent-color);
+        }
+        .favorite-icon {
+          font-size: 2rem;
+          margin-bottom: 0.75rem;
+          color: var(--accent-color);
+        }
+        .favorite-delete {
+          position: absolute;
+          top: 5px;
+          right: 5px;
+          background: var(--danger-color);
+          color: white;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          border: none;
+          cursor: pointer;
+          opacity: 0;
+          transition: 0.2s;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .favorite-item:hover .favorite-delete {
+          opacity: 1;
+        }
 
-      /* Draggable CS Tools Panel */
-      .floating-panel {
-        position: fixed; top: 120px; right: 20px; width: 260px;
-        background: var(--bg-primary); backdrop-filter: blur(var(--glass-blur));
-        border: 1px solid var(--border-color); border-radius: var(--border-radius);
-        box-shadow: var(--shadow-glass); z-index: 1500;
-        display: flex; flex-direction: column; overflow: hidden;
-        transition: opacity 0.3s;
-      }
-      .panel-header {
-        padding: 12px 15px; background: var(--bg-tertiary);
-        border-bottom: 1px solid var(--border-color); cursor: move;
-        display: flex; justify-content: space-between; align-items: center;
-        user-select: none; font-weight: 600;
-      }
-      .panel-content {
-        max-height: 450px; overflow-y: auto; padding: 10px;
-      }
-      .tool-link {
-        display: flex; align-items: center; padding: 10px;
-        text-decoration: none; color: var(--text-color);
-        border-radius: var(--border-radius-small); margin-bottom: 5px;
-        transition: background 0.2s;
-      }
-      .tool-link:hover { background: var(--bg-tertiary); color: var(--accent-hover); }
-      .tool-link i { width: 24px; color: var(--accent-color); text-align: center; margin-right: 8px; }
-      
-      .panel-toggle-btn {
-        position: fixed; bottom: 30px; right: 30px;
-        width: 50px; height: 50px; border-radius: 50%;
-        background: var(--accent-color); color: white;
-        border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        cursor: pointer; z-index: 1400; display: flex;
-        align-items: center; justify-content: center;
-        font-size: 1.2rem; transition: transform 0.2s;
-      }
-      .panel-toggle-btn:hover { transform: scale(1.1); background: var(--accent-hover); }
+        .feed-source {
+          background: var(--bg-secondary);
+          padding: 1.5rem;
+          border-radius: var(--border-radius);
+          border: 1px solid var(--border-color);
+          margin-bottom: 1rem;
+        }
+        .feed-item {
+          margin-bottom: 0.8rem;
+          border-bottom: 1px solid var(--border-color);
+          padding-bottom: 0.8rem;
+        }
+        .feed-item:last-child {
+          border-bottom: none;
+        }
+        .feed-item a {
+          text-decoration: none;
+          color: var(--text-color);
+          font-weight: 500;
+        }
+        .feed-item a:hover {
+          color: var(--accent-hover);
+        }
 
-      /* Modals */
-      .modal-overlay {
-        position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
-        display: flex; align-items: center; justify-content: center;
-        z-index: 2000; opacity: 0; visibility: hidden; transition: var(--transition);
-      }
-      .modal-overlay.active { opacity: 1; visibility: visible; }
-      .modal {
-        background: var(--bg-primary); padding: 2rem; border-radius: var(--border-radius);
-        width: 90%; max-width: 500px; border: 1px solid var(--border-color);
-        box-shadow: var(--shadow-hover); transform: scale(0.95); transition: var(--transition);
-        max-height: 90vh; overflow-y: auto;
-      }
-      .modal-overlay.active .modal { transform: scale(1); }
-      .form-group { margin-bottom: 1rem; }
-      .form-label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
-      .form-input {
-        width: 100%; padding: 0.8rem; border-radius: var(--border-radius-small);
-        border: 1px solid var(--border-color); background: var(--bg-secondary);
-        color: var(--text-color); font-family: inherit;
-      }
+        .bookmark-folder {
+          margin-bottom: 1.5rem;
+          border: 1px solid var(--border-color);
+          border-radius: var(--border-radius);
+          overflow: hidden;
+          background: var(--bg-secondary);
+        }
+        .bookmark-folder-header {
+          background: var(--bg-tertiary);
+          padding: 1rem;
+          font-weight: 600;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          cursor: pointer;
+          user-select: none;
+        }
+        .bookmark-folder-header:hover {
+          background: rgba(255, 255, 255, 0.1);
+        }
+        .bookmark-list {
+          padding: 1rem;
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          gap: 1rem;
+          transition: max-height 0.3s ease;
+        }
+        .bookmark-list.collapsed {
+          display: none;
+        }
+        .bookmark-item {
+          display: flex;
+          align-items: center;
+          gap: 0.8rem;
+          padding: 0.8rem;
+          background: var(--bg-primary);
+          border-radius: var(--border-radius-small);
+          border: 1px solid var(--border-color);
+          transition: var(--transition);
+        }
+        .bookmark-item:hover {
+          background: var(--bg-tertiary);
+          transform: translateX(5px);
+          border-color: var(--accent-color);
+        }
+        .bookmark-link {
+          text-decoration: none;
+          color: var(--text-color);
+          flex: 1;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          font-size: 0.95rem;
+        }
 
-      /* Responsive */
-      @media (max-width: 768px) {
-        .dashboard-split { grid-template-columns: 1fr; }
-        .hero-grid { flex-direction: column; }
-        .clock { font-size: 3.5rem; }
-        .nav { overflow-x: auto; padding-bottom: 5px; }
-        .floating-panel { display: none !important; } /* Hide on mobile by default */
-        .panel-toggle-btn { display: none; }
-      }
-    </style>
-  </head>
-  <body data-theme="dark">
-    
-    <!-- WALLPAPER OVERLAY FIXED -->
-    <div class="wallpaper-overlay"></div>
+        .dashboard-split {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 2rem;
+        }
+        .list-container {
+          max-height: 400px;
+          overflow-y: auto;
+          padding-right: 5px;
+        }
+        .item-card {
+          background: var(--bg-tertiary);
+          padding: 1rem;
+          margin-bottom: 0.75rem;
+          border-radius: var(--border-radius-small);
+          border: 1px solid var(--border-color);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .item-card.completed span {
+          text-decoration: line-through;
+          opacity: 0.6;
+        }
 
-    <!-- DRAGGABLE CS TOOLS SIDEBAR -->
-    <div id="csToolsPanel" class="floating-panel">
+        /* Draggable CS Tools Panel */
+        .floating-panel {
+          position: fixed;
+          top: 120px;
+          right: 20px;
+          width: 260px;
+          background: var(--bg-primary);
+          backdrop-filter: blur(var(--glass-blur));
+          border: 1px solid var(--border-color);
+          border-radius: var(--border-radius);
+          box-shadow: var(--shadow-glass);
+          z-index: 1500;
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+          transition: opacity 0.3s;
+        }
+        .panel-header {
+          padding: 12px 15px;
+          background: var(--bg-tertiary);
+          border-bottom: 1px solid var(--border-color);
+          cursor: move;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          user-select: none;
+          font-weight: 600;
+        }
+        .panel-content {
+          max-height: 450px;
+          overflow-y: auto;
+          padding: 10px;
+        }
+        .tool-link {
+          display: flex;
+          align-items: center;
+          padding: 10px;
+          text-decoration: none;
+          color: var(--text-color);
+          border-radius: var(--border-radius-small);
+          margin-bottom: 5px;
+          transition: background 0.2s;
+        }
+        .tool-link:hover {
+          background: var(--bg-tertiary);
+          color: var(--accent-hover);
+        }
+        .tool-link i {
+          width: 24px;
+          color: var(--accent-color);
+          text-align: center;
+          margin-right: 8px;
+        }
+        .panel-toggle-btn {
+          position: fixed;
+          bottom: 30px;
+          right: 30px;
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          background: var(--accent-color);
+          color: white;
+          border: none;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+          cursor: pointer;
+          z-index: 1400;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.2rem;
+          transition: transform 0.2s;
+        }
+        .panel-toggle-btn:hover {
+          transform: scale(1.1);
+          background: var(--accent-hover);
+        }
+
+        /* Modals */
+        .modal-overlay {
+          position: fixed;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.6);
+          backdrop-filter: blur(5px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 2000;
+          opacity: 0;
+          visibility: hidden;
+          transition: var(--transition);
+        }
+        .modal-overlay.active {
+          opacity: 1;
+          visibility: visible;
+        }
+        .modal {
+          background: var(--bg-primary);
+          padding: 2rem;
+          border-radius: var(--border-radius);
+          width: 90%;
+          max-width: 500px;
+          border: 1px solid var(--border-color);
+          box-shadow: var(--shadow-hover);
+          transform: scale(0.95);
+          transition: var(--transition);
+          max-height: 90vh;
+          overflow-y: auto;
+        }
+        .modal-overlay.active .modal {
+          transform: scale(1);
+        }
+        .form-group {
+          margin-bottom: 1rem;
+        }
+        .form-label {
+          display: block;
+          margin-bottom: 0.5rem;
+          font-weight: 500;
+        }
+        .form-input {
+          width: 100%;
+          padding: 0.8rem;
+          border-radius: var(--border-radius-small);
+          border: 1px solid var(--border-color);
+          background: var(--bg-secondary);
+          color: var(--text-color);
+          font-family: inherit;
+        }
+
+        /* Whiteboard & Tools CSS */
+        .whiteboard-container {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          height: 75vh;
+        }
+        .wb-toolbar {
+          display: flex;
+          gap: 10px;
+          background: var(--bg-secondary);
+          padding: 10px;
+          border-radius: var(--border-radius-small);
+          align-items: center;
+          border: 1px solid var(--border-color);
+          flex-wrap: wrap;
+        }
+        .wb-tool-btn.active {
+          background: var(--accent-color);
+          color: white;
+          border-color: var(--accent-color);
+        }
+        #wbCanvas {
+          background: white;
+          border-radius: var(--border-radius);
+          flex: 1;
+          width: 100%;
+          cursor: crosshair;
+          background-image: linear-gradient(#e5e7eb 1px, transparent 1px),
+            linear-gradient(90deg, #e5e7eb 1px, transparent 1px);
+          background-size: 20px 20px;
+        }
+        .tool-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 1.5rem;
+        }
+        .tool-card {
+          background: var(--bg-primary);
+          padding: 1.5rem;
+          border-radius: var(--border-radius);
+          border: 1px solid var(--border-color);
+          display: flex;
+          flex-direction: column;
+        }
+        .tool-output {
+          background: rgba(0, 0, 0, 0.2);
+          padding: 10px;
+          border-radius: 4px;
+          margin-top: 10px;
+          font-family: monospace;
+          min-height: 40px;
+          word-break: break-all;
+          flex-grow: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+          .dashboard-split {
+            grid-template-columns: 1fr;
+          }
+          .hero-grid {
+            flex-direction: column;
+          }
+          .clock {
+            font-size: 3.5rem;
+          }
+          .nav {
+            overflow-x: auto;
+            padding-bottom: 5px;
+          }
+          .floating-panel {
+            display: none !important;
+          }
+          .panel-toggle-btn {
+            display: none;
+          }
+        }
+      </style>
+    </head>
+    <body data-theme="dark">
+      <div class="wallpaper-overlay"></div>
+
+      <!-- DRAGGABLE SIDEBAR -->
+      <div id="csToolsPanel" class="floating-panel">
         <div class="panel-header" id="csToolsHeader">
-            <span><i class="fas fa-toolbox"></i> CS Toolkit</span>
-            <button class="btn-icon" style="padding:2px; height:auto; width:auto;" onclick="app.toggleToolsPanel()"><i class="fas fa-times"></i></button>
+          <span><i class="fas fa-toolbox"></i> Cloud & CS Toolkit</span>
+          <button
+            class="btn-icon"
+            style="padding: 2px; height: auto; width: auto"
+            onclick="app.toggleToolsPanel()"
+          >
+            <i class="fas fa-times"></i>
+          </button>
         </div>
         <div class="panel-content">
+          
             <p>Reporting</p>
             <a href="https://awes0m.github.io/cybersec_tools/security_incident_response_generator.html" target="_blank" class="tool-link"><i class="fas fa-file-alt"></i> Security Incident Response Generator</a>
             <br>
@@ -308,986 +755,2010 @@
             <a href="https://awes0m.github.io/cybersec_tools/jsonCorelatorAnalyzer.html" target="_blank" class="tool-link"><i class="fas fa-code"></i> JSON Corelator Analyzer</a>
             <a href="https://gchq.github.io/CyberChef/" target="_blank" class="tool-link"><i class="fas fa-cookie-bite"></i> CyberChef</a>
             <br>
-            <p>Online Services</p>
-            <a href="https://www.virustotal.com/" target="_blank" class="tool-link"><i class="fas fa-virus"></i> VirusTotal</a>
-            <a href="https://www.shodan.io/" target="_blank" class="tool-link"><i class="fas fa-search-location"></i> Shodan</a>
-            <a href="https://otx.alienvault.com/" target="_blank" class="tool-link"><i class="fas fa-project-diagram"></i> AlienVault OTX</a>
-            <a href="https://urlscan.io/" target="_blank" class="tool-link"><i class="fas fa-barcode"></i> urlscan.io</a>
-            <a href="https://www.abuseipdb.com/" target="_blank" class="tool-link"><i class="fas fa-ban"></i> AbuseIPDB</a>
-            <a href="https://cve.mitre.org/" target="_blank" class="tool-link"><i class="fas fa-bug"></i> MITRE CVE</a>
-            <a href="https://www.exploit-db.com/" target="_blank" class="tool-link"><i class="fas fa-bomb"></i> Exploit-DB</a>
-            <a href="https://haveibeenpwned.com/" target="_blank" class="tool-link"><i class="fas fa-user-secret"></i> Have I Been Pwned</a>
-            <a href="https://dnsster.com/" target="_blank" class="tool-link"><i class="fas fa-network-wired"></i> DNSster</a>
-            <a href="https://crt.sh/" target="_blank" class="tool-link"><i class="fas fa-certificate"></i> crt.sh</a>
-            <a href="https://mxtoolbox.com/" target="_blank" class="tool-link"><i class="fas fa-envelope-open-text"></i> MxToolbox</a>
-        </div>
-    </div>
-    
-    <button class="panel-toggle-btn" onclick="app.toggleToolsPanel()" title="Toggle CS Toolkit">
-        <i class="fas fa-tools"></i>
-    </button>
+          <small
+            style="
+              display: block;
+              padding: 5px 10px;
+              color: var(--text-muted);
+              text-transform: uppercase;
+              font-size: 0.7rem;
+              font-weight: bold;
+            "
+            >OSINT & Analysis</small>
+         
+          <a
+            href="https://www.virustotal.com/"
+            target="_blank"
+            class="tool-link"
+            ><i class="fas fa-virus"></i> VirusTotal</a
+          >
+          <a href="https://www.shodan.io/" target="_blank" class="tool-link"
+            ><i class="fas fa-search-location"></i> Shodan</a
+          >
+          <a
+            href="https://otx.alienvault.com/"
+            target="_blank"
+            class="tool-link"
+            ><i class="fas fa-project-diagram"></i> AlienVault OTX</a
+          >
+          <a href="https://urlscan.io/" target="_blank" class="tool-link"
+            ><i class="fas fa-barcode"></i> urlscan.io</a
+          >
+          <a href="https://regex101.com/" target="_blank" class="tool-link"
+            ><i class="fas fa-code"></i> Regex101</a
+          >
+          <a
+            href="https://gtfobins.github.io/"
+            target="_blank"
+            class="tool-link"
+            ><i class="fas fa-terminal"></i> GTFOBins</a
+          >
+          <a
+            href="https://lolbas-project.github.io/"
+            target="_blank"
+            class="tool-link"
+            ><i class="fas fa-file-code"></i> LOLBAS</a
+          >
 
-    <header class="header">
-      <div class="header-content">
-        <div class="logo">
-          <i class="fa-solid fa-shield-halved"></i> Awes0m CyberHome
-        </div>
-        <nav class="nav" id="mainNav">
-          <a href="#home" class="nav-link active" data-page="homePage">Dashboard</a>
-          <a href="#bookmarks" class="nav-link" data-page="bookmarksPage">Bookmarks</a>
-          <a href="#feeds" class="nav-link" data-page="feedsPage">Intel Feeds</a>
-          <a href="#automations" class="nav-link" data-page="automationsPage">Ops</a>
-          <a href="#notes" class="nav-link" data-page="notesPage">Notes</a>
-          <a href="#tasks" class="nav-link" data-page="tasksPage">Tasks</a>
-        </nav>
-        <div class="header-controls">
-          <button class="btn btn-icon" id="themeToggle"><i class="fas fa-sun"></i></button>
-          <button class="btn btn-icon" id="dbBackupBtn" title="Database Backup"><i class="fas fa-database"></i></button>
-          <button class="btn btn-icon" id="settingsBtn"><i class="fas fa-cog"></i></button>
+          <small
+            style="
+              display: block;
+              padding: 10px 10px 5px;
+              color: var(--text-muted);
+              text-transform: uppercase;
+              font-size: 0.7rem;
+              font-weight: bold;
+            "
+            >Cloud Infrastructure documentation</small
+          >
+          <a
+            href="https://docs.aws.amazon.com/"
+            target="_blank"
+            class="tool-link"
+            ><i class="fab fa-aws"></i> AWS Docs</a
+          >
+          <a href="https://learn.microsoft.com/en-us/azure/" target="_blank" class="tool-link"
+            ><i class="fab fa-microsoft"></i> Azure Docs</a
+          >
+          <a
+            href="https://docs.cloud.google.com/"
+            target="_blank"
+            class="tool-link"
+            ><i class="fab fa-google"></i> GCP Docs</a
+          >
+          <a href="https://crontab.guru/" target="_blank" class="tool-link"
+            ><i class="fas fa-clock"></i> Crontab Guru</a
+          >
+          <a href="https://jsonlint.com/" target="_blank" class="tool-link"
+            ><i class="fas fa-code"></i> JSON Lint</a
+          >
         </div>
       </div>
-    </header>
+      <button
+        class="panel-toggle-btn"
+        onclick="app.toggleToolsPanel()"
+        title="Toggle CS Toolkit"
+      >
+        <i class="fas fa-tools"></i>
+      </button>
 
-    <div class="container">
-      
-      <!-- PAGE: HOME -->
-      <div id="homePage" class="page active">
-        
-        <div class="hero-grid">
-          <div class="hero-welcome">
-            <div class="greeting" id="greetingDisplay">Welcome back</div>
-            <div class="clock" id="clockDisplay">00:00</div>
-            <div class="date-display" id="dateDisplay">Loading date...</div>
+      <header class="header">
+        <div class="header-content">
+          <div class="logo">
+            <i class="fa-solid fa-shield-halved"></i> Awes0m CyberHome
+          </div>
+          <nav class="nav" id="mainNav">
+            <a href="#home" class="nav-link active" data-page="homePage"
+              >Dashboard</a
+            >
+            <a href="#bookmarks" class="nav-link" data-page="bookmarksPage"
+              >Bookmarks</a
+            >
+            <a href="#feeds" class="nav-link" data-page="feedsPage"
+              >Intel Feeds</a
+            >
+            <a href="#automations" class="nav-link" data-page="automationsPage"
+              >Ops</a
+            >
+            <a href="#notes" class="nav-link" data-page="notesPage">Notes</a>
+            <a href="#tasks" class="nav-link" data-page="tasksPage">Tasks</a>
+            <a href="#tools" class="nav-link" data-page="toolsPage">Tools</a>
+            <a href="#whiteboard" class="nav-link" data-page="whiteboardPage"
+              >Whiteboard</a
+            >
+          </nav>
+          <div class="header-controls">
+            <button class="btn btn-icon" id="themeToggle">
+              <i class="fas fa-sun"></i>
+            </button>
+            <button
+              class="btn btn-icon"
+              id="dbBackupBtn"
+              title="Database Backup"
+            >
+              <i class="fas fa-database"></i>
+            </button>
+            <button class="btn btn-icon" id="settingsBtn">
+              <i class="fas fa-cog"></i>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div class="container">
+
+        <!-- PAGE: HOME -->
+        <div id="homePage" class="page active">
+          <div class="hero-grid">
+            <div class="hero-welcome">
+              <div class="greeting" id="greetingDisplay">Welcome back</div>
+              <div class="clock" id="clockDisplay">00:00</div>
+              <div class="date-display" id="dateDisplay">Loading date...</div>
+            </div>
+          </div>
+          <div class="search-container">
+            <form
+              id="searchForm"
+              class="search-form"
+              action="https://www.google.com/search"
+              method="get"
+              target="_blank"
+            >
+              <i class="fas fa-search" style="opacity: 0.7"></i>
+              <input
+                type="text"
+                id="searchInput"
+                name="q"
+                placeholder="Search Google..."
+                class="search-input"
+                autocomplete="off"
+                autofocus
+              />
+              <div class="toggle-switch">
+                <i class="fab fa-google" id="googleIcon"></i>
+                <label class="switch"
+                  ><input type="checkbox" id="searchEngineToggle" /><span
+                    class="slider"
+                  ></span
+                ></label>
+                <i class="fas fa-brain" id="perplexityIcon"></i>
+              </div>
+            </form>
+          </div>
+          <section class="section">
+            <div class="section-header">
+              <h3 class="section-title">
+                <i class="fas fa-star"></i> Quick Access
+              </h3>
+              <button
+                class="btn btn-primary btn-sm"
+                onclick="app.openModal('favoriteModal')"
+              >
+                <i class="fas fa-plus"></i> Add
+              </button>
+            </div>
+            <div class="favorites-grid" id="favoritesGrid"></div>
+          </section>
+          <div class="dashboard-split">
+            <section class="section">
+              <div class="section-header">
+                <h3 class="section-title">
+                  <i class="fas fa-sticky-note"></i> Recent Notes
+                </h3>
+                <button
+                  class="btn btn-primary btn-sm"
+                  onclick="app.openModal('noteModal')"
+                >
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+              <div class="list-container" id="recentNotesList"></div>
+            </section>
+            <section class="section">
+              <div class="section-header">
+                <h3 class="section-title">
+                  <i class="fas fa-check-square"></i> Tasks
+                </h3>
+                <button
+                  class="btn btn-primary btn-sm"
+                  onclick="app.openModal('todoModal')"
+                >
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+              <div class="list-container" id="recentTodosList"></div>
+            </section>
           </div>
         </div>
 
-        <div class="search-container">
-          <form id="searchForm" class="search-form" action="https://www.google.com/search" method="get" target="_blank">
-            <i class="fas fa-search" style="opacity: 0.7;"></i>
-            <input type="text" id="searchInput" name="q" placeholder="Search Google..." class="search-input" autocomplete="off" autofocus>
-            <div class="toggle-switch">
-              <i class="fab fa-google" id="googleIcon"></i>
-              <label class="switch">
-                <input type="checkbox" id="searchEngineToggle">
-                <span class="slider"></span>
-              </label>
-              <i class="fas fa-brain" id="perplexityIcon"></i>
+        <!-- PAGE: BOOKMARKS -->
+        <div id="bookmarksPage" class="page">
+          <div class="section-header">
+            <h2 class="section-title">Bookmark Manager</h2>
+            <div style="display: flex; gap: 10px">
+              <input type="file" id="bmImportInput" accept=".html" hidden />
+              <button
+                class="btn"
+                onclick="document.getElementById('bmImportInput').click()"
+              >
+                <i class="fas fa-file-import"></i> Import HTML
+              </button>
+              <button
+                class="btn btn-primary"
+                onclick="app.openModal('folderModal')"
+              >
+                <i class="fas fa-folder-plus"></i> New Folder
+              </button>
+            </div>
+          </div>
+          <input
+            type="text"
+            id="bmSearch"
+            class="form-input"
+            placeholder="Filter bookmarks..."
+            style="margin-bottom: 1rem"
+          />
+          <div id="bookmarksContainer"></div>
+        </div>
+
+        <!-- PAGE: FEEDS -->
+        <div id="feedsPage" class="page">
+          <div class="section-header">
+            <h2 class="section-title">Intelligence Feeds</h2>
+            <div style="display: flex; gap: 10px">
+              <button class="btn" onclick="app.loadFeeds()">
+                <i class="fas fa-sync"></i> Refresh
+              </button>
+              <button
+                class="btn btn-primary"
+                onclick="app.openModal('feedModal')"
+              >
+                <i class="fas fa-plus"></i> Add RSS
+              </button>
+            </div>
+          </div>
+          <div
+            id="feedGrid"
+            style="
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+              gap: 1.5rem;
+            "
+          ></div>
+        </div>
+
+        <!-- PAGE: AUTOMATIONS -->
+        <div id="automationsPage" class="page">
+          <div class="section-header">
+            <h2 class="section-title">Automations</h2>
+            <div style="display: flex; gap: 10px">
+              <button
+                class="btn"
+                onclick="app.exportAutomations()"
+                title="Export Automations"
+              >
+                <i class="fas fa-file-export"></i> Export
+              </button>
+              <button
+                class="btn"
+                onclick="document.getElementById('autoImportInput').click()"
+                title="Import Automations"
+              >
+                <i class="fas fa-file-import"></i> Import
+              </button>
+              <input
+                type="file"
+                id="autoImportInput"
+                accept=".json"
+                style="display: none"
+                onchange="app.importAutomations(this.files[0])"
+              />
+              <button
+                class="btn btn-primary"
+                onclick="app.openModal('automationModal')"
+              >
+                <i class="fas fa-robot"></i> Create Flow
+              </button>
+            </div>
+          </div>
+          <p class="text-muted" style="margin-bottom: 1rem">
+            Launch multiple tools simultaneously.
+          </p>
+          <div
+            id="automationGrid"
+            style="
+              display: grid;
+              grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+              gap: 1rem;
+            "
+          ></div>
+        </div>
+
+        <!-- PAGE: NOTES -->
+        <div id="notesPage" class="page">
+          <div class="section-header">
+            <h2 class="section-title">All Notes</h2>
+            <button
+              class="btn btn-primary"
+              onclick="app.openModal('noteModal')"
+            >
+              <i class="fas fa-plus"></i> New Note
+            </button>
+          </div>
+          <input
+            type="text"
+            id="noteSearch"
+            class="form-input"
+            placeholder="Search content..."
+            style="margin-bottom: 1rem"
+          />
+          <div id="allNotesList"></div>
+        </div>
+
+        <!-- PAGE: TASKS -->
+        <div id="tasksPage" class="page">
+          <div class="section-header">
+            <h2 class="section-title">Task Manager</h2>
+            <button
+              class="btn btn-primary"
+              onclick="app.openModal('todoModal')"
+            >
+              <i class="fas fa-plus"></i> New Task
+            </button>
+          </div>
+          <input
+            type="text"
+            id="todoSearch"
+            class="form-input"
+            placeholder="Search tasks..."
+            style="margin-bottom: 1rem"
+          />
+          <div id="allTodosList"></div>
+        </div>
+
+        <!-- PAGE: TOOLS -->
+        <div id="toolsPage" class="page">
+          <div class="section-header">
+            <h2 class="section-title">Cyber Utilities</h2>
+          </div>
+          <div class="tool-grid">
+            <!-- Encoder/Decoder -->
+            <div class="tool-card">
+              <h3><i class="fas fa-code"></i> CyberChef Lite</h3>
+              <textarea
+                id="cyberInput"
+                class="form-input"
+                rows="3"
+                placeholder="Input text..."
+                style="margin: 10px 0"
+              ></textarea>
+              <div
+                style="
+                  display: flex;
+                  gap: 5px;
+                  flex-wrap: wrap;
+                  margin-bottom: 10px;
+                "
+              >
+                <button class="btn btn-sm" onclick="app.tools.b64Encode()">
+                  B64 Enc
+                </button>
+                <button class="btn btn-sm" onclick="app.tools.b64Decode()">
+                  B64 Dec
+                </button>
+                <button class="btn btn-sm" onclick="app.tools.urlEncode()">
+                  URL Enc
+                </button>
+                <button class="btn btn-sm" onclick="app.tools.urlDecode()">
+                  URL Dec
+                </button>
+              </div>
+              <div id="cyberOutput" class="tool-output"></div>
+            </div>
+
+            <!-- CIDR Calc -->
+            <div class="tool-card">
+              <h3><i class="fas fa-network-wired"></i> Advanced CIDR Calc</h3>
+              <div style="display: flex; gap: 5px; margin: 10px 0">
+                <input
+                  type="text"
+                  id="cidrInput"
+                  class="form-input"
+                  placeholder="192.168.1.1/24"
+                />
+                <button class="btn" onclick="app.tools.calcCidr()">
+                  Calculate
+                </button>
+              </div>
+              <div
+                id="cidrOutput"
+                class="tool-output"
+                style="white-space: pre-wrap; font-size: 0.9rem"
+              ></div>
+            </div>
+
+            <!-- Unix Time -->
+            <div class="tool-card">
+              <h3><i class="fas fa-clock"></i> Unix Timestamp</h3>
+              <div style="display: flex; gap: 5px; margin: 10px 0">
+                <input
+                  type="number"
+                  id="tsInput"
+                  class="form-input"
+                  placeholder="Timestamp"
+                />
+                <button
+                  class="btn btn-sm"
+                  onclick="app.tools.convertTime('now')"
+                >
+                  Now
+                </button>
+                <button class="btn" onclick="app.tools.convertTime()">
+                  Convert
+                </button>
+              </div>
+              <div id="tsOutput" class="tool-output"></div>
+            </div>
+
+            <!-- JSON Prettify -->
+            <div class="tool-card">
+              <h3><i class="fas fa-brackets-curly"></i> JSON Format</h3>
+              <textarea
+                id="jsonInput"
+                class="form-input"
+                rows="3"
+                placeholder='{"ugly":"json"}'
+                style="margin: 10px 0"
+              ></textarea>
+              <button class="btn btn-sm" onclick="app.tools.formatJson()">
+                Prettify
+              </button>
+              <textarea
+                id="jsonOutput"
+                class="form-input"
+                rows="5"
+                style="margin-top: 10px; font-family: monospace"
+                readonly
+              ></textarea>
+            </div>
+
+            <!-- Defang/IP -->
+            <div class="tool-card">
+              <h3><i class="fas fa-shield-alt"></i> Indicators</h3>
+              <input
+                type="text"
+                id="defangInput"
+                class="form-input"
+                placeholder="malicious.com"
+                style="margin-bottom: 5px"
+              />
+              <div style="display: flex; gap: 5px">
+                <button class="btn btn-sm" onclick="app.tools.defang()">
+                  Defang URL
+                </button>
+                <button class="btn btn-sm" onclick="app.tools.refang()">
+                  Refang
+                </button>
+              </div>
+              <div
+                id="defangOutput"
+                class="tool-output"
+                style="min-height: 30px; margin-bottom: 15px"
+              ></div>
+              <button class="btn btn-primary" onclick="app.tools.checkIp()">
+                Check Public IP
+              </button>
+              <div
+                id="ipOutput"
+                style="margin-top: 5px; font-family: monospace"
+              ></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PAGE: WHITEBOARD -->
+        <div id="whiteboardPage" class="page">
+          <div class="section-header">
+            <h2 class="section-title">Analyst Whiteboard</h2>
+          </div>
+          <div class="whiteboard-container">
+            <div class="wb-toolbar">
+              <input
+                type="color"
+                id="wbColor"
+                value="#000000"
+                title="Pen/Text Color"
+              />
+              <div style="display: flex; align-items: center; gap: 5px">
+                <span style="font-size: 0.8rem">Size:</span>
+                <input
+                  type="range"
+                  id="wbSize"
+                  min="1"
+                  max="30"
+                  value="3"
+                  title="Pen/Text Size"
+                />
+              </div>
+              <div
+                style="
+                  width: 1px;
+                  height: 20px;
+                  background: var(--border-color);
+                  margin: 0 5px;
+                "
+              ></div>
+              <button
+                class="btn btn-sm wb-tool-btn active"
+                onclick="app.wb.setTool('pen', this)"
+                title="Pen"
+              >
+                <i class="fas fa-pen"></i>
+              </button>
+              <button
+                class="btn btn-sm wb-tool-btn"
+                onclick="app.wb.setTool('eraser', this)"
+                title="Eraser"
+              >
+                <i class="fas fa-eraser"></i>
+              </button>
+              <button
+                class="btn btn-sm wb-tool-btn"
+                onclick="app.wb.setTool('text', this)"
+                title="Text Tool (Click canvas to type)"
+              >
+                <i class="fas fa-font"></i>
+              </button>
+              <div style="flex: 1"></div>
+              <button class="btn btn-danger btn-sm" onclick="app.wb.clear()">
+                <i class="fas fa-trash"></i> Clear
+              </button>
+              <button class="btn btn-primary btn-sm" onclick="app.wb.save()">
+                <i class="fas fa-download"></i> Save Image
+              </button>
+            </div>
+            <canvas id="wbCanvas"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODALS (Hidden) -->
+      <div class="modal-overlay" id="favoriteModal">
+        <div class="modal">
+          <div class="section-header">
+            <h3>Add Favorite</h3>
+            <button class="btn-icon" onclick="app.closeModal('favoriteModal')">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <form id="favoriteForm">
+            <div class="form-group">
+              <label class="form-label">Name</label
+              ><input type="text" id="favName" class="form-input" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">URL</label
+              ><input type="url" id="favUrl" class="form-input" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Icon (FontAwesome)</label
+              ><input
+                type="text"
+                id="favIcon"
+                class="form-input"
+                placeholder="fas fa-globe"
+              />
+            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 10px">
+              <button
+                type="button"
+                class="btn btn-danger"
+                onclick="app.closeModal('favoriteModal')"
+              >
+                Cancel</button
+              ><button type="submit" class="btn btn-primary">Save</button>
             </div>
           </form>
         </div>
-
-        <section class="section">
+      </div>
+      <div class="modal-overlay" id="noteModal">
+        <div class="modal">
           <div class="section-header">
-            <h3 class="section-title"><i class="fas fa-star"></i> Quick Access</h3>
-            <button class="btn btn-primary btn-sm" onclick="app.openModal('favoriteModal')"><i class="fas fa-plus"></i> Add</button>
+            <h3>Edit Note</h3>
+            <button class="btn-icon" onclick="app.closeModal('noteModal')">
+              <i class="fas fa-times"></i>
+            </button>
           </div>
-          <div class="favorites-grid" id="favoritesGrid"></div>
-        </section>
-
-        <div class="dashboard-split">
-          <section class="section">
-            <div class="section-header">
-              <h3 class="section-title"><i class="fas fa-sticky-note"></i> Recent Notes</h3>
-              <button class="btn btn-primary btn-sm" onclick="app.openModal('noteModal')"><i class="fas fa-plus"></i></button>
+          <form id="noteForm">
+            <input type="hidden" id="noteId" />
+            <div class="form-group">
+              <label class="form-label">Title</label
+              ><input type="text" id="noteTitle" class="form-input" required />
             </div>
-            <div class="list-container" id="recentNotesList"></div>
-          </section>
-          
-          <section class="section">
-            <div class="section-header">
-              <h3 class="section-title"><i class="fas fa-check-square"></i> Tasks</h3>
-              <button class="btn btn-primary btn-sm" onclick="app.openModal('todoModal')"><i class="fas fa-plus"></i></button>
+            <div class="form-group">
+              <label class="form-label">Content</label
+              ><textarea
+                id="noteContent"
+                class="form-input"
+                rows="5"
+              ></textarea>
             </div>
-            <div class="list-container" id="recentTodosList"></div>
-          </section>
-        </div>
-
-      </div>
-
-      <!-- PAGE: BOOKMARKS -->
-      <div id="bookmarksPage" class="page">
-        <div class="section-header">
-          <h2 class="section-title">Bookmark Manager</h2>
-          <div style="display: flex; gap: 10px;">
-             <input type="file" id="bmImportInput" accept=".html" hidden>
-             <button class="btn" onclick="document.getElementById('bmImportInput').click()"><i class="fas fa-file-import"></i> Import HTML</button>
-             <button class="btn btn-primary" onclick="app.openModal('folderModal')"><i class="fas fa-folder-plus"></i> New Folder</button>
-          </div>
-        </div>
-        <input type="text" id="bmSearch" class="form-input" placeholder="Filter bookmarks..." style="margin-bottom: 1rem;">
-        <div id="bookmarksContainer"></div>
-      </div>
-
-      <!-- PAGE: FEEDS -->
-      <div id="feedsPage" class="page">
-        <div class="section-header">
-            <h2 class="section-title">Intelligence Feeds</h2>
-            <div style="display: flex; gap: 10px;">
-                <button class="btn" onclick="app.loadFeeds()"><i class="fas fa-sync"></i> Refresh</button>
-                <button class="btn btn-primary" onclick="app.openModal('feedModal')"><i class="fas fa-plus"></i> Add RSS</button>
+            <div style="display: flex; justify-content: flex-end; gap: 10px">
+              <button
+                type="button"
+                class="btn btn-danger"
+                onclick="app.closeModal('noteModal')"
+              >
+                Cancel</button
+              ><button type="submit" class="btn btn-primary">Save</button>
             </div>
-        </div>
-        <div id="feedGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;"></div>
-      </div>
-
-      <!-- PAGE: AUTOMATIONS -->
-      <div id="automationsPage" class="page">
-        <div class="section-header">
-            <h2 class="section-title">Automations</h2>
-            <button class="btn btn-primary" onclick="app.openModal('automationModal')"><i class="fas fa-robot"></i> Create Flow</button>
-        </div>
-        <p class="text-muted" style="margin-bottom:1rem;">Launch multiple tools simultaneously.</p>
-        <div id="automationGrid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem;"></div>
-      </div>
-
-      <!-- PAGE: NOTES -->
-      <div id="notesPage" class="page">
-        <div class="section-header">
-            <h2 class="section-title">All Notes</h2>
-            <button class="btn btn-primary" onclick="app.openModal('noteModal')"><i class="fas fa-plus"></i> New Note</button>
-        </div>
-        <input type="text" id="noteSearch" class="form-input" placeholder="Search content..." style="margin-bottom: 1rem;">
-        <div id="allNotesList"></div>
-      </div>
-
-      <!-- PAGE: TASKS -->
-      <div id="tasksPage" class="page">
-        <div class="section-header">
-            <h2 class="section-title">Task Manager</h2>
-            <button class="btn btn-primary" onclick="app.openModal('todoModal')"><i class="fas fa-plus"></i> New Task</button>
-        </div>
-        <input type="text" id="todoSearch" class="form-input" placeholder="Search tasks..." style="margin-bottom: 1rem;">
-        <div id="allTodosList"></div>
-      </div>
-
-    </div>
-
-    <!-- MODALS -->
-    <!-- Favorite Modal -->
-    <div class="modal-overlay" id="favoriteModal">
-      <div class="modal">
-        <div class="section-header"><h3>Add Favorite</h3><button class="btn-icon" onclick="app.closeModal('favoriteModal')"><i class="fas fa-times"></i></button></div>
-        <form id="favoriteForm">
-          <div class="form-group"><label class="form-label">Name</label><input type="text" id="favName" class="form-input" required></div>
-          <div class="form-group"><label class="form-label">URL</label><input type="url" id="favUrl" class="form-input" required></div>
-          <div class="form-group"><label class="form-label">Icon Class (FontAwesome)</label><input type="text" id="favIcon" class="form-input" placeholder="fas fa-globe"></div>
-          <div style="display:flex; justify-content: flex-end; gap: 10px;">
-            <button type="button" class="btn btn-danger" onclick="app.closeModal('favoriteModal')">Cancel</button>
-            <button type="submit" class="btn btn-primary">Save</button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <!-- Note Modal -->
-    <div class="modal-overlay" id="noteModal">
-      <div class="modal">
-        <div class="section-header"><h3>Edit Note</h3><button class="btn-icon" onclick="app.closeModal('noteModal')"><i class="fas fa-times"></i></button></div>
-        <form id="noteForm">
-          <input type="hidden" id="noteId">
-          <div class="form-group"><label class="form-label">Title</label><input type="text" id="noteTitle" class="form-input" required></div>
-          <div class="form-group"><label class="form-label">Content</label><textarea id="noteContent" class="form-input" rows="5"></textarea></div>
-          <div style="display:flex; justify-content: flex-end; gap: 10px;">
-            <button type="button" class="btn btn-danger" onclick="app.closeModal('noteModal')">Cancel</button>
-            <button type="submit" class="btn btn-primary">Save Note</button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <!-- Todo Modal -->
-    <div class="modal-overlay" id="todoModal">
-      <div class="modal">
-        <div class="section-header"><h3>Task</h3><button class="btn-icon" onclick="app.closeModal('todoModal')"><i class="fas fa-times"></i></button></div>
-        <form id="todoForm">
-          <input type="hidden" id="todoId">
-          <div class="form-group"><label class="form-label">Task</label><input type="text" id="todoText" class="form-input" required></div>
-          <div style="display:flex; justify-content: flex-end; gap: 10px;">
-            <button type="button" class="btn btn-danger" onclick="app.closeModal('todoModal')">Cancel</button>
-            <button type="submit" class="btn btn-primary">Save Task</button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <!-- Folder Modal -->
-    <div class="modal-overlay" id="folderModal">
-      <div class="modal">
-        <div class="section-header"><h3>New Folder</h3><button class="btn-icon" onclick="app.closeModal('folderModal')"><i class="fas fa-times"></i></button></div>
-        <form id="folderForm">
-          <div class="form-group"><label class="form-label">Folder Name</label><input type="text" id="folderName" class="form-input" required></div>
-          <div style="display:flex; justify-content: flex-end; gap: 10px;">
-            <button type="button" class="btn btn-danger" onclick="app.closeModal('folderModal')">Cancel</button>
-            <button type="submit" class="btn btn-primary">Create Folder</button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <!-- Bookmark Modal -->
-    <div class="modal-overlay" id="bookmarkModal">
-      <div class="modal">
-        <div class="section-header"><h3>Add Bookmark</h3><button class="btn-icon" onclick="app.closeModal('bookmarkModal')"><i class="fas fa-times"></i></button></div>
-        <form id="bookmarkForm">
-          <input type="hidden" id="bmFolderId">
-          <div class="form-group"><label class="form-label">Title</label><input type="text" id="bmTitle" class="form-input" required></div>
-          <div class="form-group"><label class="form-label">URL</label><input type="url" id="bmUrl" class="form-input" required></div>
-          <div style="display:flex; justify-content: flex-end; gap: 10px;">
-            <button type="button" class="btn btn-danger" onclick="app.closeModal('bookmarkModal')">Cancel</button>
-            <button type="submit" class="btn btn-primary">Save Bookmark</button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <!-- Feed Modal -->
-    <div class="modal-overlay" id="feedModal">
-      <div class="modal">
-        <div class="section-header"><h3>Add RSS Feed</h3><button class="btn-icon" onclick="app.closeModal('feedModal')"><i class="fas fa-times"></i></button></div>
-        <form id="feedForm">
-          <div class="form-group"><label class="form-label">Name</label><input type="text" id="feedName" class="form-input" required></div>
-          <div class="form-group"><label class="form-label">RSS URL</label><input type="url" id="feedUrl" class="form-input" required></div>
-          <div style="display:flex; justify-content: flex-end; gap: 10px;">
-            <button type="button" class="btn btn-danger" onclick="app.closeModal('feedModal')">Cancel</button>
-            <button type="submit" class="btn btn-primary">Add Feed</button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <!-- Automation Modal -->
-    <div class="modal-overlay" id="automationModal">
-      <div class="modal">
-        <div class="section-header"><h3>Automation Flow</h3><button class="btn-icon" onclick="app.closeModal('automationModal')"><i class="fas fa-times"></i></button></div>
-        <form id="automationForm">
-          <div class="form-group"><label class="form-label">Name</label><input type="text" id="autoName" class="form-input" placeholder="e.g., Morning Ops" required></div>
-          
-          <!-- Bookmark Picker -->
-          <div class="form-group" style="background:var(--bg-tertiary); padding:0.8rem; border-radius:8px;">
-            <label class="form-label"><i class="fas fa-bookmark"></i> Add from Bookmarks</label>
-            <div style="display:flex; gap:0.5rem">
-                <select id="autoBmPicker" class="form-input" style="flex:1"></select>
-                <button type="button" class="btn btn-primary" id="addBmToAutoBtn">Add</button>
-            </div>
-          </div>
-
-          <div class="form-group"><label class="form-label">URLs (One per line)</label><textarea id="autoUrls" class="form-input" rows="5" placeholder="https://example.com" required></textarea></div>
-          <div style="display:flex; justify-content: flex-end; gap: 10px;">
-            <button type="button" class="btn btn-danger" onclick="app.closeModal('automationModal')">Cancel</button>
-            <button type="submit" class="btn btn-primary">Save Flow</button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <!-- Backup/Settings Modal -->
-    <div class="modal-overlay" id="settingsModal">
-      <div class="modal">
-        <div class="section-header"><h3>Data & Settings</h3><button class="btn-icon" onclick="app.closeModal('settingsModal')"><i class="fas fa-times"></i></button></div>
-        <div style="display:flex; flex-direction:column; gap:1rem;">
-            <div style="background:var(--bg-secondary); padding:1rem; border-radius:8px;">
-                <h4>Database Backup</h4>
-                <p style="font-size:0.85rem; opacity:0.7; margin-bottom:10px;">Export all your data (Favorites, Notes, Bookmarks) to a JSON file.</p>
-                <button class="btn btn-primary" onclick="app.db.exportDatabase()"><i class="fas fa-download"></i> Download Backup</button>
-            </div>
-            <div style="background:var(--bg-secondary); padding:1rem; border-radius:8px;">
-                <h4>Restore Data</h4>
-                <p style="font-size:0.85rem; opacity:0.7; margin-bottom:10px;">Restore from a previously saved JSON file. <strong>Warning: Replaces current data.</strong></p>
-                <input type="file" id="dbRestoreInput" accept=".json" style="display:none" onchange="app.db.importDatabase(this.files[0])">
-                <button class="btn btn-danger" onclick="document.getElementById('dbRestoreInput').click()"><i class="fas fa-upload"></i> Restore from Backup</button>
-            </div>
-            <div style="background:var(--bg-secondary); padding:1rem; border-radius:8px;">
-                <h4>Wallpaper</h4>
-                <input type="url" id="bgUrlInput" class="form-input" placeholder="Image URL..." style="margin-bottom:0.5rem">
-                <button class="btn" onclick="app.setWallpaper()">Set Wallpaper</button>
-            </div>
+          </form>
         </div>
       </div>
-    </div>
+      <div class="modal-overlay" id="todoModal">
+        <div class="modal">
+          <div class="section-header">
+            <h3>Task</h3>
+            <button class="btn-icon" onclick="app.closeModal('todoModal')">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <form id="todoForm">
+            <input type="hidden" id="todoId" />
+            <div class="form-group">
+              <label class="form-label">Task</label
+              ><input type="text" id="todoText" class="form-input" required />
+            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 10px">
+              <button
+                type="button"
+                class="btn btn-danger"
+                onclick="app.closeModal('todoModal')"
+              >
+                Cancel</button
+              ><button type="submit" class="btn btn-primary">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-overlay" id="folderModal">
+        <div class="modal">
+          <div class="section-header">
+            <h3>Folder</h3>
+            <button class="btn-icon" onclick="app.closeModal('folderModal')">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <form id="folderForm">
+            <input type="hidden" id="folderId" />
+            <div class="form-group">
+              <label class="form-label">Folder Name</label
+              ><input type="text" id="folderName" class="form-input" required />
+            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 10px">
+              <button
+                type="button"
+                class="btn btn-danger"
+                onclick="app.closeModal('folderModal')"
+              >
+                Cancel</button
+              ><button type="submit" class="btn btn-primary">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-overlay" id="bookmarkModal">
+        <div class="modal">
+          <div class="section-header">
+            <h3>Bookmark</h3>
+            <button class="btn-icon" onclick="app.closeModal('bookmarkModal')">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <form id="bookmarkForm">
+            <input type="hidden" id="bmId" /><input
+              type="hidden"
+              id="bmFolderId"
+            />
+            <div class="form-group">
+              <label class="form-label">Title</label
+              ><input type="text" id="bmTitle" class="form-input" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">URL</label
+              ><input type="url" id="bmUrl" class="form-input" required />
+            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 10px">
+              <button
+                type="button"
+                class="btn btn-danger"
+                onclick="app.closeModal('bookmarkModal')"
+              >
+                Cancel</button
+              ><button type="submit" class="btn btn-primary">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-overlay" id="feedModal">
+        <div class="modal">
+          <div class="section-header">
+            <h3>RSS Feed</h3>
+            <button class="btn-icon" onclick="app.closeModal('feedModal')">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <form id="feedForm">
+            <div class="form-group">
+              <label class="form-label">Name</label
+              ><input type="text" id="feedName" class="form-input" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">RSS URL</label
+              ><input type="url" id="feedUrl" class="form-input" required />
+            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 10px">
+              <button
+                type="button"
+                class="btn btn-danger"
+                onclick="app.closeModal('feedModal')"
+              >
+                Cancel</button
+              ><button type="submit" class="btn btn-primary">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-overlay" id="automationModal">
+        <div class="modal">
+          <div class="section-header">
+            <h3>Automation Flow</h3>
+            <button
+              class="btn-icon"
+              onclick="app.closeModal('automationModal')"
+            >
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <form id="automationForm">
+            <div class="form-group">
+              <label class="form-label">Name</label
+              ><input type="text" id="autoName" class="form-input" required />
+            </div>
+            <div
+              class="form-group"
+              style="
+                background: var(--bg-tertiary);
+                padding: 0.8rem;
+                border-radius: 8px;
+              "
+            >
+              <label class="form-label"
+                ><i class="fas fa-bookmark"></i> Add from Bookmarks</label
+              >
+              <div style="display: flex; gap: 0.5rem">
+                <select
+                  id="autoBmPicker"
+                  class="form-input"
+                  style="flex: 1"
+                ></select
+                ><button
+                  type="button"
+                  class="btn btn-primary"
+                  id="addBmToAutoBtn"
+                >
+                  Add
+                </button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">URLs (One per line)</label
+              ><textarea
+                id="autoUrls"
+                class="form-input"
+                rows="5"
+                placeholder="https://example.com"
+                required
+              ></textarea>
+            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 10px">
+              <button
+                type="button"
+                class="btn btn-danger"
+                onclick="app.closeModal('automationModal')"
+              >
+                Cancel</button
+              ><button type="submit" class="btn btn-primary">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-overlay" id="settingsModal">
+        <div class="modal">
+          <div class="section-header">
+            <h3>Data & Settings</h3>
+            <button class="btn-icon" onclick="app.closeModal('settingsModal')">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 1rem">
+            <div
+              style="
+                background: var(--bg-secondary);
+                padding: 1rem;
+                border-radius: 8px;
+              "
+            >
+              <h4>Database Backup</h4>
+              <p style="font-size: 0.85rem; opacity: 0.7; margin-bottom: 10px">
+                Export data to JSON.
+              </p>
+              <button class="btn btn-primary" onclick="app.db.exportDatabase()">
+                <i class="fas fa-download"></i> Download Backup
+              </button>
+            </div>
+            <div
+              style="
+                background: var(--bg-secondary);
+                padding: 1rem;
+                border-radius: 8px;
+              "
+            >
+              <h4>Restore Data</h4>
+              <p style="font-size: 0.85rem; opacity: 0.7; margin-bottom: 10px">
+                Restore from JSON.
+              </p>
+              <input
+                type="file"
+                id="dbRestoreInput"
+                accept=".json"
+                style="display: none"
+                onchange="app.db.importDatabase(this.files[0])"
+              /><button
+                class="btn btn-danger"
+                onclick="document.getElementById('dbRestoreInput').click()"
+              >
+                <i class="fas fa-upload"></i> Restore
+              </button>
+            </div>
+            <div
+              style="
+                background: var(--bg-secondary);
+                padding: 1rem;
+                border-radius: 8px;
+              "
+            >
+              <h4>Wallpaper</h4>
+              <input
+                type="url"
+                id="bgUrlInput"
+                class="form-input"
+                placeholder="Image URL..."
+                style="margin-bottom: 0.5rem"
+              /><button class="btn" onclick="app.setWallpaper()">
+                Set Wallpaper
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <script>
-      /* --- INDEXEDDB WRAPPER --- */
-      class DBService {
-        constructor(dbName = 'AwesomDB', version = 1) {
-          this.dbName = dbName;
-          this.version = version;
-          this.db = null;
+      <script>
+        /* --- INDEXEDDB WRAPPER --- */
+        class DBService {
+          constructor(dbName = "AwesomDB", version = 1) {
+            this.dbName = dbName;
+            this.version = version;
+            this.db = null;
+          }
+          async init() {
+            return new Promise((resolve, reject) => {
+              const request = indexedDB.open(this.dbName, this.version);
+              request.onupgradeneeded = (e) => {
+                const db = e.target.result;
+                [
+                  "favorites",
+                  "notes",
+                  "todos",
+                  "bookmarks",
+                  "feeds",
+                  "automations",
+                  "settings",
+                ].forEach((store) => {
+                  if (!db.objectStoreNames.contains(store)) {
+                    db.createObjectStore(store, { keyPath: "id" });
+                  }
+                });
+              };
+              request.onsuccess = (e) => {
+                this.db = e.target.result;
+                resolve(this.db);
+              };
+              request.onerror = (e) => reject("DB Error: " + e.target.error);
+            });
+          }
+          async getAll(storeName) {
+            return new Promise((resolve, reject) => {
+              const tx = this.db.transaction(storeName, "readonly");
+              const request = tx.objectStore(storeName).getAll();
+              request.onsuccess = () => resolve(request.result);
+              request.onerror = () => reject(request.error);
+            });
+          }
+          async put(storeName, item) {
+            return new Promise((resolve, reject) => {
+              const tx = this.db.transaction(storeName, "readwrite");
+              const request = tx.objectStore(storeName).put(item);
+              request.onsuccess = () => resolve(item);
+              request.onerror = () => reject(request.error);
+            });
+          }
+          async delete(storeName, id) {
+            return new Promise((resolve, reject) => {
+              const tx = this.db.transaction(storeName, "readwrite");
+              const request = tx.objectStore(storeName).delete(id);
+              request.onsuccess = () => resolve(true);
+              request.onerror = () => reject(request.error);
+            });
+          }
+          async exportDatabase() {
+            const exportData = {
+              version: 2,
+              timestamp: new Date().toISOString(),
+            };
+            const stores = [
+              "favorites",
+              "notes",
+              "todos",
+              "bookmarks",
+              "feeds",
+              "automations",
+              "settings",
+            ];
+            for (const store of stores) {
+              exportData[store] = await this.getAll(store);
+            }
+            const blob = new Blob([JSON.stringify(exportData, null, 2)], {
+              type: "application/json",
+            });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `awesom_backup_${
+              new Date().toISOString().split("T")[0]
+            }.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+          }
+          async importDatabase(file) {
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+              try {
+                const data = JSON.parse(e.target.result);
+                const stores = [
+                  "favorites",
+                  "notes",
+                  "todos",
+                  "bookmarks",
+                  "feeds",
+                  "automations",
+                  "settings",
+                ];
+                for (const storeName of stores) {
+                  if (data[storeName] && Array.isArray(data[storeName])) {
+                    const tx = this.db.transaction(storeName, "readwrite");
+                    const store = tx.objectStore(storeName);
+                    store.clear();
+                    data[storeName].forEach((item) => store.put(item));
+                  }
+                }
+                alert("Restored!");
+                window.location.reload();
+              } catch (err) {
+                alert("Error: " + err.message);
+              }
+            };
+            reader.readAsText(file);
+          }
         }
 
-        async init() {
-          return new Promise((resolve, reject) => {
-            const request = indexedDB.open(this.dbName, this.version);
-            request.onupgradeneeded = (e) => {
-              const db = e.target.result;
-              ['favorites', 'notes', 'todos', 'bookmarks', 'feeds', 'automations', 'settings'].forEach(store => {
-                if (!db.objectStoreNames.contains(store)) {
-                  db.createObjectStore(store, { keyPath: 'id' });
+        /* --- APP CONTROLLER --- */
+        class App {
+          constructor() {
+            this.db = new DBService();
+            this.state = { theme: "dark", searchEngine: "google" };
+            this.feedSources = [
+              {
+                id: "def_1",
+                name: "Krebs on Security",
+                url: "https://krebsonsecurity.com/feed/",
+              },
+              {
+                id: "def_2",
+                name: "Hacker News",
+                url: "https://news.ycombinator.com/rss",
+              },
+              {
+                id: "def_3",
+                name: "CISA Advisories",
+                url: "https://www.cisa.gov/cybersecurity-advisories/cybersecurity-advisories.xml",
+              },
+            ];
+
+            this.tools = {
+              b64Encode: () => {
+                try {
+                  document.getElementById("cyberOutput").textContent = btoa(
+                    document.getElementById("cyberInput").value
+                  );
+                } catch (e) {
+                  document.getElementById("cyberOutput").textContent = "Error";
+                }
+              },
+              b64Decode: () => {
+                try {
+                  document.getElementById("cyberOutput").textContent = atob(
+                    document.getElementById("cyberInput").value
+                  );
+                } catch (e) {
+                  document.getElementById("cyberOutput").textContent = "Error";
+                }
+              },
+              urlEncode: () => {
+                document.getElementById("cyberOutput").textContent =
+                  encodeURIComponent(
+                    document.getElementById("cyberInput").value
+                  );
+              },
+              urlDecode: () => {
+                document.getElementById("cyberOutput").textContent =
+                  decodeURIComponent(
+                    document.getElementById("cyberInput").value
+                  );
+              },
+
+              // NEW: Improved CIDR Calculator
+              calcCidr: () => {
+                const input = document.getElementById("cidrInput").value.trim();
+                try {
+                  const [ip, maskStr] = input.split("/");
+                  const mask = parseInt(maskStr);
+                  if (isNaN(mask) || mask < 0 || mask > 32)
+                    throw new Error("Invalid Mask");
+
+                  const ipParts = ip.split(".").map(Number);
+                  if (
+                    ipParts.length !== 4 ||
+                    ipParts.some((p) => isNaN(p) || p < 0 || p > 255)
+                  )
+                    throw new Error("Invalid IP");
+
+                  const ipNum =
+                    (ipParts[0] << 24) |
+                    (ipParts[1] << 16) |
+                    (ipParts[2] << 8) |
+                    ipParts[3];
+                  const maskNum = 0xffffffff << (32 - mask);
+                  const netNum = ipNum & maskNum;
+                  const broadcastNum = netNum | ~maskNum;
+
+                  const toIp = (num) =>
+                    [
+                      (num >>> 24) & 0xff,
+                      (num >>> 16) & 0xff,
+                      (num >>> 8) & 0xff,
+                      num & 0xff,
+                    ].join(".");
+
+                  const network = toIp(netNum);
+                  const broadcast = toIp(broadcastNum);
+                  const firstIp = toIp(netNum + 1);
+                  const lastIp = toIp(broadcastNum - 1);
+                  const hosts = Math.pow(2, 32 - mask) - 2;
+
+                  document.getElementById("cidrOutput").textContent =
+                    `CIDR: ${input}\n` +
+                    `Network: ${network}\n` +
+                    `Broadcast: ${broadcast}\n` +
+                    `Range: ${firstIp} - ${lastIp}\n` +
+                    `Hosts: ${hosts > 0 ? hosts.toLocaleString() : 0}`;
+                } catch (e) {
+                  document.getElementById("cidrOutput").textContent =
+                    "Error: Use format 192.168.1.1/24";
+                }
+              },
+
+              // NEW: Unix Time
+              convertTime: (mode) => {
+                const output = document.getElementById("tsOutput");
+                if (mode === "now") {
+                  const now = Math.floor(Date.now() / 1000);
+                  document.getElementById("tsInput").value = now;
+                  output.textContent = new Date(now * 1000).toLocaleString();
+                } else {
+                  const val = document.getElementById("tsInput").value;
+                  if (val)
+                    output.textContent = new Date(val * 1000).toLocaleString();
+                }
+              },
+
+              // NEW: Defang
+              defang: () => {
+                const val = document.getElementById("defangInput").value;
+                document.getElementById("defangOutput").textContent = val
+                  .replace(/\./g, "[.]")
+                  .replace(/http/g, "hxxp");
+              },
+              refang: () => {
+                const val = document.getElementById("defangInput").value;
+                document.getElementById("defangOutput").textContent = val
+                  .replace(/\[\.\]/g, ".")
+                  .replace(/hxxp/g, "http");
+              },
+
+              formatJson: () => {
+                try {
+                  document.getElementById("jsonOutput").value = JSON.stringify(
+                    JSON.parse(document.getElementById("jsonInput").value),
+                    null,
+                    2
+                  );
+                } catch (e) {
+                  document.getElementById("jsonOutput").value = "Invalid JSON";
+                }
+              },
+              checkIp: async () => {
+                document.getElementById("ipOutput").textContent = "Checking...";
+                try {
+                  const r = await fetch("https://api.ipify.org?format=json");
+                  const d = await r.json();
+                  document.getElementById("ipOutput").textContent = d.ip;
+                } catch (e) {
+                  document.getElementById("ipOutput").textContent = "Failed";
+                }
+              },
+            };
+
+            this.wb = {
+              canvas: null,
+              ctx: null,
+              drawing: false,
+              tool: "pen",
+              init: () => {
+                const c = document.getElementById("wbCanvas");
+                this.wb.canvas = c;
+                this.wb.ctx = c.getContext("2d");
+                c.addEventListener("mousedown", this.wb.start);
+                c.addEventListener("mousemove", this.wb.draw);
+                c.addEventListener("mouseup", this.wb.stop);
+                c.addEventListener("mouseout", this.wb.stop);
+                window.addEventListener("resize", this.wb.resize);
+              },
+              resize: () => {
+                const c = app.wb.canvas;
+                const p = c.parentElement;
+                if (p.clientWidth > 0) {
+                  const t = c.toDataURL();
+                  c.width = p.clientWidth;
+                  c.height = p.clientHeight;
+                  const i = new Image();
+                  i.onload = () => {
+                    app.wb.ctx.drawImage(i, 0, 0);
+                    app.wb.ctx.lineCap = "round";
+                    app.wb.ctx.lineJoin = "round";
+                  };
+                  i.src = t;
+                }
+              },
+              start: (e) => {
+                const ctx = app.wb.ctx;
+                const size = document.getElementById("wbSize").value;
+                const color = document.getElementById("wbColor").value;
+
+                if (app.wb.tool === "text") {
+                  const text = prompt("Enter text:");
+                  if (text) {
+                    // USE SLIDER SIZE FOR TEXT
+                    ctx.font = `${size * 3}px sans-serif`;
+                    ctx.fillStyle = color;
+                    ctx.fillText(text, e.offsetX, e.offsetY);
+                  }
+                  return;
+                }
+                app.wb.drawing = true;
+                ctx.beginPath();
+                ctx.moveTo(e.offsetX, e.offsetY);
+              },
+              draw: (e) => {
+                if (!app.wb.drawing || app.wb.tool === "text") return;
+                const ctx = app.wb.ctx;
+                const color = document.getElementById("wbColor").value;
+                const size = document.getElementById("wbSize").value;
+
+                if (app.wb.tool === "eraser") {
+                  ctx.globalCompositeOperation = "destination-out";
+                  ctx.lineWidth = size * 2;
+                } else {
+                  ctx.globalCompositeOperation = "source-over";
+                  ctx.strokeStyle = color;
+                  ctx.lineWidth = size;
+                }
+                ctx.lineTo(e.offsetX, e.offsetY);
+                ctx.stroke();
+              },
+              stop: () => {
+                app.wb.drawing = false;
+                app.wb.ctx.closePath();
+              },
+              clear: () => {
+                app.wb.ctx.clearRect(
+                  0,
+                  0,
+                  app.wb.canvas.width,
+                  app.wb.canvas.height
+                );
+              },
+              save: () => {
+                const l = document.createElement("a");
+                l.download = "sketch.png";
+                const t = document.createElement("canvas");
+                t.width = app.wb.canvas.width;
+                t.height = app.wb.canvas.height;
+                const c = t.getContext("2d");
+                c.fillStyle = "#fff";
+                c.fillRect(0, 0, t.width, t.height);
+                c.drawImage(app.wb.canvas, 0, 0);
+                l.href = t.toDataURL();
+                l.click();
+              },
+              setTool: (t, btn) => {
+                app.wb.tool = t;
+                document
+                  .querySelectorAll(".wb-tool-btn")
+                  .forEach((b) => b.classList.remove("active"));
+                if (btn) btn.classList.add("active");
+              },
+            };
+          }
+
+          async init() {
+            await this.db.init();
+            const legacy = localStorage.getItem("awesom_home_v2");
+            if (legacy) {
+              const data = JSON.parse(legacy);
+              if (data.favorites)
+                data.favorites.forEach((f) => this.db.put("favorites", f));
+              localStorage.removeItem("awesom_home_v2");
+            }
+            this.loadSettings();
+            this.startClock();
+            this.renderAll();
+            this.setupEvents();
+            this.makeDraggable(document.getElementById("csToolsPanel"));
+            this.wb.init();
+          }
+
+          async loadSettings() {
+            const s = await this.db.getAll("settings");
+            const p = s.find((i) => i.id === "preferences");
+            if (p) {
+              this.state = p;
+              document.body.setAttribute("data-theme", this.state.theme);
+              if (this.state.wallpaper) {
+                document.querySelector(
+                  ".wallpaper-overlay"
+                ).style.backgroundImage = `url('${this.state.wallpaper}')`;
+                document.querySelector(".wallpaper-overlay").style.opacity = 1;
+              }
+            }
+          }
+          async saveSettings() {
+            await this.db.put("settings", { id: "preferences", ...this.state });
+          }
+          startClock() {
+            const u = () => {
+              const n = new Date();
+              document.getElementById("clockDisplay").textContent =
+                n.toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  second: "2-digit",
+                });
+              document.getElementById("dateDisplay").textContent =
+                n.toLocaleDateString(undefined, {
+                  weekday: "long",
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                });
+              const h = n.getHours();
+              document.getElementById("greetingDisplay").textContent =
+                h < 12
+                  ? "Good Morning"
+                  : h < 18
+                  ? "Good Afternoon"
+                  : "Good Evening";
+            };
+            u();
+            setInterval(u, 1000);
+          }
+          async renderAll() {
+            this.renderFavorites();
+            this.renderNotes();
+            this.renderTodos();
+            this.renderAutomations();
+            this.renderBookmarks();
+            this.loadFeeds();
+          }
+          escapeHtml(s) {
+            return String(s || "")
+              .replace(/&/g, "&amp;")
+              .replace(/</g, "&lt;")
+              .replace(/>/g, "&gt;")
+              .replace(/"/g, "&quot;")
+              .replace(/'/g, "&#039;");
+          }
+
+          async renderFavorites() {
+            const i = await this.db.getAll("favorites");
+            document.getElementById("favoritesGrid").innerHTML = i
+              .map(
+                (x) =>
+                  `<a href="${this.escapeHtml(
+                    x.url
+                  )}" class="favorite-item" target="_blank"><button class="favorite-delete" onclick="event.preventDefault(); app.deleteItem('favorites', '${
+                    x.id
+                  }')"><i class="fas fa-times"></i></button><i class="${
+                    this.escapeHtml(x.icon) || "fas fa-globe"
+                  } favorite-icon"></i><span style="font-weight:600;font-size:0.9rem;">${this.escapeHtml(
+                    x.name
+                  )}</span></a>`
+              )
+              .join("");
+          }
+
+          async renderNotes() {
+            const n = await this.db.getAll("notes");
+            document.getElementById("recentNotesList").innerHTML = n
+              .slice(0, 3)
+              .map(
+                (x) =>
+                  `<div class="item-card" onclick="app.editNote('${
+                    x.id
+                  }')"><div style="font-weight:600">${this.escapeHtml(
+                    x.title
+                  )}</div><div style="font-size:0.8rem;opacity:0.7">${new Date(
+                    x.id
+                  ).toLocaleDateString()}</div></div>`
+              )
+              .join("");
+            const q = (
+              document.getElementById("noteSearch").value || ""
+            ).toLowerCase();
+            document.getElementById("allNotesList").innerHTML = n
+              .filter(
+                (x) =>
+                  x.title.toLowerCase().includes(q) ||
+                  x.content.toLowerCase().includes(q)
+              )
+              .map(
+                (x) =>
+                  `<div class="section" style="padding:1rem;"><div class="section-header" style="margin-bottom:0.5rem"><strong>${this.escapeHtml(
+                    x.title
+                  )}</strong><div><button class="btn-icon" onclick="app.editNote('${
+                    x.id
+                  }')"><i class="fas fa-pen"></i></button><button class="btn-icon" onclick="app.deleteItem('notes', '${
+                    x.id
+                  }')"><i class="fas fa-trash"></i></button></div></div><div style="white-space:pre-wrap;opacity:0.8">${this.escapeHtml(
+                    x.content
+                  )}</div></div>`
+              )
+              .join("");
+          }
+
+          async renderTodos() {
+            const t = await this.db.getAll("todos");
+            const s = t.sort((a, b) => a.completed - b.completed);
+            document.getElementById("recentTodosList").innerHTML = s
+              .slice(0, 5)
+              .map(
+                (x) =>
+                  `<div class="item-card ${
+                    x.completed ? "completed" : ""
+                  }"><div style="display:flex;align-items:center;gap:10px;"><input type="checkbox" ${
+                    x.completed ? "checked" : ""
+                  } onchange="app.toggleTodo('${
+                    x.id
+                  }', this.checked)"><span>${this.escapeHtml(
+                    x.text
+                  )}</span></div><div style="display:flex;gap:5px;"><button class="btn-icon" onclick="app.editTodo('${
+                    x.id
+                  }')"><i class="fas fa-pen"></i></button><button class="btn-icon" onclick="app.deleteItem('todos', '${
+                    x.id
+                  }')"><i class="fas fa-times"></i></button></div></div>`
+              )
+              .join("");
+            const q = (
+              document.getElementById("todoSearch")
+                ? document.getElementById("todoSearch").value
+                : ""
+            ).toLowerCase();
+            if (document.getElementById("allTodosList"))
+              document.getElementById("allTodosList").innerHTML = s
+                .filter((x) => x.text.toLowerCase().includes(q))
+                .map(
+                  (x) =>
+                    `<div class="item-card ${
+                      x.completed ? "completed" : ""
+                    }" style="margin-bottom:1rem;padding:1.5rem;"><div style="display:flex;align-items:center;gap:15px;width:100%"><input type="checkbox" ${
+                      x.completed ? "checked" : ""
+                    } onchange="app.toggleTodo('${
+                      x.id
+                    }',this.checked)" style="transform:scale(1.3)"><div style="flex:1"><div style="font-weight:600;font-size:1.1rem">${this.escapeHtml(
+                      x.text
+                    )}</div><div style="font-size:0.8rem;opacity:0.7">Created: ${new Date(
+                      x.id
+                    ).toLocaleDateString()}</div></div><button class="btn btn-sm" onclick="app.editTodo('${
+                      x.id
+                    }')"><i class="fas fa-pen"></i> Edit</button><button class="btn btn-danger btn-sm" onclick="app.deleteItem('todos','${
+                      x.id
+                    }')"><i class="fas fa-trash"></i> Delete</button></div></div>`
+                )
+                .join("");
+          }
+
+          async renderAutomations() {
+            const a = await this.db.getAll("automations");
+            document.getElementById("automationGrid").innerHTML = a
+              .map(
+                (x) =>
+                  `<div class="section" style="padding:1.5rem;margin-bottom:0;"><h4 style="margin-bottom:0.5rem"><i class="fas fa-rocket"></i> ${this.escapeHtml(
+                    x.name
+                  )}</h4><div style="font-size:0.8rem;opacity:0.7;margin-bottom:1rem;">${
+                    x.urls.length
+                  } Actions</div><button class="btn btn-primary btn-sm" onclick="app.runAutomation('${
+                    x.id
+                  }')">Launch</button><button class="btn btn-sm" onclick="app.deleteItem('automations','${
+                    x.id
+                  }')" style="margin-left:0.5rem"><i class="fas fa-trash"></i></button></div>`
+              )
+              .join("");
+          }
+          async exportAutomations() {
+            const a = await this.db.getAll("automations");
+            const b = new Blob(
+              [
+                JSON.stringify(
+                  { type: "awesom_automations_export", data: a },
+                  null,
+                  2
+                ),
+              ],
+              { type: "application/json" }
+            );
+            const u = URL.createObjectURL(b);
+            const l = document.createElement("a");
+            l.href = u;
+            l.download = "ops.json";
+            l.click();
+          }
+          async importAutomations(f) {
+            if (!f) return;
+            const r = new FileReader();
+            r.onload = async (e) => {
+              try {
+                const j = JSON.parse(e.target.result);
+                const i = (Array.isArray(j) ? j : j.data) || [];
+                for (const x of i) {
+                  if (x.name && x.urls) {
+                    x.id = Date.now() + Math.random();
+                    await this.db.put("automations", x);
+                  }
+                }
+                alert("Imported!");
+                this.renderAutomations();
+              } catch (err) {
+                alert("Error");
+              }
+            };
+            r.readAsText(f);
+          }
+
+          async renderBookmarks() {
+            const f = await this.db.getAll("bookmarks");
+            const q = (
+              document.getElementById("bmSearch").value || ""
+            ).toLowerCase();
+            const c = document.getElementById("bookmarksContainer");
+            if (f.length === 0) {
+              c.innerHTML =
+                '<div style="text-align:center;padding:2rem;opacity:0.7">No bookmarks.</div>';
+              return;
+            }
+            c.innerHTML = f
+              .map((x) => {
+                const v = x.bookmarks.filter(
+                  (b) =>
+                    b.title.toLowerCase().includes(q) ||
+                    b.url.toLowerCase().includes(q)
+                );
+                if (q && v.length === 0) return "";
+                const o = sessionStorage.getItem(`f_${x.id}_c`) !== "true";
+                return `<div class="bookmark-folder"><div class="bookmark-folder-header" onclick="app.toggleFolder('${
+                  x.id
+                }')"><span><i class="fas fa-folder${
+                  o ? "-open" : ""
+                }"></i> ${this.escapeHtml(x.name)} <small>(${
+                  x.bookmarks.length
+                })</small></span><div onclick="event.stopPropagation()"><button class="btn-icon" onclick="app.openBookmarkModal('${
+                  x.id
+                }')"><i class="fas fa-plus"></i></button><button class="btn-icon" onclick="app.openFolderModal('${
+                  x.id
+                }')"><i class="fas fa-pen"></i></button><button class="btn-icon" onclick="app.deleteItem('bookmarks','${
+                  x.id
+                }')"><i class="fas fa-trash"></i></button></div></div><div class="bookmark-list" id="fl_${
+                  x.id
+                }" style="${o ? "" : "display:none;"}">${v
+                  .map(
+                    (b) =>
+                      `<div class="bookmark-item"><a href="${this.escapeHtml(
+                        b.url
+                      )}" target="_blank" class="bookmark-link"><img src="https://www.google.com/s2/favicons?domain=${
+                        new URL(b.url).hostname
+                      }&sz=32" width="16" height="16" onerror="this.style.display='none'"> ${this.escapeHtml(
+                        b.title
+                      )}</a><div style="display:flex;gap:2px;"><button class="btn-icon" style="width:25px;height:25px;font-size:0.8rem" onclick="app.addFavoriteFromBookmark('${
+                        x.id
+                      }','${
+                        b.id
+                      }')"><i class="fas fa-star"></i></button><button class="btn-icon" style="width:25px;height:25px;font-size:0.8rem" onclick="app.openBookmarkModal('${
+                        x.id
+                      }','${
+                        b.id
+                      }')"><i class="fas fa-pen"></i></button><button class="btn-icon" style="width:25px;height:25px;font-size:0.8rem" onclick="app.deleteBookmark('${
+                        x.id
+                      }','${
+                        b.id
+                      }')"><i class="fas fa-times"></i></button></div></div>`
+                  )
+                  .join("")}</div></div>`;
+              })
+              .join("");
+          }
+          toggleFolder(id) {
+            const l = document.getElementById(`fl_${id}`);
+            const h = l.style.display === "none";
+            l.style.display = h ? "grid" : "none";
+            sessionStorage.setItem(`f_${id}_c`, !h);
+            const i = l.previousElementSibling.querySelector(
+              ".fa-folder,.fa-folder-open"
+            );
+            if (i) i.className = h ? "fas fa-folder-open" : "fas fa-folder";
+          }
+          async handleBookmarksFile(f) {
+            const r = new FileReader();
+            r.onload = async (e) => {
+              const p = new DOMParser();
+              const d = p.parseFromString(e.target.result, "text/html");
+              const ts = d.querySelectorAll("dt");
+              let c = 0;
+              ts.forEach((t) => {
+                const h = t.querySelector("h3");
+                if (h) {
+                  const n = h.textContent;
+                  const l = t.querySelector("dl");
+                  if (l) {
+                    const as = l.querySelectorAll("a");
+                    if (as.length > 0) {
+                      const bs = Array.from(as).map((a) => ({
+                        id: "b_" + Date.now() + Math.random(),
+                        title: a.textContent,
+                        url: a.href,
+                      }));
+                      this.db.put("bookmarks", {
+                        id: "f_" + Date.now() + Math.random(),
+                        name: n,
+                        bookmarks: bs,
+                      });
+                      c++;
+                    }
+                  }
                 }
               });
-            };
-            request.onsuccess = (e) => { this.db = e.target.result; resolve(this.db); };
-            request.onerror = (e) => reject("DB Error: " + e.target.error);
-          });
-        }
-
-        async getAll(storeName) {
-          return new Promise((resolve, reject) => {
-            const tx = this.db.transaction(storeName, 'readonly');
-            const store = tx.objectStore(storeName);
-            const request = store.getAll();
-            request.onsuccess = () => resolve(request.result);
-            request.onerror = () => reject(request.error);
-          });
-        }
-
-        async put(storeName, item) {
-          return new Promise((resolve, reject) => {
-            const tx = this.db.transaction(storeName, 'readwrite');
-            const store = tx.objectStore(storeName);
-            const request = store.put(item);
-            request.onsuccess = () => resolve(item);
-            request.onerror = () => reject(request.error);
-          });
-        }
-
-        async delete(storeName, id) {
-           return new Promise((resolve, reject) => {
-            const tx = this.db.transaction(storeName, 'readwrite');
-            const store = tx.objectStore(storeName);
-            const request = store.delete(id);
-            request.onsuccess = () => resolve(true);
-            request.onerror = () => reject(request.error);
-          });
-        }
-
-        async exportDatabase() {
-            const exportData = { version: 2, timestamp: new Date().toISOString() };
-            const stores = ['favorites', 'notes', 'todos', 'bookmarks', 'feeds', 'automations', 'settings'];
-            for (const store of stores) {
-                exportData[store] = await this.getAll(store);
-            }
-            const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url; a.download = `awesom_backup_${new Date().toISOString().split('T')[0]}.json`;
-            document.body.appendChild(a); a.click(); document.body.removeChild(a);
-        }
-
-        async importDatabase(file) {
-            if(!file) return;
-            const reader = new FileReader();
-            reader.onload = async (e) => {
-                try {
-                    const data = JSON.parse(e.target.result);
-                    const stores = ['favorites', 'notes', 'todos', 'bookmarks', 'feeds', 'automations', 'settings'];
-                    for (const storeName of stores) {
-                        if (data[storeName] && Array.isArray(data[storeName])) {
-                            const tx = this.db.transaction(storeName, 'readwrite');
-                            const store = tx.objectStore(storeName);
-                            store.clear(); 
-                            data[storeName].forEach(item => store.put(item));
-                        }
-                    }
-                    alert('Database restored successfully! Reloading...');
-                    window.location.reload();
-                } catch(err) { alert('Error importing DB: ' + err.message); }
-            };
-            reader.readAsText(file);
-        }
-      }
-
-      /* --- APP CONTROLLER --- */
-      class App {
-        constructor() {
-          this.db = new DBService();
-          this.state = { theme: 'dark', searchEngine: 'google' };
-          this.feedSources = [
-            { id: 'def_1', name: "Krebs on Security", url: "https://krebsonsecurity.com/feed/" },
-            { id: 'def_2', name: "Hacker News", url: "https://news.ycombinator.com/rss" },
-            { id: 'def_3', name: "CISA Advisories", url: "https://www.cisa.gov/cybersecurity-advisories/cybersecurity-advisories.xml" }
-          ];
-        }
-
-        async init() {
-          await this.db.init();
-          const legacy = localStorage.getItem('awesom_home_v2');
-          if (legacy) {
-              const data = JSON.parse(legacy);
-              if(data.favorites) data.favorites.forEach(f => this.db.put('favorites', f));
-              localStorage.removeItem('awesom_home_v2');
-          }
-          this.loadSettings();
-          this.startClock();
-          this.renderAll();
-          this.setupEvents();
-          
-          // Make panel draggable
-          this.makeDraggable(document.getElementById('csToolsPanel'));
-        }
-
-        async loadSettings() {
-          const settings = await this.db.getAll('settings');
-          const pref = settings.find(s => s.id === 'preferences');
-          if (pref) {
-            this.state = pref;
-            document.body.setAttribute('data-theme', this.state.theme);
-            if(this.state.wallpaper) {
-                const overlay = document.querySelector('.wallpaper-overlay');
-                if (overlay) { overlay.style.backgroundImage = `url('${this.state.wallpaper}')`; overlay.style.opacity = 1; }
-            }
-          }
-        }
-
-        async saveSettings() { await this.db.put('settings', { id: 'preferences', ...this.state }); }
-
-        startClock() {
-          const update = () => {
-             const now = new Date();
-             document.getElementById('clockDisplay').textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-             document.getElementById('dateDisplay').textContent = now.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
-             const hr = now.getHours();
-             let greet = "Good Evening";
-             if (hr < 12) greet = "Good Morning"; else if (hr < 18) greet = "Good Afternoon";
-             document.getElementById('greetingDisplay').textContent = greet;
-          };
-          update(); setInterval(update, 1000);
-        }
-
-        /* --- RENDERERS --- */
-        async renderAll() {
-            this.renderFavorites(); this.renderNotes(); this.renderTodos();
-            this.renderAutomations(); this.renderBookmarks(); this.loadFeeds();
-        }
-
-        escapeHtml(str) {
-            if(!str) return '';
-            return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
-        }
-
-        async renderFavorites() {
-            const items = await this.db.getAll('favorites');
-            document.getElementById('favoritesGrid').innerHTML = items.map(item => `
-                <a href="${this.escapeHtml(item.url)}" class="favorite-item" target="_blank">
-                    <button class="favorite-delete" onclick="event.preventDefault(); app.deleteItem('favorites', '${item.id}')"><i class="fas fa-times"></i></button>
-                    <i class="${this.escapeHtml(item.icon) || 'fas fa-globe'} favorite-icon"></i>
-                    <span style="font-weight:600; font-size:0.9rem;">${this.escapeHtml(item.name)}</span>
-                </a>
-            `).join('');
-        }
-
-        async renderNotes() {
-            const items = await this.db.getAll('notes');
-            // Recent
-            document.getElementById('recentNotesList').innerHTML = items.slice(0, 3).map(n => `
-                <div class="item-card" onclick="app.editNote('${n.id}')">
-                    <div style="font-weight:600">${this.escapeHtml(n.title)}</div>
-                    <div style="font-size:0.8rem; opacity:0.7">${new Date(n.id).toLocaleDateString()}</div>
-                </div>
-            `).join('');
-            // All
-            const query = (document.getElementById('noteSearch').value || '').toLowerCase();
-            const filtered = items.filter(n => n.title.toLowerCase().includes(query) || n.content.toLowerCase().includes(query));
-            document.getElementById('allNotesList').innerHTML = filtered.map(n => `
-                <div class="section" style="padding:1rem;">
-                    <div class="section-header" style="margin-bottom:0.5rem">
-                        <strong>${this.escapeHtml(n.title)}</strong>
-                        <div>
-                             <button class="btn-icon" onclick="app.editNote('${n.id}')"><i class="fas fa-pen"></i></button>
-                             <button class="btn-icon" onclick="app.deleteItem('notes', '${n.id}')"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </div>
-                    <div style="white-space:pre-wrap; opacity:0.8">${this.escapeHtml(n.content)}</div>
-                </div>
-            `).join('');
-        }
-        
-        async renderTodos() {
-            const items = await this.db.getAll('todos');
-            const sorted = items.sort((a,b) => a.completed - b.completed);
-            
-            // Recent
-            document.getElementById('recentTodosList').innerHTML = sorted.slice(0, 5).map(t => `
-                <div class="item-card ${t.completed ? 'completed' : ''}">
-                    <div style="display:flex; align-items:center; gap:10px;">
-                        <input type="checkbox" ${t.completed ? 'checked' : ''} onchange="app.toggleTodo('${t.id}', this.checked)">
-                        <span>${this.escapeHtml(t.text)}</span>
-                    </div>
-                    <div style="display:flex; gap:5px;">
-                        <button class="btn-icon" onclick="app.editTodo('${t.id}')" style="width:25px;height:25px;font-size:0.8rem"><i class="fas fa-pen"></i></button>
-                        <button class="btn-icon" onclick="app.deleteItem('todos', '${t.id}')" style="width:25px;height:25px;font-size:0.8rem"><i class="fas fa-times"></i></button>
-                    </div>
-                </div>
-            `).join('');
-
-            // All
-            const query = (document.getElementById('todoSearch') ? document.getElementById('todoSearch').value || '' : '').toLowerCase();
-            const filtered = sorted.filter(t => t.text.toLowerCase().includes(query));
-            const allContainer = document.getElementById('allTodosList');
-            if(allContainer) {
-                allContainer.innerHTML = filtered.map(t => `
-                    <div class="item-card ${t.completed ? 'completed' : ''}" style="margin-bottom:1rem; padding:1.5rem;">
-                        <div style="display:flex; align-items:center; gap:15px; width:100%">
-                            <input type="checkbox" ${t.completed ? 'checked' : ''} onchange="app.toggleTodo('${t.id}', this.checked)" style="transform:scale(1.3)">
-                            <div style="flex:1">
-                                <div style="font-weight:600; font-size:1.1rem">${this.escapeHtml(t.text)}</div>
-                                <div style="font-size:0.8rem; opacity:0.7">Created: ${new Date(t.id).toLocaleDateString()}</div>
-                            </div>
-                            <button class="btn btn-sm" onclick="app.editTodo('${t.id}')"><i class="fas fa-pen"></i> Edit</button>
-                            <button class="btn btn-danger btn-sm" onclick="app.deleteItem('todos', '${t.id}')"><i class="fas fa-trash"></i> Delete</button>
-                        </div>
-                    </div>
-                `).join('');
-            }
-        }
-
-        async renderAutomations() {
-            const items = await this.db.getAll('automations');
-            document.getElementById('automationGrid').innerHTML = items.map(a => `
-                <div class="section" style="padding:1.5rem; margin-bottom:0;">
-                    <h4 style="margin-bottom:0.5rem"><i class="fas fa-rocket"></i> ${this.escapeHtml(a.name)}</h4>
-                    <div style="font-size:0.8rem; opacity:0.7; margin-bottom:1rem;">${a.urls.length} Actions configured</div>
-                    <button class="btn btn-primary btn-sm" onclick="app.runAutomation('${a.id}')">Launch</button>
-                    <button class="btn btn-sm" onclick="app.deleteItem('automations', '${a.id}')" style="margin-left:0.5rem"><i class="fas fa-trash"></i></button>
-                </div>
-            `).join('');
-        }
-
-        /* --- BOOKMARKS --- */
-        async renderBookmarks() {
-            const folders = await this.db.getAll('bookmarks');
-            const query = (document.getElementById('bmSearch').value || '').toLowerCase();
-            const container = document.getElementById('bookmarksContainer');
-            if(folders.length === 0) {
-                container.innerHTML = `<div style="text-align:center; padding:2rem; opacity:0.7">No bookmarks found. Create a folder or import HTML.</div>`;
-                return;
-            }
-            container.innerHTML = folders.map(folder => {
-                const visible = folder.bookmarks.filter(b => b.title.toLowerCase().includes(query) || b.url.toLowerCase().includes(query));
-                if(query && visible.length === 0) return '';
-                return `
-                <div class="bookmark-folder">
-                    <div class="bookmark-folder-header">
-                        <span><i class="fas fa-folder"></i> ${this.escapeHtml(folder.name)} (${folder.bookmarks.length})</span>
-                        <div>
-                            <button class="btn-icon" onclick="app.openBookmarkModal('${folder.id}')"><i class="fas fa-plus"></i></button>
-                            <button class="btn-icon" onclick="app.deleteItem('bookmarks', '${folder.id}')"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </div>
-                    <div class="bookmark-list">
-                        ${visible.map(bm => `
-                            <div class="bookmark-item">
-                                <a href="${this.escapeHtml(bm.url)}" target="_blank" class="bookmark-link">
-                                    <img src="https://www.google.com/s2/favicons?domain=${new URL(bm.url).hostname}&sz=32" width="16" height="16" onerror="this.style.display='none'">
-                                    ${this.escapeHtml(bm.title)}
-                                </a>
-                                <button class="btn-icon" style="width:25px;height:25px;font-size:0.8rem" onclick="app.addFavoriteFromBookmark('${folder.id}', '${bm.id}')" title="Add to Favorites"><i class="fas fa-star"></i></button>
-                                <button class="btn-icon" style="width:25px;height:25px;font-size:0.8rem" onclick="app.deleteBookmark('${folder.id}', '${bm.id}')"><i class="fas fa-times"></i></button>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>`;
-            }).join('');
-        }
-
-        async handleBookmarksFile(file) {
-            const reader = new FileReader();
-            reader.onload = async (e) => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(e.target.result, "text/html");
-                const dts = doc.querySelectorAll('dt');
-                let folders = [];
-                dts.forEach(dt => {
-                    const h3 = dt.querySelector('h3');
-                    if(h3) {
-                        const folderName = h3.textContent;
-                        const dl = dt.querySelector('dl');
-                        if(dl) {
-                            const links = dl.querySelectorAll('a');
-                            if(links.length > 0) {
-                                const bookmarks = Array.from(links).map(a => ({
-                                    id: 'bm_' + Date.now() + Math.random(),
-                                    title: a.textContent,
-                                    url: a.href
-                                }));
-                                folders.push({
-                                    id: 'f_' + Date.now() + Math.random(),
-                                    name: folderName,
-                                    bookmarks: bookmarks
-                                });
-                            }
-                        }
-                    }
-                });
-                if(folders.length > 0) {
-                    for(const f of folders) await this.db.put('bookmarks', f);
-                    alert(`Imported ${folders.length} folders.`);
-                    this.renderBookmarks();
-                } else { alert('No structured bookmarks found.'); }
-            };
-            reader.readAsText(file);
-        }
-
-        async deleteBookmark(folderId, bmId) {
-            const folders = await this.db.getAll('bookmarks');
-            const folder = folders.find(f => String(f.id) === String(folderId));
-            if(folder) {
-                folder.bookmarks = folder.bookmarks.filter(b => b.id != bmId);
-                await this.db.put('bookmarks', folder);
+              if (c > 0) {
+                alert(`Imported ${c} folders`);
                 this.renderBookmarks();
+              } else {
+                alert("No structure found");
+              }
+            };
+            r.readAsText(f);
+          }
+          async deleteBookmark(fid, bid) {
+            const f = await this.db.getAll("bookmarks");
+            const t = f.find((x) => String(x.id) === String(fid));
+            if (t) {
+              t.bookmarks = t.bookmarks.filter((b) => b.id != bid);
+              await this.db.put("bookmarks", t);
+              this.renderBookmarks();
             }
-        }
-        
-        async addFavoriteFromBookmark(folderId, bmId) {
-            const folders = await this.db.getAll('bookmarks');
-            const folder = folders.find(f => String(f.id) === String(folderId));
-            const bm = folder?.bookmarks.find(b => b.id == bmId);
-            if(bm) {
-                this.openModal('favoriteModal'); 
-                const form = document.getElementById('favoriteForm');
-                if(form) {
-                    form.elements['favName'].value = bm.title;
-                    form.elements['favUrl'].value = bm.url;
-                    form.elements['favIcon'].value = 'fas fa-bookmark';
-                }
+          }
+          async addFavoriteFromBookmark(fid, bid) {
+            const f = await this.db.getAll("bookmarks");
+            const t = f.find((x) => String(x.id) === String(fid));
+            const b = t?.bookmarks.find((x) => x.id == bid);
+            if (b) {
+              this.openModal("favoriteModal");
+              document.getElementById("favName").value = b.title;
+              document.getElementById("favUrl").value = b.url;
+              document.getElementById("favIcon").value = "fas fa-bookmark";
             }
-        }
+          }
 
-        /* --- FEEDS --- */
-        async loadFeeds() {
-            const grid = document.getElementById('feedGrid');
-            grid.innerHTML = '<div style="grid-column:1/-1;text-align:center">Loading feeds...</div>';
-            const customFeeds = await this.db.getAll('feeds');
-            const allFeeds = [...this.feedSources, ...customFeeds];
-            const promises = allFeeds.map(async (source) => {
-                try {
-                    const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(source.url)}`);
-                    const data = await res.json();
-                    if(data.status !== 'ok') throw new Error('API Error');
-                    return `
-                    <div class="feed-source">
-                        <div style="display:flex;justify-content:space-between;margin-bottom:1rem;border-bottom:1px solid var(--border-color);padding-bottom:0.5rem">
-                            <strong>${this.escapeHtml(source.name)}</strong>
-                            ${String(source.id).startsWith('def') ? '' : `<button class="btn-icon" style="width:25px;height:25px" onclick="app.deleteItem('feeds', '${source.id}')"><i class="fas fa-trash"></i></button>`}
-                        </div>
-                        ${data.items.slice(0, 5).map(item => `
-                            <div class="feed-item">
-                                <a href="${this.escapeHtml(item.link)}" target="_blank">${this.escapeHtml(item.title)}</a>
-                            </div>
-                        `).join('')}
-                    </div>`;
-                } catch(e) { return `<div class="feed-source"><strong>${this.escapeHtml(source.name)}</strong><br><small>Failed.</small></div>`; }
+          async loadFeeds() {
+            const g = document.getElementById("feedGrid");
+            g.innerHTML = "Loading...";
+            const c = await this.db.getAll("feeds");
+            const a = [...this.feedSources, ...c];
+            const p = a.map(async (s) => {
+              try {
+                const r = await fetch(
+                  `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(
+                    s.url
+                  )}`
+                );
+                const d = await r.json();
+                return `<div class="feed-source"><div style="display:flex;justify-content:space-between;margin-bottom:1rem;border-bottom:1px solid var(--border-color);padding-bottom:0.5rem"><strong>${this.escapeHtml(
+                  s.name
+                )}</strong>${
+                  String(s.id).startsWith("def")
+                    ? ""
+                    : `<button class="btn-icon" style="width:25px;height:25px" onclick="app.deleteItem('feeds','${s.id}')"><i class="fas fa-trash"></i></button>`
+                }</div>${d.items
+                  .slice(0, 5)
+                  .map(
+                    (i) =>
+                      `<div class="feed-item"><a href="${this.escapeHtml(
+                        i.link
+                      )}" target="_blank">${this.escapeHtml(i.title)}</a></div>`
+                  )
+                  .join("")}</div>`;
+              } catch (e) {
+                return `<div class="feed-source"><strong>${this.escapeHtml(
+                  s.name
+                )}</strong><br><small>Failed.</small></div>`;
+              }
             });
-            const results = await Promise.all(promises);
-            grid.innerHTML = results.join('');
-        }
+            const r = await Promise.all(p);
+            g.innerHTML = r.join("");
+          }
 
-        /* --- ACTIONS --- */
-        async deleteItem(store, id) {
+          async deleteItem(s, id) {
             if (/^\d+(\.\d+)?$/.test(id)) id = Number(id);
-            if(confirm('Delete this item?')) {
-                await this.db.delete(store, id);
-                this.renderAll();
+            if (confirm("Delete?")) {
+              await this.db.delete(s, id);
+              this.renderAll();
             }
-        }
-        
-        async toggleTodo(id, checked) {
+          }
+          async toggleTodo(id, c) {
             if (/^\d+(\.\d+)?$/.test(id)) id = Number(id);
-            const todos = await this.db.getAll('todos');
-            const todo = todos.find(t => t.id == id);
-            if(todo) {
-                todo.completed = checked;
-                await this.db.put('todos', todo);
-                this.renderTodos();
+            const t = await this.db.getAll("todos");
+            const x = t.find((i) => i.id == id);
+            if (x) {
+              x.completed = c;
+              await this.db.put("todos", x);
+              this.renderTodos();
             }
-        }
+          }
+          async runAutomation(id) {
+            if (/^\d+(\.\d+)?$/.test(id)) id = Number(id);
+            const a = await this.db.getAll("automations");
+            const x = a.find((i) => i.id == id);
+            if (x && x.urls) {
+              if (confirm(`Open ${x.urls.length} tabs?`))
+                x.urls.forEach((u) => window.open(u, "_blank"));
+            }
+          }
 
-        async runAutomation(id) {
-            if (/^\d+(\.\d+)?$/.test(id)) id = Number(id);
-            const autos = await this.db.getAll('automations');
-            const auto = autos.find(a => a.id == id);
-            if(auto && auto.urls) {
-                if(confirm(`Opening ${auto.urls.length} tabs. Allow popups?`)) {
-                    auto.urls.forEach(url => window.open(url, '_blank'));
-                }
-            }
-        }
-        
-        async populateBookmarkPicker() {
-            const folders = await this.db.getAll('bookmarks');
-            const picker = document.getElementById('autoBmPicker');
-            picker.innerHTML = '<option value="">Select a bookmark...</option>';
-            folders.forEach(f => {
-                if(f.bookmarks.length) {
-                    const group = document.createElement('optgroup');
-                    group.label = f.name;
-                    f.bookmarks.forEach(b => {
-                        const opt = document.createElement('option');
-                        opt.value = b.url; opt.textContent = b.title;
-                        group.appendChild(opt);
-                    });
-                    picker.appendChild(group);
-                }
+          async populateBookmarkPicker() {
+            const f = await this.db.getAll("bookmarks");
+            const p = document.getElementById("autoBmPicker");
+            p.innerHTML = '<option value="">Select...</option>';
+            f.forEach((x) => {
+              if (x.bookmarks.length) {
+                const g = document.createElement("optgroup");
+                g.label = x.name;
+                x.bookmarks.forEach((b) => {
+                  const o = document.createElement("option");
+                  o.value = b.url;
+                  o.textContent = b.title;
+                  g.appendChild(o);
+                });
+                p.appendChild(g);
+              }
             });
-        }
+          }
 
-        async setWallpaper() {
-            const url = document.getElementById('bgUrlInput').value;
-            this.state.wallpaper = url;
+          async setWallpaper() {
+            const u = document.getElementById("bgUrlInput").value;
+            this.state.wallpaper = u;
             await this.saveSettings();
-            document.querySelector('.wallpaper-overlay').style.backgroundImage = `url('${url}')`;
-            document.querySelector('.wallpaper-overlay').style.opacity = 1;
-            this.closeModal('settingsModal');
-        }
-
-        openModal(id) { 
+            document.querySelector(
+              ".wallpaper-overlay"
+            ).style.backgroundImage = `url('${u}')`;
+            document.querySelector(".wallpaper-overlay").style.opacity = 1;
+            this.closeModal("settingsModal");
+          }
+          openModal(id) {
             const m = document.getElementById(id);
-            m.classList.add('active');
-            if(id === 'automationModal') { this.populateBookmarkPicker(); }
-            const form = m.querySelector('form');
-            if(form) {
-                form.reset();
-                const hiddenId = form.querySelector('input[type="hidden"]');
-                if(hiddenId) hiddenId.value = '';
+            m.classList.add("active");
+            if (id === "automationModal") this.populateBookmarkPicker();
+            const f = m.querySelector("form");
+            if (f) {
+              f.reset();
+              const h = f.querySelector('input[type="hidden"]');
+              if (h) h.value = "";
             }
-        }
-        
-        openBookmarkModal(folderId) {
-            // FIX: Open and reset modal FIRST, then set the hidden ID.
-            // Otherwise openModal() resets the form and wipes our folderId.
-            this.openModal('bookmarkModal');
-            document.getElementById('bmFolderId').value = folderId;
-        }
-        
-        closeModal(id) { document.getElementById(id).classList.remove('active'); }
-        
-        toggleToolsPanel() {
-            const panel = document.getElementById('csToolsPanel');
-            if (panel.style.display === 'none') {
-                panel.style.display = 'flex';
-            } else {
-                panel.style.display = 'none';
+          }
+          openBookmarkModal(fid, bid = null) {
+            this.openModal("bookmarkModal");
+            document.getElementById("bmFolderId").value = fid;
+            if (bid) {
+              this.db.getAll("bookmarks").then((fs) => {
+                const f = fs.find((x) => String(x.id) === String(fid));
+                const b = f?.bookmarks.find((x) => x.id == bid);
+                if (b) {
+                  document.getElementById("bmId").value = bid;
+                  document.getElementById("bmTitle").value = b.title;
+                  document.getElementById("bmUrl").value = b.url;
+                }
+              });
             }
-        }
-        
-        makeDraggable(element) {
-            let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-            const header = document.getElementById(element.id + "Header");
-            
-            if (header) {
-                header.onmousedown = dragMouseDown;
-            } else {
-                element.onmousedown = dragMouseDown;
+          }
+          openFolderModal(fid = null) {
+            this.openModal("folderModal");
+            if (fid) {
+              this.db.getAll("bookmarks").then((fs) => {
+                const f = fs.find((x) => String(x.id) === String(fid));
+                if (f) {
+                  document.getElementById("folderId").value = fid;
+                  document.getElementById("folderName").value = f.name;
+                }
+              });
             }
-
-            function dragMouseDown(e) {
-                e = e || window.event;
-                e.preventDefault();
-                pos3 = e.clientX;
-                pos4 = e.clientY;
-                document.onmouseup = closeDragElement;
-                document.onmousemove = elementDrag;
+          }
+          closeModal(id) {
+            document.getElementById(id).classList.remove("active");
+          }
+          toggleToolsPanel() {
+            const p = document.getElementById("csToolsPanel");
+            p.style.display = p.style.display === "none" ? "flex" : "none";
+          }
+          makeDraggable(e) {
+            let pos1 = 0,
+              pos2 = 0,
+              pos3 = 0,
+              pos4 = 0;
+            const h = document.getElementById(e.id + "Header");
+            if (h) h.onmousedown = dragMouseDown;
+            else e.onmousedown = dragMouseDown;
+            function dragMouseDown(ev) {
+              ev = ev || window.event;
+              ev.preventDefault();
+              pos3 = ev.clientX;
+              pos4 = ev.clientY;
+              document.onmouseup = closeDragElement;
+              document.onmousemove = elementDrag;
             }
-
-            function elementDrag(e) {
-                e = e || window.event;
-                e.preventDefault();
-                pos1 = pos3 - e.clientX;
-                pos2 = pos4 - e.clientY;
-                pos3 = e.clientX;
-                pos4 = e.clientY;
-                element.style.top = (element.offsetTop - pos2) + "px";
-                element.style.left = (element.offsetLeft - pos1) + "px";
+            function elementDrag(ev) {
+              ev = ev || window.event;
+              ev.preventDefault();
+              pos1 = pos3 - ev.clientX;
+              pos2 = pos4 - ev.clientY;
+              pos3 = ev.clientX;
+              pos4 = ev.clientY;
+              e.style.top = e.offsetTop - pos2 + "px";
+              e.style.left = e.offsetLeft - pos1 + "px";
             }
-
             function closeDragElement() {
-                document.onmouseup = null;
-                document.onmousemove = null;
+              document.onmouseup = null;
+              document.onmousemove = null;
             }
-        }
+          }
 
-        async editNote(id) {
+          async editNote(id) {
             if (/^\d+(\.\d+)?$/.test(id)) id = Number(id);
-            const notes = await this.db.getAll('notes');
-            const note = notes.find(n => n.id == id);
-            if(note) {
-                this.openModal('noteModal');
-                document.getElementById('noteId').value = note.id;
-                document.getElementById('noteTitle').value = note.title;
-                document.getElementById('noteContent').value = note.content;
+            const n = await this.db.getAll("notes");
+            const x = n.find((i) => i.id == id);
+            if (x) {
+              this.openModal("noteModal");
+              document.getElementById("noteId").value = x.id;
+              document.getElementById("noteTitle").value = x.title;
+              document.getElementById("noteContent").value = x.content;
             }
-        }
-
-        async editTodo(id) {
+          }
+          async editTodo(id) {
             if (/^\d+(\.\d+)?$/.test(id)) id = Number(id);
-            const todos = await this.db.getAll('todos');
-            const todo = todos.find(t => t.id == id);
-            if(todo) {
-                this.openModal('todoModal');
-                document.getElementById('todoId').value = todo.id;
-                document.getElementById('todoText').value = todo.text;
+            const t = await this.db.getAll("todos");
+            const x = t.find((i) => i.id == id);
+            if (x) {
+              this.openModal("todoModal");
+              document.getElementById("todoId").value = x.id;
+              document.getElementById("todoText").value = x.text;
             }
-        }
+          }
 
-        /* --- UI HELPERS --- */
-        setupEvents() {
-            // Navigation
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-                    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-                    const pageId = e.target.getAttribute('data-page');
-                    document.getElementById(pageId).classList.add('active');
-                    e.target.classList.add('active');
-                });
+          setupEvents() {
+            document.querySelectorAll(".nav-link").forEach((l) => {
+              l.addEventListener("click", (e) => {
+                e.preventDefault();
+                document
+                  .querySelectorAll(".page")
+                  .forEach((p) => p.classList.remove("active"));
+                document
+                  .querySelectorAll(".nav-link")
+                  .forEach((n) => n.classList.remove("active"));
+                const pid = e.target.getAttribute("data-page");
+                document.getElementById(pid).classList.add("active");
+                e.target.classList.add("active");
+                if (pid === "whiteboardPage")
+                  setTimeout(() => app.wb.resize(), 50);
+              });
             });
-
-            // Close Modal on Overlay Click
-            document.querySelectorAll('.modal-overlay').forEach(overlay => {
-                overlay.addEventListener('click', (e) => {
-                    if (e.target === overlay) {
-                        this.closeModal(overlay.id);
-                    }
-                });
+            document.querySelectorAll(".modal-overlay").forEach((o) => {
+              o.addEventListener("click", (e) => {
+                if (e.target === o) this.closeModal(o.id);
+              });
             });
+            document.getElementById("dbBackupBtn").onclick = () =>
+              this.openModal("settingsModal");
+            document.getElementById("settingsBtn").onclick = () =>
+              this.openModal("settingsModal");
+            document.getElementById("searchForm").onsubmit = (e) => {
+              const eng = document.getElementById("searchEngineToggle").checked
+                ? "perplexity"
+                : "google";
+              e.target.action =
+                eng === "google"
+                  ? "https://www.google.com/search"
+                  : "https://www.perplexity.ai/search";
+            };
 
-            // Modals
-            document.getElementById('dbBackupBtn').onclick = () => this.openModal('settingsModal');
-            document.getElementById('settingsBtn').onclick = () => this.openModal('settingsModal');
-            
-            // Search
-            document.getElementById('searchForm').onsubmit = (e) => {
-                // No preventDefault - allow native form submission to target="_blank"
-                const engine = document.getElementById('searchEngineToggle').checked ? 'perplexity' : 'google';
-                if(engine === 'google') {
-                    e.target.action = "https://www.google.com/search";
+            document.getElementById("favoriteForm").onsubmit = async (e) => {
+              e.preventDefault();
+              await this.db.put("favorites", {
+                id: Date.now(),
+                name: document.getElementById("favName").value,
+                url: document.getElementById("favUrl").value,
+                icon: document.getElementById("favIcon").value,
+              });
+              this.closeModal("favoriteModal");
+              this.renderFavorites();
+            };
+            document.getElementById("todoForm").onsubmit = async (e) => {
+              e.preventDefault();
+              const id = document.getElementById("todoId").value;
+              await this.db.put("todos", {
+                id: id ? (isNaN(id) ? id : Number(id)) : Date.now(),
+                text: document.getElementById("todoText").value,
+                completed: false,
+              });
+              this.closeModal("todoModal");
+              this.renderTodos();
+            };
+            document.getElementById("noteForm").onsubmit = async (e) => {
+              e.preventDefault();
+              const id = document.getElementById("noteId").value;
+              await this.db.put("notes", {
+                id: id ? (isNaN(id) ? id : Number(id)) : Date.now(),
+                title: document.getElementById("noteTitle").value,
+                content: document.getElementById("noteContent").value,
+              });
+              this.closeModal("noteModal");
+              this.renderNotes();
+            };
+            document.getElementById("folderForm").onsubmit = async (e) => {
+              e.preventDefault();
+              const fid = document.getElementById("folderId").value;
+              if (fid) {
+                const fs = await this.db.getAll("bookmarks");
+                const f = fs.find((x) => String(x.id) === String(fid));
+                if (f) {
+                  f.name = document.getElementById("folderName").value;
+                  await this.db.put("bookmarks", f);
+                }
+              } else {
+                await this.db.put("bookmarks", {
+                  id: Date.now(),
+                  name: document.getElementById("folderName").value,
+                  bookmarks: [],
+                });
+              }
+              this.closeModal("folderModal");
+              this.renderBookmarks();
+            };
+            document.getElementById("bookmarkForm").onsubmit = async (e) => {
+              e.preventDefault();
+              const fid = document.getElementById("bmFolderId").value;
+              const bid = document.getElementById("bmId").value;
+              const fs = await this.db.getAll("bookmarks");
+              const f = fs.find((x) => String(x.id) === String(fid));
+              if (f) {
+                if (bid) {
+                  const b = f.bookmarks.find((x) => x.id == bid);
+                  if (b) {
+                    b.title = document.getElementById("bmTitle").value;
+                    b.url = document.getElementById("bmUrl").value;
+                  }
                 } else {
-                    e.target.action = "https://www.perplexity.ai/search";
+                  f.bookmarks.push({
+                    id: "b_" + Date.now(),
+                    title: document.getElementById("bmTitle").value,
+                    url: document.getElementById("bmUrl").value,
+                  });
                 }
-            };
-
-            // Forms
-            document.getElementById('favoriteForm').onsubmit = async (e) => {
-                e.preventDefault();
-                await this.db.put('favorites', {
-                    id: Date.now(),
-                    name: document.getElementById('favName').value,
-                    url: document.getElementById('favUrl').value,
-                    icon: document.getElementById('favIcon').value
-                });
-                this.closeModal('favoriteModal');
-                this.renderFavorites();
-            };
-
-            document.getElementById('todoForm').onsubmit = async (e) => {
-                e.preventDefault();
-                const id = document.getElementById('todoId').value;
-                await this.db.put('todos', {
-                    id: id ? (isNaN(id) ? id : Number(id)) : Date.now(),
-                    text: document.getElementById('todoText').value,
-                    completed: false
-                });
-                this.closeModal('todoModal');
-                this.renderTodos();
-            };
-
-            document.getElementById('noteForm').onsubmit = async (e) => {
-                e.preventDefault();
-                const id = document.getElementById('noteId').value;
-                await this.db.put('notes', {
-                    id: id ? (isNaN(id) ? id : Number(id)) : Date.now(),
-                    title: document.getElementById('noteTitle').value,
-                    content: document.getElementById('noteContent').value
-                });
-                this.closeModal('noteModal');
-                this.renderNotes();
-            };
-            
-            // Bookmark & Folder Forms
-            document.getElementById('folderForm').onsubmit = async (e) => {
-                e.preventDefault();
-                await this.db.put('bookmarks', {
-                    id: Date.now(),
-                    name: document.getElementById('folderName').value,
-                    bookmarks: []
-                });
-                this.closeModal('folderModal');
+                await this.db.put("bookmarks", f);
                 this.renderBookmarks();
+              }
+              this.closeModal("bookmarkModal");
             };
-
-            document.getElementById('bookmarkForm').onsubmit = async (e) => {
-                e.preventDefault();
-                const folderId = document.getElementById('bmFolderId').value;
-                const folders = await this.db.getAll('bookmarks');
-                // Robust compare
-                const folder = folders.find(f => String(f.id) === String(folderId));
-                if(folder) {
-                    folder.bookmarks.push({
-                        id: 'bm_' + Date.now(),
-                        title: document.getElementById('bmTitle').value,
-                        url: document.getElementById('bmUrl').value
-                    });
-                    await this.db.put('bookmarks', folder);
-                    this.renderBookmarks();
-                }
-                this.closeModal('bookmarkModal');
+            document.getElementById("feedForm").onsubmit = async (e) => {
+              e.preventDefault();
+              await this.db.put("feeds", {
+                id: Date.now(),
+                name: document.getElementById("feedName").value,
+                url: document.getElementById("feedUrl").value,
+              });
+              this.closeModal("feedModal");
+              this.loadFeeds();
             };
-            
-            // Feeds & Auto
-            document.getElementById('feedForm').onsubmit = async (e) => {
-                e.preventDefault();
-                await this.db.put('feeds', {
-                    id: Date.now(),
-                    name: document.getElementById('feedName').value,
-                    url: document.getElementById('feedUrl').value
-                });
-                this.closeModal('feedModal');
-                this.loadFeeds();
+            document.getElementById("automationForm").onsubmit = async (e) => {
+              e.preventDefault();
+              const u = document
+                .getElementById("autoUrls")
+                .value.split("\n")
+                .map((x) => x.trim())
+                .filter((x) => x);
+              await this.db.put("automations", {
+                id: Date.now(),
+                name: document.getElementById("autoName").value,
+                urls: u,
+              });
+              this.closeModal("automationModal");
+              this.renderAutomations();
             };
-
-            document.getElementById('automationForm').onsubmit = async (e) => {
-                e.preventDefault();
-                const urls = document.getElementById('autoUrls').value.split('\n').map(u => u.trim()).filter(u => u);
-                await this.db.put('automations', {
-                    id: Date.now(),
-                    name: document.getElementById('autoName').value,
-                    urls: urls
-                });
-                this.closeModal('automationModal');
-                this.renderAutomations();
+            document.getElementById("addBmToAutoBtn").onclick = () => {
+              const p = document.getElementById("autoBmPicker");
+              if (p.value) {
+                const t = document.getElementById("autoUrls");
+                t.value += (t.value ? "\n" : "") + p.value;
+              }
             };
-            
-            // Add Bookmark to Auto
-            document.getElementById('addBmToAutoBtn').onclick = () => {
-                const picker = document.getElementById('autoBmPicker');
-                const url = picker.value;
-                if(url) {
-                    const ta = document.getElementById('autoUrls');
-                    ta.value = ta.value + (ta.value ? '\n' : '') + url;
-                }
+            document.getElementById("bmImportInput").onchange = (e) => {
+              if (e.target.files.length)
+                this.handleBookmarksFile(e.target.files[0]);
             };
-
-            // Inputs
-            document.getElementById('bmImportInput').onchange = (e) => {
-                if(e.target.files.length) this.handleBookmarksFile(e.target.files[0]);
+            document.getElementById("bmSearch").oninput = () =>
+              this.renderBookmarks();
+            document.getElementById("noteSearch").oninput = () =>
+              this.renderNotes();
+            if (document.getElementById("todoSearch"))
+              document.getElementById("todoSearch").oninput = () =>
+                this.renderTodos();
+            document.getElementById("themeToggle").onclick = () => {
+              this.state.theme =
+                this.state.theme === "light" ? "dark" : "light";
+              document.body.setAttribute("data-theme", this.state.theme);
+              this.saveSettings();
             };
-            document.getElementById('bmSearch').oninput = () => this.renderBookmarks();
-            document.getElementById('noteSearch').oninput = () => this.renderNotes();
-            if(document.getElementById('todoSearch')) {
-                document.getElementById('todoSearch').oninput = () => this.renderTodos();
-            }
-            
-            // Theme Toggle
-            document.getElementById('themeToggle').onclick = () => {
-                this.state.theme = this.state.theme === 'light' ? 'dark' : 'light';
-                document.body.setAttribute('data-theme', this.state.theme);
-                this.saveSettings();
-            };
+          }
         }
-      }
 
-      const app = new App();
-      app.init();
-    </script>
-  </body>
-</html>
+        const app = new App();
+        app.init();
+      </script>
+    </body>
+  </html>
+</div>
