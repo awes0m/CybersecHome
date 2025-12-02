@@ -3,20 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Awes0m Cybersec Homepage</title>
+    <title>Awes0m Cybersec Homepage v2.8</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <style>
-      /* CSS Variables for Theme */
+      /* --- CSS Variables & Theme --- */
       :root {
         --bg-primary: rgba(255, 255, 255, 0.1);
         --bg-secondary: rgba(255, 255, 255, 0.05);
         --bg-tertiary: rgba(255, 255, 255, 0.15);
         --text-color: #190953;
         --text-secondary: rgb(43, 1, 59);
-        --text-muted: rgba(0, 0, 0, 0.822);
+        --text-muted: rgba(0, 0, 0, 0.6);
         --border-color: rgb(4, 3, 43);
         --accent-color: #020b20;
         --accent-hover: #229ce2;
@@ -31,2702 +31,1263 @@
       }
 
       [data-theme="dark"] {
-        --text-color: #ffffff;
-        --text-secondary: rgba(255, 255, 255, 0.8);
-        --text-muted: rgba(255, 255, 255, 0.6);
+        --text-color: #f1f5f9;
+        --text-secondary: rgba(241, 245, 249, 0.8);
+        --text-muted: rgba(241, 245, 249, 0.5);
         --accent-color: #60a5fa;
         --accent-hover: #3b82f6;
         --bg-primary: rgba(15, 23, 42, 0.8);
         --bg-secondary: rgba(15, 23, 42, 0.6);
         --bg-tertiary: rgba(30, 41, 59, 0.9);
-        --text-color: #f1f5f9;
-        --text-secondary: rgba(241, 245, 249, 0.8);
-        --text-muted: rgba(241, 245, 249, 0.6);
         --border-color: rgba(148, 163, 184, 0.3);
       }
 
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
 
       body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          Oxygen, Ubuntu, Cantarell, sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         min-height: 100vh;
         color: var(--text-color);
         line-height: 1.6;
         transition: var(--transition);
         position: relative;
+        overflow-x: hidden;
       }
 
       body::before {
         content: "";
         position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: radial-gradient(
-            circle at 20% 50%,
-            rgba(120, 119, 198, 0.3) 0%,
-            transparent 50%
-          ),
-          radial-gradient(
-            circle at 80% 20%,
-            rgba(255, 119, 198, 0.3) 0%,
-            transparent 50%
-          ),
-          radial-gradient(
-            circle at 40% 80%,
-            rgba(120, 219, 255, 0.3) 0%,
-            transparent 50%
-          );
-        z-index: -2;
-      }
-
-      /* Wallpaper overlay */
-      .wallpaper-overlay {
-        position: fixed;
         inset: 0;
-        z-index: -1;
-        background-size: cover;
-        background-position: center;
-        transition: opacity 0.3s ease;
-        opacity: 0;
+        background: radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3), transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3), transparent 50%);
+        z-index: -2;
+        pointer-events: none;
       }
 
-      /* Header & Navigation */
+      .wallpaper-overlay {
+        position: fixed; inset: 0; z-index: -1;
+        background-size: cover; background-position: center;
+        transition: opacity 0.3s ease; opacity: 0;
+      }
+
+      /* --- Layout --- */
       .header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
+        position: fixed; top: 0; left: 0; right: 0;
         background: var(--bg-primary);
         backdrop-filter: blur(var(--glass-blur));
         border-bottom: 1px solid var(--border-color);
-        z-index: 1000;
-        padding: 0.75rem 0;
+        z-index: 1000; padding: 0.75rem 0;
       }
 
       .header-content {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 1rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        max-width: 1400px; margin: 0 auto; padding: 0 1rem;
+        display: flex; justify-content: space-between; align-items: center;
       }
 
-      .logo {
-        font-size: 1.25rem;
-        font-weight: bold;
-        color: var(--accent-color);
-        text-shadow: 0 0 20px rgba(96, 165, 250, 0.5);
-      }
-
-      .nav {
-        display: flex;
-        gap: 0.5rem;
-      }
-
+      .logo { font-size: 1.25rem; font-weight: bold; color: var(--accent-color); display: flex; align-items: center; gap: 0.5rem; }
+      
+      .nav { display: flex; gap: 0.5rem; }
       .nav-link {
-        padding: 0.5rem 1rem;
-        border-radius: var(--border-radius-small);
-        text-decoration: none;
-        color: var(--text-secondary);
-        font-weight: 500;
-        transition: var(--transition);
-        background: var(--bg-secondary);
-        backdrop-filter: blur(10px);
+        padding: 0.5rem 1rem; border-radius: var(--border-radius-small);
+        text-decoration: none; color: var(--text-secondary); font-weight: 500;
+        transition: var(--transition); background: var(--bg-secondary);
         border: 1px solid var(--border-color);
       }
+      .nav-link:hover { background: var(--bg-tertiary); color: var(--text-color); transform: translateY(-2px); }
+      .nav-link.active { background: var(--accent-color); color: white; border-color: var(--accent-color); }
 
-      .nav-link:hover {
-        background: var(--bg-tertiary);
-        color: var(--text-color);
-        transform: translateY(-2px);
-      }
+      .header-controls { display: flex; gap: 0.5rem; align-items: center; }
 
-      .nav-link.active {
-        background: var(--accent-color);
-        color: white;
-        box-shadow: 0 0 20px rgba(96, 165, 250, 0.4);
-      }
+      .container { max-width: 1400px; margin: 0 auto; padding: 100px 1rem 2rem; }
+      .page { display: none; animation: fadeIn 0.3s ease; }
+      .page.active { display: block; }
+      @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-      .header-controls {
-        display: flex;
-        gap: 0.5rem;
-        align-items: center;
-      }
-
-      .theme-toggle {
-        background: var(--bg-secondary);
-        backdrop-filter: blur(10px);
-        border: 1px solid var(--border-color);
-        color: var(--text-color);
-        padding: 0.5rem;
-        border-radius: var(--border-radius-small);
-        cursor: pointer;
-        transition: var(--transition);
-      }
-
-      .theme-toggle:hover {
-        background: var(--bg-tertiary);
-        transform: translateY(-2px);
-      }
-
-      /* Main Container & Pages */
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 1rem;
-        padding-top: 100px;
-      }
-
-      .page {
-        display: none;
-      }
-
-      .page.active {
-        display: block;
-      }
-
-      /* Glass Section Styles */
+      /* --- Components --- */
       .section {
-        margin-bottom: 2rem;
-        background: var(--bg-primary);
-        backdrop-filter: blur(var(--glass-blur));
-        border-radius: var(--border-radius);
-        padding: 2rem;
-        box-shadow: var(--shadow-glass);
-        border: 1px solid var(--border-color);
+        margin-bottom: 2rem; background: var(--bg-primary);
+        backdrop-filter: blur(var(--glass-blur)); border-radius: var(--border-radius);
+        padding: 2rem; border: 1px solid var(--border-color);
+        box-shadow: var(--shadow-glass); transition: var(--transition);
+      }
+      .section:hover { box-shadow: var(--shadow-hover); border-color: var(--accent-color); }
+
+      .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+      .section-title { font-size: 1.25rem; font-weight: 600; color: var(--text-color); display: flex; align-items: center; gap: 0.5rem; }
+
+      /* Hero Section (Clock Only) */
+      .hero-grid {
+        display: flex; justify-content: center; align-items: center; 
+        margin-bottom: 3rem; text-align: center;
+      }
+      .hero-welcome {
+        display: flex; flex-direction: column; justify-content: center; align-items: center;
+      }
+      .greeting { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; opacity: 0.9; }
+      .clock { 
+        font-size: 5rem; font-weight: 800; color: var(--accent-color); 
+        line-height: 1; margin-bottom: 0.5rem; font-variant-numeric: tabular-nums;
+        text-shadow: 0 0 30px rgba(96, 165, 250, 0.2);
+      }
+      .date-display { font-size: 1.2rem; opacity: 0.8; font-weight: 500; }
+
+      /* Search */
+      .search-container { display: flex; justify-content: center; margin-bottom: 2rem; }
+      .search-form {
+        display: flex; align-items: center; background: var(--bg-secondary);
+        padding: 0.75rem 1.5rem; border-radius: 50px; border: 1px solid var(--border-color);
+        width: 100%; max-width: 700px; box-shadow: var(--shadow-glass);
         transition: var(--transition);
       }
-
-      .section:hover {
-        transform: translateY(-4px);
-        box-shadow: var(--shadow-hover);
-      }
-
-      .section-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 1.5rem;
-      }
-
-      .section-title {
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: var(--text-color);
-        cursor: pointer;
-      }
-
-      /* Button Styles */
+      .search-form:focus-within { border-color: var(--accent-color); box-shadow: 0 0 25px rgba(96, 165, 250, 0.2); transform: scale(1.01); }
+      .search-input { flex: 1; background: none; border: none; padding: 0.5rem; font-size: 1.1rem; color: var(--text-color); outline: none; }
+      
+      /* Toggles & Buttons */
+      .toggle-switch { display: flex; align-items: center; gap: 10px; padding-left: 15px; border-left: 1px solid var(--border-color); }
+      .switch { position: relative; width: 40px; height: 22px; }
+      .switch input { opacity: 0; width: 0; height: 0; }
+      .slider { position: absolute; cursor: pointer; inset: 0; background: #ccc; transition: .4s; border-radius: 34px; }
+      .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px; background: white; transition: .4s; border-radius: 50%; }
+      input:checked + .slider { background: var(--accent-color); }
+      input:checked + .slider:before { transform: translateX(18px); }
+      
       .btn {
-        padding: 0.75rem 1.5rem;
-        border: none;
-        border-radius: var(--border-radius-small);
-        cursor: pointer;
-        font-size: 0.875rem;
-        font-weight: 500;
-        transition: var(--transition);
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        background: var(--bg-secondary);
-        backdrop-filter: blur(10px);
-        border: 1px solid var(--border-color);
-        color: var(--text-color);
+        padding: 0.6rem 1.2rem; border: none; border-radius: var(--border-radius-small);
+        cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: var(--transition);
+        display: inline-flex; align-items: center; gap: 0.5rem;
+        background: var(--bg-secondary); border: 1px solid var(--border-color); color: var(--text-color);
       }
+      .btn:hover { background: var(--bg-tertiary); transform: translateY(-2px); }
+      .btn-primary { background: var(--accent-color); color: white; border-color: transparent; }
+      .btn-primary:hover { background: var(--accent-hover); box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4); }
+      .btn-icon { padding: 0.5rem; border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; }
+      .btn-danger { color: #f87171; border-color: #f87171; }
+      .btn-danger:hover { background: #f87171; color: white; }
 
-      .btn:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-glass);
-      }
-
-      .btn-primary {
-        background: var(--accent-color);
-        color: white;
-        box-shadow: 0 0 20px rgba(96, 165, 250, 0.3);
-      }
-
-      .btn-primary:hover {
-        background: var(--accent-hover);
-        box-shadow: 0 0 30px rgba(96, 165, 250, 0.5);
-      }
-
-      .btn-danger {
-        background: var(--danger-color);
-        color: white;
-      }
-
-      .btn-small {
-        padding: 0.5rem 1rem;
-        font-size: 0.75rem;
-      }
-
-      .btn-icon {
-        background: none;
-        border: none;
-        color: var(--text-secondary);
-        cursor: pointer;
-        padding: 0.5rem;
-        border-radius: var(--border-radius-small);
-        transition: var(--transition);
-      }
-
-      .btn-icon:hover {
-        color: var(--text-color);
-        background: var(--bg-secondary);
-      }
-
-      /* NEW: Scrollable Homepage sections */
-      #favoritesGrid,
-      #notesList,
-      #todosList {
-        max-height: 400px;
-        overflow-y: auto;
-        padding-right: 10px; /* Space for scrollbar */
-        margin-right: -10px; /* Counteract padding to keep alignment */
-      }
-
-      /* Optional: nice scrollbar styling */
-      #favoritesGrid::-webkit-scrollbar,
-      #notesList::-webkit-scrollbar,
-      #todosList::-webkit-scrollbar {
-        width: 8px;
-      }
-
-      #favoritesGrid::-webkit-scrollbar-track,
-      #notesList::-webkit-scrollbar-track,
-      #todosList::-webkit-scrollbar-track {
-        background: var(--bg-secondary);
-        border-radius: 10px;
-      }
-
-      #favoritesGrid::-webkit-scrollbar-thumb,
-      #notesList::-webkit-scrollbar-thumb,
-      #todosList::-webkit-scrollbar-thumb {
-        background: var(--border-color);
-        border-radius: 10px;
-      }
-
-      #favoritesGrid::-webkit-scrollbar-thumb:hover,
-      #notesList::-webkit-scrollbar-thumb:hover,
-      #todosList::-webkit-scrollbar-thumb:hover {
-        background: var(--accent-color);
-      }
-
-      /* Favorites Section */
-      .favorites-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-        gap: 1.5rem;
-      }
-
+      /* Grids */
+      .favorites-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 1rem; }
       .favorite-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 1.5rem;
-        background: var(--bg-secondary);
-        backdrop-filter: blur(15px);
-        border: 1px solid var(--border-color);
-        border-radius: var(--border-radius);
-        text-decoration: none;
-        color: var(--text-color);
-        transition: var(--transition);
-        position: relative;
+        display: flex; flex-direction: column; align-items: center; padding: 1.5rem;
+        background: var(--bg-secondary); border: 1px solid var(--border-color);
+        border-radius: var(--border-radius); text-decoration: none; color: var(--text-color);
+        transition: var(--transition); position: relative;
       }
-
-      .favorite-item:hover {
-        transform: translateY(-4px);
-        box-shadow: var(--shadow-hover);
-        background: var(--bg-tertiary);
+      .favorite-item:hover { background: var(--bg-tertiary); transform: translateY(-5px); border-color: var(--accent-color); }
+      .favorite-icon { font-size: 2rem; margin-bottom: 0.75rem; color: var(--accent-color); }
+      .favorite-delete { 
+        position: absolute; top: 5px; right: 5px; background: var(--danger-color); color: white;
+        width: 20px; height: 20px; border-radius: 50%; border: none; cursor: pointer;
+        opacity: 0; transition: 0.2s; display: flex; align-items: center; justify-content: center;
       }
+      .favorite-item:hover .favorite-delete { opacity: 1; }
 
-      .favorite-icon {
-        font-size: 2.5rem;
-        margin-bottom: 0.75rem;
-        color: var(--accent-color);
-        filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.3));
-      }
-
-      .favorite-label {
-        font-size: 0.875rem;
-        text-align: center;
-        word-break: break-word;
-        font-weight: 500;
-      }
-
-      .favorite-delete {
-        position: absolute;
-        top: 0.5rem;
-        right: 0.5rem;
-        background: var(--danger-color);
-        color: white;
-        border: none;
-        border-radius: 50%;
-        width: 1.75rem;
-        height: 1.75rem;
-        font-size: 0.75rem;
-        cursor: pointer;
-        opacity: 0;
-        transition: var(--transition);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        backdrop-filter: blur(10px);
-      }
-
-      .favorite-item:hover .favorite-delete {
-        opacity: 1;
-      }
-
-      /* Notes and Todos */
-      .notes-todos {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
-      }
-
-      @media (max-width: 768px) {
-        .notes-todos {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      .notes-container,
-      .todos-container {
-        background: var(--bg-secondary);
-        backdrop-filter: blur(15px);
-        border: 1px solid var(--border-color);
-        border-radius: var(--border-radius);
-        padding: 1.5rem;
-      }
-
-      .note-item,
-      .todo-item {
-        background: var(--bg-tertiary);
-        backdrop-filter: blur(10px);
-        border: 1px solid var(--border-color);
-        border-radius: var(--border-radius-small);
-        padding: 1rem;
-        margin-bottom: 1rem;
-        position: relative;
-        transition: var(--transition);
-      }
-
-      .note-item:hover,
-      .todo-item:hover {
-        transform: translateX(4px);
-      }
-
-      .note-item .note-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 0.5rem;
-      }
-
-      .note-item .note-title {
-        font-weight: 600;
-        color: var(--text-color);
-      }
-
-      .note-item .note-content {
-        color: var(--text-secondary);
-      }
-
-      .todo-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 0.75rem;
-      }
-
-      .todo-left {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-
-      .todo-right {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-
-      .todo-due {
-        font-size: 0.8rem;
-        color: var(--text-muted);
-      }
-
-      .todo-item.completed .todo-text {
-        text-decoration: line-through;
-        color: var(--text-muted);
-      }
-
-      /* Bookmarks Page */
-      .bookmarks-page-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 2rem;
-        gap: 1rem;
-      }
-
-      .bookmarks-upload-container {
-        display: flex;
-        gap: 1rem;
-      }
-
-      .bookmarks-upload {
-        border: 2px dashed var(--border-color);
-        border-radius: var(--border-radius);
-        padding: 1.5rem;
-        text-align: center;
-        transition: var(--transition);
-        cursor: pointer;
-        background: var(--bg-secondary);
-        backdrop-filter: blur(15px);
-      }
-
-      .bookmarks-upload:hover {
-        border-color: var(--accent-color);
-        background: var(--bg-tertiary);
-        transform: translateY(-2px);
-      }
-
-      .bookmark-folder {
-        margin-bottom: 2rem;
-        border: 1px solid var(--border-color);
-        border-radius: var(--border-radius);
-        overflow: hidden;
-        background: var(--bg-secondary);
-        backdrop-filter: blur(15px);
-      }
-
-      .bookmark-folder-header {
-        font-weight: 600;
-        padding: 1rem 1.5rem;
-        color: var(--text-color);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background: var(--bg-tertiary);
-        border-bottom: 1px solid var(--border-color);
-      }
-
-      .bookmark-folder-name {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        color: var(--accent-color);
-      }
-
-      .bookmark-list {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 1rem;
-        padding: 1.5rem;
-      }
-
-      .bookmark-item {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 0.75rem;
-        padding: 1rem;
-        background: var(--bg-primary);
-        backdrop-filter: blur(10px);
-        border: 1px solid var(--border-color);
-        border-radius: var(--border-radius-small);
-        text-decoration: none;
-        color: var(--text-color);
-        transition: var(--transition);
-      }
-
-      .bookmark-item:hover {
-        background: var(--bg-tertiary);
-        transform: translateX(6px);
-      }
-
-      .bookmark-item-link {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        text-decoration: none;
-        color: inherit;
-        overflow: hidden;
-        flex: 1;
-      }
-
-      .bookmark-favicon {
-        width: 20px;
-        height: 20px;
-        border-radius: 4px;
-        flex-shrink: 0;
-      }
-
-      .bookmark-title {
-        font-weight: 500;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      /* Feeds Section */
-      .feed-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: 2rem;
-      }
-
+      /* Feeds & Bookmarks */
       .feed-source {
-        background: var(--bg-secondary);
-        backdrop-filter: blur(15px);
-        border-radius: var(--border-radius);
-        padding: 1.5rem;
-        box-shadow: var(--shadow-glass);
-        border: 1px solid var(--border-color);
-        transition: var(--transition);
+        background: var(--bg-secondary); padding: 1.5rem; border-radius: var(--border-radius);
+        border: 1px solid var(--border-color); margin-bottom: 1rem;
       }
+      .feed-item { margin-bottom: 0.8rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.8rem; }
+      .feed-item:last-child { border-bottom: none; }
+      .feed-item a { text-decoration: none; color: var(--text-color); font-weight: 500; }
+      .feed-item a:hover { color: var(--accent-hover); }
 
-      .feed-source:hover {
-        transform: translateY(-4px);
+      .bookmark-folder { margin-bottom: 1.5rem; border: 1px solid var(--border-color); border-radius: var(--border-radius); overflow: hidden; }
+      .bookmark-folder-header {
+        background: var(--bg-tertiary); padding: 1rem; font-weight: 600;
+        display: flex; justify-content: space-between; align-items: center;
       }
-
-      .feed-source-header {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        margin-bottom: 1rem;
-        padding-bottom: 0.75rem;
-        border-bottom: 1px solid var(--border-color);
+      .bookmark-list { padding: 1rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; }
+      .bookmark-item {
+         display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem;
+         background: var(--bg-secondary); border-radius: var(--border-radius-small);
+         border: 1px solid var(--border-color); transition: var(--transition);
       }
+      .bookmark-item:hover { background: var(--bg-tertiary); transform: translateX(5px); }
+      .bookmark-link { text-decoration: none; color: var(--text-color); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-      .feed-source-icon {
-        width: 24px;
-        height: 24px;
-        border-radius: 4px;
+      /* Notes & Todos Split */
+      .dashboard-split { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .list-container { max-height: 400px; overflow-y: auto; padding-right: 5px; }
+      .item-card {
+        background: var(--bg-tertiary); padding: 1rem; margin-bottom: 0.75rem;
+        border-radius: var(--border-radius-small); border: 1px solid var(--border-color);
+        display: flex; justify-content: space-between; align-items: center;
       }
+      .item-card.completed span { text-decoration: line-through; opacity: 0.6; }
 
-      .feed-source-title a {
-        font-weight: 600;
-        color: var(--accent-color);
-        text-decoration: none;
+      /* Draggable CS Tools Panel */
+      .floating-panel {
+        position: fixed; top: 120px; right: 20px; width: 260px;
+        background: var(--bg-primary); backdrop-filter: blur(var(--glass-blur));
+        border: 1px solid var(--border-color); border-radius: var(--border-radius);
+        box-shadow: var(--shadow-glass); z-index: 1500;
+        display: flex; flex-direction: column; overflow: hidden;
+        transition: opacity 0.3s;
       }
-
-      .feed-item {
-        margin-bottom: 1rem;
-        padding-bottom: 1rem;
-        border-bottom: 1px solid var(--border-color);
+      .panel-header {
+        padding: 12px 15px; background: var(--bg-tertiary);
+        border-bottom: 1px solid var(--border-color); cursor: move;
+        display: flex; justify-content: space-between; align-items: center;
+        user-select: none; font-weight: 600;
       }
-
-      .feed-item:last-child {
-        margin-bottom: 0;
-        padding-bottom: 0;
-        border-bottom: none;
+      .panel-content {
+        max-height: 450px; overflow-y: auto; padding: 10px;
       }
-
-      .feed-item-title a {
-        color: var(--text-color);
-        text-decoration: none;
-        transition: var(--transition);
-        font-weight: 500;
+      .tool-link {
+        display: flex; align-items: center; padding: 10px;
+        text-decoration: none; color: var(--text-color);
+        border-radius: var(--border-radius-small); margin-bottom: 5px;
+        transition: background 0.2s;
       }
-
-      .feed-item-title a:hover {
-        color: var(--accent-color);
+      .tool-link:hover { background: var(--bg-tertiary); color: var(--accent-hover); }
+      .tool-link i { width: 24px; color: var(--accent-color); text-align: center; margin-right: 8px; }
+      
+      .panel-toggle-btn {
+        position: fixed; bottom: 30px; right: 30px;
+        width: 50px; height: 50px; border-radius: 50%;
+        background: var(--accent-color); color: white;
+        border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        cursor: pointer; z-index: 1400; display: flex;
+        align-items: center; justify-content: center;
+        font-size: 1.2rem; transition: transform 0.2s;
       }
+      .panel-toggle-btn:hover { transform: scale(1.1); background: var(--accent-hover); }
 
-      .feed-item-meta {
-        font-size: 0.8rem;
-        color: var(--text-muted);
-        margin-bottom: 0.5rem;
-      }
-
-      /* Modal Styles */
+      /* Modals */
       .modal-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(10px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 2000;
-        opacity: 0;
-        visibility: hidden;
-        transition: var(--transition);
+        position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
+        display: flex; align-items: center; justify-content: center;
+        z-index: 2000; opacity: 0; visibility: hidden; transition: var(--transition);
       }
-
-      .modal-overlay.active {
-        opacity: 1;
-        visibility: visible;
-      }
-
+      .modal-overlay.active { opacity: 1; visibility: visible; }
       .modal {
-        background: var(--bg-primary);
-        backdrop-filter: blur(var(--glass-blur));
-        border: 1px solid var(--border-color);
-        border-radius: var(--border-radius);
-        padding: 2rem;
-        max-width: 700px;
-        width: 90%;
-        max-height: 90vh;
-        overflow-y: auto;
-        transform: scale(0.9);
-        transition: var(--transition);
-        box-shadow: var(--shadow-glass);
+        background: var(--bg-primary); padding: 2rem; border-radius: var(--border-radius);
+        width: 90%; max-width: 500px; border: 1px solid var(--border-color);
+        box-shadow: var(--shadow-hover); transform: scale(0.95); transition: var(--transition);
+        max-height: 90vh; overflow-y: auto;
       }
-
-      .modal-overlay.active .modal {
-        transform: scale(1);
-      }
-
-      .modal-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 1.5rem;
-      }
-
-      .modal-title {
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: var(--text-color);
-      }
-
-      .modal-close {
-        background: none;
-        border: none;
-        font-size: 1.5rem;
-        cursor: pointer;
-        color: var(--text-secondary);
-        transition: var(--transition);
-      }
-
-      .modal-close:hover {
-        color: var(--text-color);
-      }
-
-      /* Form Styles */
-      .form-group {
-        margin-bottom: 1rem;
-      }
-
-      .form-label {
-        display: block;
-        margin-bottom: 0.5rem;
-        font-weight: 500;
-        color: var(--text-color);
-      }
-
+      .modal-overlay.active .modal { transform: scale(1); }
+      .form-group { margin-bottom: 1rem; }
+      .form-label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
       .form-input {
-        width: 100%;
-        padding: 0.75rem;
-        border: 1px solid var(--border-color);
-        border-radius: var(--border-radius-small);
-        background: var(--bg-secondary);
-        backdrop-filter: blur(10px);
-        color: var(--text-color);
-        font-family: inherit;
-        transition: var(--transition);
+        width: 100%; padding: 0.8rem; border-radius: var(--border-radius-small);
+        border: 1px solid var(--border-color); background: var(--bg-secondary);
+        color: var(--text-color); font-family: inherit;
       }
 
-      .form-input:focus {
-        outline: none;
-        border-color: var(--accent-color);
-        box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
-      }
-
-      .form-input::placeholder {
-        color: var(--text-muted);
-      }
-
-      /* Loading States */
-      .loading {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 2rem;
-        color: var(--text-secondary);
-        font-size: 1rem;
-      }
-
-      .spinner {
-        width: 24px;
-        height: 24px;
-        border: 3px solid var(--border-color);
-        border-top: 3px solid var(--accent-color);
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-        margin-right: 0.75rem;
-      }
-
-      @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-
-      .empty-state {
-        text-align: center;
-        padding: 3rem;
-        color: var(--text-secondary);
-      }
-
-      /* Import status */
-      .import-status {
-        padding: 1rem;
-        margin: 1rem 0;
-        border-radius: var(--border-radius-small);
-        background: var(--bg-secondary);
-        backdrop-filter: blur(10px);
-        border: 1px solid var(--border-color);
-      }
-
-      .import-status.success {
-        border-color: var(--success-color);
-        background: rgba(52, 211, 153, 0.1);
-      }
-
-      .import-status.error {
-        border-color: var(--danger-color);
-        background: rgba(248, 113, 113, 0.1);
-      }
-
-      /* Responsive Design */
+      /* Responsive */
       @media (max-width: 768px) {
-        .container {
-          padding: 0 0.5rem;
-          padding-top: 90px;
-        }
-
-        .header-content {
-          padding: 0 0.5rem;
-        }
-
-        .nav {
-          gap: 0.25rem;
-        }
-
-        .nav-link {
-          padding: 0.5rem 0.75rem;
-          font-size: 0.8rem;
-        }
-
-        .favorites-grid {
-          grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-        }
-
-        .feed-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .bookmark-list {
-          grid-template-columns: 1fr;
-        }
-
-        .bookmarks-page-header {
-          flex-direction: column;
-          gap: 1rem;
-          align-items: stretch;
-        }
+        .dashboard-split { grid-template-columns: 1fr; }
+        .hero-grid { flex-direction: column; }
+        .clock { font-size: 3.5rem; }
+        .nav { overflow-x: auto; padding-bottom: 5px; }
+        .floating-panel { display: none !important; } /* Hide on mobile by default */
+        .panel-toggle-btn { display: none; }
       }
     </style>
   </head>
-  <body data-theme="light">
-    <!-- Header -->
+  <body data-theme="dark">
+    
+    <!-- WALLPAPER OVERLAY FIXED -->
+    <div class="wallpaper-overlay"></div>
+
+    <!-- DRAGGABLE CS TOOLS SIDEBAR -->
+    <div id="csToolsPanel" class="floating-panel">
+        <div class="panel-header" id="csToolsHeader">
+            <span><i class="fas fa-toolbox"></i> CS Toolkit</span>
+            <button class="btn-icon" style="padding:2px; height:auto; width:auto;" onclick="app.toggleToolsPanel()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="panel-content">
+            <p>Reporting</p>
+            <a href="https://awes0m.github.io/cybersec_tools/security_incident_response_generator.html" target="_blank" class="tool-link"><i class="fas fa-file-alt"></i> Security Incident Response Generator</a>
+            <br>
+            <p>Investigation Tools</p>
+            <a href="https://awes0m.github.io/cybersec_tools/smartJsonFormatterAnalyzer.html" target="_blank" class="tool-link"><i class="fas fa-code"></i> Smart JSON Formatter & Analyzer</a>
+            <a href="https://awes0m.github.io/cybersec_tools/json_multi_corelator.html" target="_blank" class="tool-link"><i class="fas fa-code-branch"></i> JSON Multi Correlator</a>
+            <a href="https://awes0m.github.io/cybersec_tools/jsonCorelatorAnalyzer.html" target="_blank" class="tool-link"><i class="fas fa-code"></i> JSON Corelator Analyzer</a>
+            <a href="https://gchq.github.io/CyberChef/" target="_blank" class="tool-link"><i class="fas fa-cookie-bite"></i> CyberChef</a>
+            <br>
+            <p>Online Services</p>
+            <a href="https://www.virustotal.com/" target="_blank" class="tool-link"><i class="fas fa-virus"></i> VirusTotal</a>
+            <a href="https://www.shodan.io/" target="_blank" class="tool-link"><i class="fas fa-search-location"></i> Shodan</a>
+            <a href="https://otx.alienvault.com/" target="_blank" class="tool-link"><i class="fas fa-project-diagram"></i> AlienVault OTX</a>
+            <a href="https://urlscan.io/" target="_blank" class="tool-link"><i class="fas fa-barcode"></i> urlscan.io</a>
+            <a href="https://www.abuseipdb.com/" target="_blank" class="tool-link"><i class="fas fa-ban"></i> AbuseIPDB</a>
+            <a href="https://cve.mitre.org/" target="_blank" class="tool-link"><i class="fas fa-bug"></i> MITRE CVE</a>
+            <a href="https://www.exploit-db.com/" target="_blank" class="tool-link"><i class="fas fa-bomb"></i> Exploit-DB</a>
+            <a href="https://haveibeenpwned.com/" target="_blank" class="tool-link"><i class="fas fa-user-secret"></i> Have I Been Pwned</a>
+            <a href="https://dnsster.com/" target="_blank" class="tool-link"><i class="fas fa-network-wired"></i> DNSster</a>
+            <a href="https://crt.sh/" target="_blank" class="tool-link"><i class="fas fa-certificate"></i> crt.sh</a>
+            <a href="https://mxtoolbox.com/" target="_blank" class="tool-link"><i class="fas fa-envelope-open-text"></i> MxToolbox</a>
+        </div>
+    </div>
+    
+    <button class="panel-toggle-btn" onclick="app.toggleToolsPanel()" title="Toggle CS Toolkit">
+        <i class="fas fa-tools"></i>
+    </button>
+
     <header class="header">
       <div class="header-content">
         <div class="logo">
-          <i class="fa-solid fa-microchip"></i> Awes0m's CyberSecHome
-          <i class="fa-solid fa-microchip"></i>
+          <i class="fa-solid fa-shield-halved"></i> Awes0m CyberHome
         </div>
         <nav class="nav" id="mainNav">
-          <a href="#home" class="nav-link active" data-page="homePage">Home</a>
-          <a href="#bookmarks" class="nav-link" data-page="bookmarksPage"
-            >Bookmarks</a
-          >
-          <a href="#feeds" class="nav-link" data-page="feedsPage">Feeds</a>
+          <a href="#home" class="nav-link active" data-page="homePage">Dashboard</a>
+          <a href="#bookmarks" class="nav-link" data-page="bookmarksPage">Bookmarks</a>
+          <a href="#feeds" class="nav-link" data-page="feedsPage">Intel Feeds</a>
+          <a href="#automations" class="nav-link" data-page="automationsPage">Ops</a>
           <a href="#notes" class="nav-link" data-page="notesPage">Notes</a>
           <a href="#tasks" class="nav-link" data-page="tasksPage">Tasks</a>
         </nav>
         <div class="header-controls">
-          <button class="theme-toggle" id="themeToggle" title="Toggle theme">
-            <i class="fas fa-moon"></i>
-          </button>
-          <button
-            class="theme-toggle"
-            id="changeWallpaperBtn"
-            title="Change wallpaper"
-          >
-            <i class="fas fa-image"></i>
-          </button>
-          <div style="display: flex; gap: 0.5rem; align-items: center">
-            <button
-              class="btn btn-small"
-              id="exportDataBtn"
-              title="Export data as JSON"
-            >
-              <i class="fas fa-file-export"></i>
-            </button>
-            <button
-              class="btn btn-small"
-              id="importDataBtn"
-              title="Import data (JSON)"
-            >
-              <i class="fas fa-file-import"></i>
-            </button>
-            <input
-              type="file"
-              id="importDataInput"
-              accept="application/json"
-              style="display: none"
-            />
-          </div>
+          <button class="btn btn-icon" id="themeToggle"><i class="fas fa-sun"></i></button>
+          <button class="btn btn-icon" id="dbBackupBtn" title="Database Backup"><i class="fas fa-database"></i></button>
+          <button class="btn btn-icon" id="settingsBtn"><i class="fas fa-cog"></i></button>
         </div>
       </div>
     </header>
 
     <div class="container">
+      
+      <!-- PAGE: HOME -->
       <div id="homePage" class="page active">
-        <section class="section" id="favoritesSection">
+        
+        <div class="hero-grid">
+          <div class="hero-welcome">
+            <div class="greeting" id="greetingDisplay">Welcome back</div>
+            <div class="clock" id="clockDisplay">00:00</div>
+            <div class="date-display" id="dateDisplay">Loading date...</div>
+          </div>
+        </div>
+
+        <div class="search-container">
+          <form id="searchForm" class="search-form" action="https://www.google.com/search" method="get" target="_blank">
+            <i class="fas fa-search" style="opacity: 0.7;"></i>
+            <input type="text" id="searchInput" name="q" placeholder="Search Google..." class="search-input" autocomplete="off" autofocus>
+            <div class="toggle-switch">
+              <i class="fab fa-google" id="googleIcon"></i>
+              <label class="switch">
+                <input type="checkbox" id="searchEngineToggle">
+                <span class="slider"></span>
+              </label>
+              <i class="fas fa-brain" id="perplexityIcon"></i>
+            </div>
+          </form>
+        </div>
+
+        <section class="section">
           <div class="section-header">
-            <h2 class="section-title"><i class="fas fa-star"></i> Favorites</h2>
-            <button class="btn btn-primary" id="addFavoriteBtn">
-              <i class="fas fa-plus"></i> Add Favorite
-            </button>
+            <h3 class="section-title"><i class="fas fa-star"></i> Quick Access</h3>
+            <button class="btn btn-primary btn-sm" onclick="app.openModal('favoriteModal')"><i class="fas fa-plus"></i> Add</button>
           </div>
           <div class="favorites-grid" id="favoritesGrid"></div>
         </section>
 
-        <section class="section">
-          <div class="notes-todos">
-            <div class="notes-container">
-              <div class="section-header">
-                <h3 class="section-title" id="notesSectionHeader">
-                  <i class="fas fa-note-sticky"></i> Notes
-                </h3>
-                <button class="btn btn-primary btn-small" id="addNoteBtn">
-                  <i class="fas fa-plus"></i> Add
-                </button>
-              </div>
-              <div id="notesList"></div>
+        <div class="dashboard-split">
+          <section class="section">
+            <div class="section-header">
+              <h3 class="section-title"><i class="fas fa-sticky-note"></i> Recent Notes</h3>
+              <button class="btn btn-primary btn-sm" onclick="app.openModal('noteModal')"><i class="fas fa-plus"></i></button>
             </div>
-            <div class="todos-container">
-              <div class="section-header">
-                <h3 class="section-title" id="tasksSectionHeader">
-                  <i class="fas fa-check-square"></i> Tasks
-                </h3>
-                <button class="btn btn-primary btn-small" id="addTodoBtn">
-                  <i class="fas fa-plus"></i> Add
-                </button>
-              </div>
-              <div id="todosList"></div>
+            <div class="list-container" id="recentNotesList"></div>
+          </section>
+          
+          <section class="section">
+            <div class="section-header">
+              <h3 class="section-title"><i class="fas fa-check-square"></i> Tasks</h3>
+              <button class="btn btn-primary btn-sm" onclick="app.openModal('todoModal')"><i class="fas fa-plus"></i></button>
             </div>
-          </div>
-        </section>
+            <div class="list-container" id="recentTodosList"></div>
+          </section>
+        </div>
 
-        <section class="section">
-          <div class="section-header">
-            <h2 class="section-title">
-              <i class="fas fa-rss"></i> Recent News
-            </h2>
-            <button class="btn btn-primary" id="refreshFeedsBtnHome">
-              <i class="fa-solid fa-arrows-rotate"></i> Refresh
-            </button>
-          </div>
-          <div class="feed-grid" id="feedGridHome"></div>
-        </section>
       </div>
 
+      <!-- PAGE: BOOKMARKS -->
       <div id="bookmarksPage" class="page">
-        <div class="bookmarks-page-header">
-          <h1 class="section-title">My Bookmarks</h1>
-          <div
-            class="form-group"
-            style="flex-grow: 1; max-width: 400px; margin-bottom: 0"
-          >
-            <input
-              type="search"
-              id="bookmarkSearchInput"
-              class="form-input"
-              placeholder="Search bookmarks by title or URL..."
-            />
-          </div>
-          <div class="bookmarks-upload-container">
-            <div class="bookmarks-upload" id="bookmarksUpload">
-              <i class="fas fa-upload"></i> Import HTML
-              <input
-                type="file"
-                id="bookmarksInput"
-                accept=".html"
-                style="display: none"
-              />
-            </div>
-            <button class="btn btn-primary" id="addFolderBtn">
-              <i class="fas fa-folder-plus"></i> New Folder
-            </button>
+        <div class="section-header">
+          <h2 class="section-title">Bookmark Manager</h2>
+          <div style="display: flex; gap: 10px;">
+             <input type="file" id="bmImportInput" accept=".html" hidden>
+             <button class="btn" onclick="document.getElementById('bmImportInput').click()"><i class="fas fa-file-import"></i> Import HTML</button>
+             <button class="btn btn-primary" onclick="app.openModal('folderModal')"><i class="fas fa-folder-plus"></i> New Folder</button>
           </div>
         </div>
-        <div id="importStatus"></div>
+        <input type="text" id="bmSearch" class="form-input" placeholder="Filter bookmarks..." style="margin-bottom: 1rem;">
         <div id="bookmarksContainer"></div>
       </div>
 
+      <!-- PAGE: FEEDS -->
       <div id="feedsPage" class="page">
         <div class="section-header">
-          <h1 class="section-title">Cybersecurity News Feeds</h1>
-          <div style="display: flex; gap: 0.5rem; align-items: center">
-            <button class="btn btn-primary" id="addFeedBtn">
-              <i class="fas fa-plus"></i> Add Feed
-            </button>
-            <button class="btn btn-primary" id="refreshFeedsBtnPage">
-              <i class="fa-solid fa-arrows-rotate"></i> Refresh Feeds
-            </button>
-          </div>
+            <h2 class="section-title">Intelligence Feeds</h2>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn" onclick="app.loadFeeds()"><i class="fas fa-sync"></i> Refresh</button>
+                <button class="btn btn-primary" onclick="app.openModal('feedModal')"><i class="fas fa-plus"></i> Add RSS</button>
+            </div>
         </div>
-        <div class="feed-grid" id="feedGridPage"></div>
+        <div id="feedGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;"></div>
       </div>
 
+      <!-- PAGE: AUTOMATIONS -->
+      <div id="automationsPage" class="page">
+        <div class="section-header">
+            <h2 class="section-title">Automations</h2>
+            <button class="btn btn-primary" onclick="app.openModal('automationModal')"><i class="fas fa-robot"></i> Create Flow</button>
+        </div>
+        <p class="text-muted" style="margin-bottom:1rem;">Launch multiple tools simultaneously.</p>
+        <div id="automationGrid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem;"></div>
+      </div>
+
+      <!-- PAGE: NOTES -->
       <div id="notesPage" class="page">
         <div class="section-header">
-          <h1 class="section-title">Notes</h1>
-          <div
-            class="form-group"
-            style="
-              flex-grow: 1;
-              max-width: 400px;
-              margin-bottom: 0;
-              margin-left: 1rem;
-            "
-          >
-            <input
-              type="search"
-              id="noteSearchInput"
-              class="form-input"
-              placeholder="Search notes..."
-            />
-          </div>
-          <div>
-            <button class="btn btn-primary" id="newNotePageBtn">
-              <i class="fas fa-plus"></i> New Note
-            </button>
-            <button
-              class="btn btn-small"
-              id="exportNotesBtn"
-              title="Export notes to JSON"
-            >
-              <i class="fas fa-file-export"></i>
-            </button>
-          </div>
+            <h2 class="section-title">All Notes</h2>
+            <button class="btn btn-primary" onclick="app.openModal('noteModal')"><i class="fas fa-plus"></i> New Note</button>
         </div>
-        <div id="notesPageList"></div>
+        <input type="text" id="noteSearch" class="form-input" placeholder="Search content..." style="margin-bottom: 1rem;">
+        <div id="allNotesList"></div>
       </div>
 
+      <!-- PAGE: TASKS -->
       <div id="tasksPage" class="page">
         <div class="section-header">
-          <h1 class="section-title">Tasks</h1>
-          <div>
-            <button class="btn btn-primary" id="newTaskPageBtn">
-              <i class="fas fa-plus"></i> New Task
-            </button>
-            <button
-              class="btn btn-small"
-              id="exportTasksBtn"
-              title="Export tasks to JSON"
-            >
-              <i class="fas fa-file-export"></i>
-            </button>
-          </div>
+            <h2 class="section-title">Task Manager</h2>
+            <button class="btn btn-primary" onclick="app.openModal('todoModal')"><i class="fas fa-plus"></i> New Task</button>
         </div>
-        <div id="tasksPageList"></div>
+        <input type="text" id="todoSearch" class="form-input" placeholder="Search tasks..." style="margin-bottom: 1rem;">
+        <div id="allTodosList"></div>
       </div>
+
     </div>
 
+    <!-- MODALS -->
+    <!-- Favorite Modal -->
     <div class="modal-overlay" id="favoriteModal">
       <div class="modal">
-        <div class="modal-header">
-          <h3 class="modal-title">Add Favorite</h3>
-          <button class="modal-close">&times;</button>
-        </div>
+        <div class="section-header"><h3>Add Favorite</h3><button class="btn-icon" onclick="app.closeModal('favoriteModal')"><i class="fas fa-times"></i></button></div>
         <form id="favoriteForm">
-          <div class="form-group">
-            <label class="form-label">Label</label>
-            <input type="text" class="form-input" id="favoriteLabel" required />
-          </div>
-          <div class="form-group">
-            <label class="form-label">URL</label>
-            <input type="url" class="form-input" id="favoriteUrl" required />
-          </div>
-          <div class="form-group">
-            <label class="form-label">Icon (Font Awesome)</label>
-            <input
-              type="text"
-              class="form-input"
-              id="favoriteIcon"
-              placeholder="fas fa-globe"
-            />
-          </div>
-          <button type="submit" class="btn btn-primary">Add Favorite</button>
-        </form>
-      </div>
-    </div>
-
-    <div class="modal-overlay" id="feedModal">
-      <div class="modal">
-        <div class="modal-header">
-          <h3 class="modal-title">Add RSS Feed</h3>
-          <button class="modal-close">&times;</button>
-        </div>
-        <form id="feedForm">
-          <div class="form-group">
-            <label class="form-label">Name</label>
-            <input type="text" class="form-input" id="feedNameInput" required />
-          </div>
-          <div class="form-group">
-            <label class="form-label">RSS URL</label>
-            <input
-              type="url"
-              class="form-input"
-              id="feedUrlInput"
-              placeholder="https://example.com/feed"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label class="form-label">Icon URL (optional)</label>
-            <input
-              type="url"
-              class="form-input"
-              id="feedIconInput"
-              placeholder="https://example.com/favicon.ico"
-            />
-          </div>
-          <div
-            id="feedPreviewArea"
-            style="margin-bottom: 0.75rem; display: none"
-          >
-            <div
-              id="feedPreviewTitle"
-              style="font-weight: 600; margin-bottom: 0.25rem"
-            ></div>
-            <div
-              id="feedPreviewItems"
-              style="font-size: 0.9rem; color: var(--text-secondary)"
-            ></div>
-          </div>
-          <div
-            id="feedPreviewError"
-            style="
-              color: var(--danger-color);
-              margin-bottom: 0.5rem;
-              display: none;
-            "
-          ></div>
-          <button
-            type="submit"
-            class="btn btn-primary"
-            id="saveFeedBtn"
-            disabled
-          >
-            Save Feed
-          </button>
-        </form>
-      </div>
-    </div>
-
-    <div class="modal-overlay" id="wallpaperModal">
-      <div class="modal">
-        <div class="modal-header">
-          <h3 class="modal-title">Set Wallpaper</h3>
-          <button class="modal-close">&times;</button>
-        </div>
-        <form id="wallpaperForm">
-          <div class="form-group">
-            <label class="form-label">Image URL</label>
-            <input
-              type="url"
-              class="form-input"
-              id="wallpaperUrlInput"
-              placeholder="https://...jpg"
-            />
-          </div>
-          <div
-            id="wallpaperPreviewArea"
-            style="display: none; margin-bottom: 0.5rem"
-          >
-            <img
-              id="wallpaperPreviewImg"
-              src=""
-              alt="preview"
-              style="
-                max-width: 100%;
-                border-radius: 6px;
-                display: block;
-                margin-bottom: 0.5rem;
-              "
-            />
-            <div
-              id="wallpaperPreviewMsg"
-              style="font-size: 0.9rem; color: var(--text-secondary)"
-            ></div>
-          </div>
-          <div style="display: flex; gap: 0.5rem; align-items: center">
-            <button
-              type="submit"
-              class="btn btn-primary"
-              id="setWallpaperBtn"
-              disabled
-            >
-              Set Wallpaper
-            </button>
-            <button
-              type="button"
-              class="btn btn-primary"
-              id="clearWallpaperBtn"
-            >
-              Clear
-            </button>
+          <div class="form-group"><label class="form-label">Name</label><input type="text" id="favName" class="form-input" required></div>
+          <div class="form-group"><label class="form-label">URL</label><input type="url" id="favUrl" class="form-input" required></div>
+          <div class="form-group"><label class="form-label">Icon Class (FontAwesome)</label><input type="text" id="favIcon" class="form-input" placeholder="fas fa-globe"></div>
+          <div style="display:flex; justify-content: flex-end; gap: 10px;">
+            <button type="button" class="btn btn-danger" onclick="app.closeModal('favoriteModal')">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save</button>
           </div>
         </form>
       </div>
     </div>
 
+    <!-- Note Modal -->
     <div class="modal-overlay" id="noteModal">
       <div class="modal">
-        <div class="modal-header">
-          <h3 class="modal-title" id="noteModalTitle">Add Note</h3>
-          <button class="modal-close">&times;</button>
-        </div>
+        <div class="section-header"><h3>Edit Note</h3><button class="btn-icon" onclick="app.closeModal('noteModal')"><i class="fas fa-times"></i></button></div>
         <form id="noteForm">
-          <input type="hidden" id="noteIdInput" />
-          <div class="form-group">
-            <label class="form-label">Title</label>
-            <input type="text" class="form-input" id="noteTitle" required />
+          <input type="hidden" id="noteId">
+          <div class="form-group"><label class="form-label">Title</label><input type="text" id="noteTitle" class="form-input" required></div>
+          <div class="form-group"><label class="form-label">Content</label><textarea id="noteContent" class="form-input" rows="5"></textarea></div>
+          <div style="display:flex; justify-content: flex-end; gap: 10px;">
+            <button type="button" class="btn btn-danger" onclick="app.closeModal('noteModal')">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Note</button>
           </div>
-          <div class="form-group">
-            <label class="form-label">Content</label>
-            <textarea
-              class="form-input"
-              id="noteContent"
-              rows="6"
-              required
-            ></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Save Note</button>
         </form>
       </div>
     </div>
 
+    <!-- Todo Modal -->
     <div class="modal-overlay" id="todoModal">
       <div class="modal">
-        <div class="modal-header">
-          <h3 class="modal-title" id="todoModalTitle">Add Task</h3>
-          <button class="modal-close">&times;</button>
-        </div>
+        <div class="section-header"><h3>Task</h3><button class="btn-icon" onclick="app.closeModal('todoModal')"><i class="fas fa-times"></i></button></div>
         <form id="todoForm">
-          <input type="hidden" id="todoIdInput" />
-          <div class="form-group">
-            <label class="form-label">Task</label>
-            <input type="text" class="form-input" id="todoText" required />
+          <input type="hidden" id="todoId">
+          <div class="form-group"><label class="form-label">Task</label><input type="text" id="todoText" class="form-input" required></div>
+          <div style="display:flex; justify-content: flex-end; gap: 10px;">
+            <button type="button" class="btn btn-danger" onclick="app.closeModal('todoModal')">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Task</button>
           </div>
-          <div class="form-group">
-            <label class="form-label">Due Date</label>
-            <input type="date" class="form-input" id="todoDueDate" />
-          </div>
-          <div class="form-group">
-            <label class="form-label"
-              ><input type="checkbox" id="todoCompleted" /> Mark
-              completed</label
-            >
-          </div>
-          <button type="submit" class="btn btn-primary">Save Task</button>
         </form>
       </div>
     </div>
 
+    <!-- Folder Modal -->
     <div class="modal-overlay" id="folderModal">
       <div class="modal">
-        <div class="modal-header">
-          <h3 class="modal-title" id="folderModalTitle">New Folder</h3>
-          <button class="modal-close">&times;</button>
-        </div>
+        <div class="section-header"><h3>New Folder</h3><button class="btn-icon" onclick="app.closeModal('folderModal')"><i class="fas fa-times"></i></button></div>
         <form id="folderForm">
-          <input type="hidden" id="folderIdInput" />
-          <div class="form-group">
-            <label class="form-label">Folder Name</label>
-            <input
-              type="text"
-              class="form-input"
-              id="folderNameInput"
-              required
-            />
+          <div class="form-group"><label class="form-label">Folder Name</label><input type="text" id="folderName" class="form-input" required></div>
+          <div style="display:flex; justify-content: flex-end; gap: 10px;">
+            <button type="button" class="btn btn-danger" onclick="app.closeModal('folderModal')">Cancel</button>
+            <button type="submit" class="btn btn-primary">Create Folder</button>
           </div>
-          <button type="submit" class="btn btn-primary">Save Folder</button>
         </form>
       </div>
     </div>
 
+    <!-- Bookmark Modal -->
     <div class="modal-overlay" id="bookmarkModal">
       <div class="modal">
-        <div class="modal-header">
-          <h3 class="modal-title" id="bookmarkModalTitle">New Bookmark</h3>
-          <button class="modal-close">&times;</button>
-        </div>
+        <div class="section-header"><h3>Add Bookmark</h3><button class="btn-icon" onclick="app.closeModal('bookmarkModal')"><i class="fas fa-times"></i></button></div>
         <form id="bookmarkForm">
-          <input type="hidden" id="bookmarkIdInput" />
-          <input type="hidden" id="bookmarkFolderIdInput" />
-          <div class="form-group">
-            <label class="form-label">Title</label>
-            <input
-              type="text"
-              class="form-input"
-              id="bookmarkTitleInput"
-              required
-            />
+          <input type="hidden" id="bmFolderId">
+          <div class="form-group"><label class="form-label">Title</label><input type="text" id="bmTitle" class="form-input" required></div>
+          <div class="form-group"><label class="form-label">URL</label><input type="url" id="bmUrl" class="form-input" required></div>
+          <div style="display:flex; justify-content: flex-end; gap: 10px;">
+            <button type="button" class="btn btn-danger" onclick="app.closeModal('bookmarkModal')">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Bookmark</button>
           </div>
-          <div class="form-group">
-            <label class="form-label">URL</label>
-            <input
-              type="url"
-              class="form-input"
-              id="bookmarkUrlInput"
-              required
-            />
-          </div>
-          <button type="submit" class="btn btn-primary">Save Bookmark</button>
         </form>
+      </div>
+    </div>
+
+    <!-- Feed Modal -->
+    <div class="modal-overlay" id="feedModal">
+      <div class="modal">
+        <div class="section-header"><h3>Add RSS Feed</h3><button class="btn-icon" onclick="app.closeModal('feedModal')"><i class="fas fa-times"></i></button></div>
+        <form id="feedForm">
+          <div class="form-group"><label class="form-label">Name</label><input type="text" id="feedName" class="form-input" required></div>
+          <div class="form-group"><label class="form-label">RSS URL</label><input type="url" id="feedUrl" class="form-input" required></div>
+          <div style="display:flex; justify-content: flex-end; gap: 10px;">
+            <button type="button" class="btn btn-danger" onclick="app.closeModal('feedModal')">Cancel</button>
+            <button type="submit" class="btn btn-primary">Add Feed</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Automation Modal -->
+    <div class="modal-overlay" id="automationModal">
+      <div class="modal">
+        <div class="section-header"><h3>Automation Flow</h3><button class="btn-icon" onclick="app.closeModal('automationModal')"><i class="fas fa-times"></i></button></div>
+        <form id="automationForm">
+          <div class="form-group"><label class="form-label">Name</label><input type="text" id="autoName" class="form-input" placeholder="e.g., Morning Ops" required></div>
+          
+          <!-- Bookmark Picker -->
+          <div class="form-group" style="background:var(--bg-tertiary); padding:0.8rem; border-radius:8px;">
+            <label class="form-label"><i class="fas fa-bookmark"></i> Add from Bookmarks</label>
+            <div style="display:flex; gap:0.5rem">
+                <select id="autoBmPicker" class="form-input" style="flex:1"></select>
+                <button type="button" class="btn btn-primary" id="addBmToAutoBtn">Add</button>
+            </div>
+          </div>
+
+          <div class="form-group"><label class="form-label">URLs (One per line)</label><textarea id="autoUrls" class="form-input" rows="5" placeholder="https://example.com" required></textarea></div>
+          <div style="display:flex; justify-content: flex-end; gap: 10px;">
+            <button type="button" class="btn btn-danger" onclick="app.closeModal('automationModal')">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Flow</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Backup/Settings Modal -->
+    <div class="modal-overlay" id="settingsModal">
+      <div class="modal">
+        <div class="section-header"><h3>Data & Settings</h3><button class="btn-icon" onclick="app.closeModal('settingsModal')"><i class="fas fa-times"></i></button></div>
+        <div style="display:flex; flex-direction:column; gap:1rem;">
+            <div style="background:var(--bg-secondary); padding:1rem; border-radius:8px;">
+                <h4>Database Backup</h4>
+                <p style="font-size:0.85rem; opacity:0.7; margin-bottom:10px;">Export all your data (Favorites, Notes, Bookmarks) to a JSON file.</p>
+                <button class="btn btn-primary" onclick="app.db.exportDatabase()"><i class="fas fa-download"></i> Download Backup</button>
+            </div>
+            <div style="background:var(--bg-secondary); padding:1rem; border-radius:8px;">
+                <h4>Restore Data</h4>
+                <p style="font-size:0.85rem; opacity:0.7; margin-bottom:10px;">Restore from a previously saved JSON file. <strong>Warning: Replaces current data.</strong></p>
+                <input type="file" id="dbRestoreInput" accept=".json" style="display:none" onchange="app.db.importDatabase(this.files[0])">
+                <button class="btn btn-danger" onclick="document.getElementById('dbRestoreInput').click()"><i class="fas fa-upload"></i> Restore from Backup</button>
+            </div>
+            <div style="background:var(--bg-secondary); padding:1rem; border-radius:8px;">
+                <h4>Wallpaper</h4>
+                <input type="url" id="bgUrlInput" class="form-input" placeholder="Image URL..." style="margin-bottom:0.5rem">
+                <button class="btn" onclick="app.setWallpaper()">Set Wallpaper</button>
+            </div>
+        </div>
       </div>
     </div>
 
     <script>
-      /* Keys for localStorage */
-      const STORAGE_KEY = "awes0m_home_v1";
-
-      class HomepageApp {
-        constructor() {
-          // Data with defaults
-          this.favorites = [];
-          this.notes = [];
-          this.todos = [];
-          this.bookmarks = [];
-          this.customFeeds = [];
-          this.theme = "light";
-          this.wallpaper = "";
-          this.currentPage = "homePage";
-
-          this.feedSources = [
-            {
-              name: "Krebs on Security",
-              rssUrl: "https://krebsonsecurity.com/feed/",
-              icon: "https://krebsonsecurity.com/favicon.ico",
-            },
-            {
-              name: "Hacker News",
-              rssUrl: "https://news.ycombinator.com/rss",
-              icon: "https://news.ycombinator.com/favicon.ico",
-            },
-            {
-              name: "CISA Advisories",
-              rssUrl:
-                "https://www.cisa.gov/cybersecurity-advisories/cybersecurity-advisories.xml",
-              icon: "https://www.cisa.gov/sites/default/files/favicon.ico",
-            },
-          ];
-
-          this.init();
+      /* --- INDEXEDDB WRAPPER --- */
+      class DBService {
+        constructor(dbName = 'AwesomDB', version = 1) {
+          this.dbName = dbName;
+          this.version = version;
+          this.db = null;
         }
 
-        // --- CORE INITIALIZATION ---
-        init() {
-          this.loadFromStorage();
-          this.setupTheme();
-          this.setupEventListeners();
-          this.navigateTo(window.location.hash.substring(1) || "home");
-          this.renderAll();
-          this.applyWallpaper();
-        }
-
-        // --- Persistence helpers ---
-        saveToStorage() {
-          const payload = {
-            favorites: this.favorites,
-            notes: this.notes,
-            todos: this.todos,
-            bookmarks: this.bookmarks,
-            customFeeds: this.customFeeds,
-            theme: this.theme,
-            wallpaper: this.wallpaper,
-          };
-          try {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
-          } catch (e) {
-            console.error("Failed to save data", e);
-          }
-        }
-
-        loadFromStorage() {
-          try {
-            const raw = localStorage.getItem(STORAGE_KEY);
-            if (!raw) return;
-            const data = JSON.parse(raw);
-            if (data.favorites) this.favorites = data.favorites;
-            if (data.notes) this.notes = data.notes;
-            if (data.todos) this.todos = data.todos;
-            if (data.bookmarks) this.bookmarks = data.bookmarks;
-            if (data.customFeeds) this.customFeeds = data.customFeeds;
-            if (data.theme) this.theme = data.theme;
-            if (data.wallpaper) this.wallpaper = data.wallpaper;
-          } catch (e) {
-            console.error("Failed to load stored data", e);
-          }
-        }
-
-        exportData() {
-          const payload = {
-            favorites: this.favorites,
-            notes: this.notes,
-            todos: this.todos,
-            bookmarks: this.bookmarks,
-            customFeeds: this.customFeeds,
-            theme: this.theme,
-            wallpaper: this.wallpaper,
-            exportedAt: new Date().toISOString(),
-          };
-          const blob = new Blob([JSON.stringify(payload, null, 2)], {
-            type: "application/json",
-          });
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement("a");
-          a.href = url;
-          a.download = `awes0m_home_export_${new Date()
-            .toISOString()
-            .slice(0, 19)
-            .replace(/[:T]/g, "-")}.json`;
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
-          URL.revokeObjectURL(url);
-        }
-
-        importDataFile(file) {
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            try {
-              const data = JSON.parse(e.target.result);
-              // Basic validation and merging (replace existing)
-              if (data.favorites) this.favorites = data.favorites;
-              if (data.notes) this.notes = data.notes;
-              if (data.todos) this.todos = data.todos;
-              if (data.bookmarks) this.bookmarks = data.bookmarks;
-              if (data.customFeeds) this.customFeeds = data.customFeeds;
-              if (data.theme) this.theme = data.theme;
-              if (data.wallpaper) this.wallpaper = data.wallpaper;
-              this.saveToStorage();
-              this.renderAll();
-              this.applyWallpaper();
-              alert("Data imported successfully.");
-            } catch (err) {
-              console.error("Import failed", err);
-              alert("Failed to import data: invalid JSON.");
-            }
-          };
-          reader.readAsText(file);
-        }
-
-        // --- RENDERING ---
-        renderAll() {
-          this.renderFavorites();
-          this.renderNotes();
-          this.renderTodos();
-          this.renderBookmarks();
-          this.loadFeeds();
-          this.renderNotesPage();
-          this.renderTasksPage();
-        }
-
-        setupTheme() {
-          document.body.setAttribute("data-theme", this.theme);
-          const icon = document.querySelector("#themeToggle i");
-          if (icon)
-            icon.className =
-              this.theme === "light" ? "fas fa-moon" : "fas fa-sun";
-        }
-
-        // --- EVENT LISTENERS ---
-        setupEventListeners() {
-          document
-            .getElementById("themeToggle")
-            .addEventListener("click", () => this.toggleTheme());
-          document
-            .getElementById("changeWallpaperBtn")
-            .addEventListener("click", () => this.openModal("wallpaperModal"));
-
-          // Navigation
-          document.getElementById("mainNav").addEventListener("click", (e) => {
-            if (e.target.matches(".nav-link")) {
-              e.preventDefault();
-              this.navigateTo(e.target.dataset.page.replace("Page", ""));
-            }
-          });
-
-          // NEW: Search listeners
-          document
-            .getElementById("bookmarkSearchInput")
-            .addEventListener("input", (e) =>
-              this.renderBookmarks(e.target.value)
-            );
-          document
-            .getElementById("noteSearchInput")
-            .addEventListener("input", (e) =>
-              this.renderNotesPage(e.target.value)
-            );
-
-          // Clickable notes/tasks section headings open pages
-          document
-            .getElementById("notesSectionHeader")
-            .addEventListener("click", () => this.navigateTo("notes"));
-          document
-            .getElementById("tasksSectionHeader")
-            .addEventListener("click", () => this.navigateTo("tasks"));
-
-          // Modals
-          this.setupModalEventListeners(
-            "favoriteModal",
-            "addFavoriteBtn",
-            "favoriteForm",
-            this.addFavorite.bind(this)
-          );
-          this.setupModalEventListeners(
-            "noteModal",
-            "addNoteBtn",
-            "noteForm",
-            this.handleNoteFormSubmit.bind(this)
-          );
-          this.setupModalEventListeners(
-            "todoModal",
-            "addTodoBtn",
-            "todoForm",
-            this.handleTodoFormSubmit.bind(this)
-          );
-          this.setupModalEventListeners(
-            "folderModal",
-            "addFolderBtn",
-            "folderForm",
-            this.handleFolderSubmit.bind(this)
-          );
-          this.setupModalEventListeners(
-            "bookmarkModal",
-            null,
-            "bookmarkForm",
-            this.handleBookmarkSubmit.bind(this)
-          );
-          this.setupModalEventListeners(
-            "feedModal",
-            "addFeedBtn",
-            "feedForm",
-            (e) => {
-              e.preventDefault();
-              this.saveCustomFeed();
-            }
-          );
-
-          // Feed preview & validation (debounced)
-          const feedUrlInput = document.getElementById("feedUrlInput");
-          const feedNameInput = document.getElementById("feedNameInput");
-          const feedPreviewArea = document.getElementById("feedPreviewArea");
-          const feedPreviewTitle = document.getElementById("feedPreviewTitle");
-          const feedPreviewItems = document.getElementById("feedPreviewItems");
-          const feedPreviewError = document.getElementById("feedPreviewError");
-          const saveFeedBtn = document.getElementById("saveFeedBtn");
-          if (feedUrlInput) {
-            let feedDebounceTimer = null;
-            feedUrlInput.addEventListener("input", () => {
-              feedPreviewArea.style.display = "none";
-              feedPreviewError.style.display = "none";
-              saveFeedBtn.disabled = true;
-              if (feedDebounceTimer) clearTimeout(feedDebounceTimer);
-              feedDebounceTimer = setTimeout(async () => {
-                const url = feedUrlInput.value.trim();
-                if (!url) return;
-                feedPreviewTitle.textContent = "Checking...";
-                feedPreviewItems.textContent = "";
-                feedPreviewArea.style.display = "block";
-                try {
-                  const proxyUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(
-                    url
-                  )}`;
-                  const resp = await fetch(proxyUrl);
-                  const data = await resp.json();
-                  if (!resp.ok || data.status !== "ok")
-                    throw new Error(data.message || "Invalid feed");
-                  feedPreviewTitle.textContent =
-                    data.feed && data.feed.title
-                      ? data.feed.title
-                      : feedNameInput.value || "Untitled";
-                  feedPreviewItems.innerHTML = data.items
-                    .slice(0, 3)
-                    .map((it) => `<div>• ${it.title}</div>`)
-                    .join("");
-                  saveFeedBtn.disabled = false;
-                } catch (err) {
-                  feedPreviewArea.style.display = "none";
-                  feedPreviewError.style.display = "block";
-                  feedPreviewError.textContent =
-                    "Could not load preview for this RSS URL." +
-                    (err.message ? " " + err.message : "");
-                  saveFeedBtn.disabled = true;
+        async init() {
+          return new Promise((resolve, reject) => {
+            const request = indexedDB.open(this.dbName, this.version);
+            request.onupgradeneeded = (e) => {
+              const db = e.target.result;
+              ['favorites', 'notes', 'todos', 'bookmarks', 'feeds', 'automations', 'settings'].forEach(store => {
+                if (!db.objectStoreNames.contains(store)) {
+                  db.createObjectStore(store, { keyPath: 'id' });
                 }
-              }, 600);
-            });
-          }
-
-          // Wallpaper modal
-          document
-            .getElementById("wallpaperForm")
-            .addEventListener("submit", (e) => {
-              e.preventDefault();
-              const url = document
-                .getElementById("wallpaperUrlInput")
-                .value.trim();
-              if (url) {
-                this.setWallpaper(url);
-                this.saveToStorage();
-              }
-              this.closeModal("wallpaperModal");
-            });
-          document
-            .getElementById("clearWallpaperBtn")
-            .addEventListener("click", () => {
-              this.clearWallpaper();
-              this.saveToStorage();
-              this.closeModal("wallpaperModal");
-            });
-
-          // Wallpaper preview & validation
-          const wallpaperUrlInput =
-            document.getElementById("wallpaperUrlInput");
-          const wallpaperPreviewArea = document.getElementById(
-            "wallpaperPreviewArea"
-          );
-          const wallpaperPreviewImg = document.getElementById(
-            "wallpaperPreviewImg"
-          );
-          const wallpaperPreviewMsg = document.getElementById(
-            "wallpaperPreviewMsg"
-          );
-          const setWallpaperBtn = document.getElementById("setWallpaperBtn");
-
-          if (wallpaperUrlInput) {
-            let wallpaperTimer = null;
-            wallpaperUrlInput.addEventListener("input", () => {
-              wallpaperPreviewArea.style.display = "none";
-              wallpaperPreviewMsg.textContent = "";
-              setWallpaperBtn.disabled = true;
-              if (wallpaperTimer) clearTimeout(wallpaperTimer);
-              wallpaperTimer = setTimeout(() => {
-                const url = wallpaperUrlInput.value.trim();
-                if (!url) return;
-                wallpaperPreviewImg.src = url;
-                wallpaperPreviewArea.style.display = "block";
-                wallpaperPreviewMsg.textContent = "Loading preview...";
-                setWallpaperBtn.disabled = true;
-              }, 250);
-            });
-
-            wallpaperPreviewImg.addEventListener("load", () => {
-              wallpaperPreviewMsg.textContent =
-                "Image looks good. Click Set to apply.";
-              setWallpaperBtn.disabled = false;
-            });
-            wallpaperPreviewImg.addEventListener("error", () => {
-              wallpaperPreviewMsg.textContent =
-                "Failed to load image. Check the URL or try another image.";
-              setWallpaperBtn.disabled = true;
-            });
-          }
-
-          // Bookmarks Import
-          const uploadArea = document.getElementById("bookmarksUpload");
-          const fileInput = document.getElementById("bookmarksInput");
-          if (uploadArea && fileInput) {
-            uploadArea.addEventListener("click", () => fileInput.click());
-            fileInput.addEventListener(
-              "change",
-              (e) =>
-                e.target.files.length &&
-                this.handleBookmarksFile(e.target.files[0])
-            );
-          }
-
-          // Refresh feeds
-          document
-            .getElementById("refreshFeedsBtnHome")
-            .addEventListener("click", () => this.loadFeeds());
-          document
-            .getElementById("refreshFeedsBtnPage")
-            .addEventListener("click", () => this.loadFeeds());
-
-          // Export/import global
-          document
-            .getElementById("exportDataBtn")
-            .addEventListener("click", () => this.exportData());
-          const importBtn = document.getElementById("importDataBtn");
-          const importInput = document.getElementById("importDataInput");
-          importBtn.addEventListener("click", () => importInput.click());
-          importInput.addEventListener("change", (e) => {
-            if (e.target.files.length) this.importDataFile(e.target.files[0]);
-            e.target.value = "";
-          });
-
-          // Notes/Tasks page buttons
-          document
-            .getElementById("newNotePageBtn")
-            .addEventListener("click", () => {
-              this.openModal("noteModal");
-            });
-          document
-            .getElementById("newTaskPageBtn")
-            .addEventListener("click", () => {
-              this.openModal("todoModal");
-            });
-          document
-            .getElementById("exportNotesBtn")
-            .addEventListener("click", () =>
-              this.exportSubset({ notes: this.notes }, "notes")
-            );
-          document
-            .getElementById("exportTasksBtn")
-            .addEventListener("click", () =>
-              this.exportSubset({ todos: this.todos }, "tasks")
-            );
-        }
-
-        exportSubset(obj, name) {
-          const blob = new Blob([JSON.stringify(obj, null, 2)], {
-            type: "application/json",
-          });
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement("a");
-          a.href = url;
-          a.download = `awes0m_${name}_export_${new Date()
-            .toISOString()
-            .slice(0, 19)
-            .replace(/[:T]/g, "-")}.json`;
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
-          URL.revokeObjectURL(url);
-        }
-
-        // --- NAVIGATION & PAGE HANDLING ---
-        navigateTo(pageName) {
-          const pageId = `${pageName}Page`;
-          document
-            .querySelectorAll(".page")
-            .forEach((p) => p.classList.remove("active"));
-          document
-            .querySelectorAll(".nav-link")
-            .forEach((l) => l.classList.remove("active"));
-
-          const targetPage = document.getElementById(pageId);
-          const targetLink = document.querySelector(
-            `.nav-link[data-page="${pageId}"]`
-          );
-
-          if (targetPage) {
-            targetPage.classList.add("active");
-            this.currentPage = pageId;
-            window.location.hash = pageName;
-          }
-          if (targetLink) targetLink.classList.add("active");
-        }
-
-        // --- THEME ---
-        toggleTheme() {
-          this.theme = this.theme === "light" ? "dark" : "light";
-          this.setupTheme();
-          this.saveToStorage();
-        }
-
-        // --- MODALS ---
-        setupModalEventListeners(modalId, openBtnId, formId, submitHandler) {
-          const modal = document.getElementById(modalId);
-          if (!modal) return;
-          if (openBtnId) {
-            const openBtn = document.getElementById(openBtnId);
-            if (openBtn)
-              openBtn.addEventListener("click", () => this.openModal(modalId));
-          }
-          const closeBtn = modal.querySelector(".modal-close");
-          if (closeBtn)
-            closeBtn.addEventListener("click", () => this.closeModal(modalId));
-          modal.addEventListener(
-            "click",
-            (e) => e.target === modal && this.closeModal(modalId)
-          );
-          if (formId) {
-            const form = document.getElementById(formId);
-            if (form)
-              form.addEventListener("submit", (e) => {
-                e.preventDefault();
-                submitHandler(e);
               });
-          }
-        }
-
-        openModal(modalId) {
-          const modal = document.getElementById(modalId);
-          if (modal) modal.classList.add("active");
-        }
-
-        closeModal(modalId) {
-          const modal = document.getElementById(modalId);
-          if (!modal) return;
-          modal.classList.remove("active");
-          const form = modal.querySelector("form");
-          if (form) form.reset();
-          // Clear hidden ids used for edit
-          const hiddenId = modal.querySelector("input[type=hidden]");
-          if (hiddenId) hiddenId.value = "";
-        }
-
-        // --- FAVORITES ---
-        addFavorite() {
-          const newFavorite = {
-            id: Date.now(),
-            label: document.getElementById("favoriteLabel").value,
-            url: document.getElementById("favoriteUrl").value,
-            icon:
-              document.getElementById("favoriteIcon").value || "fas fa-globe",
-          };
-          this.favorites.push(newFavorite);
-          this.saveToStorage();
-          this.renderFavorites();
-          this.closeModal("favoriteModal");
-        }
-
-        removeFavorite(id) {
-          this.favorites = this.favorites.filter((fav) => fav.id !== id);
-          this.saveToStorage();
-          this.renderFavorites();
-        }
-
-        renderFavorites() {
-          const grid = document.getElementById("favoritesGrid");
-          grid.innerHTML =
-            this.favorites.length > 0
-              ? this.favorites
-                  .map(
-                    (fav) => `
-            <div class="favorite-item">
-                <button class="favorite-delete" onclick="app.removeFavorite(${
-                  fav.id
-                })"><i class="fas fa-times"></i></button>
-                <a href="${
-                  fav.url
-                }" target="_blank" rel="noopener noreferrer" style="display: contents;">
-                    <div class="favorite-icon"><i class="${fav.icon}"></i></div>
-                    <div class="favorite-label">${this.escapeHtml(
-                      fav.label
-                    )}</div>
-                </a>
-            </div>
-        `
-                  )
-                  .join("")
-              : `<p class="empty-state" style="grid-column: 1 / -1;">No favorites yet. Add one!</p>`;
-        }
-
-        // --- NOTES ---
-        handleNoteFormSubmit() {
-          const id = document.getElementById("noteIdInput").value;
-          const title = document.getElementById("noteTitle").value.trim();
-          const content = document.getElementById("noteContent").value.trim();
-          if (!title) {
-            alert("Title required");
-            return;
-          }
-
-          if (id) {
-            // edit
-            const note = this.notes.find((n) => String(n.id) === String(id));
-            if (note) {
-              note.title = title;
-              note.content = content;
-              note.updatedAt = new Date().toISOString();
-            }
-          } else {
-            // new
-            const note = {
-              id: Date.now(),
-              title,
-              content,
-              createdAt: new Date().toISOString(),
-              updatedAt: new Date().toISOString(),
             };
-            this.notes.unshift(note);
-          }
-          this.saveToStorage();
-          this.renderNotes();
-          this.renderNotesPage();
-          this.closeModal("noteModal");
-        }
-
-        addNote() {
-          // preserved for compatibility; open modal handled by modal submit
-          this.openModal("noteModal");
-        }
-
-        editNote(id) {
-          const note = this.notes.find((n) => n.id === id);
-          if (!note) return;
-          const form = document.getElementById("noteForm");
-          form.noteIdInput.value = note.id;
-          form.noteTitle.value = note.title;
-          form.noteContent.value = note.content;
-          document.getElementById("noteModalTitle").textContent = "Edit Note";
-          this.openModal("noteModal");
-        }
-
-        removeNote(id) {
-          if (!confirm("Delete this note?")) return;
-          this.notes = this.notes.filter((n) => n.id !== id);
-          this.saveToStorage();
-          this.renderNotes();
-          this.renderNotesPage();
-        }
-
-        renderNotes() {
-          const list = document.getElementById("notesList");
-          if (!this.notes || this.notes.length === 0) {
-            list.innerHTML = `<p class="empty-state">No notes yet.</p>`;
-            return;
-          }
-          list.innerHTML = this.notes
-            .slice(0, 5)
-            .map(
-              (n) => `
-            <div class="note-item">
-                <div class="note-header">
-                    <div class="note-title">${this.escapeHtml(n.title)}</div>
-                    <div>
-                      <button class="btn-icon" title="Edit" onclick="app.editNote(${
-                        n.id
-                      })"><i class="fas fa-pen"></i></button>
-                      <button class="btn-icon" title="Delete" onclick="app.removeNote(${
-                        n.id
-                      })"><i class="fas fa-trash"></i></button>
-                    </div>
-                </div>
-                <div class="note-content">${this.escapeHtml(n.content).replace(
-                  /\n/g,
-                  "<br>"
-                )}</div>
-            </div>
-        `
-            )
-            .join("");
-        }
-
-        // Notes Page
-        renderNotesPage(query = "") {
-          const container = document.getElementById("notesPageList");
-
-          let notesToRender = this.notes;
-          const normalizedQuery = query.trim().toLowerCase();
-
-          if (normalizedQuery) {
-            notesToRender = this.notes.filter(
-              (n) =>
-                n.title.toLowerCase().includes(normalizedQuery) ||
-                n.content.toLowerCase().includes(normalizedQuery)
-            );
-          }
-
-          if (!notesToRender || notesToRender.length === 0) {
-            container.innerHTML = `<div class="empty-state">No notes found${
-              normalizedQuery ? " matching your search" : ""
-            }. Create one with New Note.</div>`;
-            return;
-          }
-
-          container.innerHTML = notesToRender
-            .map(
-              (n) => `
-            <div class="note-item" style="margin-bottom:1rem;">
-                <div class="note-header">
-                    <div style="display:flex;flex-direction:column;">
-                      <div class="note-title">${this.escapeHtml(n.title)}</div>
-                      <div style="font-size:0.8rem;color:var(--text-muted)">${
-                        n.updatedAt
-                          ? "Updated: " + new Date(n.updatedAt).toLocaleString()
-                          : ""
-                      }</div>
-                    </div>
-                    <div>
-                      <button class="btn btn-small" onclick="app.editNote(${
-                        n.id
-                      })"><i class="fas fa-pen"></i> Edit</button>
-                      <button class="btn btn-small" onclick="app.removeNote(${
-                        n.id
-                      })"><i class="fas fa-trash"></i> Delete</button>
-                    </div>
-                </div>
-                <div class="note-content">${this.escapeHtml(n.content).replace(
-                  /\n/g,
-                  "<br>"
-                )}</div>
-            </div>
-        `
-            )
-            .join("");
-        }
-
-        // --- TODOS ---
-        handleTodoFormSubmit() {
-          const id = document.getElementById("todoIdInput").value;
-          const text = document.getElementById("todoText").value.trim();
-          const dueDate = document.getElementById("todoDueDate").value;
-          const completed = document.getElementById("todoCompleted").checked;
-          if (!text) {
-            alert("Task text required");
-            return;
-          }
-
-          if (id) {
-            const todo = this.todos.find((t) => String(t.id) === String(id));
-            if (todo) {
-              todo.text = text;
-              todo.dueDate = dueDate || "";
-              todo.completed = !!completed;
-              todo.updatedAt = new Date().toISOString();
-            }
-          } else {
-            const todo = {
-              id: Date.now(),
-              text,
-              dueDate: dueDate || "",
-              completed: !!completed,
-              createdAt: new Date().toISOString(),
-              updatedAt: new Date().toISOString(),
-            };
-            this.todos.unshift(todo);
-          }
-          this.saveToStorage();
-          this.renderTodos();
-          this.renderTasksPage();
-          this.closeModal("todoModal");
-        }
-
-        addTodo() {
-          this.openModal("todoModal");
-        }
-
-        editTodoPage(id) {
-          const todo = this.todos.find((t) => t.id === id);
-          if (!todo) return;
-          const form = document.getElementById("todoForm");
-          form.todoIdInput.value = todo.id;
-          form.todoText.value = todo.text;
-          form.todoDueDate.value = todo.dueDate || "";
-          form.todoCompleted.checked = !!todo.completed;
-          document.getElementById("todoModalTitle").textContent = "Edit Task";
-          this.openModal("todoModal");
-        }
-
-        removeTodo(id) {
-          if (!confirm("Delete this task?")) return;
-          this.todos = this.todos.filter((t) => t.id !== id);
-          this.saveToStorage();
-          this.renderTodos();
-          this.renderTasksPage();
-        }
-
-        toggleTodo(id) {
-          const t = this.todos.find((t) => t.id === id);
-          if (t) {
-            t.completed = !t.completed;
-            t.updatedAt = new Date().toISOString();
-            this.saveToStorage();
-            this.renderTodos();
-            this.renderTasksPage();
-          }
-        }
-
-        renderTodos() {
-          const list = document.getElementById("todosList");
-          if (!this.todos || this.todos.length === 0) {
-            list.innerHTML = `<p class="empty-state">No tasks yet.</p>`;
-            return;
-          }
-          list.innerHTML = this.todos
-            .slice(0, 8)
-            .map((t) => {
-              const due = t.dueDate ? new Date(t.dueDate) : null;
-              const dueDisplay = due ? due.toLocaleDateString() : "";
-              return `
-                <div class="todo-item ${t.completed ? "completed" : ""}">
-                    <div class="todo-left">
-                        <input type="checkbox" ${
-                          t.completed ? "checked" : ""
-                        } onchange="app.toggleTodo(${t.id})" />
-                        <span class="todo-text">${this.escapeHtml(
-                          t.text
-                        )}</span>
-                    </div>
-                    <div class="todo-right">
-                        ${
-                          dueDisplay
-                            ? `<span class="todo-due">${dueDisplay}</span>`
-                            : ""
-                        }
-                        <button class="btn-icon" title="Edit" onclick="app.editTodoPage(${
-                          t.id
-                        })"><i class="fas fa-pen"></i></button>
-                        <button class="btn-icon" title="Delete" onclick="app.removeTodo(${
-                          t.id
-                        })"><i class="fas fa-trash"></i></button>
-                    </div>
-                </div>`;
-            })
-            .join("");
-        }
-
-        renderTasksPage() {
-          const container = document.getElementById("tasksPageList");
-          if (!this.todos || this.todos.length === 0) {
-            container.innerHTML = `<div class="empty-state">No tasks yet. Create one with New Task.</div>`;
-            return;
-          }
-          container.innerHTML = this.todos
-            .map((t) => {
-              const due = t.dueDate ? new Date(t.dueDate) : null;
-              const dueDisplay = due ? due.toLocaleDateString() : "";
-              return `
-                <div class="todo-item" style="margin-bottom:1rem;">
-                    <div style="display:flex;justify-content:space-between;align-items:center;">
-                        <div style="display:flex;flex-direction:column;">
-                          <div style="font-weight:600">${this.escapeHtml(
-                            t.text
-                          )} ${
-                t.completed
-                  ? '<span style="color:var(--success-color);font-weight:600;">(Done)</span>'
-                  : ""
-              }</div>
-                          <div style="font-size:0.85rem;color:var(--text-muted)">${
-                            dueDisplay ? "Due: " + dueDisplay : ""
-                          } ${
-                t.updatedAt
-                  ? " • Updated: " + new Date(t.updatedAt).toLocaleString()
-                  : ""
-              }</div>
-                        </div>
-                        <div style="display:flex;gap:0.5rem;">
-                          <button class="btn btn-small" onclick="app.editTodoPage(${
-                            t.id
-                          })"><i class="fas fa-pen"></i> Edit</button>
-                          <button class="btn btn-small" onclick="app.toggleTodo(${
-                            t.id
-                          })"><i class="fas fa-check"></i> Toggle</button>
-                          <button class="btn btn-small" onclick="app.removeTodo(${
-                            t.id
-                          })"><i class="fas fa-trash"></i> Delete</button>
-                        </div>
-                    </div>
-                </div>
-            `;
-            })
-            .join("");
-        }
-
-        // --- ENHANCED BOOKMARKS ---
-        handleBookmarksFile(file) {
-          const statusDiv = document.getElementById("importStatus");
-          statusDiv.innerHTML =
-            '<div class="import-status"><i class="fas fa-spinner fa-spin"></i> Importing bookmarks...</div>';
-
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            try {
-              const result = this.parseChromiumBookmarks(e.target.result);
-              this.bookmarks = result.bookmarks;
-              this.saveToStorage();
-              this.renderBookmarks();
-
-              statusDiv.innerHTML = `
-                    <div class="import-status success">
-                        <i class="fas fa-check-circle"></i> 
-                        Successfully imported ${result.totalBookmarks} bookmarks in ${result.totalFolders} folders!
-                    </div>
-                `;
-
-              setTimeout(() => {
-                statusDiv.innerHTML = "";
-              }, 5000);
-            } catch (error) {
-              console.error("Error parsing bookmarks file:", error);
-              statusDiv.innerHTML = `
-                    <div class="import-status error">
-                        <i class="fas fa-exclamation-triangle"></i> 
-                        Error importing bookmarks: ${error.message}
-                    </div>
-                `;
-            }
-          };
-          reader.readAsText(file);
-        }
-
-        parseChromiumBookmarks(html) {
-          const parser = new DOMParser();
-          const doc = parser.parseFromString(html, "text/html");
-          const result = [];
-          let totalBookmarks = 0;
-          let totalFolders = 0;
-
-          const parseFolder = (folderElement, depth = 0) => {
-            const folder = {
-              id:
-                "folder_" +
-                Date.now() +
-                "_" +
-                Math.random().toString(36).substr(2, 9),
-              name: "Untitled Folder",
-              bookmarks: [],
-              depth: depth,
-            };
-
-            // Find folder name from H3 element
-            const h3 = folderElement.querySelector("h3");
-            if (h3) {
-              folder.name = h3.textContent.trim() || "Untitled Folder";
-            }
-
-            // Find the DL (definition list) containing bookmarks and subfolders
-            const dl = folderElement.querySelector("dl");
-            if (dl) {
-              const items = dl.children;
-
-              for (let i = 0; i < items.length; i++) {
-                const item = items[i];
-
-                if (item.tagName === "DT") {
-                  const anchor = item.querySelector("a");
-                  const subH3 = item.querySelector("h3");
-
-                  if (anchor && anchor.href) {
-                    // This is a bookmark
-                    const bookmark = {
-                      id:
-                        "bm_" +
-                        Date.now() +
-                        "_" +
-                        Math.random().toString(36).substr(2, 9),
-                      title: anchor.textContent.trim() || anchor.href,
-                      url: anchor.href,
-                      favicon: this.getFaviconUrl(anchor.href),
-                      addDate: anchor.getAttribute("add_date"),
-                      icon: anchor.getAttribute("icon"),
-                    };
-                    folder.bookmarks.push(bookmark);
-                    totalBookmarks++;
-                  } else if (subH3) {
-                    // This is a subfolder
-                    const subFolder = parseFolder(item, depth + 1);
-                    if (subFolder.bookmarks.length > 0) {
-                      result.push(subFolder);
-                      totalFolders++;
-                    }
-                  }
-                }
-              }
-            }
-
-            return folder;
-          };
-
-          // Start parsing from the root
-          const rootDT = doc.querySelectorAll("dt");
-          rootDT.forEach((dt) => {
-            const h3 = dt.querySelector("h3");
-            if (h3) {
-              const folder = parseFolder(dt, 0);
-              if (
-                folder.bookmarks.length > 0 ||
-                folder.name !== "Untitled Folder"
-              ) {
-                result.push(folder);
-                totalFolders++;
-              }
-            }
+            request.onsuccess = (e) => { this.db = e.target.result; resolve(this.db); };
+            request.onerror = (e) => reject("DB Error: " + e.target.error);
           });
+        }
 
-          // Handle bookmarks that might be at the root level without folders
-          const rootAnchors = doc.querySelectorAll("body > dl > dt > a");
-          if (rootAnchors.length > 0) {
-            const rootFolder = {
-              id: "folder_root_" + Date.now(),
-              name: "Imported Bookmarks",
-              bookmarks: [],
-              depth: 0,
-            };
+        async getAll(storeName) {
+          return new Promise((resolve, reject) => {
+            const tx = this.db.transaction(storeName, 'readonly');
+            const store = tx.objectStore(storeName);
+            const request = store.getAll();
+            request.onsuccess = () => resolve(request.result);
+            request.onerror = () => reject(request.error);
+          });
+        }
 
-            rootAnchors.forEach((anchor) => {
-              if (anchor.href) {
-                rootFolder.bookmarks.push({
-                  id:
-                    "bm_" +
-                    Date.now() +
-                    "_" +
-                    Math.random().toString(36).substr(2, 9),
-                  title: anchor.textContent.trim() || anchor.href,
-                  url: anchor.href,
-                  favicon: this.getFaviconUrl(anchor.href),
-                  addDate: anchor.getAttribute("add_date"),
-                  icon: anchor.getAttribute("icon"),
-                });
-                totalBookmarks++;
-              }
-            });
+        async put(storeName, item) {
+          return new Promise((resolve, reject) => {
+            const tx = this.db.transaction(storeName, 'readwrite');
+            const store = tx.objectStore(storeName);
+            const request = store.put(item);
+            request.onsuccess = () => resolve(item);
+            request.onerror = () => reject(request.error);
+          });
+        }
 
-            if (rootFolder.bookmarks.length > 0) {
-              result.unshift(rootFolder);
-              totalFolders++;
+        async delete(storeName, id) {
+           return new Promise((resolve, reject) => {
+            const tx = this.db.transaction(storeName, 'readwrite');
+            const store = tx.objectStore(storeName);
+            const request = store.delete(id);
+            request.onsuccess = () => resolve(true);
+            request.onerror = () => reject(request.error);
+          });
+        }
+
+        async exportDatabase() {
+            const exportData = { version: 2, timestamp: new Date().toISOString() };
+            const stores = ['favorites', 'notes', 'todos', 'bookmarks', 'feeds', 'automations', 'settings'];
+            for (const store of stores) {
+                exportData[store] = await this.getAll(store);
             }
-          }
-
-          return {
-            bookmarks: result,
-            totalBookmarks: totalBookmarks,
-            totalFolders: totalFolders,
-          };
+            const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url; a.download = `awesom_backup_${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a); a.click(); document.body.removeChild(a);
         }
 
-        getFaviconUrl(url) {
-          try {
-            const domain = new URL(url).hostname;
-            return `https://www.google.com/s2/favicons?domain=${domain}&sz=32`;
-          } catch {
-            return 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><rect width="16" height="16" fill="%23ddd"/></svg>';
-          }
-        }
-
-        renderBookmarks(query = "") {
-          const container = document.getElementById("bookmarksContainer");
-
-          let dataToRender = this.bookmarks;
-          const normalizedQuery = query.trim().toLowerCase();
-
-          if (normalizedQuery) {
-            dataToRender = this.bookmarks
-              .map((folder) => {
-                const filteredBookmarks = folder.bookmarks.filter(
-                  (bm) =>
-                    bm.title.toLowerCase().includes(normalizedQuery) ||
-                    bm.url.toLowerCase().includes(normalizedQuery)
-                );
-                return { ...folder, bookmarks: filteredBookmarks };
-              })
-              .filter((folder) => folder.bookmarks.length > 0);
-          }
-
-          if (!dataToRender || dataToRender.length === 0) {
-            container.innerHTML = `<div class="empty-state">No bookmarks found${
-              normalizedQuery ? " matching your search" : ""
-            }. Create a folder or import your 'bookmarks.html' file.</div>`;
-            return;
-          }
-
-          container.innerHTML = dataToRender
-            .map(
-              (folder) => `
-            <div class="bookmark-folder" data-folder-id="${folder.id}">
-                <div class="bookmark-folder-header">
-                    <span class="bookmark-folder-name">
-                        <i class="fas fa-folder"></i> 
-                        ${this.escapeHtml(folder.name)} 
-                        <span style="font-size: 0.8em; color: var(--text-muted);">(${
-                          folder.bookmarks.length
-                        })</span>
-                    </span>
-                    <div>
-                        <button class="btn-icon" onclick="app.openBookmarkModal(null, '${
-                          folder.id
-                        }')" title="Add bookmark"><i class="fas fa-plus"></i></button>
-                        <button class="btn-icon" onclick="app.openFolderModal('${
-                          folder.id
-                        }')" title="Edit folder"><i class="fas fa-pen"></i></button>
-                        <button class="btn-icon" onclick="app.deleteFolder('${
-                          folder.id
-                        }')" title="Delete folder"><i class="fas fa-trash"></i></button>
-                    </div>
-                </div>
-                <div class="bookmark-list">
-                    ${folder.bookmarks
-                      .map(
-                        (bm) => `
-                        <div class="bookmark-item" data-bookmark-id="${bm.id}">
-                            <a href="${
-                              bm.url
-                            }" target="_blank" rel="noopener noreferrer" class="bookmark-item-link">
-                                <img src="${
-                                  bm.favicon
-                                }" alt="" class="bookmark-favicon" onerror="this.src='data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;16&quot; height=&quot;16&quot; viewBox=&quot;0 0 16 16&quot;><rect width=&quot;16&quot; height=&quot;16&quot; fill=&quot;%23ddd&quot;/></svg>'">
-                                <span class="bookmark-title">${this.escapeHtml(
-                                  bm.title
-                                )}</span>
-                            </a>
-                            <div>
-                                <button class="btn-icon" onclick="app.addFavoriteFromBookmark('${
-                                  bm.id
-                                }', '${
-                          folder.id
-                        }')" title="Add to Favorites"><i class="fas fa-star"></i></button>
-                                <button class="btn-icon" onclick="app.openBookmarkModal('${
-                                  bm.id
-                                }', '${
-                          folder.id
-                        }')" title="Edit"><i class="fas fa-pen"></i></button>
-                                <button class="btn-icon" onclick="app.deleteBookmark('${
-                                  bm.id
-                                }', '${
-                          folder.id
-                        }')" title="Delete"><i class="fas fa-trash"></i></button>
-                            </div>
-                        </div>
-                    `
-                      )
-                      .join("")}
-                    ${
-                      folder.bookmarks.length === 0
-                        ? '<p style="color: var(--text-secondary); text-align: center; padding: 2rem;">This folder is empty.</p>'
-                        : ""
-                    }
-                </div>
-            </div>
-        `
-            )
-            .join("");
-        }
-
-        handleFolderSubmit() {
-          const id = document.getElementById("folderIdInput").value;
-          const name = document.getElementById("folderNameInput").value;
-          if (id) {
-            // Edit
-            const folder = this.bookmarks.find((f) => f.id === id);
-            if (folder) folder.name = name;
-          } else {
-            // Add
-            this.bookmarks.unshift({
-              id: "folder_" + Date.now(),
-              name,
-              bookmarks: [],
-              depth: 0,
-            });
-          }
-          this.saveToStorage();
-          this.renderBookmarks();
-          this.closeModal("folderModal");
-        }
-
-        openFolderModal(id = null) {
-          const form = document.getElementById("folderForm");
-          const title = document.getElementById("folderModalTitle");
-          if (id) {
-            const folder = this.bookmarks.find((f) => f.id === id);
-            title.textContent = "Edit Folder";
-            form.folderIdInput.value = id;
-            form.folderNameInput.value = folder.name;
-          } else {
-            title.textContent = "New Folder";
-            form.reset();
-          }
-          this.openModal("folderModal");
-        }
-
-        deleteFolder(id) {
-          if (
-            confirm(
-              "Are you sure you want to delete this folder and all its bookmarks?"
-            )
-          ) {
-            this.bookmarks = this.bookmarks.filter((f) => f.id !== id);
-            this.saveToStorage();
-            this.renderBookmarks();
-          }
-        }
-
-        handleBookmarkSubmit() {
-          const bmId = document.getElementById("bookmarkIdInput").value;
-          const folderId = document.getElementById(
-            "bookmarkFolderIdInput"
-          ).value;
-          const title = document.getElementById("bookmarkTitleInput").value;
-          const url = document.getElementById("bookmarkUrlInput").value;
-
-          const folder = this.bookmarks.find((f) => f.id === folderId);
-          if (!folder) return;
-
-          if (bmId) {
-            // Edit
-            const bookmark = folder.bookmarks.find((b) => b.id === bmId);
-            if (bookmark) {
-              bookmark.title = title;
-              bookmark.url = url;
-              bookmark.favicon = this.getFaviconUrl(url);
-            }
-          } else {
-            // Add
-            folder.bookmarks.push({
-              id: "bm_" + Date.now(),
-              title,
-              url,
-              favicon: this.getFaviconUrl(url),
-            });
-          }
-          this.saveToStorage();
-          this.renderBookmarks();
-          this.closeModal("bookmarkModal");
-        }
-
-        openBookmarkModal(bookmarkId = null, folderId) {
-          const form = document.getElementById("bookmarkForm");
-          const title = document.getElementById("bookmarkModalTitle");
-          form.reset();
-          form.bookmarkFolderIdInput.value = folderId;
-
-          if (bookmarkId) {
-            const folder = this.bookmarks.find((f) => f.id === folderId);
-            const bookmark = folder?.bookmarks.find((b) => b.id === bookmarkId);
-            if (bookmark) {
-              title.textContent = "Edit Bookmark";
-              form.bookmarkIdInput.value = bookmarkId;
-              form.bookmarkTitleInput.value = bookmark.title;
-              form.bookmarkUrlInput.value = bookmark.url;
-            }
-          } else {
-            title.textContent = "New Bookmark";
-          }
-          this.openModal("bookmarkModal");
-        }
-
-        // NEW: Add a favorite directly from a bookmark
-        addFavoriteFromBookmark(bookmarkId, folderId) {
-          const folder = this.bookmarks.find((f) => f.id === folderId);
-          const bookmark = folder?.bookmarks.find((b) => b.id === bookmarkId);
-          if (!bookmark) return;
-
-          document.getElementById("favoriteLabel").value = bookmark.title;
-          document.getElementById("favoriteUrl").value = bookmark.url;
-          document.getElementById("favoriteIcon").value =
-            "fas fa-book-bookmark";
-
-          this.openModal("favoriteModal");
-        }
-
-        deleteBookmark(bookmarkId, folderId) {
-          const folder = this.bookmarks.find((f) => f.id === folderId);
-          if (folder) {
-            folder.bookmarks = folder.bookmarks.filter(
-              (b) => b.id !== bookmarkId
-            );
-            this.saveToStorage();
-            this.renderBookmarks();
-          }
-        }
-
-        // --- RSS FEEDS ---
-        async loadFeeds() {
-          const homeGrid = document.getElementById("feedGridHome");
-          const pageGrid = document.getElementById("feedGridPage");
-          const loadingHTML = `<div class="loading" style="grid-column: 1 / -1;"><div class="spinner"></div>Loading feeds...</div>`;
-          if (homeGrid) homeGrid.innerHTML = loadingHTML;
-          if (pageGrid) pageGrid.innerHTML = loadingHTML;
-
-          const combined = [
-            ...this.customFeeds.map((f) => ({
-              name: f.name,
-              rssUrl: f.rssUrl,
-              icon: f.icon,
-              id: f.id,
-              custom: true,
-            })),
-            ...this.feedSources.map((f) => ({ ...f, custom: false })),
-          ];
-
-          const allFeedsHtml = await Promise.all(
-            combined.map((source) => this.fetchAndRenderFeed(source))
-          );
-
-          const customListHtml = this.renderCustomFeedsList();
-
-          if (homeGrid) homeGrid.innerHTML = allFeedsHtml.join("");
-          if (pageGrid)
-            pageGrid.innerHTML = customListHtml + allFeedsHtml.join("");
-        }
-
-        async fetchAndRenderFeed(source) {
-          try {
-            const proxyUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(
-              source.rssUrl
-            )}`;
-            const response = await fetch(proxyUrl);
-            if (!response.ok)
-              throw new Error(`HTTP error! status: ${response.status}`);
-            const data = await response.json();
-
-            if (data.status !== "ok")
-              throw new Error(`API Error: ${data.message}`);
-
-            const items = data.items.slice(0, 5);
-            return `
-                <div class="feed-source">
-                    <div class="feed-source-header">
-                        <img src="${
-                          source.icon || ""
-                        }" alt="" class="feed-source-icon" onerror="this.style.display='none'">
-                        <div class="feed-source-title"><a href="${
-                          data.feed.link || "#"
-                        }" target="_blank" rel="noopener noreferrer">${this.escapeHtml(
-              data.feed.title || source.name
-            )}</a></div>
-                        ${
-                          source.custom
-                            ? `<button class="btn-small btn" style="margin-left:8px;" onclick="app.removeCustomFeed('${source.id}')"><i class='fas fa-trash'></i></button>`
-                            : ""
+        async importDatabase(file) {
+            if(!file) return;
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    const stores = ['favorites', 'notes', 'todos', 'bookmarks', 'feeds', 'automations', 'settings'];
+                    for (const storeName of stores) {
+                        if (data[storeName] && Array.isArray(data[storeName])) {
+                            const tx = this.db.transaction(storeName, 'readwrite');
+                            const store = tx.objectStore(storeName);
+                            store.clear(); 
+                            data[storeName].forEach(item => store.put(item));
                         }
-                    </div>
-                    ${items
-                      .map(
-                        (item) => `
-                        <div class="feed-item">
-                            <div class="feed-item-title"><a href="${
-                              item.link
-                            }" target="_blank" rel="noopener noreferrer">${this.escapeHtml(
-                          item.title
-                        )}</a></div>
-                            <div class="feed-item-meta">${new Date(
-                              item.pubDate
-                            ).toLocaleDateString()}</div>
-                        </div>
-                    `
-                      )
-                      .join("")}
-                </div>
-            `;
-          } catch (error) {
-            console.error(`Failed to load feed from ${source.name}:`, error);
-            return `<div class="feed-source"><div class="feed-source-header">${this.escapeHtml(
-              source.name
-            )}</div><p>Could not load feed.</p></div>`;
-          }
-        }
-
-        renderCustomFeedsList() {
-          if (!this.customFeeds || this.customFeeds.length === 0) return "";
-          return `
-            <div style="grid-column:1/-1; margin-bottom:1rem;">
-                <div class="feed-source">
-                    <div class="feed-source-header"><div class="feed-source-title">Custom Feeds</div></div>
-                    <div style="padding:1rem; display:flex;flex-direction:column;gap:0.5rem;">
-                        ${this.customFeeds
-                          .map(
-                            (f) => `
-                            <div style="display:flex;justify-content:space-between;align-items:center;">
-                                <div style="display:flex;align-items:center;gap:0.5rem;">
-                                    <img src="${
-                                      f.icon || ""
-                                    }" style="width:20px;height:20px;object-fit:cover;border-radius:3px;" onerror="this.style.display='none'">
-                                    ${this.escapeHtml(f.name)}
-                                </div>
-                                <div><button class="btn-small btn" onclick="app.removeCustomFeed('${
-                                  f.id
-                                }')"><i class='fas fa-trash'></i></button></div>
-                            </div>
-                        `
-                          )
-                          .join("")}
-                    </div>
-                </div>
-            </div>
-        `;
-        }
-
-        saveCustomFeed() {
-          const name = document.getElementById("feedNameInput").value.trim();
-          const rssUrl = document.getElementById("feedUrlInput").value.trim();
-          const icon = document.getElementById("feedIconInput").value.trim();
-          if (!name || !rssUrl) return;
-          this.customFeeds.push({ id: "cf_" + Date.now(), name, rssUrl, icon });
-          this.saveToStorage();
-          this.renderAll();
-          this.closeModal("feedModal");
-        }
-
-        removeCustomFeed(id) {
-          if (!confirm("Remove this feed?")) return;
-          this.customFeeds = this.customFeeds.filter((f) => f.id !== id);
-          this.saveToStorage();
-          this.renderAll();
-        }
-
-        // --- WALLPAPER ---
-        applyWallpaper() {
-          const overlay = document.querySelector(".wallpaper-overlay");
-          if (!this.wallpaper) {
-            if (overlay) overlay.style.opacity = "0";
-            return;
-          }
-          let el = overlay;
-          if (!el) {
-            el = document.createElement("div");
-            el.className = "wallpaper-overlay";
-            document.body.prepend(el);
-          }
-          el.style.backgroundImage = `url('${this.wallpaper}')`;
-          el.style.opacity = "1";
-        }
-
-        setWallpaper(url) {
-          this.wallpaper = url;
-          this.applyWallpaper();
-        }
-
-        clearWallpaper() {
-          this.wallpaper = "";
-          const overlay = document.querySelector(".wallpaper-overlay");
-          if (overlay) overlay.style.opacity = "0";
-        }
-
-        // --- Utilities ---
-        escapeHtml(str) {
-          return String(str || "")
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/\"/g, "&quot;")
-            .replace(/'/g, "&#039;");
+                    }
+                    alert('Database restored successfully! Reloading...');
+                    window.location.reload();
+                } catch(err) { alert('Error importing DB: ' + err.message); }
+            };
+            reader.readAsText(file);
         }
       }
 
-      // Initialize the application
-      const app = new HomepageApp();
+      /* --- APP CONTROLLER --- */
+      class App {
+        constructor() {
+          this.db = new DBService();
+          this.state = { theme: 'dark', searchEngine: 'google' };
+          this.feedSources = [
+            { id: 'def_1', name: "Krebs on Security", url: "https://krebsonsecurity.com/feed/" },
+            { id: 'def_2', name: "Hacker News", url: "https://news.ycombinator.com/rss" },
+            { id: 'def_3', name: "CISA Advisories", url: "https://www.cisa.gov/cybersecurity-advisories/cybersecurity-advisories.xml" }
+          ];
+        }
+
+        async init() {
+          await this.db.init();
+          const legacy = localStorage.getItem('awesom_home_v2');
+          if (legacy) {
+              const data = JSON.parse(legacy);
+              if(data.favorites) data.favorites.forEach(f => this.db.put('favorites', f));
+              localStorage.removeItem('awesom_home_v2');
+          }
+          this.loadSettings();
+          this.startClock();
+          this.renderAll();
+          this.setupEvents();
+          
+          // Make panel draggable
+          this.makeDraggable(document.getElementById('csToolsPanel'));
+        }
+
+        async loadSettings() {
+          const settings = await this.db.getAll('settings');
+          const pref = settings.find(s => s.id === 'preferences');
+          if (pref) {
+            this.state = pref;
+            document.body.setAttribute('data-theme', this.state.theme);
+            if(this.state.wallpaper) {
+                const overlay = document.querySelector('.wallpaper-overlay');
+                if (overlay) { overlay.style.backgroundImage = `url('${this.state.wallpaper}')`; overlay.style.opacity = 1; }
+            }
+          }
+        }
+
+        async saveSettings() { await this.db.put('settings', { id: 'preferences', ...this.state }); }
+
+        startClock() {
+          const update = () => {
+             const now = new Date();
+             document.getElementById('clockDisplay').textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+             document.getElementById('dateDisplay').textContent = now.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+             const hr = now.getHours();
+             let greet = "Good Evening";
+             if (hr < 12) greet = "Good Morning"; else if (hr < 18) greet = "Good Afternoon";
+             document.getElementById('greetingDisplay').textContent = greet;
+          };
+          update(); setInterval(update, 1000);
+        }
+
+        /* --- RENDERERS --- */
+        async renderAll() {
+            this.renderFavorites(); this.renderNotes(); this.renderTodos();
+            this.renderAutomations(); this.renderBookmarks(); this.loadFeeds();
+        }
+
+        escapeHtml(str) {
+            if(!str) return '';
+            return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
+
+        async renderFavorites() {
+            const items = await this.db.getAll('favorites');
+            document.getElementById('favoritesGrid').innerHTML = items.map(item => `
+                <a href="${this.escapeHtml(item.url)}" class="favorite-item" target="_blank">
+                    <button class="favorite-delete" onclick="event.preventDefault(); app.deleteItem('favorites', '${item.id}')"><i class="fas fa-times"></i></button>
+                    <i class="${this.escapeHtml(item.icon) || 'fas fa-globe'} favorite-icon"></i>
+                    <span style="font-weight:600; font-size:0.9rem;">${this.escapeHtml(item.name)}</span>
+                </a>
+            `).join('');
+        }
+
+        async renderNotes() {
+            const items = await this.db.getAll('notes');
+            // Recent
+            document.getElementById('recentNotesList').innerHTML = items.slice(0, 3).map(n => `
+                <div class="item-card" onclick="app.editNote('${n.id}')">
+                    <div style="font-weight:600">${this.escapeHtml(n.title)}</div>
+                    <div style="font-size:0.8rem; opacity:0.7">${new Date(n.id).toLocaleDateString()}</div>
+                </div>
+            `).join('');
+            // All
+            const query = (document.getElementById('noteSearch').value || '').toLowerCase();
+            const filtered = items.filter(n => n.title.toLowerCase().includes(query) || n.content.toLowerCase().includes(query));
+            document.getElementById('allNotesList').innerHTML = filtered.map(n => `
+                <div class="section" style="padding:1rem;">
+                    <div class="section-header" style="margin-bottom:0.5rem">
+                        <strong>${this.escapeHtml(n.title)}</strong>
+                        <div>
+                             <button class="btn-icon" onclick="app.editNote('${n.id}')"><i class="fas fa-pen"></i></button>
+                             <button class="btn-icon" onclick="app.deleteItem('notes', '${n.id}')"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <div style="white-space:pre-wrap; opacity:0.8">${this.escapeHtml(n.content)}</div>
+                </div>
+            `).join('');
+        }
+        
+        async renderTodos() {
+            const items = await this.db.getAll('todos');
+            const sorted = items.sort((a,b) => a.completed - b.completed);
+            
+            // Recent
+            document.getElementById('recentTodosList').innerHTML = sorted.slice(0, 5).map(t => `
+                <div class="item-card ${t.completed ? 'completed' : ''}">
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <input type="checkbox" ${t.completed ? 'checked' : ''} onchange="app.toggleTodo('${t.id}', this.checked)">
+                        <span>${this.escapeHtml(t.text)}</span>
+                    </div>
+                    <div style="display:flex; gap:5px;">
+                        <button class="btn-icon" onclick="app.editTodo('${t.id}')" style="width:25px;height:25px;font-size:0.8rem"><i class="fas fa-pen"></i></button>
+                        <button class="btn-icon" onclick="app.deleteItem('todos', '${t.id}')" style="width:25px;height:25px;font-size:0.8rem"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+            `).join('');
+
+            // All
+            const query = (document.getElementById('todoSearch') ? document.getElementById('todoSearch').value || '' : '').toLowerCase();
+            const filtered = sorted.filter(t => t.text.toLowerCase().includes(query));
+            const allContainer = document.getElementById('allTodosList');
+            if(allContainer) {
+                allContainer.innerHTML = filtered.map(t => `
+                    <div class="item-card ${t.completed ? 'completed' : ''}" style="margin-bottom:1rem; padding:1.5rem;">
+                        <div style="display:flex; align-items:center; gap:15px; width:100%">
+                            <input type="checkbox" ${t.completed ? 'checked' : ''} onchange="app.toggleTodo('${t.id}', this.checked)" style="transform:scale(1.3)">
+                            <div style="flex:1">
+                                <div style="font-weight:600; font-size:1.1rem">${this.escapeHtml(t.text)}</div>
+                                <div style="font-size:0.8rem; opacity:0.7">Created: ${new Date(t.id).toLocaleDateString()}</div>
+                            </div>
+                            <button class="btn btn-sm" onclick="app.editTodo('${t.id}')"><i class="fas fa-pen"></i> Edit</button>
+                            <button class="btn btn-danger btn-sm" onclick="app.deleteItem('todos', '${t.id}')"><i class="fas fa-trash"></i> Delete</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        async renderAutomations() {
+            const items = await this.db.getAll('automations');
+            document.getElementById('automationGrid').innerHTML = items.map(a => `
+                <div class="section" style="padding:1.5rem; margin-bottom:0;">
+                    <h4 style="margin-bottom:0.5rem"><i class="fas fa-rocket"></i> ${this.escapeHtml(a.name)}</h4>
+                    <div style="font-size:0.8rem; opacity:0.7; margin-bottom:1rem;">${a.urls.length} Actions configured</div>
+                    <button class="btn btn-primary btn-sm" onclick="app.runAutomation('${a.id}')">Launch</button>
+                    <button class="btn btn-sm" onclick="app.deleteItem('automations', '${a.id}')" style="margin-left:0.5rem"><i class="fas fa-trash"></i></button>
+                </div>
+            `).join('');
+        }
+
+        /* --- BOOKMARKS --- */
+        async renderBookmarks() {
+            const folders = await this.db.getAll('bookmarks');
+            const query = (document.getElementById('bmSearch').value || '').toLowerCase();
+            const container = document.getElementById('bookmarksContainer');
+            if(folders.length === 0) {
+                container.innerHTML = `<div style="text-align:center; padding:2rem; opacity:0.7">No bookmarks found. Create a folder or import HTML.</div>`;
+                return;
+            }
+            container.innerHTML = folders.map(folder => {
+                const visible = folder.bookmarks.filter(b => b.title.toLowerCase().includes(query) || b.url.toLowerCase().includes(query));
+                if(query && visible.length === 0) return '';
+                return `
+                <div class="bookmark-folder">
+                    <div class="bookmark-folder-header">
+                        <span><i class="fas fa-folder"></i> ${this.escapeHtml(folder.name)} (${folder.bookmarks.length})</span>
+                        <div>
+                            <button class="btn-icon" onclick="app.openBookmarkModal('${folder.id}')"><i class="fas fa-plus"></i></button>
+                            <button class="btn-icon" onclick="app.deleteItem('bookmarks', '${folder.id}')"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <div class="bookmark-list">
+                        ${visible.map(bm => `
+                            <div class="bookmark-item">
+                                <a href="${this.escapeHtml(bm.url)}" target="_blank" class="bookmark-link">
+                                    <img src="https://www.google.com/s2/favicons?domain=${new URL(bm.url).hostname}&sz=32" width="16" height="16" onerror="this.style.display='none'">
+                                    ${this.escapeHtml(bm.title)}
+                                </a>
+                                <button class="btn-icon" style="width:25px;height:25px;font-size:0.8rem" onclick="app.addFavoriteFromBookmark('${folder.id}', '${bm.id}')" title="Add to Favorites"><i class="fas fa-star"></i></button>
+                                <button class="btn-icon" style="width:25px;height:25px;font-size:0.8rem" onclick="app.deleteBookmark('${folder.id}', '${bm.id}')"><i class="fas fa-times"></i></button>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        async handleBookmarksFile(file) {
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(e.target.result, "text/html");
+                const dts = doc.querySelectorAll('dt');
+                let folders = [];
+                dts.forEach(dt => {
+                    const h3 = dt.querySelector('h3');
+                    if(h3) {
+                        const folderName = h3.textContent;
+                        const dl = dt.querySelector('dl');
+                        if(dl) {
+                            const links = dl.querySelectorAll('a');
+                            if(links.length > 0) {
+                                const bookmarks = Array.from(links).map(a => ({
+                                    id: 'bm_' + Date.now() + Math.random(),
+                                    title: a.textContent,
+                                    url: a.href
+                                }));
+                                folders.push({
+                                    id: 'f_' + Date.now() + Math.random(),
+                                    name: folderName,
+                                    bookmarks: bookmarks
+                                });
+                            }
+                        }
+                    }
+                });
+                if(folders.length > 0) {
+                    for(const f of folders) await this.db.put('bookmarks', f);
+                    alert(`Imported ${folders.length} folders.`);
+                    this.renderBookmarks();
+                } else { alert('No structured bookmarks found.'); }
+            };
+            reader.readAsText(file);
+        }
+
+        async deleteBookmark(folderId, bmId) {
+            const folders = await this.db.getAll('bookmarks');
+            const folder = folders.find(f => String(f.id) === String(folderId));
+            if(folder) {
+                folder.bookmarks = folder.bookmarks.filter(b => b.id != bmId);
+                await this.db.put('bookmarks', folder);
+                this.renderBookmarks();
+            }
+        }
+        
+        async addFavoriteFromBookmark(folderId, bmId) {
+            const folders = await this.db.getAll('bookmarks');
+            const folder = folders.find(f => String(f.id) === String(folderId));
+            const bm = folder?.bookmarks.find(b => b.id == bmId);
+            if(bm) {
+                this.openModal('favoriteModal'); 
+                const form = document.getElementById('favoriteForm');
+                if(form) {
+                    form.elements['favName'].value = bm.title;
+                    form.elements['favUrl'].value = bm.url;
+                    form.elements['favIcon'].value = 'fas fa-bookmark';
+                }
+            }
+        }
+
+        /* --- FEEDS --- */
+        async loadFeeds() {
+            const grid = document.getElementById('feedGrid');
+            grid.innerHTML = '<div style="grid-column:1/-1;text-align:center">Loading feeds...</div>';
+            const customFeeds = await this.db.getAll('feeds');
+            const allFeeds = [...this.feedSources, ...customFeeds];
+            const promises = allFeeds.map(async (source) => {
+                try {
+                    const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(source.url)}`);
+                    const data = await res.json();
+                    if(data.status !== 'ok') throw new Error('API Error');
+                    return `
+                    <div class="feed-source">
+                        <div style="display:flex;justify-content:space-between;margin-bottom:1rem;border-bottom:1px solid var(--border-color);padding-bottom:0.5rem">
+                            <strong>${this.escapeHtml(source.name)}</strong>
+                            ${String(source.id).startsWith('def') ? '' : `<button class="btn-icon" style="width:25px;height:25px" onclick="app.deleteItem('feeds', '${source.id}')"><i class="fas fa-trash"></i></button>`}
+                        </div>
+                        ${data.items.slice(0, 5).map(item => `
+                            <div class="feed-item">
+                                <a href="${this.escapeHtml(item.link)}" target="_blank">${this.escapeHtml(item.title)}</a>
+                            </div>
+                        `).join('')}
+                    </div>`;
+                } catch(e) { return `<div class="feed-source"><strong>${this.escapeHtml(source.name)}</strong><br><small>Failed.</small></div>`; }
+            });
+            const results = await Promise.all(promises);
+            grid.innerHTML = results.join('');
+        }
+
+        /* --- ACTIONS --- */
+        async deleteItem(store, id) {
+            if (/^\d+(\.\d+)?$/.test(id)) id = Number(id);
+            if(confirm('Delete this item?')) {
+                await this.db.delete(store, id);
+                this.renderAll();
+            }
+        }
+        
+        async toggleTodo(id, checked) {
+            if (/^\d+(\.\d+)?$/.test(id)) id = Number(id);
+            const todos = await this.db.getAll('todos');
+            const todo = todos.find(t => t.id == id);
+            if(todo) {
+                todo.completed = checked;
+                await this.db.put('todos', todo);
+                this.renderTodos();
+            }
+        }
+
+        async runAutomation(id) {
+            if (/^\d+(\.\d+)?$/.test(id)) id = Number(id);
+            const autos = await this.db.getAll('automations');
+            const auto = autos.find(a => a.id == id);
+            if(auto && auto.urls) {
+                if(confirm(`Opening ${auto.urls.length} tabs. Allow popups?`)) {
+                    auto.urls.forEach(url => window.open(url, '_blank'));
+                }
+            }
+        }
+        
+        async populateBookmarkPicker() {
+            const folders = await this.db.getAll('bookmarks');
+            const picker = document.getElementById('autoBmPicker');
+            picker.innerHTML = '<option value="">Select a bookmark...</option>';
+            folders.forEach(f => {
+                if(f.bookmarks.length) {
+                    const group = document.createElement('optgroup');
+                    group.label = f.name;
+                    f.bookmarks.forEach(b => {
+                        const opt = document.createElement('option');
+                        opt.value = b.url; opt.textContent = b.title;
+                        group.appendChild(opt);
+                    });
+                    picker.appendChild(group);
+                }
+            });
+        }
+
+        async setWallpaper() {
+            const url = document.getElementById('bgUrlInput').value;
+            this.state.wallpaper = url;
+            await this.saveSettings();
+            document.querySelector('.wallpaper-overlay').style.backgroundImage = `url('${url}')`;
+            document.querySelector('.wallpaper-overlay').style.opacity = 1;
+            this.closeModal('settingsModal');
+        }
+
+        openModal(id) { 
+            const m = document.getElementById(id);
+            m.classList.add('active');
+            if(id === 'automationModal') { this.populateBookmarkPicker(); }
+            const form = m.querySelector('form');
+            if(form) {
+                form.reset();
+                const hiddenId = form.querySelector('input[type="hidden"]');
+                if(hiddenId) hiddenId.value = '';
+            }
+        }
+        
+        openBookmarkModal(folderId) {
+            // FIX: Open and reset modal FIRST, then set the hidden ID.
+            // Otherwise openModal() resets the form and wipes our folderId.
+            this.openModal('bookmarkModal');
+            document.getElementById('bmFolderId').value = folderId;
+        }
+        
+        closeModal(id) { document.getElementById(id).classList.remove('active'); }
+        
+        toggleToolsPanel() {
+            const panel = document.getElementById('csToolsPanel');
+            if (panel.style.display === 'none') {
+                panel.style.display = 'flex';
+            } else {
+                panel.style.display = 'none';
+            }
+        }
+        
+        makeDraggable(element) {
+            let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+            const header = document.getElementById(element.id + "Header");
+            
+            if (header) {
+                header.onmousedown = dragMouseDown;
+            } else {
+                element.onmousedown = dragMouseDown;
+            }
+
+            function dragMouseDown(e) {
+                e = e || window.event;
+                e.preventDefault();
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                document.onmouseup = closeDragElement;
+                document.onmousemove = elementDrag;
+            }
+
+            function elementDrag(e) {
+                e = e || window.event;
+                e.preventDefault();
+                pos1 = pos3 - e.clientX;
+                pos2 = pos4 - e.clientY;
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                element.style.top = (element.offsetTop - pos2) + "px";
+                element.style.left = (element.offsetLeft - pos1) + "px";
+            }
+
+            function closeDragElement() {
+                document.onmouseup = null;
+                document.onmousemove = null;
+            }
+        }
+
+        async editNote(id) {
+            if (/^\d+(\.\d+)?$/.test(id)) id = Number(id);
+            const notes = await this.db.getAll('notes');
+            const note = notes.find(n => n.id == id);
+            if(note) {
+                this.openModal('noteModal');
+                document.getElementById('noteId').value = note.id;
+                document.getElementById('noteTitle').value = note.title;
+                document.getElementById('noteContent').value = note.content;
+            }
+        }
+
+        async editTodo(id) {
+            if (/^\d+(\.\d+)?$/.test(id)) id = Number(id);
+            const todos = await this.db.getAll('todos');
+            const todo = todos.find(t => t.id == id);
+            if(todo) {
+                this.openModal('todoModal');
+                document.getElementById('todoId').value = todo.id;
+                document.getElementById('todoText').value = todo.text;
+            }
+        }
+
+        /* --- UI HELPERS --- */
+        setupEvents() {
+            // Navigation
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                    const pageId = e.target.getAttribute('data-page');
+                    document.getElementById(pageId).classList.add('active');
+                    e.target.classList.add('active');
+                });
+            });
+
+            // Close Modal on Overlay Click
+            document.querySelectorAll('.modal-overlay').forEach(overlay => {
+                overlay.addEventListener('click', (e) => {
+                    if (e.target === overlay) {
+                        this.closeModal(overlay.id);
+                    }
+                });
+            });
+
+            // Modals
+            document.getElementById('dbBackupBtn').onclick = () => this.openModal('settingsModal');
+            document.getElementById('settingsBtn').onclick = () => this.openModal('settingsModal');
+            
+            // Search
+            document.getElementById('searchForm').onsubmit = (e) => {
+                // No preventDefault - allow native form submission to target="_blank"
+                const engine = document.getElementById('searchEngineToggle').checked ? 'perplexity' : 'google';
+                if(engine === 'google') {
+                    e.target.action = "https://www.google.com/search";
+                } else {
+                    e.target.action = "https://www.perplexity.ai/search";
+                }
+            };
+
+            // Forms
+            document.getElementById('favoriteForm').onsubmit = async (e) => {
+                e.preventDefault();
+                await this.db.put('favorites', {
+                    id: Date.now(),
+                    name: document.getElementById('favName').value,
+                    url: document.getElementById('favUrl').value,
+                    icon: document.getElementById('favIcon').value
+                });
+                this.closeModal('favoriteModal');
+                this.renderFavorites();
+            };
+
+            document.getElementById('todoForm').onsubmit = async (e) => {
+                e.preventDefault();
+                const id = document.getElementById('todoId').value;
+                await this.db.put('todos', {
+                    id: id ? (isNaN(id) ? id : Number(id)) : Date.now(),
+                    text: document.getElementById('todoText').value,
+                    completed: false
+                });
+                this.closeModal('todoModal');
+                this.renderTodos();
+            };
+
+            document.getElementById('noteForm').onsubmit = async (e) => {
+                e.preventDefault();
+                const id = document.getElementById('noteId').value;
+                await this.db.put('notes', {
+                    id: id ? (isNaN(id) ? id : Number(id)) : Date.now(),
+                    title: document.getElementById('noteTitle').value,
+                    content: document.getElementById('noteContent').value
+                });
+                this.closeModal('noteModal');
+                this.renderNotes();
+            };
+            
+            // Bookmark & Folder Forms
+            document.getElementById('folderForm').onsubmit = async (e) => {
+                e.preventDefault();
+                await this.db.put('bookmarks', {
+                    id: Date.now(),
+                    name: document.getElementById('folderName').value,
+                    bookmarks: []
+                });
+                this.closeModal('folderModal');
+                this.renderBookmarks();
+            };
+
+            document.getElementById('bookmarkForm').onsubmit = async (e) => {
+                e.preventDefault();
+                const folderId = document.getElementById('bmFolderId').value;
+                const folders = await this.db.getAll('bookmarks');
+                // Robust compare
+                const folder = folders.find(f => String(f.id) === String(folderId));
+                if(folder) {
+                    folder.bookmarks.push({
+                        id: 'bm_' + Date.now(),
+                        title: document.getElementById('bmTitle').value,
+                        url: document.getElementById('bmUrl').value
+                    });
+                    await this.db.put('bookmarks', folder);
+                    this.renderBookmarks();
+                }
+                this.closeModal('bookmarkModal');
+            };
+            
+            // Feeds & Auto
+            document.getElementById('feedForm').onsubmit = async (e) => {
+                e.preventDefault();
+                await this.db.put('feeds', {
+                    id: Date.now(),
+                    name: document.getElementById('feedName').value,
+                    url: document.getElementById('feedUrl').value
+                });
+                this.closeModal('feedModal');
+                this.loadFeeds();
+            };
+
+            document.getElementById('automationForm').onsubmit = async (e) => {
+                e.preventDefault();
+                const urls = document.getElementById('autoUrls').value.split('\n').map(u => u.trim()).filter(u => u);
+                await this.db.put('automations', {
+                    id: Date.now(),
+                    name: document.getElementById('autoName').value,
+                    urls: urls
+                });
+                this.closeModal('automationModal');
+                this.renderAutomations();
+            };
+            
+            // Add Bookmark to Auto
+            document.getElementById('addBmToAutoBtn').onclick = () => {
+                const picker = document.getElementById('autoBmPicker');
+                const url = picker.value;
+                if(url) {
+                    const ta = document.getElementById('autoUrls');
+                    ta.value = ta.value + (ta.value ? '\n' : '') + url;
+                }
+            };
+
+            // Inputs
+            document.getElementById('bmImportInput').onchange = (e) => {
+                if(e.target.files.length) this.handleBookmarksFile(e.target.files[0]);
+            };
+            document.getElementById('bmSearch').oninput = () => this.renderBookmarks();
+            document.getElementById('noteSearch').oninput = () => this.renderNotes();
+            if(document.getElementById('todoSearch')) {
+                document.getElementById('todoSearch').oninput = () => this.renderTodos();
+            }
+            
+            // Theme Toggle
+            document.getElementById('themeToggle').onclick = () => {
+                this.state.theme = this.state.theme === 'light' ? 'dark' : 'light';
+                document.body.setAttribute('data-theme', this.state.theme);
+                this.saveSettings();
+            };
+        }
+      }
+
+      const app = new App();
+      app.init();
     </script>
   </body>
-  
 </html>
