@@ -1,31 +1,27 @@
 # Awes0m Cybersec Home
 
-## A Modular Browser Homepage
+
+A customizable, self-contained browser homepage tailored for cybersecurity professionals. Features favorites, notes, tasks, bookmark import, news feeds, automation flows, and a floating toolkit panel.
+
+[![GitHub stars](https://img.shields.io/github/stars/awes0m/awesom_browser_tools.svg)](https://github.com/awes0m/awesom_browser_tools/stargazers "Stargazers") [![GitHub forks](https://img.shields.io/github/forks/awes0m/awesom_browser_tools.svg)](https://github.com/awes0m/awesom_browser_tools/network/members "Forkers") [![License](https://img.shields.io/github/license/awes0m/awesom_browser_tools.svg)]
+
+
 <div align="center">
   <table>
     <tr>
       <td align="center">
-        <a href="https://awes0m.github.io/awesom_browser_tools/#home">
+        <a href="https://awes0m.github.io/CybersecHome/">
           <img src="https://img.shields.io/badge/Launch-Live-8A2BE2?style=for-the-badge" alt="Live" />
         </a>
       </td>
       <td align="center">
-        <a href="https://github.com/awes0m/awesom_browser_tools/raw/refs/heads/main/awesom_cybersec_home.zip">
-          <img src="https://img.shields.io/badge/Launch-Download-FF8C00?style=for-the-badge" alt="Download" />
+        <a href="https://github.com/awes0m/CybersecHome/raw/refs/heads/main/awesom_cybersec_home.zip">
+          <img src="https://img.shields.io/badge/Click to-Download-FF8C00?style=for-the-badge" alt="Download" />
         </a>
       </td>
     </tr>
   </table>
 </div>
-A customizable, self-contained browser homepage tailored for cybersecurity professionals. Features favorites, notes, tasks, bookmark import, news feeds, automation flows, and a floating toolkit panel.
-
-[![GitHub stars](https://img.shields.io/github/stars/awes0m/awesom_browser_tools.svg)](https://github.com/awes0m/awesom_browser_tools/stargazers "Stargazers") [![GitHub forks](https://img.shields.io/github/forks/awes0m/awesom_browser_tools.svg)](https://github.com/awes0m/awesom_browser_tools/network/members "Forkers") [![License](https://img.shields.io/github/license/awes0m/awesom_browser_tools.svg)]
-
-- Live: [https://awes0m.github.io/awesom_browser_tools/#home](https://awes0m.github.io/awesom_browser_tools/#home "https://awes0m.github.io/awesom_browser_tools/#home")
-- Download: [https://github.com/awes0m/awesom_browser_tools/raw/refs/heads/main/awesom_cybersec_home.zip](https://github.com/awes0m/awesom_browser_tools/raw/refs/heads/main/awesom_cybersec_home.zip "https://github.com/awes0m/awesom_browser_tools/raw/refs/heads/main/awesom_cybersec_home.zip")
-
-This is a fully featured, responsive browser homepage with favorites, notes, tasks, bookmark import, and cybersecurity news feeds. It is self-contained in a single HTML file and stores your data locally in the browser.
-
 ---
 
 <img src="app_sc.jpg" alt="app_screenshot" width="1000" height="600">
