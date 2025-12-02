@@ -1,6 +1,25 @@
 # Awes0m Cybersec Home
 
 ## A Modular Browser Homepage
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <a href="https://awes0m.github.io/awesom_browser_tools/#home">
+          <img src="https://img.shields.io/badge/Launch-Live-8A2BE2?style=for-the-badge" alt="Live" />
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/awes0m/awesom_browser_tools/raw/refs/heads/main/awesom_cybersec_home.zip">
+          <img src="https://img.shields.io/badge/Launch-Download-FF8C00?style=for-the-badge" alt="Download" />
+        </a>
+      </td>
+    </tr>
+  </table>
+</div>
+A customizable, self-contained browser homepage tailored for cybersecurity professionals. Features favorites, notes, tasks, bookmark import, news feeds, automation flows, and a floating toolkit panel.
+
+[![GitHub stars](https://img.shields.io/github/stars/awes0m/awesom_browser_tools.svg)](https://github.com/awes0m/awesom_browser_tools/stargazers "Stargazers") [![GitHub forks](https://img.shields.io/github/forks/awes0m/awesom_browser_tools.svg)](https://github.com/awes0m/awesom_browser_tools/network/members "Forkers") [![License](https://img.shields.io/github/license/awes0m/awesom_browser_tools.svg)]
 
 - Live: [https://awes0m.github.io/awesom_browser_tools/#home](https://awes0m.github.io/awesom_browser_tools/#home "https://awes0m.github.io/awesom_browser_tools/#home")
 - Download: [https://github.com/awes0m/awesom_browser_tools/raw/refs/heads/main/awesom_cybersec_home.zip](https://github.com/awes0m/awesom_browser_tools/raw/refs/heads/main/awesom_cybersec_home.zip "https://github.com/awes0m/awesom_browser_tools/raw/refs/heads/main/awesom_cybersec_home.zip")
@@ -56,117 +75,160 @@ This is a fully featured, responsive browser homepage with favorites, notes, tas
 
 ### 📰 News Feeds (with custom sources)
 
-- Predefined cybersecurity sources (e.g., Krebs, The Hacker News, HN, Threatpost)
-- Lazy loading on scroll and manual refresh
-- Mock data used in-browser to avoid CORS; can be swapped with a backend later
-- Add custom feed sources in the configuration array
+- Predefined cybersecurity sources (e.g., Krebs on Security, Hacker News, CISA Advisories)
+- Add custom RSS feed sources
+- Real-time refresh with RSS parsing via rss2json API
+- Individual feed deletion for custom sources
+
+### 🚀 Automations/Ops Flows
+
+- Create automation flows to open multiple URLs simultaneously
+- Add URLs manually or select from existing bookmarks
+- Pre-configured actions for common security workflows (e.g., "Morning Ops")
+- Launch flows with confirmation dialog to manage popup blocking
+
+### 🛠️ CS Toolkit Panel
+
+- Draggable floating panel with quick access to cybersecurity tools
+- Organized categories: Reporting, Investigation Tools, Online Services
+- Tools include: Security Incident Response Generator, JSON tools, CyberChef, VirusTotal, Shodan, AlienVault OTX, and more
+- Toggle visibility with corner button (mobile hidden by default)
 
 ---
 
-## What’s New / Recent Improvements
+## What's New / Recent Improvements
 
+- **Automations/Ops Flows**: Create and launch automation flows to open multiple URLs simultaneously for rapid access to grouped tools.
+- **CS Toolkit Floating Panel**: Draggable sidebar with quick links to cybersecurity investigation tools (VirusTotal, Shodan, CyberChef, etc.).
+- **IndexedDB Persistence**: Upgraded from localStorage to IndexedDB for better data capacity and performance.
+- **Enhanced Bookmark Management**: Organize bookmarks into folders, add from bookmarks to favorites, and search across all bookmarks.
+- **Search Filtering**: Real-time filtering across Notes, Tasks, and Bookmarks for quick information retrieval.
+- **Database Backup/Restore**: Export and import all data as JSON for backup and migration purposes.
 - **Scrollable modules**: Favorites, Notes, and Todos sections are scrollable with custom scrollbar styling.
 - **Theme polish**: Refined dark theme variables and shadows.
 - **Glass UI updates**: Consistent borders, hover elevation, and blur.
-- **Header controls**: Consolidated theme toggle and navigation.
-- **Performance**: Efficient DOM updates and minimal dependencies.
 
 ---
 
 ## Data Flow and Architecture
 
-The homepage is a simple, modular, client-side app built with vanilla HTML/CSS/JS. It uses Local Storage for persistence.
+The homepage is a simple, modular, client-side app built with vanilla HTML/CSS/JS. It uses IndexedDB for persistence with automatic migration from older localStorage format.
 
 ### High-Level Flow
 
 1. **Boot**
-   - Read persisted settings and data from `localStorage` (theme, favorites, notes, todos, bookmarks).
+   - Initialize IndexedDB connection and create object stores (favorites, notes, todos, bookmarks, feeds, automations, settings).
+   - Check for legacy localStorage data and migrate if needed.
+   - Load settings (theme, wallpaper) from the settings store.
    - Render initial page and attach event listeners.
 2. **User Interaction**
-   - UI events (click, submit, drag/drop, toggle) call handlers.
-   - Handlers update in-memory state and write changes to `localStorage`.
+   - UI events (click, submit, drag/drop, toggle) trigger handler methods.
+   - Handlers create/update/delete items and call `db.put()` or `db.delete()` to persist.
 3. **Render**
-   - After each change, the relevant section re-renders from state.
+   - After each change, the relevant section re-renders by fetching fresh data via `db.getAll()`.
 4. **Persist**
-   - Data is saved under defined keys; on reload, the UI restores from saved state.
+   - Data is automatically saved to IndexedDB; on reload, the UI restores from persisted state.
 
 ### Module Responsibilities
 
-- **Favorites**: Manage an array of link objects; render grid; delete via inline button; persist to `favorites` key.
-- **Notes**: Manage note objects with `title` and `content`; render cards; persist to `notes` key.
-- **Todos**: Manage task objects with `dueDate` and `completed`; compute overdue; persist to `todos` key.
-- **Bookmarks**: Parse imported HTML, normalize items, group by folders, render list/grid; persist to `bookmarks` key.
-- **Feeds**: Provide mock articles for each source to demonstrate layout; lazy-load on scroll; no persistence required.
-- **Theme**: Toggle attribute on `<body>` (e.g., `data-theme="dark"`); persist to `theme` key.
+- **Favorites**: Manage favorite link objects; render grid; delete via inline button; full CRUD operations; persist to `favorites` store.
+- **Notes**: Create, read, update, delete note objects with `title` and `content`; search filtering; persist to `notes` store.
+- **Todos**: Manage task objects with `text` and `completed` status; toggle completion; search filtering; persist to `todos` store.
+- **Bookmarks**: Parse imported HTML from browsers, organize into folders, add individual bookmarks, search across all bookmarks; persist to `bookmarks` store.
+- **Feeds**: Fetch RSS feeds via rss2json API, display latest articles, manage custom feeds; persist to `feeds` store.
+- **Automations**: Create workflows with multiple URLs, launch flows to open multiple tabs; integrate with bookmarks; persist to `automations` store.
+- **CS Toolkit Panel**: Draggable sidebar with organized tool links; toggle visibility; no persistence required.
+- **Theme**: Toggle attribute on `<body>` (e.g., `data-theme="dark"`); persist to `settings` store with other preferences.
+- **Database**: Export/import all data as JSON backup; migrate from older localStorage format to IndexedDB.
 
 ### Event → State → Storage → UI
 
 - Example (Add Favorite):
-  1) User submits form → 2) Create favorite object → 3) Push to favorites array → 4) `localStorage.setItem('favorites', JSON)` → 5) Re-render favorites grid.
+  1) User submits form → 2) Create favorite object → 3) Call `db.put('favorites', newFav)` → 4) Re-render favorites grid by calling `db.getAll('favorites')`.
 - Example (Toggle Theme):
-  1) Click theme button → 2) Flip `data-theme` → 3) `localStorage.setItem('theme', 'dark'|'light')` → 4) CSS variables update theme instantly.
+  1) Click theme button → 2) Flip `data-theme` → 3) Call `db.put('settings', { id: 'preferences', theme: 'dark'|'light', ... })` → 4) CSS variables update theme instantly.
 - Example (Import Bookmarks):
-  1) Drop file → 2) Read/parse bookmark HTML → 3) Map to normalized entries → 4) Save to `bookmarks` → 5) Render grouped view with favicons.
+  1) Drop file → 2) Read/parse bookmark HTML → 3) Map to normalized folder entries → 4) Call `db.put('bookmarks', folder)` for each folder → 5) Render grouped view with favicons.
 
 ---
 
-## Local Storage Schema
+## Data Persistence (IndexedDB)
 
-Keys and example structures used by the app:
+The app uses **IndexedDB** for persistent storage instead of localStorage, allowing for larger data capacity and better performance. Data is organized into the following object stores:
 
+### Favorites Store
 ```json
-// favorites
-[
-  {
-    "id": 1694000000,
-    "label": "GitHub",
-    "url": "https://github.com",
-    "icon": "fab fa-github"
-  }
-]
+{
+  "id": 1694000000,
+  "name": "GitHub",
+  "url": "https://github.com",
+  "icon": "fab fa-github"
+}
 ```
 
+### Notes Store
 ```json
-// notes
-[
-  {
-    "id": 1694000001,
-    "title": "Meeting Notes",
-    "content": "Discussion points...",
-    "createdAt": "2024-09-14"
-  }
-]
+{
+  "id": 1694000001,
+  "title": "Meeting Notes",
+  "content": "Discussion points...",
+}
 ```
 
+### Todos Store
 ```json
-// todos
-[
-  {
-    "id": 1694000002,
-    "text": "Complete security review",
-    "dueDate": "2024-09-20",
-    "completed": false,
-    "createdAt": "2024-09-14"
-  }
-]
+{
+  "id": 1694000002,
+  "text": "Complete security review",
+  "completed": false
+}
 ```
 
+### Bookmarks Store (Folder-based)
 ```json
-// bookmarks
-[
-  {
-    "id": 1694000003,
-    "title": "OWASP",
-    "url": "https://owasp.org",
-    "folder": "Security Resources",
-    "favicon": "https://owasp.org/favicon.ico"
-  }
-]
+{
+  "id": "f_1694000003",
+  "name": "Security Resources",
+  "bookmarks": [
+    {
+      "id": "bm_1694000004",
+      "title": "OWASP",
+      "url": "https://owasp.org"
+    }
+  ]
+}
 ```
 
-```text
-// theme
-"light" | "dark"
+### Feeds Store
+```json
+{
+  "id": 1694000005,
+  "name": "Custom Security Feed",
+  "url": "https://example.com/feed.xml"
+}
+```
+
+### Automations Store
+```json
+{
+  "id": 1694000006,
+  "name": "Morning Ops",
+  "urls": [
+    "https://virustotal.com",
+    "https://shodan.io",
+    "https://urlscan.io"
+  ]
+}
+```
+
+### Settings Store
+```json
+{
+  "id": "preferences",
+  "theme": "dark",
+  "wallpaper": "https://example.com/image.jpg",
+  "searchEngine": "google"
+}
 ```
 
 ---
@@ -230,25 +292,52 @@ Then open http://localhost:8000
 2. Drag-and-drop the file onto the import area, or click to select.
 3. Bookmarks are parsed and grouped by folder with favicons.
 
+### Automations/Ops Flows
+
+1. Click "Ops" in the navigation menu.
+2. Click "Create Flow" button.
+3. Enter a name for the flow (e.g., "Morning Ops").
+4. Add URLs either:
+   - Manually (one per line) in the "URLs" textarea
+   - Select from existing bookmarks using the "Add from Bookmarks" dropdown
+5. Click "Save Flow" to create the automation.
+6. Launch the flow by clicking the "Launch" button; confirm the popup permission dialog.
+
+### Database Backup & Restore
+
+1. Click the database icon (or settings gear) in the header to open "Data & Settings".
+2. **To backup**: Click "Download Backup" to export all data as a JSON file.
+3. **To restore**: Click "Restore from Backup", select a previously saved JSON file, and confirm. (Warning: This replaces current data.)
+
+### Wallpaper
+
+1. Open "Data & Settings" (database or settings icon in header).
+2. Enter an image URL (e.g., `https://example.com/image.jpg`).
+3. Click "Set Wallpaper" to apply the custom background.
+
 ### Theme
 
-- Use the theme toggle in the header. The choice is saved and restored on next visit.
+- Use the theme toggle (sun icon) in the header. The choice is saved and restored on next visit.
 
 ---
 
 ## Browser Support
 
-- Modern Browsers: Chrome 80+, Firefox 75+, Safari 13+, Edge 80+
-- Mobile: iOS Safari, Chrome Mobile, Samsung Internet
-- Uses CSS Grid/Flexbox, Local Storage API, File API, and CSS custom properties
+- **Modern Browsers**: Chrome 80+, Firefox 75+, Safari 13+, Edge 80+
+- **Mobile**: iOS Safari, Chrome Mobile, Samsung Internet
+- **APIs Used**: CSS Grid/Flexbox, IndexedDB, File API, Fetch API, CSS custom properties, LocalStorage (legacy migration)
 
 ---
 
 ## Development Notes
 
-- Single-file architecture with embedded CSS/JS for easy distribution
-- Structure emphasizes clear sections, modular functions, and minimal dependencies
-- Feeds use mock data client-side to bypass CORS; real feeds require a backend proxy or server-side worker
+- **Single-file architecture**: All code (HTML/CSS/JS) is self-contained in `index.html` for easy distribution and offline use
+- **IndexedDB for persistence**: Uses browser's IndexedDB API for robust client-side data storage with larger capacity than localStorage
+- **Modular class structure**: `DBService` handles all database operations; `App` class manages UI and business logic
+- **RSS parsing**: Uses rss2json API to fetch and parse RSS feeds (bypasses CORS restrictions)
+- **Draggable UI components**: CS Toolkit panel uses vanilla JS drag implementation for better UX
+- **Minimal dependencies**: No external frameworks; uses vanilla HTML5, CSS3, and JavaScript
+- **Responsive design**: CSS Grid/Flexbox with mobile-first approach; floating panel hidden on mobile
 
 ---
 
@@ -256,22 +345,34 @@ Then open http://localhost:8000
 
 ### Bookmarks Not Importing
 
-- Ensure the file is a valid HTML bookmark export
-- Check browser console for parsing errors
-- Try the provided sample `sample-bookmarks.html`
+- Ensure the file is a valid HTML bookmark export from Chrome, Firefox, Edge, or Safari
+- Check browser console (F12 → Console) for parsing errors
+- Try the provided sample `sample-bookmarks.html` file
 
-### Favicons Not Loading
+### Favicons Not Loading in Bookmarks
 
-- Some sites block favicon requests; a default icon is used when unavailable
+- Some sites block favicon requests; a default icon appears when unavailable
+- Favicon resolution uses Google's favicon service
 
-### Feeds Not Loading
+### Feeds Not Loading or Showing "Failed"
 
-- The demo uses mock data; real-time fetching requires a backend due to CORS
+- Verify the RSS URL is correct and publicly accessible
+- Check that the feed is a valid XML/RSS format
+- Some feeds may require a proxy if they have CORS restrictions
+- The app uses rss2json API to parse feeds; if it's unavailable, feeds will fail to load
 
 ### Data Not Persisting
 
-- Confirm Local Storage is enabled and not cleared on exit
-- Avoid private/incognito mode if you want persistence
+- Confirm IndexedDB is enabled in browser settings (not just localStorage)
+- Avoid private/incognito mode if you want data to persist long-term
+- Check browser's storage quota hasn't been exceeded
+- Clearing browser data/cache may delete IndexedDB; use Backup feature to save important data
+
+### Automations Not Opening Tabs
+
+- Browser may block popups by default; allow popups for this site in browser settings
+- Some URLs may be blocked by browser security policies
+- Confirm URLs are valid and don't have typos
 
 ---
 
@@ -293,14 +394,34 @@ awesom_browser_tools/
 
 ### Add New Sections
 
-1. Create the HTML structure in `index.html` (new section container)
-2. Style with CSS variables and shared classes
-3. Implement JS logic and events; persist to `localStorage` as needed
+1. Create the HTML structure in `index.html` (new page div and modal overlays)
+2. Style with CSS variables and shared classes (see `:root` and `[data-theme="dark"]`)
+3. Implement JS logic in the `App` class; create new methods for rendering and event handling
+4. Add new IndexedDB store in `DBService.init()` and expose get/put/delete methods
+5. Integrate with the settings modal if user preferences are needed
+
+### Extend Existing Features
+
+- **Add more CS Toolkit links**: Edit the `.panel-content` section with new tool categories and links
+- **Add RSS feed sources**: Modify the `feedSources` array in the `App` constructor
+- **Create new automation templates**: UI allows freeform URL input; consider pre-filling with common workflows
+- **Enhance bookmark organization**: Add tags, color labels, or hierarchical folder structures
 
 ### Extend Data Models
 
-1. Update the object structure and persistence key
-2. Adjust render functions accordingly
-3. Add input validation and UX affordances
+1. Add new object store in `DBService.init()` (in the `onupgradeneeded` callback)
+2. Implement async methods for CRUD operations on the new store
+3. Create render functions in the `App` class
+4. Add form modals for user input
+5. Implement search/filter functionality if needed
+6. Ensure the export/import functions include the new store
 
-PRs welcome for usability improvements, accessibility, performance, and new widgets.
+### Development Guidelines
+
+- Use `escapeHtml()` to prevent XSS when rendering user-generated content
+- Use timestamps (`Date.now()`) for auto-generated IDs
+- Maintain CSS variable consistency for theme support
+- Test in both light and dark themes
+- Ensure mobile responsiveness (test at 768px breakpoint)
+
+PRs welcome for usability improvements, accessibility, performance, bug fixes, and new features!
