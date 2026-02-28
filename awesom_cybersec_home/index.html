@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Awes0m Cybersec Homepage v3.5.2</title>
+    <title>Awes0m Cybersec Homepage v5.0</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -49,8 +49,8 @@
       }
 
       body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          sans-serif;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         min-height: 100vh;
         color: var(--text-color);
@@ -64,7 +64,8 @@
         content: "";
         position: fixed;
         inset: 0;
-        background: radial-gradient(
+        background:
+          radial-gradient(
             circle at 20% 50%,
             rgba(120, 119, 198, 0.3),
             transparent 50%
@@ -513,9 +514,10 @@
         border: 1px solid var(--border-color);
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        align-items: flex-start;
       }
-      .item-card.completed span {
+      .item-card.completed span,
+      .item-card.completed .task-text-body {
         text-decoration: line-through;
         opacity: 0.6;
       }
@@ -679,7 +681,8 @@
         flex: 1;
         width: 100%;
         cursor: crosshair;
-        background-image: linear-gradient(#e5e7eb 1px, transparent 1px),
+        background-image:
+          linear-gradient(#e5e7eb 1px, transparent 1px),
           linear-gradient(90deg, #e5e7eb 1px, transparent 1px);
         background-size: 20px 20px;
         display: block;
@@ -721,6 +724,132 @@
         flex-grow: 1;
       }
 
+      /* World Clock Styles */
+      .world-clock-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 10px;
+        margin-top: 10px;
+      }
+      .clock-zone {
+        background: var(--bg-secondary);
+        padding: 10px;
+        border-radius: 8px;
+        text-align: center;
+        border: 1px solid var(--border-color);
+      }
+      .clock-zone-name {
+        font-size: 0.8rem;
+        font-weight: bold;
+        color: var(--text-muted);
+        text-transform: uppercase;
+      }
+      .clock-zone-time {
+        font-size: 1.2rem;
+        font-family: monospace;
+        font-weight: 600;
+        color: var(--accent-color);
+      }
+
+      /* Calendar & Timebox Styles */
+      .calendar-layout {
+        display: grid;
+        grid-template-columns: 320px 1fr;
+        gap: 1.5rem;
+        align-items: start;
+      }
+      .task-backlog {
+        background: var(--bg-secondary);
+        padding: 1.5rem;
+        border-radius: var(--border-radius);
+        border: 1px solid var(--border-color);
+        height: 75vh;
+        overflow-y: auto;
+      }
+      .timeline-container {
+        background: var(--bg-secondary);
+        border-radius: var(--border-radius);
+        border: 1px solid var(--border-color);
+        height: 75vh;
+        overflow-y: auto;
+        position: relative;
+      }
+      .timeline-grid {
+        position: relative;
+        height: 1440px;
+        background: repeating-linear-gradient(
+          to bottom,
+          transparent,
+          transparent 59px,
+          var(--border-color) 60px
+        );
+        cursor: crosshair;
+      }
+      .time-label {
+        position: absolute;
+        left: 10px;
+        width: 40px;
+        text-align: right;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        transform: translateY(-50%);
+        font-variant-numeric: tabular-nums;
+        pointer-events: none;
+      }
+
+      .timebox-task {
+        position: absolute;
+        left: 60px;
+        right: 20px;
+        background: var(--bg-primary);
+        border-left: 4px solid var(--accent-color);
+        padding: 5px 10px;
+        border-radius: 4px;
+        box-shadow: var(--shadow-glass);
+        border: 1px solid var(--border-color);
+        font-size: 0.85rem;
+        transition: var(--transition);
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+      .timebox-task::-webkit-scrollbar {
+        width: 4px;
+      }
+      .timebox-task::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 4px;
+      }
+      .timebox-task:hover {
+        transform: translateX(5px);
+        background: var(--bg-tertiary);
+        z-index: 10;
+        border-color: var(--accent-color);
+      }
+      .timebox-task.completed {
+        opacity: 0.6;
+        border-left-color: var(--success-color);
+        text-decoration: line-through;
+      }
+
+      .backlog-item {
+        background: var(--bg-primary);
+        padding: 10px;
+        border-radius: var(--border-radius-small);
+        border: 1px solid var(--border-color);
+        margin-bottom: 10px;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        transition: var(--transition);
+      }
+      .backlog-item:hover {
+        border-color: var(--accent-color);
+        transform: translateX(2px);
+      }
+
       /* Responsive */
       @media (max-width: 768px) {
         .dashboard-split {
@@ -742,6 +871,12 @@
         .panel-toggle-btn {
           display: none;
         }
+        .calendar-layout {
+          grid-template-columns: 1fr;
+        }
+        .task-backlog {
+          height: 300px;
+        }
       }
     </style>
   </head>
@@ -761,7 +896,7 @@
         </button>
       </div>
       <div class="panel-content">
-         <small
+        <small
           style="
             display: block;
             padding: 5px 10px;
@@ -769,10 +904,18 @@
             text-transform: uppercase;
             font-size: 0.7rem;
             font-weight: bold;
-          "p>Reporting</small>
-            <a href="https://awes0m.github.io/cybersec_tools/security_incident_response_generator.html" target="_blank" class="tool-link"><i class="fas fa-file-alt"></i> Security Incident Response Generator</a>
-            <br>
-            <small
+          "
+          >Reporting</small
+        >
+        <a
+          href="https://awes0m.github.io/cybersec_tools/security_incident_response_generator.html"
+          target="_blank"
+          class="tool-link"
+          ><i class="fas fa-file-alt"></i> Security Incident Response
+          Generator</a
+        >
+        <br />
+        <small
           style="
             display: block;
             padding: 5px 10px;
@@ -780,12 +923,34 @@
             text-transform: uppercase;
             font-size: 0.7rem;
             font-weight: bold;
-          ">Investigation Tools</small>
-            <a href="https://awes0m.github.io/cybersec_tools/smartJsonFormatterAnalyzer.html" target="_blank" class="tool-link"><i class="fas fa-code"></i> Smart JSON Formatter & Analyzer</a>
-            <a href="https://awes0m.github.io/cybersec_tools/json_multi_corelator.html" target="_blank" class="tool-link"><i class="fas fa-code-branch"></i> JSON Multi Correlator</a>
-            <a href="https://awes0m.github.io/cybersec_tools/jsonCorelatorAnalyzer.html" target="_blank" class="tool-link"><i class="fas fa-code"></i> JSON Corelator Analyzer</a>
-            <a href="https://gchq.github.io/CyberChef/" target="_blank" class="tool-link"><i class="fas fa-cookie-bite"></i> CyberChef</a>
-            <br>
+          "
+          >Investigation Tools
+        </small>
+        <a
+          href="https://awes0m.github.io/cybersec_tools/smartJsonFormatterAnalyzer.html"
+          target="_blank"
+          class="tool-link"
+          ><i class="fas fa-code"></i> Smart JSON Formatter & Analyzer</a
+        >
+        <a
+          href="https://awes0m.github.io/cybersec_tools/json_multi_corelator.html"
+          target="_blank"
+          class="tool-link"
+          ><i class="fas fa-code-branch"></i> JSON Multi Correlator</a
+        >
+        <a
+          href="https://awes0m.github.io/cybersec_tools/jsonCorelatorAnalyzer.html"
+          target="_blank"
+          class="tool-link"
+          ><i class="fas fa-code"></i> JSON Corelator Analyzer</a
+        >
+        <a
+          href="https://gchq.github.io/CyberChef/"
+          target="_blank"
+          class="tool-link"
+          ><i class="fas fa-cookie-bite"></i> CyberChef</a
+        >
+        <br />
         <small
           style="
             display: block;
@@ -796,12 +961,6 @@
             font-weight: bold;
           "
           >OSINT & Analysis</small
-        >
-        <a
-          href="https://gchq.github.io/CyberChef/"
-          target="_blank"
-          class="tool-link"
-          ><i class="fas fa-cookie-bite"></i> CyberChef</a
         >
         <a href="https://www.virustotal.com/" target="_blank" class="tool-link"
           ><i class="fas fa-virus"></i> VirusTotal</a
@@ -828,33 +987,32 @@
           ><i class="fas fa-file-code"></i> LOLBAS</a
         >
 
-      
-    <small
-            style="
-              display: block;
-              padding: 10px 10px 5px;
-              color: var(--text-muted);
-              text-transform: uppercase;
-              font-size: 0.7rem;
-              font-weight: bold;
-            "
-            >Cloud Infrastructure documentation</small
-          >
-          <a
-            href="https://docs.aws.amazon.com/"
-            target="_blank"
-            class="tool-link"
-            ><i class="fab fa-aws"></i> AWS Docs</a
-          >
-          <a href="https://learn.microsoft.com/en-us/azure/" target="_blank" class="tool-link"
-            ><i class="fab fa-microsoft"></i> Azure Docs</a
-          >
-          <a
-            href="https://docs.cloud.google.com/"
-            target="_blank"
-            class="tool-link"
-            ><i class="fab fa-google"></i> GCP Docs</a
-          >
+        <small
+          style="
+            display: block;
+            padding: 10px 10px 5px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            font-weight: bold;
+          "
+          >Cloud Infrastructure</small
+        >
+        <a
+          href="https://console.aws.amazon.com/"
+          target="_blank"
+          class="tool-link"
+          ><i class="fab fa-aws"></i> AWS Console</a
+        >
+        <a href="https://portal.azure.com/" target="_blank" class="tool-link"
+          ><i class="fab fa-microsoft"></i> Azure Portal</a
+        >
+        <a
+          href="https://console.cloud.google.com/"
+          target="_blank"
+          class="tool-link"
+          ><i class="fab fa-google"></i> GCP Console</a
+        >
         <a href="https://crontab.guru/" target="_blank" class="tool-link"
           ><i class="fas fa-clock"></i> Crontab Guru</a
         >
@@ -981,7 +1139,7 @@
           <section class="section">
             <div class="section-header">
               <h3 class="section-title">
-                <i class="fas fa-check-square"></i> Tasks
+                <i class="fas fa-calendar-day"></i> Today's Agenda
               </h3>
               <button
                 class="btn btn-primary btn-sm"
@@ -1054,7 +1212,7 @@
       <!-- PAGE: AUTOMATIONS -->
       <div id="automationsPage" class="page">
         <div class="section-header">
-          <h2 class="section-title">Automations</h2>
+          <h2 class="section-title">Operational Workflows</h2>
           <div style="display: flex; gap: 10px">
             <button
               class="btn"
@@ -1081,18 +1239,31 @@
               class="btn btn-primary"
               onclick="app.openModal('automationModal')"
             >
-              <i class="fas fa-robot"></i> Create Flow
+              <i class="fas fa-robot"></i> Create Workflow
             </button>
           </div>
         </div>
-        <p class="text-muted" style="margin-bottom: 1rem">
-          Launch multiple tools simultaneously.
-        </p>
+        <div
+          style="
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 1.5rem;
+          "
+        >
+          <i class="fas fa-info-circle" style="color: var(--accent-color)"></i>
+          <strong>Pro Tip:</strong> Use <code>{TARGET}</code> in your URLs to
+          inject a variable (like an IP or Domain) at runtime. <br /><em
+            >Example:
+            <code>https://www.virustotal.com/gui/search/{TARGET}</code></em
+          >
+        </div>
         <div
           id="automationGrid"
           style="
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 1rem;
           "
         ></div>
@@ -1116,22 +1287,55 @@
         <div id="allNotesList"></div>
       </div>
 
-      <!-- PAGE: TASKS -->
+      <!-- PAGE: TASKS (TIMEBOX & CALENDAR) -->
       <div id="tasksPage" class="page">
         <div class="section-header">
-          <h2 class="section-title">Task Manager</h2>
-          <button class="btn btn-primary" onclick="app.openModal('todoModal')">
-            <i class="fas fa-plus"></i> New Task
-          </button>
+          <h2 class="section-title">Timebox Calendar</h2>
+          <div style="display: flex; gap: 10px">
+            <input
+              type="date"
+              id="taskDatePicker"
+              class="form-input"
+              onchange="app.setTaskDate(this.value)"
+            />
+            <button
+              class="btn btn-primary"
+              onclick="app.openModal('todoModal')"
+            >
+              <i class="fas fa-plus"></i> Add Event
+            </button>
+          </div>
         </div>
         <input
           type="text"
           id="todoSearch"
           class="form-input"
           placeholder="Search tasks..."
-          style="margin-bottom: 1rem"
+          style="margin-bottom: 1.5rem"
         />
-        <div id="allTodosList"></div>
+
+        <div class="calendar-layout">
+          <div class="task-backlog">
+            <h3
+              style="
+                margin-bottom: 1rem;
+                border-bottom: 1px solid var(--border-color);
+                padding-bottom: 0.5rem;
+                font-size: 1rem;
+              "
+            >
+              Backlog / Unscheduled
+            </h3>
+            <div id="unscheduledTodosList"></div>
+          </div>
+          <div class="task-timeline">
+            <div class="timeline-container" id="timelineScrollContainer">
+              <div class="timeline-grid" id="timelineGrid">
+                <!-- Grid and Tasks Rendered via JS -->
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- PAGE: TOOLS -->
@@ -1140,6 +1344,110 @@
           <h2 class="section-title">Cyber Utilities</h2>
         </div>
         <div class="tool-grid">
+          <!-- WORLD CLOCK -->
+          <div class="tool-card" style="grid-column: span 1">
+            <h3><i class="fas fa-globe"></i> World Clock</h3>
+            <div id="worldClockGrid" class="world-clock-grid">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <!-- NEW: CVE Lookup -->
+          <div class="tool-card">
+            <h3><i class="fas fa-bug"></i> CVE Database Lookup</h3>
+            <input
+              type="text"
+              id="cveInput"
+              class="form-input"
+              placeholder="CVE-2023-XXXXX"
+              style="margin: 10px 0"
+            />
+            <div style="display: flex; gap: 5px; flex-wrap: wrap">
+              <button class="btn btn-sm" onclick="app.tools.lookupCVE('nvd')">
+                NVD
+              </button>
+              <button class="btn btn-sm" onclick="app.tools.lookupCVE('mitre')">
+                MITRE
+              </button>
+              <button
+                class="btn btn-sm"
+                onclick="app.tools.lookupCVE('exploitdb')"
+              >
+                Exploit-DB
+              </button>
+            </div>
+          </div>
+
+          <!-- NEW: DNS Lookup -->
+          <div class="tool-card">
+            <h3><i class="fas fa-network-wired"></i> Quick DNS Lookup</h3>
+            <div style="display: flex; gap: 5px; margin: 10px 0">
+              <input
+                type="text"
+                id="dnsInput"
+                class="form-input"
+                placeholder="example.com"
+              />
+              <button class="btn" onclick="app.tools.dnsLookup()">
+                Lookup
+              </button>
+            </div>
+            <div
+              id="dnsOutput"
+              class="tool-output"
+              style="
+                white-space: pre-wrap;
+                font-size: 0.85rem;
+                max-height: 150px;
+                overflow-y: auto;
+              "
+            ></div>
+          </div>
+
+          <!-- NEW: Hash Generator -->
+          <div class="tool-card">
+            <h3><i class="fas fa-hashtag"></i> Hash Generator</h3>
+            <textarea
+              id="hashInput"
+              class="form-input"
+              rows="2"
+              placeholder="Text to hash..."
+              style="margin: 10px 0"
+            ></textarea>
+            <div
+              style="
+                display: flex;
+                gap: 5px;
+                flex-wrap: wrap;
+                margin-bottom: 10px;
+              "
+            >
+              <button
+                class="btn btn-sm"
+                onclick="app.tools.generateHash('SHA-256')"
+              >
+                SHA-256
+              </button>
+              <button
+                class="btn btn-sm"
+                onclick="app.tools.generateHash('SHA-384')"
+              >
+                SHA-384
+              </button>
+              <button
+                class="btn btn-sm"
+                onclick="app.tools.generateHash('SHA-512')"
+              >
+                SHA-512
+              </button>
+            </div>
+            <div
+              id="hashOutput"
+              class="tool-output"
+              style="word-break: break-all; font-size: 0.85rem"
+            ></div>
+          </div>
+
           <!-- Encoder/Decoder -->
           <div class="tool-card">
             <h3><i class="fas fa-code"></i> CyberChef Lite</h3>
@@ -1176,7 +1484,7 @@
 
           <!-- CIDR Calc -->
           <div class="tool-card">
-            <h3><i class="fas fa-network-wired"></i> Advanced CIDR Calc</h3>
+            <h3><i class="fas fa-sitemap"></i> Advanced CIDR Calc</h3>
             <div style="display: flex; gap: 5px; margin: 10px 0">
               <input
                 type="text"
@@ -1451,10 +1759,12 @@
         </form>
       </div>
     </div>
+
+    <!-- UPDATED: Task Modal with Description -->
     <div class="modal-overlay" id="todoModal">
       <div class="modal">
         <div class="section-header">
-          <h3>Task</h3>
+          <h3>Task / Event</h3>
           <button class="btn-icon" onclick="app.closeModal('todoModal')">
             <i class="fas fa-times"></i>
           </button>
@@ -1462,8 +1772,40 @@
         <form id="todoForm">
           <input type="hidden" id="todoId" />
           <div class="form-group">
-            <label class="form-label">Task</label
+            <label class="form-label">Task Name</label
             ><input type="text" id="todoText" class="form-input" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Description (Optional)</label
+            ><textarea
+              id="todoDesc"
+              class="form-input"
+              rows="3"
+              placeholder="Add detailed notes or links here..."
+            ></textarea>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px">
+            <div class="form-group">
+              <label class="form-label">Date (Optional)</label
+              ><input type="date" id="todoDate" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Time (Start - End)</label>
+              <div style="display: flex; gap: 5px">
+                <input
+                  type="time"
+                  id="todoStart"
+                  class="form-input"
+                  title="Start Time"
+                />
+                <input
+                  type="time"
+                  id="todoEnd"
+                  class="form-input"
+                  title="End Time"
+                />
+              </div>
+            </div>
           </div>
           <div style="display: flex; justify-content: flex-end; gap: 10px">
             <button
@@ -1477,6 +1819,7 @@
         </form>
       </div>
     </div>
+
     <div class="modal-overlay" id="folderModal">
       <div class="modal">
         <div class="section-header">
@@ -1574,6 +1917,7 @@
           </button>
         </div>
         <form id="automationForm">
+          <input type="hidden" id="autoId" />
           <div class="form-group">
             <label class="form-label">Name</label
             ><input type="text" id="autoName" class="form-input" required />
@@ -1605,12 +1949,15 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="form-label">URLs (One per line)</label
-            ><textarea
+            <label class="form-label">URLs (One per line)</label>
+            <small style="opacity: 0.7; display: block; margin-bottom: 5px"
+              >Use <code>{TARGET}</code> to prompt for variable input.</small
+            >
+            <textarea
               id="autoUrls"
               class="form-input"
               rows="5"
-              placeholder="https://example.com"
+              placeholder="https://example.com/search?q={TARGET}"
               required
             ></textarea>
           </div>
@@ -1692,6 +2039,24 @@
               Set Wallpaper
             </button>
           </div>
+
+          </div>
+          <div
+            style="
+              background: var(--bg-secondary);
+              padding: 1rem;
+              border-radius: 8px;
+            "
+          >
+            <h4>ℹ️ About the Dev</h4>
+            <a href="https://awes0m.github.io/"
+      ><p style="font-size: 0.85rem; opacity: 0.7; margin-bottom: 10px">
+              Visit awe-Som's portfolio.
+            </p></a>
+            
+          </div>
+
+
         </div>
       </div>
     </div>
@@ -1777,9 +2142,7 @@
           const url = URL.createObjectURL(blob);
           const a = document.createElement("a");
           a.href = url;
-          a.download = `awesom_backup_${
-            new Date().toISOString().split("T")[0]
-          }.json`;
+          a.download = `awesom_backup_${new Date().toISOString().split("T")[0]}.json`;
           document.body.appendChild(a);
           a.click();
           document.body.removeChild(a);
@@ -1821,7 +2184,12 @@
       class App {
         constructor() {
           this.db = new DBService();
-          this.state = { theme: "dark", searchEngine: "google" };
+          this.state = {
+            theme: "dark",
+            searchEngine: "google",
+            currentTaskDate: null,
+            timelineScrolled: false,
+          };
           this.feedSources = [
             {
               id: "def_1",
@@ -1844,7 +2212,7 @@
             b64Encode: () => {
               try {
                 document.getElementById("cyberOutput").textContent = btoa(
-                  document.getElementById("cyberInput").value
+                  document.getElementById("cyberInput").value,
                 );
               } catch (e) {
                 document.getElementById("cyberOutput").textContent = "Error";
@@ -1853,7 +2221,7 @@
             b64Decode: () => {
               try {
                 document.getElementById("cyberOutput").textContent = atob(
-                  document.getElementById("cyberInput").value
+                  document.getElementById("cyberInput").value,
                 );
               } catch (e) {
                 document.getElementById("cyberOutput").textContent = "Error";
@@ -1867,7 +2235,6 @@
               document.getElementById("cyberOutput").textContent =
                 decodeURIComponent(document.getElementById("cyberInput").value);
             },
-
             calcCidr: () => {
               const input = document.getElementById("cidrInput").value.trim();
               try {
@@ -1875,14 +2242,12 @@
                 const mask = parseInt(maskStr);
                 if (isNaN(mask) || mask < 0 || mask > 32)
                   throw new Error("Invalid Mask");
-
                 const ipParts = ip.split(".").map(Number);
                 if (
                   ipParts.length !== 4 ||
                   ipParts.some((p) => isNaN(p) || p < 0 || p > 255)
                 )
                   throw new Error("Invalid IP");
-
                 const ipNum =
                   (ipParts[0] << 24) |
                   (ipParts[1] << 16) |
@@ -1891,7 +2256,6 @@
                 const maskNum = 0xffffffff << (32 - mask);
                 const netNum = ipNum & maskNum;
                 const broadcastNum = netNum | ~maskNum;
-
                 const toIp = (num) =>
                   [
                     (num >>> 24) & 0xff,
@@ -1899,25 +2263,18 @@
                     (num >>> 8) & 0xff,
                     num & 0xff,
                   ].join(".");
-
                 const network = toIp(netNum);
                 const broadcast = toIp(broadcastNum);
                 const firstIp = toIp(netNum + 1);
                 const lastIp = toIp(broadcastNum - 1);
                 const hosts = Math.pow(2, 32 - mask) - 2;
-
                 document.getElementById("cidrOutput").textContent =
-                  `CIDR: ${input}\n` +
-                  `Network: ${network}\n` +
-                  `Broadcast: ${broadcast}\n` +
-                  `Range: ${firstIp} - ${lastIp}\n` +
-                  `Hosts: ${hosts > 0 ? hosts.toLocaleString() : 0}`;
+                  `CIDR: ${input}\nNetwork: ${network}\nBroadcast: ${broadcast}\nRange: ${firstIp} - ${lastIp}\nHosts: ${hosts > 0 ? hosts.toLocaleString() : 0}`;
               } catch (e) {
                 document.getElementById("cidrOutput").textContent =
                   "Error: Use format 192.168.1.1/24";
               }
             },
-
             convertTime: (mode) => {
               const output = document.getElementById("tsOutput");
               if (mode === "now") {
@@ -1930,21 +2287,18 @@
                   output.textContent = new Date(val * 1000).toLocaleString();
               }
             },
-
             defang: () => {
-              const val = document.getElementById("defangInput").value;
-              document.getElementById("defangOutput").textContent = val
-                .replace(/\./g, "[.]")
+              document.getElementById("defangOutput").textContent = document
+                .getElementById("defangInput")
+                .value.replace(/\./g, "[.]")
                 .replace(/http/g, "hxxp");
             },
             refang: () => {
-              const val = document.getElementById("defangInput").value;
-              document.getElementById("defangOutput").textContent = val
-                .replace(/\[\.\]/g, ".")
+              document.getElementById("defangOutput").textContent = document
+                .getElementById("defangInput")
+                .value.replace(/\[\.\]/g, ".")
                 .replace(/hxxp/g, "http");
             },
-
-            // NEW: Email Header Analysis
             analyzeEmail: () => {
               const raw = document.getElementById("emailInput").value;
               const fields = {
@@ -1955,7 +2309,6 @@
                 "Message-ID": /Message-ID:\s*(.+)/i,
                 "Return-Path": /Return-Path:\s*(.+)/i,
               };
-
               let output = "--- Analysis Result ---\n";
               for (const [key, regex] of Object.entries(fields)) {
                 const match = raw.match(regex);
@@ -1963,13 +2316,32 @@
               }
               document.getElementById("emailOutput").textContent = output;
             },
-
+            updateWorldClocks: () => {
+              const zones = [
+                { name: "UTC", tz: "UTC" },
+                { name: "US East", tz: "America/New_York" },
+                { name: "US West", tz: "America/Los_Angeles" },
+                { name: "London", tz: "Europe/London" },
+                { name: "Berlin", tz: "Europe/Berlin" },
+                { name: "India", tz: "Asia/Kolkata" },
+                { name: "Singapore", tz: "Asia/Singapore" },
+                { name: "Tokyo", tz: "Asia/Tokyo" },
+              ];
+              const container = document.getElementById("worldClockGrid");
+              if (!container) return;
+              container.innerHTML = zones
+                .map(
+                  (z) =>
+                    `<div class="clock-zone"><div class="clock-zone-name">${z.name}</div><div class="clock-zone-time">${new Date().toLocaleTimeString("en-US", { timeZone: z.tz, hour: "2-digit", minute: "2-digit", hour12: false })}</div></div>`,
+                )
+                .join("");
+            },
             formatJson: () => {
               try {
                 document.getElementById("jsonOutput").value = JSON.stringify(
                   JSON.parse(document.getElementById("jsonInput").value),
                   null,
-                  2
+                  2,
                 );
               } catch (e) {
                 document.getElementById("jsonOutput").value = "Invalid JSON";
@@ -1985,21 +2357,91 @@
                 document.getElementById("ipOutput").textContent = "Failed";
               }
             },
+
+            // NEW TOOLS
+            lookupCVE: (source) => {
+              let cve = document
+                .getElementById("cveInput")
+                .value.trim()
+                .toUpperCase();
+              if (!cve) return alert("Please enter a CVE");
+              if (!cve.startsWith("CVE-")) cve = "CVE-" + cve;
+              if (!/^CVE-\d{4}-\d{4,}$/.test(cve))
+                return alert("Invalid format. Use CVE-YYYY-XXXXX");
+
+              const urls = {
+                nvd: `https://nvd.nist.gov/vuln/detail/${cve}`,
+                mitre: `https://cve.mitre.org/cgi-bin/cvename.cgi?name=${cve}`,
+                exploitdb: `https://www.exploit-db.com/search?cve=${cve.replace("CVE-", "")}`,
+              };
+              if (urls[source]) window.open(urls[source], "_blank");
+            },
+            dnsLookup: async () => {
+              const domain = document.getElementById("dnsInput").value.trim();
+              const out = document.getElementById("dnsOutput");
+              if (!domain) {
+                out.textContent = "Please enter a domain.";
+                return;
+              }
+              out.textContent = "Querying DNS...";
+              try {
+                // Using Google's Public DNS-over-HTTPS
+                const r = await fetch(
+                  `https://dns.google/resolve?name=${encodeURIComponent(domain)}&type=ANY`,
+                );
+                const d = await r.json();
+                if (d.Answer && d.Answer.length > 0) {
+                  out.textContent = d.Answer.map((a) => {
+                    // Map common Type IDs to readable names
+                    const typeMap = {
+                      1: "A",
+                      2: "NS",
+                      5: "CNAME",
+                      15: "MX",
+                      16: "TXT",
+                      28: "AAAA",
+                    };
+                    return `[${typeMap[a.type] || a.type}] ${a.data}`;
+                  }).join("\n");
+                } else {
+                  out.textContent = "No records found.";
+                }
+              } catch (e) {
+                out.textContent = "Error fetching records.";
+              }
+            },
+            generateHash: async (algo) => {
+              const text = document.getElementById("hashInput").value;
+              const out = document.getElementById("hashOutput");
+              if (!text) {
+                out.textContent = "Please enter text to hash.";
+                return;
+              }
+              try {
+                const msgUint8 = new TextEncoder().encode(text);
+                const hashBuffer = await crypto.subtle.digest(algo, msgUint8);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                const hashHex = hashArray
+                  .map((b) => b.toString(16).padStart(2, "0"))
+                  .join("");
+                out.textContent = `[${algo}]\n${hashHex}`;
+              } catch (e) {
+                out.textContent = "Error generating hash.";
+              }
+            },
           };
 
-          // --- WHITEBOARD (VECTOR-LITE) ---
           this.wb = {
             canvas: null,
             ctx: null,
-            objects: [], // {type:'path', points:[{x,y}], color, size} or {type:'text', x,y, text, color, size}
-            tool: "pen", // pen, eraser, text, select
+            objects: [],
+            tool: "pen",
             isDrawing: false,
             currentPath: [],
             selectedIndex: -1,
             isDragging: false,
             dragStart: { x: 0, y: 0 },
             tracer: null,
-
             init: () => {
               const c = document.getElementById("wbCanvas");
               this.wb.canvas = c;
@@ -2008,21 +2450,18 @@
               const w = document.getElementById("wbWrapper");
               c.width = w.clientWidth;
               c.height = w.clientHeight;
-
               c.addEventListener("mousedown", this.wb.onDown);
               c.addEventListener("mousemove", this.wb.onMove);
               c.addEventListener("mouseup", this.wb.onUp);
-              // Tracer events
               c.addEventListener("mousemove", this.wb.updateTracer);
               c.addEventListener(
                 "mouseenter",
-                () => (this.wb.tracer.style.display = "block")
+                () => (this.wb.tracer.style.display = "block"),
               );
               c.addEventListener(
                 "mouseleave",
-                () => (this.wb.tracer.style.display = "none")
+                () => (this.wb.tracer.style.display = "none"),
               );
-
               window.addEventListener("resize", this.wb.resize);
             },
             resize: () => {
@@ -2038,29 +2477,23 @@
                 .querySelectorAll(".wb-tool-btn")
                 .forEach((b) => b.classList.remove("active"));
               if (btn) btn.classList.add("active");
-              app.wb.selectedIndex = -1; // Deselect
+              app.wb.selectedIndex = -1;
               app.wb.redraw();
-
-              // Cursor management
               if (t === "select") app.wb.canvas.style.cursor = "default";
               else app.wb.canvas.style.cursor = "none";
             },
-
             updateTracer: (e) => {
               if (app.wb.tool === "select") {
                 app.wb.tracer.style.display = "none";
                 return;
               }
-
               const mx = e.offsetX;
               const my = e.offsetY;
               const tracer = app.wb.tracer;
               tracer.style.display = "block";
               tracer.style.left = mx + "px";
               tracer.style.top = my + "px";
-
               const size = document.getElementById("wbSize").value;
-
               if (app.wb.tool === "text") {
                 tracer.style.width = "2px";
                 tracer.style.height = size * 2 + 10 + "px";
@@ -2080,20 +2513,16 @@
                     : document.getElementById("wbColor").value;
               }
             },
-
             onDown: (e) => {
               const mx = e.offsetX;
               const my = e.offsetY;
-
               if (app.wb.tool === "select") {
-                // Hit detection (reverse order for top-most)
                 app.wb.selectedIndex = -1;
                 for (let i = app.wb.objects.length - 1; i >= 0; i--) {
                   if (app.wb.hitTest(app.wb.objects[i], mx, my)) {
                     app.wb.selectedIndex = i;
                     app.wb.isDragging = true;
                     app.wb.dragStart = { x: mx, y: my };
-                    // Update UI inputs to match selected object
                     const obj = app.wb.objects[i];
                     document.getElementById("wbColor").value = obj.color;
                     document.getElementById("wbSize").value = obj.size;
@@ -2103,21 +2532,17 @@
                 app.wb.redraw();
                 return;
               }
-
-              // Eraser Functionality (Delete on Click)
               if (app.wb.tool === "eraser") {
                 for (let i = app.wb.objects.length - 1; i >= 0; i--) {
                   if (app.wb.hitTest(app.wb.objects[i], mx, my)) {
-                    app.wb.objects.splice(i, 1); // Remove object
+                    app.wb.objects.splice(i, 1);
                     app.wb.redraw();
-                    return; // Delete one item per click
+                    return;
                   }
                 }
                 return;
               }
-
               if (app.wb.tool === "text") {
-                // Use Browser PROMPT for reliable text input
                 const text = prompt("Enter text to add:");
                 if (text) {
                   app.wb.objects.push({
@@ -2132,21 +2557,15 @@
                 }
                 return;
               }
-
-              // Pen drawing
               app.wb.isDrawing = true;
               app.wb.currentPath = [{ x: mx, y: my }];
-
-              // Immediate draw
               const ctx = app.wb.ctx;
               ctx.beginPath();
               ctx.moveTo(mx, my);
             },
-
             onMove: (e) => {
               const mx = e.offsetX;
               const my = e.offsetY;
-
               if (
                 app.wb.tool === "select" &&
                 app.wb.isDragging &&
@@ -2155,7 +2574,6 @@
                 const dx = mx - app.wb.dragStart.x;
                 const dy = my - app.wb.dragStart.y;
                 const obj = app.wb.objects[app.wb.selectedIndex];
-
                 if (obj.type === "text") {
                   obj.x += dx;
                   obj.y += dy;
@@ -2165,16 +2583,12 @@
                     p.y += dy;
                   });
                 }
-
                 app.wb.dragStart = { x: mx, y: my };
                 app.wb.redraw();
                 return;
               }
-
               if (app.wb.isDrawing) {
                 app.wb.currentPath.push({ x: mx, y: my });
-
-                // Real-time drawing directly to context without full redraw
                 const ctx = app.wb.ctx;
                 ctx.lineTo(mx, my);
                 ctx.strokeStyle = document.getElementById("wbColor").value;
@@ -2184,12 +2598,11 @@
                 ctx.stroke();
               }
             },
-
             onUp: (e) => {
               app.wb.isDragging = false;
               if (app.wb.isDrawing) {
                 app.wb.isDrawing = false;
-                app.wb.ctx.closePath(); // Close current path context
+                app.wb.ctx.closePath();
                 app.wb.objects.push({
                   type: "path",
                   points: app.wb.currentPath,
@@ -2197,14 +2610,11 @@
                   size: document.getElementById("wbSize").value,
                 });
                 app.wb.currentPath = [];
-                // Full redraw to ensure layer stack is correct
                 app.wb.redraw();
               }
             },
-
             hitTest: (obj, mx, my) => {
               if (obj.type === "text") {
-                // Approx bounding box
                 const fontSize = obj.size * 2 + 10;
                 app.wb.ctx.font = `${fontSize}px sans-serif`;
                 const w = app.wb.ctx.measureText(obj.text).width;
@@ -2216,7 +2626,6 @@
                 );
               }
               if (obj.type === "path") {
-                // Simple point proximity
                 for (let p of obj.points) {
                   if (Math.hypot(p.x - mx, p.y - my) < parseInt(obj.size) + 5)
                     return true;
@@ -2224,13 +2633,11 @@
               }
               return false;
             },
-
             redraw: () => {
               const ctx = app.wb.ctx;
               const w = app.wb.canvas.width;
               const h = app.wb.canvas.height;
               ctx.clearRect(0, 0, w, h);
-
               app.wb.objects.forEach((obj, idx) => {
                 ctx.beginPath();
                 if (obj.type === "path") {
@@ -2255,8 +2662,6 @@
                     ctx.fillText(line, obj.x, obj.y + i * fontSize * 1.2);
                   });
                 }
-
-                // Draw selection highlight
                 if (idx === app.wb.selectedIndex) {
                   if (obj.type === "text") {
                     const fontSize = obj.size * 2 + 10;
@@ -2267,13 +2672,12 @@
                       obj.x - 5,
                       obj.y - fontSize - 5,
                       width + 10,
-                      fontSize + 10
+                      fontSize + 10,
                     );
                   }
                 }
               });
             },
-
             updateSelected: () => {
               if (app.wb.selectedIndex !== -1) {
                 const obj = app.wb.objects[app.wb.selectedIndex];
@@ -2282,7 +2686,6 @@
                 app.wb.redraw();
               }
             },
-
             deleteSelected: () => {
               if (app.wb.selectedIndex !== -1) {
                 app.wb.objects.splice(app.wb.selectedIndex, 1);
@@ -2290,7 +2693,6 @@
                 app.wb.redraw();
               }
             },
-
             clear: () => {
               app.wb.objects = [];
               app.wb.redraw();
@@ -2313,6 +2715,7 @@
 
         async init() {
           await this.db.init();
+          this.state.currentTaskDate = new Date().toISOString().split("T")[0];
           const legacy = localStorage.getItem("awesom_home_v2");
           if (legacy) {
             const data = JSON.parse(legacy);
@@ -2336,7 +2739,7 @@
             document.body.setAttribute("data-theme", this.state.theme);
             if (this.state.wallpaper) {
               document.querySelector(
-                ".wallpaper-overlay"
+                ".wallpaper-overlay",
               ).style.backgroundImage = `url('${this.state.wallpaper}')`;
               document.querySelector(".wallpaper-overlay").style.opacity = 1;
             }
@@ -2345,6 +2748,7 @@
         async saveSettings() {
           await this.db.put("settings", { id: "preferences", ...this.state });
         }
+
         startClock() {
           const u = () => {
             const n = new Date();
@@ -2366,12 +2770,15 @@
               h < 12
                 ? "Good Morning"
                 : h < 18
-                ? "Good Afternoon"
-                : "Good Evening";
+                  ? "Good Afternoon"
+                  : "Good Evening";
+            if (app.tools && app.tools.updateWorldClocks)
+              app.tools.updateWorldClocks();
           };
           u();
           setInterval(u, 1000);
         }
+
         async renderAll() {
           this.renderFavorites();
           this.renderNotes();
@@ -2389,37 +2796,32 @@
             .replace(/'/g, "&#039;");
         }
 
+        linkify(text) {
+          if (!text) return "";
+          const escaped = this.escapeHtml(text);
+          return escaped.replace(/((https?:\/\/|www\.)[^\s]+)/g, (url) => {
+            let href = url;
+            if (url.startsWith("www.")) href = "http://" + url;
+            return `<a href="${href}" target="_blank" style="color:var(--accent-hover);text-decoration:underline; pointer-events: auto;" onclick="event.stopPropagation()">${url}</a>`;
+          });
+        }
+
         async renderFavorites() {
           const i = await this.db.getAll("favorites");
           document.getElementById("favoritesGrid").innerHTML = i
             .map(
               (x) =>
-                `<a href="${this.escapeHtml(
-                  x.url
-                )}" class="favorite-item" target="_blank"><button class="favorite-delete" onclick="event.preventDefault(); app.deleteItem('favorites', '${
-                  x.id
-                }')"><i class="fas fa-times"></i></button><i class="${
-                  this.escapeHtml(x.icon) || "fas fa-globe"
-                } favorite-icon"></i><span style="font-weight:600;font-size:0.9rem;">${this.escapeHtml(
-                  x.name
-                )}</span></a>`
+                `<a href="${this.escapeHtml(x.url)}" class="favorite-item" target="_blank"><button class="favorite-delete" onclick="event.preventDefault(); app.deleteItem('favorites', '${x.id}')"><i class="fas fa-times"></i></button><i class="${this.escapeHtml(x.icon) || "fas fa-globe"} favorite-icon"></i><span style="font-weight:600;font-size:0.9rem;">${this.escapeHtml(x.name)}</span></a>`,
             )
             .join("");
         }
-
         async renderNotes() {
           const n = await this.db.getAll("notes");
           document.getElementById("recentNotesList").innerHTML = n
             .slice(0, 3)
             .map(
               (x) =>
-                `<div class="item-card" onclick="app.editNote('${
-                  x.id
-                }')"><div style="font-weight:600">${this.escapeHtml(
-                  x.title
-                )}</div><div style="font-size:0.8rem;opacity:0.7">${new Date(
-                  x.id
-                ).toLocaleDateString()}</div></div>`
+                `<div class="item-card" onclick="app.editNote('${x.id}')"><div style="font-weight:600">${this.escapeHtml(x.title)}</div><div style="font-size:0.8rem;opacity:0.7">${new Date(x.id).toLocaleDateString()}</div></div>`,
             )
             .join("");
           const q = (
@@ -2429,88 +2831,144 @@
             .filter(
               (x) =>
                 x.title.toLowerCase().includes(q) ||
-                x.content.toLowerCase().includes(q)
+                x.content.toLowerCase().includes(q),
             )
             .map(
               (x) =>
-                `<div class="section" style="padding:1rem;"><div class="section-header" style="margin-bottom:0.5rem"><strong>${this.escapeHtml(
-                  x.title
-                )}</strong><div><button class="btn-icon" onclick="app.editNote('${
-                  x.id
-                }')"><i class="fas fa-pen"></i></button><button class="btn-icon" onclick="app.deleteItem('notes', '${
-                  x.id
-                }')"><i class="fas fa-trash"></i></button></div></div><div style="white-space:pre-wrap;opacity:0.8">${this.escapeHtml(
-                  x.content
-                )}</div></div>`
+                `<div class="section" style="padding:1rem;"><div class="section-header" style="margin-bottom:0.5rem"><strong>${this.escapeHtml(x.title)}</strong><div><button class="btn-icon" onclick="app.editNote('${x.id}')"><i class="fas fa-pen"></i></button><button class="btn-icon" onclick="app.deleteItem('notes', '${x.id}')"><i class="fas fa-trash"></i></button></div></div><div style="white-space:pre-wrap;opacity:0.8">${this.linkify(x.content)}</div></div>`,
             )
             .join("");
+        }
+
+        setTaskDate(dateStr) {
+          this.state.currentTaskDate = dateStr;
+          this.renderTodos();
         }
 
         async renderTodos() {
           const t = await this.db.getAll("todos");
           const s = t.sort((a, b) => a.completed - b.completed);
-          document.getElementById("recentTodosList").innerHTML = s
-            .slice(0, 5)
-            .map(
-              (x) =>
-                `<div class="item-card ${
-                  x.completed ? "completed" : ""
-                }"><div style="display:flex;align-items:center;gap:10px;"><input type="checkbox" ${
-                  x.completed ? "checked" : ""
-                } onchange="app.toggleTodo('${
-                  x.id
-                }', this.checked)"><span>${this.escapeHtml(
-                  x.text
-                )}</span></div><div style="display:flex;gap:5px;"><button class="btn-icon" onclick="app.editTodo('${
-                  x.id
-                }')"><i class="fas fa-pen"></i></button><button class="btn-icon" onclick="app.deleteItem('todos', '${
-                  x.id
-                }')"><i class="fas fa-times"></i></button></div></div>`
-            )
-            .join("");
           const q = (
             document.getElementById("todoSearch")
               ? document.getElementById("todoSearch").value
               : ""
           ).toLowerCase();
-          if (document.getElementById("allTodosList"))
-            document.getElementById("allTodosList").innerHTML = s
-              .filter((x) => x.text.toLowerCase().includes(q))
-              .map(
-                (x) =>
-                  `<div class="item-card ${
-                    x.completed ? "completed" : ""
-                  }" style="margin-bottom:1rem;padding:1.5rem;"><div style="display:flex;align-items:center;gap:15px;width:100%"><input type="checkbox" ${
-                    x.completed ? "checked" : ""
-                  } onchange="app.toggleTodo('${
-                    x.id
-                  }',this.checked)" style="transform:scale(1.3)"><div style="flex:1"><div style="font-weight:600;font-size:1.1rem">${this.escapeHtml(
-                    x.text
-                  )}</div><div style="font-size:0.8rem;opacity:0.7">Created: ${new Date(
-                    x.id
-                  ).toLocaleDateString()}</div></div><button class="btn btn-sm" onclick="app.editTodo('${
-                    x.id
-                  }')"><i class="fas fa-pen"></i> Edit</button><button class="btn btn-danger btn-sm" onclick="app.deleteItem('todos','${
-                    x.id
-                  }')"><i class="fas fa-trash"></i> Delete</button></div></div>`
-              )
-              .join("");
+
+          // Dashboard: "Today's Agenda"
+          const todayStr = new Date().toISOString().split("T")[0];
+          const todaysTasks = s
+            .filter((x) => x.date === todayStr)
+            .sort((a, b) =>
+              (a.startTime || "").localeCompare(b.startTime || ""),
+            );
+          document.getElementById("recentTodosList").innerHTML =
+            todaysTasks.length
+              ? todaysTasks
+                  .map(
+                    (x) => `
+                <div class="item-card ${x.completed ? "completed" : ""}" style="align-items:flex-start;">
+                    <div style="display:flex;align-items:flex-start;gap:10px; width:100%; overflow:hidden;">
+                        <input type="checkbox" ${x.completed ? "checked" : ""} onchange="app.toggleTodo('${x.id}', this.checked)" style="margin-top:5px; flex-shrink:0;">
+                        <div style="flex:1; min-width:0;">
+                            <div style="font-weight:bold; white-space:pre-wrap; word-wrap:break-word;">${this.linkify(x.text)} <small style="color:var(--accent-color); font-weight:normal; white-space:nowrap;">${x.startTime || ""}</small></div>
+                            ${x.description ? `<div style="font-size:0.85rem; opacity:0.8; margin-top:4px; white-space:pre-wrap; word-wrap:break-word;">${this.linkify(x.description)}</div>` : ""}
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:5px; flex-shrink:0; margin-left:10px;">
+                        <button class="btn-icon" onclick="app.editTodo('${x.id}')"><i class="fas fa-pen"></i></button>
+                    </div>
+                </div>`,
+                  )
+                  .join("")
+              : '<div style="padding:1rem; opacity:0.6; text-align:center;">No tasks scheduled for today.</div>';
+
+          // Tasks Page: Calendar Layout
+          if (!document.getElementById("timelineGrid")) return;
+
+          const targetDate = this.state.currentTaskDate || todayStr;
+          document.getElementById("taskDatePicker").value = targetDate;
+
+          // Generate Timeline Background
+          const grid = document.getElementById("timelineGrid");
+          let gridHtml = "";
+          for (let i = 0; i <= 24; i++) {
+            gridHtml += `<div class="time-label" style="top:${i * 60}px">${i.toString().padStart(2, "0")}:00</div>`;
+          }
+
+          // Place Scheduled Tasks on Timeline
+          const scheduled = s.filter(
+            (x) => x.date === targetDate && x.text.toLowerCase().includes(q),
+          );
+          scheduled.forEach((x) => {
+            if (x.startTime) {
+              const [sh, sm] = x.startTime.split(":").map(Number);
+              const top = sh * 60 + sm;
+              let height = 60; // default 1 hour visual block
+              if (x.endTime) {
+                const [eh, em] = x.endTime.split(":").map(Number);
+                height = eh * 60 + em - top;
+                if (height < 20) height = 20; // minimum block size
+              }
+              gridHtml += `
+                    <div class="timebox-task ${x.completed ? "completed" : ""}" style="top:${top}px; height:${height}px;" onclick="app.editTodo('${x.id}')">
+                        <div class="timebox-title" style="white-space:pre-wrap; word-wrap:break-word;">${this.linkify(x.text)}</div>
+                        <div class="timebox-time" style="flex-shrink:0;">${x.startTime} - ${x.endTime || "?"}</div>
+                        ${x.description ? `<div style="font-size:0.75rem; opacity:0.8; margin-top:4px; white-space:pre-wrap; word-wrap:break-word; flex:1;">${this.linkify(x.description)}</div>` : ""}
+                    </div>`;
+            }
+          });
+          grid.innerHTML = gridHtml;
+
+          // Render Unscheduled / Backlog Tasks
+          const backlog = s.filter(
+            (x) =>
+              (!x.date || x.date !== targetDate || !x.startTime) &&
+              x.text.toLowerCase().includes(q),
+          );
+          document.getElementById("unscheduledTodosList").innerHTML =
+            backlog.length
+              ? backlog
+                  .map(
+                    (x) => `
+                <div class="backlog-item ${x.completed ? "completed" : ""}">
+                    <input type="checkbox" ${x.completed ? "checked" : ""} onchange="app.toggleTodo('${x.id}',this.checked)" style="margin-top:4px; flex-shrink:0;">
+                    <div style="flex:1; cursor:pointer; min-width:0;" onclick="app.editTodo('${x.id}')">
+                        <div style="font-weight:600; white-space:pre-wrap; word-wrap:break-word; margin-bottom:2px;">${this.linkify(x.text)}</div>
+                        ${x.description ? `<div style="font-size:0.8rem; opacity:0.8; margin-bottom:4px; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; word-wrap:break-word;">${this.linkify(x.description)}</div>` : ""}
+                        ${x.date ? `<div style="font-size:0.75rem; opacity:0.7">Scheduled: ${x.date}</div>` : ""}
+                    </div>
+                    <button class="btn-icon" style="width:25px;height:25px; flex-shrink:0; margin-left:10px;" onclick="event.stopPropagation(); app.deleteItem('todos', '${x.id}')"><i class="fas fa-times"></i></button>
+                </div>
+            `,
+                  )
+                  .join("")
+              : '<div style="opacity:0.6; text-align:center; padding:1rem;">No unscheduled tasks.</div>';
+
+          // Auto-scroll timeline to current time if looking at today
+          if (targetDate === todayStr && !this.state.timelineScrolled) {
+            const h = new Date().getHours();
+            const container = document.getElementById(
+              "timelineScrollContainer",
+            );
+            if (container) container.scrollTop = Math.max(0, h * 60 - 100);
+            this.state.timelineScrolled = true;
+          }
         }
 
         async renderAutomations() {
           const a = await this.db.getAll("automations");
           document.getElementById("automationGrid").innerHTML = a
             .map(
-              (x) =>
-                `<div class="section" style="padding:1.5rem;margin-bottom:0;"><h4 style="margin-bottom:0.5rem"><i class="fas fa-rocket"></i> ${this.escapeHtml(
-                  x.name
-                )}</h4><div style="font-size:0.8rem;opacity:0.7;margin-bottom:1rem;">${
-                  x.urls.length
-                } Actions</div><button class="btn btn-primary btn-sm" onclick="app.runAutomation('${
-                  x.id
-                }')">Launch</button><button class="btn btn-sm" onclick="app.deleteItem('automations','${
-                  x.id
-                }')" style="margin-left:0.5rem"><i class="fas fa-trash"></i></button></div>`
+              (x) => `
+                <div class="section" style="padding:1.5rem;margin-bottom:0;">
+                    <h4 style="margin-bottom:0.5rem"><i class="fas fa-rocket"></i> ${this.escapeHtml(x.name)}</h4>
+                    <div style="font-size:0.8rem;opacity:0.7;margin-bottom:1rem;">${x.urls.length} Actions</div>
+                    <div style="display:flex; gap:5px;">
+                        <button class="btn btn-primary btn-sm" style="flex:1" onclick="app.runAutomation('${x.id}')">Launch</button>
+                        <button class="btn btn-sm" onclick="app.editAutomation('${x.id}')" title="Edit"><i class="fas fa-pen"></i></button>
+                        <button class="btn btn-sm" onclick="app.deleteItem('automations','${x.id}')"><i class="fas fa-trash"></i></button>
+                    </div>
+                </div>`,
             )
             .join("");
         }
@@ -2521,10 +2979,10 @@
               JSON.stringify(
                 { type: "awesom_automations_export", data: a },
                 null,
-                2
+                2,
               ),
             ],
-            { type: "application/json" }
+            { type: "application/json" },
           );
           const u = URL.createObjectURL(b);
           const l = document.createElement("a");
@@ -2570,48 +3028,11 @@
               const v = x.bookmarks.filter(
                 (b) =>
                   b.title.toLowerCase().includes(q) ||
-                  b.url.toLowerCase().includes(q)
+                  b.url.toLowerCase().includes(q),
               );
               if (q && v.length === 0) return "";
               const o = sessionStorage.getItem(`f_${x.id}_c`) !== "true";
-              return `<div class="bookmark-folder"><div class="bookmark-folder-header" onclick="app.toggleFolder('${
-                x.id
-              }')"><span><i class="fas fa-folder${
-                o ? "-open" : ""
-              }"></i> ${this.escapeHtml(x.name)} <small>(${
-                x.bookmarks.length
-              })</small></span><div onclick="event.stopPropagation()"><button class="btn-icon" onclick="app.openBookmarkModal('${
-                x.id
-              }')"><i class="fas fa-plus"></i></button><button class="btn-icon" onclick="app.openFolderModal('${
-                x.id
-              }')"><i class="fas fa-pen"></i></button><button class="btn-icon" onclick="app.deleteItem('bookmarks','${
-                x.id
-              }')"><i class="fas fa-trash"></i></button></div></div><div class="bookmark-list" id="fl_${
-                x.id
-              }" style="${o ? "" : "display:none;"}">${v
-                .map(
-                  (b) =>
-                    `<div class="bookmark-item"><a href="${this.escapeHtml(
-                      b.url
-                    )}" target="_blank" class="bookmark-link"><img src="https://www.google.com/s2/favicons?domain=${
-                      new URL(b.url).hostname
-                    }&sz=32" width="16" height="16" onerror="this.style.display='none'"> ${this.escapeHtml(
-                      b.title
-                    )}</a><div style="display:flex;gap:2px;"><button class="btn-icon" style="width:25px;height:25px;font-size:0.8rem" onclick="app.addFavoriteFromBookmark('${
-                      x.id
-                    }','${
-                      b.id
-                    }')"><i class="fas fa-star"></i></button><button class="btn-icon" style="width:25px;height:25px;font-size:0.8rem" onclick="app.openBookmarkModal('${
-                      x.id
-                    }','${
-                      b.id
-                    }')"><i class="fas fa-pen"></i></button><button class="btn-icon" style="width:25px;height:25px;font-size:0.8rem" onclick="app.deleteBookmark('${
-                      x.id
-                    }','${
-                      b.id
-                    }')"><i class="fas fa-times"></i></button></div></div>`
-                )
-                .join("")}</div></div>`;
+              return `<div class="bookmark-folder"><div class="bookmark-folder-header" onclick="app.toggleFolder('${x.id}')"><span><i class="fas fa-folder${o ? "-open" : ""}"></i> ${this.escapeHtml(x.name)} <small>(${x.bookmarks.length})</small></span><div onclick="event.stopPropagation()"><button class="btn-icon" onclick="app.openBookmarkModal('${x.id}')"><i class="fas fa-plus"></i></button><button class="btn-icon" onclick="app.openFolderModal('${x.id}')"><i class="fas fa-pen"></i></button><button class="btn-icon" onclick="app.deleteItem('bookmarks','${x.id}')"><i class="fas fa-trash"></i></button></div></div><div class="bookmark-list" id="fl_${x.id}" style="${o ? "" : "display:none;"}">${v.map((b) => `<div class="bookmark-item"><a href="${this.escapeHtml(b.url)}" target="_blank" class="bookmark-link"><img src="https://www.google.com/s2/favicons?domain=${new URL(b.url).hostname}&sz=32" width="16" height="16" onerror="this.style.display='none'"> ${this.escapeHtml(b.title)}</a><div style="display:flex;gap:2px;"><button class="btn-icon" style="width:25px;height:25px;font-size:0.8rem" onclick="app.addFavoriteFromBookmark('${x.id}','${b.id}')"><i class="fas fa-star"></i></button><button class="btn-icon" style="width:25px;height:25px;font-size:0.8rem" onclick="app.openBookmarkModal('${x.id}','${b.id}')"><i class="fas fa-pen"></i></button><button class="btn-icon" style="width:25px;height:25px;font-size:0.8rem" onclick="app.deleteBookmark('${x.id}','${b.id}')"><i class="fas fa-times"></i></button></div></div>`).join("")}</div></div>`;
             })
             .join("");
         }
@@ -2621,7 +3042,7 @@
           l.style.display = h ? "grid" : "none";
           sessionStorage.setItem(`f_${id}_c`, !h);
           const i = l.previousElementSibling.querySelector(
-            ".fa-folder,.fa-folder-open"
+            ".fa-folder,.fa-folder-open",
           );
           if (i) i.className = h ? "fas fa-folder-open" : "fas fa-folder";
         }
@@ -2693,30 +3114,18 @@
           const p = a.map(async (s) => {
             try {
               const r = await fetch(
-                `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(
-                  s.url
-                )}`
+                `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(s.url)}`,
               );
               const d = await r.json();
-              return `<div class="feed-source"><div style="display:flex;justify-content:space-between;margin-bottom:1rem;border-bottom:1px solid var(--border-color);padding-bottom:0.5rem"><strong>${this.escapeHtml(
-                s.name
-              )}</strong>${
-                String(s.id).startsWith("def")
-                  ? ""
-                  : `<button class="btn-icon" style="width:25px;height:25px" onclick="app.deleteItem('feeds','${s.id}')"><i class="fas fa-trash"></i></button>`
-              }</div>${d.items
+              return `<div class="feed-source"><div style="display:flex;justify-content:space-between;margin-bottom:1rem;border-bottom:1px solid var(--border-color);padding-bottom:0.5rem"><strong>${this.escapeHtml(s.name)}</strong>${String(s.id).startsWith("def") ? "" : `<button class="btn-icon" style="width:25px;height:25px" onclick="app.deleteItem('feeds','${s.id}')"><i class="fas fa-trash"></i></button>`}</div>${d.items
                 .slice(0, 5)
                 .map(
                   (i) =>
-                    `<div class="feed-item"><a href="${this.escapeHtml(
-                      i.link
-                    )}" target="_blank">${this.escapeHtml(i.title)}</a></div>`
+                    `<div class="feed-item"><a href="${this.escapeHtml(i.link)}" target="_blank">${this.escapeHtml(i.title)}</a></div>`,
                 )
                 .join("")}</div>`;
             } catch (e) {
-              return `<div class="feed-source"><strong>${this.escapeHtml(
-                s.name
-              )}</strong><br><small>Failed.</small></div>`;
+              return `<div class="feed-source"><strong>${this.escapeHtml(s.name)}</strong><br><small>Failed.</small></div>`;
             }
           });
           const r = await Promise.all(p);
@@ -2740,13 +3149,40 @@
             this.renderTodos();
           }
         }
+
         async runAutomation(id) {
           if (/^\d+(\.\d+)?$/.test(id)) id = Number(id);
           const a = await this.db.getAll("automations");
           const x = a.find((i) => i.id == id);
           if (x && x.urls) {
-            if (confirm(`Open ${x.urls.length} tabs?`))
-              x.urls.forEach((u) => window.open(u, "_blank"));
+            let urlsToOpen = x.urls;
+            const hasVariable = urlsToOpen.some((u) => u.includes("{TARGET}"));
+            if (hasVariable) {
+              const target = prompt(
+                "Enter Target (e.g., IP, Domain, Hash) for this workflow:",
+              );
+              if (!target) return;
+              urlsToOpen = urlsToOpen.map((u) =>
+                u.replace(/{TARGET}/g, target),
+              );
+            }
+            if (
+              confirm(`Launch ${x.name}? Opening ${urlsToOpen.length} tabs...`)
+            ) {
+              urlsToOpen.forEach((u) => window.open(u, "_blank"));
+            }
+          }
+        }
+
+        async editAutomation(id) {
+          if (/^\d+(\.\d+)?$/.test(id)) id = Number(id);
+          const a = await this.db.getAll("automations");
+          const x = a.find((i) => i.id == id);
+          if (x) {
+            this.openModal("automationModal");
+            document.getElementById("autoId").value = x.id;
+            document.getElementById("autoName").value = x.name;
+            document.getElementById("autoUrls").value = x.urls.join("\n");
           }
         }
 
@@ -2773,9 +3209,8 @@
           const u = document.getElementById("bgUrlInput").value;
           this.state.wallpaper = u;
           await this.saveSettings();
-          document.querySelector(
-            ".wallpaper-overlay"
-          ).style.backgroundImage = `url('${u}')`;
+          document.querySelector(".wallpaper-overlay").style.backgroundImage =
+            `url('${u}')`;
           document.querySelector(".wallpaper-overlay").style.opacity = 1;
           this.closeModal("settingsModal");
         }
@@ -2867,6 +3302,7 @@
             document.getElementById("noteContent").value = x.content;
           }
         }
+
         async editTodo(id) {
           if (/^\d+(\.\d+)?$/.test(id)) id = Number(id);
           const t = await this.db.getAll("todos");
@@ -2875,6 +3311,10 @@
             this.openModal("todoModal");
             document.getElementById("todoId").value = x.id;
             document.getElementById("todoText").value = x.text;
+            document.getElementById("todoDesc").value = x.description || "";
+            document.getElementById("todoDate").value = x.date || "";
+            document.getElementById("todoStart").value = x.startTime || "";
+            document.getElementById("todoEnd").value = x.endTime || "";
           }
         }
 
@@ -2905,8 +3345,6 @@
           document.getElementById("settingsBtn").onclick = () =>
             this.openModal("settingsModal");
           document.getElementById("searchForm").onsubmit = (e) => {
-            // Fix: Allow default form submission to target="_blank"
-            // Do NOT call e.preventDefault();
             const eng = document.getElementById("searchEngineToggle").checked
               ? "perplexity"
               : "google";
@@ -2915,6 +3353,26 @@
                 ? "https://www.google.com/search"
                 : "https://www.perplexity.ai/search";
           };
+
+          // Grid Click to quick-add timebox
+          document
+            .getElementById("timelineGrid")
+            .addEventListener("click", (e) => {
+              if (
+                e.target.classList.contains("timeline-grid") ||
+                e.target.classList.contains("time-label")
+              ) {
+                const hour = Math.floor(e.offsetY / 60);
+                app.openModal("todoModal");
+                document.getElementById("todoDate").value =
+                  app.state.currentTaskDate ||
+                  new Date().toISOString().split("T")[0];
+                document.getElementById("todoStart").value =
+                  `${hour.toString().padStart(2, "0")}:00`;
+                document.getElementById("todoEnd").value =
+                  `${(hour + 1).toString().padStart(2, "0")}:00`;
+              }
+            });
 
           document.getElementById("favoriteForm").onsubmit = async (e) => {
             e.preventDefault();
@@ -2926,17 +3384,6 @@
             });
             this.closeModal("favoriteModal");
             this.renderFavorites();
-          };
-          document.getElementById("todoForm").onsubmit = async (e) => {
-            e.preventDefault();
-            const id = document.getElementById("todoId").value;
-            await this.db.put("todos", {
-              id: id ? (isNaN(id) ? id : Number(id)) : Date.now(),
-              text: document.getElementById("todoText").value,
-              completed: false,
-            });
-            this.closeModal("todoModal");
-            this.renderTodos();
           };
           document.getElementById("noteForm").onsubmit = async (e) => {
             e.preventDefault();
@@ -3004,15 +3451,41 @@
             this.closeModal("feedModal");
             this.loadFeeds();
           };
+
+          // TIMEBOX TODO SUBMIT
+          document.getElementById("todoForm").onsubmit = async (e) => {
+            e.preventDefault();
+            const id = document.getElementById("todoId").value;
+            let completed = false;
+            if (id) {
+              const existing = await this.db
+                .getAll("todos")
+                .then((ts) => ts.find((t) => String(t.id) === String(id)));
+              if (existing) completed = existing.completed;
+            }
+            await this.db.put("todos", {
+              id: id ? (isNaN(id) ? id : Number(id)) : Date.now(),
+              text: document.getElementById("todoText").value,
+              description: document.getElementById("todoDesc").value,
+              date: document.getElementById("todoDate").value,
+              startTime: document.getElementById("todoStart").value,
+              endTime: document.getElementById("todoEnd").value,
+              completed: completed,
+            });
+            this.closeModal("todoModal");
+            this.renderTodos();
+          };
+
           document.getElementById("automationForm").onsubmit = async (e) => {
             e.preventDefault();
+            const id = document.getElementById("autoId").value;
             const u = document
               .getElementById("autoUrls")
               .value.split("\n")
               .map((x) => x.trim())
               .filter((x) => x);
             await this.db.put("automations", {
-              id: Date.now(),
+              id: id ? (isNaN(id) ? id : Number(id)) : Date.now(),
               name: document.getElementById("autoName").value,
               urls: u,
             });
