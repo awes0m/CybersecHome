@@ -3,11 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Awes0m Cybersec Homepage v5.0</title>
+    <title>Awes0m Cybersec Homepage v5.0 (Timebox Edition)</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <!-- Add js-yaml for YAML validation and parsing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
     <style>
       /* --- CSS Variables & Theme --- */
       :root {
@@ -51,7 +53,11 @@
       body {
         font-family:
           -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background-color: #050505;
+        background-image:
+          linear-gradient(rgba(0, 255, 100, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 255, 100, 0.05) 1px, transparent 1px);
+        background-size: 40px 40px;
         min-height: 100vh;
         color: var(--text-color);
         line-height: 1.6;
@@ -64,17 +70,11 @@
         content: "";
         position: fixed;
         inset: 0;
-        background:
-          radial-gradient(
-            circle at 20% 50%,
-            rgba(120, 119, 198, 0.3),
-            transparent 50%
-          ),
-          radial-gradient(
-            circle at 80% 20%,
-            rgba(255, 119, 198, 0.3),
-            transparent 50%
-          );
+        background: radial-gradient(
+          circle at 50% 50%,
+          rgba(0, 200, 100, 0.05),
+          transparent 70%
+        );
         z-index: -2;
         pointer-events: none;
       }
@@ -1352,7 +1352,85 @@
             </div>
           </div>
 
-          <!-- NEW: CVE Lookup -->
+          <!-- NEW: Advanced JSON Validator & Corrector -->
+          <div class="tool-card">
+            <h3>
+              <i class="fas fa-brackets-curly"></i> JSON Validator & Corrector
+            </h3>
+            <textarea
+              id="jsonInput"
+              class="form-input"
+              rows="3"
+              placeholder='{ "ugly": "json", }'
+              style="margin: 10px 0"
+            ></textarea>
+            <div
+              style="
+                display: flex;
+                gap: 5px;
+                flex-wrap: wrap;
+                margin-bottom: 10px;
+              "
+            >
+              <button class="btn btn-sm" onclick="app.tools.formatJson()">
+                Format & Validate
+              </button>
+              <button
+                class="btn btn-sm btn-primary"
+                onclick="app.tools.fixJson()"
+              >
+                Auto-Correct
+              </button>
+              <button class="btn btn-sm" onclick="app.tools.jsonToYaml()">
+                Convert to YAML
+              </button>
+            </div>
+            <textarea
+              id="jsonOutput"
+              class="form-input"
+              rows="4"
+              style="font-family: monospace; font-size: 0.85rem"
+              readonly
+              placeholder="Output..."
+            ></textarea>
+          </div>
+
+          <!-- NEW: YAML Validator & Converter -->
+          <div class="tool-card">
+            <h3><i class="fas fa-file-code"></i> YAML Validator & Converter</h3>
+            <textarea
+              id="yamlInput"
+              class="form-input"
+              rows="3"
+              placeholder="version: '3'&#10;services:&#10;  web:&#10;    image: nginx"
+              style="margin: 10px 0"
+            ></textarea>
+            <div
+              style="
+                display: flex;
+                gap: 5px;
+                flex-wrap: wrap;
+                margin-bottom: 10px;
+              "
+            >
+              <button class="btn btn-sm" onclick="app.tools.validateYaml()">
+                Validate & Format
+              </button>
+              <button class="btn btn-sm" onclick="app.tools.yamlToJson()">
+                Convert to JSON
+              </button>
+            </div>
+            <textarea
+              id="yamlOutput"
+              class="form-input"
+              rows="4"
+              style="font-family: monospace; font-size: 0.85rem"
+              readonly
+              placeholder="Output..."
+            ></textarea>
+          </div>
+
+          <!-- CVE Lookup -->
           <div class="tool-card">
             <h3><i class="fas fa-bug"></i> CVE Database Lookup</h3>
             <input
@@ -1378,7 +1456,7 @@
             </div>
           </div>
 
-          <!-- NEW: DNS Lookup -->
+          <!-- DNS Lookup -->
           <div class="tool-card">
             <h3><i class="fas fa-network-wired"></i> Quick DNS Lookup</h3>
             <div style="display: flex; gap: 5px; margin: 10px 0">
@@ -1404,7 +1482,7 @@
             ></div>
           </div>
 
-          <!-- NEW: Hash Generator -->
+          <!-- Hash Generator -->
           <div class="tool-card">
             <h3><i class="fas fa-hashtag"></i> Hash Generator</h3>
             <textarea
@@ -1521,28 +1599,6 @@
               </button>
             </div>
             <div id="tsOutput" class="tool-output"></div>
-          </div>
-
-          <!-- JSON Prettify -->
-          <div class="tool-card">
-            <h3><i class="fas fa-brackets-curly"></i> JSON Format</h3>
-            <textarea
-              id="jsonInput"
-              class="form-input"
-              rows="3"
-              placeholder='{"ugly":"json"}'
-              style="margin: 10px 0"
-            ></textarea>
-            <button class="btn btn-sm" onclick="app.tools.formatJson()">
-              Prettify
-            </button>
-            <textarea
-              id="jsonOutput"
-              class="form-input"
-              rows="5"
-              style="margin-top: 10px; font-family: monospace"
-              readonly
-            ></textarea>
           </div>
 
           <!-- Email Header Analyzer -->
@@ -1760,7 +1816,7 @@
       </div>
     </div>
 
-    <!-- UPDATED: Task Modal with Description -->
+    <!-- Task Modal with Description -->
     <div class="modal-overlay" id="todoModal">
       <div class="modal">
         <div class="section-header">
@@ -1888,6 +1944,7 @@
           </button>
         </div>
         <form id="feedForm">
+          <input type="hidden" id="feedId" />
           <div class="form-group">
             <label class="form-label">Name</label
             ><input type="text" id="feedName" class="form-input" required />
@@ -1931,7 +1988,8 @@
             "
           >
             <label class="form-label"
-              ><i class="fas fa-bookmark"></i> Add from Bookmarks</label
+              ><i class="fas fa-bookmark"></i> Add from Bookmarks (Appends to
+              last step)</label
             >
             <div style="display: flex; gap: 0.5rem">
               <select
@@ -1949,17 +2007,32 @@
             </div>
           </div>
           <div class="form-group">
-            <label class="form-label">URLs (One per line)</label>
+            <label class="form-label">Steps (URLs per line)</label>
             <small style="opacity: 0.7; display: block; margin-bottom: 5px"
-              >Use <code>{TARGET}</code> to prompt for variable input.</small
+              >Use <code>{TARGET}</code> to prompt for variable input. Create
+              multiple steps for sequenced execution.</small
             >
-            <textarea
-              id="autoUrls"
-              class="form-input"
-              rows="5"
-              placeholder="https://example.com/search?q={TARGET}"
-              required
-            ></textarea>
+            <div
+              id="autoStepsContainer"
+              style="
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                max-height: 300px;
+                overflow-y: auto;
+                padding-right: 5px;
+              "
+            >
+              <!-- Textareas added via JS -->
+            </div>
+            <button
+              type="button"
+              class="btn btn-sm"
+              style="margin-top: 10px"
+              onclick="app.addAutoStep()"
+            >
+              <i class="fas fa-plus"></i> Add Step
+            </button>
           </div>
           <div style="display: flex; justify-content: flex-end; gap: 10px">
             <button
@@ -1973,6 +2046,41 @@
         </form>
       </div>
     </div>
+
+    <!-- Automation Runner Modal -->
+    <div class="modal-overlay" id="automationRunnerModal">
+      <div class="modal">
+        <div class="section-header">
+          <h3 id="runnerTitle" style="margin: 0">Running Workflow</h3>
+          <button
+            class="btn-icon"
+            onclick="app.closeModal('automationRunnerModal')"
+          >
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div
+          id="runnerTargetDisplay"
+          style="
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            word-break: break-all;
+          "
+        ></div>
+        <div
+          id="runnerStepsContainer"
+          style="
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+          "
+        ></div>
+      </div>
+    </div>
+
     <div class="modal-overlay" id="settingsModal">
       <div class="modal">
         <div class="section-header">
@@ -2039,8 +2147,6 @@
               Set Wallpaper
             </button>
           </div>
-
-          </div>
           <div
             style="
               background: var(--bg-secondary);
@@ -2048,15 +2154,134 @@
               border-radius: 8px;
             "
           >
-            <h4>ℹ️ About the Dev</h4>
-            <a href="https://awes0m.github.io/"
-      ><p style="font-size: 0.85rem; opacity: 0.7; margin-bottom: 10px">
-              Visit awe-Som's portfolio.
-            </p></a>
-            
+            <h4>Help & Documentation</h4>
+            <p style="font-size: 0.85rem; opacity: 0.7; margin-bottom: 10px">
+              Learn how to use the dashboard features and tools.
+            </p>
+            <button class="btn btn-primary" id="helpBtn">
+              <i class="fas fa-book"></i> View Documentation
+            </button>
           </div>
+        </div>
+      </div>
+    </div>
 
+    <!-- Documentation Modal -->
+    <div class="modal-overlay" id="helpModal">
+      <div class="modal" style="max-width: 750px">
+        <div class="section-header">
+          <h3><i class="fas fa-book"></i> Documentation & Guide</h3>
+          <button class="btn-icon" onclick="app.closeModal('helpModal')">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div
+          style="
+            max-height: 65vh;
+            overflow-y: auto;
+            padding-right: 15px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+          "
+        >
+          <h4 style="color: var(--accent-color); margin-top: 0">
+            ✅ Timebox Calendar & Tasks
+          </h4>
+          <ul style="margin-left: 1.5rem; margin-bottom: 1rem; opacity: 0.9">
+            <li>
+              <strong>Timeboxing:</strong> Schedule tasks with specific Start
+              and End times.
+            </li>
+            <li>
+              <strong>Calendar View:</strong> A 24-hour visual timeline grid.
+              Scheduled tasks appear as blocks reflecting their duration.
+            </li>
+            <li>
+              <strong>Quick-Add:</strong> Click anywhere on the calendar grid to
+              instantly create a task for that specific hour.
+            </li>
+            <li>
+              <strong>Dashboard Agenda:</strong> The main dashboard displays
+              your strictly chronological "Today's Agenda".
+            </li>
+          </ul>
 
+          <h4 style="color: var(--accent-color)">
+            🚀 Step-Wise Automations (Ops Flows)
+          </h4>
+          <ul style="margin-left: 1.5rem; margin-bottom: 1rem; opacity: 0.9">
+            <li>Create operational workflows to open multiple target URLs.</li>
+            <li>
+              <strong>Multi-Step Execution:</strong> Group URLs into sequential
+              "Steps". Launch Step 1, review the data, then launch Step 2.
+            </li>
+            <li>
+              <strong>Variable Injection:</strong> Use <code>{TARGET}</code> in
+              your URLs. Upon launch, the app prompts you for an indicator (IP,
+              domain, hash) and automatically injects it across all tabs.
+            </li>
+          </ul>
+
+          <h4 style="color: var(--accent-color)">
+            🔧 Cyber Utilities (Tools Page)
+          </h4>
+          <ul style="margin-left: 1.5rem; margin-bottom: 1rem; opacity: 0.9">
+            <li>
+              <strong>CVE Database Lookup:</strong> Input a CVE to quickly
+              search NVD, MITRE, or Exploit-DB.
+            </li>
+            <li>
+              <strong>Quick DNS Lookup:</strong> Native client-side DNS resolver
+              (A, MX, TXT, CNAME) via DoH.
+            </li>
+            <li>
+              <strong>Hash Generator:</strong> Local cryptographic hash
+              generation (SHA-256, SHA-384, SHA-512).
+            </li>
+            <li>
+              <strong>JSON Validator & Corrector:</strong> Prettify JSON,
+              validate structure, and heuristically auto-correct common syntax
+              errors.
+            </li>
+            <li>
+              <strong>YAML Validator & Converter:</strong> Validate DevSecOps
+              YAML manifests and convert them to JSON.
+            </li>
+            <li>
+              <strong>World Clock:</strong> Instant view of standard
+              security/global timezones.
+            </li>
+            <li>
+              <strong>Other Tools:</strong> CyberChef Lite, Advanced CIDR
+              Calculator, Unix Timestamp Converter, Email Header Analyzer, and
+              Indicators (Defang/Refang URLs, Check Public IP).
+            </li>
+          </ul>
+
+          <h4 style="color: var(--accent-color)">📚 Bookmarks & Notes</h4>
+          <ul style="margin-left: 1.5rem; margin-bottom: 1rem; opacity: 0.9">
+            <li>
+              <strong>Auto-linkify:</strong> URLs typed in notes and task
+              descriptions automatically become clickable hyperlinks.
+            </li>
+            <li>
+              <strong>Bookmark Import:</strong> Drag-and-drop a standard
+              <code>bookmarks.html</code> file to import, parse, and organize
+              folders.
+            </li>
+          </ul>
+
+          <h4 style="color: var(--accent-color)">🎨 Analyst Whiteboard</h4>
+          <ul style="margin-left: 1.5rem; margin-bottom: 1rem; opacity: 0.9">
+            <li>
+              Drawing canvas with grid background for network diagrams and
+              notes.
+            </li>
+            <li>
+              Includes Pen, Eraser, and Text tools. Export to PNG via "Save
+              Image".
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -2190,23 +2415,6 @@
             currentTaskDate: null,
             timelineScrolled: false,
           };
-          this.feedSources = [
-            {
-              id: "def_1",
-              name: "Krebs on Security",
-              url: "https://krebsonsecurity.com/feed/",
-            },
-            {
-              id: "def_2",
-              name: "Hacker News",
-              url: "https://news.ycombinator.com/rss",
-            },
-            {
-              id: "def_3",
-              name: "CISA Advisories",
-              url: "https://www.cisa.gov/cybersecurity-advisories/cybersecurity-advisories.xml",
-            },
-          ];
 
           this.tools = {
             b64Encode: () => {
@@ -2336,17 +2544,130 @@
                 )
                 .join("");
             },
+
+            // Enhanced JSON Tool with Auto-Corrector & JSON to YAML
             formatJson: () => {
+              const input = document.getElementById("jsonInput").value;
+              const output = document.getElementById("jsonOutput");
+              if (!input) return;
               try {
-                document.getElementById("jsonOutput").value = JSON.stringify(
-                  JSON.parse(document.getElementById("jsonInput").value),
+                const parsed = JSON.parse(input);
+                output.value =
+                  "✅ Valid JSON.\n\n" + JSON.stringify(parsed, null, 2);
+              } catch (e) {
+                output.value =
+                  "❌ Invalid JSON:\n" +
+                  e.message +
+                  "\n\nTry clicking 'Auto-Correct' if you have minor syntax issues.";
+              }
+            },
+            fixJson: () => {
+              let input = document.getElementById("jsonInput").value.trim();
+              const output = document.getElementById("jsonOutput");
+              if (!input) return;
+
+              try {
+                // Test if already valid
+                let parsed = JSON.parse(input);
+                output.value =
+                  "✅ JSON is already valid.\n\n" +
+                  JSON.stringify(parsed, null, 2);
+                document.getElementById("jsonInput").value = JSON.stringify(
+                  parsed,
                   null,
                   2,
                 );
-              } catch (e) {
-                document.getElementById("jsonOutput").value = "Invalid JSON";
+              } catch (e1) {
+                try {
+                  // Naive Auto-Correct Heuristics:
+                  // 1. Remove trailing commas in objects and arrays
+                  let fixed = input.replace(/,\s*([\]}])/g, "$1");
+                  // 2. Quote unquoted string keys
+                  fixed = fixed.replace(
+                    /([{,]\s*)([a-zA-Z0-9_]+)\s*:/g,
+                    '$1"$2":',
+                  );
+                  // 3. Replace single quotes wrapping values/keys with double quotes
+                  fixed = fixed.replace(/'([^']*)'/g, '"$1"');
+
+                  let parsed = JSON.parse(fixed);
+                  document.getElementById("jsonInput").value = JSON.stringify(
+                    parsed,
+                    null,
+                    2,
+                  );
+                  output.value =
+                    "✅ Auto-Corrected Successfully:\n\n" +
+                    JSON.stringify(parsed, null, 2);
+                } catch (e2) {
+                  output.value =
+                    "❌ Could not auto-correct. Deeper structural errors exist:\n" +
+                    e2.message;
+                }
               }
             },
+            jsonToYaml: () => {
+              const input = document.getElementById("jsonInput").value.trim();
+              const output = document.getElementById("jsonOutput");
+              if (!input) {
+                output.value = "Please enter JSON.";
+                return;
+              }
+              if (typeof jsyaml === "undefined") {
+                output.value = "YAML library is loading, please try again.";
+                return;
+              }
+              try {
+                const parsed = JSON.parse(input);
+                output.value =
+                  "✅ Converted to YAML:\n\n" + jsyaml.dump(parsed);
+              } catch (e) {
+                output.value =
+                  "❌ Invalid JSON. Cannot convert. Try 'Auto-Correct' first:\n" +
+                  e.message;
+              }
+            },
+
+            // YAML Validator & Converter
+            validateYaml: () => {
+              const input = document.getElementById("yamlInput").value;
+              const output = document.getElementById("yamlOutput");
+              if (!input) {
+                output.value = "Please enter YAML.";
+                return;
+              }
+              if (typeof jsyaml === "undefined") {
+                output.value = "YAML library is loading, please try again.";
+                return;
+              }
+              try {
+                const doc = jsyaml.load(input);
+                output.value =
+                  "✅ YAML is Valid!\n\nFormatted Output:\n" + jsyaml.dump(doc);
+              } catch (e) {
+                output.value = "❌ YAML Syntax Error:\n" + e.message;
+              }
+            },
+            yamlToJson: () => {
+              const input = document.getElementById("yamlInput").value;
+              const output = document.getElementById("yamlOutput");
+              if (!input) {
+                output.value = "Please enter YAML.";
+                return;
+              }
+              if (typeof jsyaml === "undefined") {
+                output.value = "YAML library is loading, please try again.";
+                return;
+              }
+              try {
+                const doc = jsyaml.load(input);
+                output.value = JSON.stringify(doc, null, 2);
+              } catch (e) {
+                output.value =
+                  "❌ Cannot convert. YAML Syntax Error:\n" + e.message;
+              }
+            },
+
             checkIp: async () => {
               document.getElementById("ipOutput").textContent = "Checking...";
               try {
@@ -2357,8 +2678,6 @@
                 document.getElementById("ipOutput").textContent = "Failed";
               }
             },
-
-            // NEW TOOLS
             lookupCVE: (source) => {
               let cve = document
                 .getElementById("cveInput")
@@ -2385,14 +2704,12 @@
               }
               out.textContent = "Querying DNS...";
               try {
-                // Using Google's Public DNS-over-HTTPS
                 const r = await fetch(
                   `https://dns.google/resolve?name=${encodeURIComponent(domain)}&type=ANY`,
                 );
                 const d = await r.json();
                 if (d.Answer && d.Answer.length > 0) {
                   out.textContent = d.Answer.map((a) => {
-                    // Map common Type IDs to readable names
                     const typeMap = {
                       1: "A",
                       2: "NS",
@@ -2716,13 +3033,53 @@
         async init() {
           await this.db.init();
           this.state.currentTaskDate = new Date().toISOString().split("T")[0];
-          const legacy = localStorage.getItem("awesom_home_v2");
-          if (legacy) {
-            const data = JSON.parse(legacy);
-            if (data.favorites)
-              data.favorites.forEach((f) => this.db.put("favorites", f));
-            localStorage.removeItem("awesom_home_v2");
+
+          // Added robust try-catch around legacy migration to prevent startup crashes
+          try {
+            const legacy = localStorage.getItem("awesom_home_v2");
+            if (legacy) {
+              const data = JSON.parse(legacy);
+              if (data.favorites)
+                data.favorites.forEach((f) => this.db.put("favorites", f));
+              localStorage.removeItem("awesom_home_v2");
+            }
+          } catch (e) {
+            console.warn("Legacy migration skipped.", e);
           }
+
+          // NEW SEEDING LOGIC: Populate default Intel Feeds into IndexedDB so they are editable/deletable
+          try {
+            const existingFeeds = await this.db.getAll("feeds");
+            if (
+              existingFeeds.length === 0 &&
+              !localStorage.getItem("awesom_feeds_seeded_v5")
+            ) {
+              const defaultFeeds = [
+                {
+                  id: "def_1",
+                  name: "Krebs on Security",
+                  url: "https://krebsonsecurity.com/feed/",
+                },
+                {
+                  id: "def_2",
+                  name: "Hacker News",
+                  url: "https://news.ycombinator.com/rss",
+                },
+                {
+                  id: "def_3",
+                  name: "CISA Advisories",
+                  url: "https://www.cisa.gov/cybersecurity-advisories/cybersecurity-advisories.xml",
+                },
+              ];
+              for (const f of defaultFeeds) {
+                await this.db.put("feeds", f);
+              }
+              localStorage.setItem("awesom_feeds_seeded_v5", "true");
+            }
+          } catch (e) {
+            console.error("Error seeding feeds:", e);
+          }
+
           this.loadSettings();
           this.startClock();
           this.renderAll();
@@ -2772,8 +3129,8 @@
                 : h < 18
                   ? "Good Afternoon"
                   : "Good Evening";
-            if (app.tools && app.tools.updateWorldClocks)
-              app.tools.updateWorldClocks();
+            if (this.tools && this.tools.updateWorldClocks)
+              this.tools.updateWorldClocks();
           };
           u();
           setInterval(u, 1000);
@@ -2815,6 +3172,7 @@
             )
             .join("");
         }
+
         async renderNotes() {
           const n = await this.db.getAll("notes");
           document.getElementById("recentNotesList").innerHTML = n
@@ -2827,11 +3185,12 @@
           const q = (
             document.getElementById("noteSearch").value || ""
           ).toLowerCase();
+          // FIXED: Added fallback OR strings to prevent missing content from crashing toLowerCase()
           document.getElementById("allNotesList").innerHTML = n
             .filter(
               (x) =>
-                x.title.toLowerCase().includes(q) ||
-                x.content.toLowerCase().includes(q),
+                (x.title || "").toLowerCase().includes(q) ||
+                (x.content || "").toLowerCase().includes(q),
             )
             .map(
               (x) =>
@@ -2895,9 +3254,10 @@
             gridHtml += `<div class="time-label" style="top:${i * 60}px">${i.toString().padStart(2, "0")}:00</div>`;
           }
 
-          // Place Scheduled Tasks on Timeline
+          // Place Scheduled Tasks on Timeline. FIXED: Check for text validity
           const scheduled = s.filter(
-            (x) => x.date === targetDate && x.text.toLowerCase().includes(q),
+            (x) =>
+              x.date === targetDate && (x.text || "").toLowerCase().includes(q),
           );
           scheduled.forEach((x) => {
             if (x.startTime) {
@@ -2919,11 +3279,11 @@
           });
           grid.innerHTML = gridHtml;
 
-          // Render Unscheduled / Backlog Tasks
+          // Render Unscheduled / Backlog Tasks. FIXED: Check for text validity
           const backlog = s.filter(
             (x) =>
               (!x.date || x.date !== targetDate || !x.startTime) &&
-              x.text.toLowerCase().includes(q),
+              (x.text || "").toLowerCase().includes(q),
           );
           document.getElementById("unscheduledTodosList").innerHTML =
             backlog.length
@@ -2944,7 +3304,6 @@
                   .join("")
               : '<div style="opacity:0.6; text-align:center; padding:1rem;">No unscheduled tasks.</div>';
 
-          // Auto-scroll timeline to current time if looking at today
           if (targetDate === todayStr && !this.state.timelineScrolled) {
             const h = new Date().getHours();
             const container = document.getElementById(
@@ -2958,18 +3317,24 @@
         async renderAutomations() {
           const a = await this.db.getAll("automations");
           document.getElementById("automationGrid").innerHTML = a
-            .map(
-              (x) => `
+            .map((x) => {
+              const stepCount = x.steps ? x.steps.length : x.urls ? 1 : 0;
+              const totalUrls = x.steps
+                ? x.steps.reduce((acc, s) => acc + s.length, 0)
+                : x.urls
+                  ? x.urls.length
+                  : 0;
+              return `
                 <div class="section" style="padding:1.5rem;margin-bottom:0;">
                     <h4 style="margin-bottom:0.5rem"><i class="fas fa-rocket"></i> ${this.escapeHtml(x.name)}</h4>
-                    <div style="font-size:0.8rem;opacity:0.7;margin-bottom:1rem;">${x.urls.length} Actions</div>
+                    <div style="font-size:0.8rem;opacity:0.7;margin-bottom:1rem;">${stepCount} Steps (${totalUrls} Actions)</div>
                     <div style="display:flex; gap:5px;">
                         <button class="btn btn-primary btn-sm" style="flex:1" onclick="app.runAutomation('${x.id}')">Launch</button>
                         <button class="btn btn-sm" onclick="app.editAutomation('${x.id}')" title="Edit"><i class="fas fa-pen"></i></button>
                         <button class="btn btn-sm" onclick="app.deleteItem('automations','${x.id}')"><i class="fas fa-trash"></i></button>
                     </div>
-                </div>`,
-            )
+                </div>`;
+            })
             .join("");
         }
         async exportAutomations() {
@@ -2998,7 +3363,7 @@
               const j = JSON.parse(e.target.result);
               const i = (Array.isArray(j) ? j : j.data) || [];
               for (const x of i) {
-                if (x.name && x.urls) {
+                if (x.name && (x.urls || x.steps)) {
                   x.id = Date.now() + Math.random();
                   await this.db.put("automations", x);
                 }
@@ -3023,19 +3388,30 @@
               '<div style="text-align:center;padding:2rem;opacity:0.7">No bookmarks.</div>';
             return;
           }
+
+          // FIXED: Safely attempt to parse the URL. If it's a Chrome/Extension internal URL or malformed, default to empty.
+          const getHostname = (url) => {
+            try {
+              return new URL(url).hostname;
+            } catch (e) {
+              return "";
+            }
+          };
+
           c.innerHTML = f
             .map((x) => {
               const v = x.bookmarks.filter(
                 (b) =>
-                  b.title.toLowerCase().includes(q) ||
-                  b.url.toLowerCase().includes(q),
+                  (b.title || "").toLowerCase().includes(q) ||
+                  (b.url || "").toLowerCase().includes(q),
               );
               if (q && v.length === 0) return "";
               const o = sessionStorage.getItem(`f_${x.id}_c`) !== "true";
-              return `<div class="bookmark-folder"><div class="bookmark-folder-header" onclick="app.toggleFolder('${x.id}')"><span><i class="fas fa-folder${o ? "-open" : ""}"></i> ${this.escapeHtml(x.name)} <small>(${x.bookmarks.length})</small></span><div onclick="event.stopPropagation()"><button class="btn-icon" onclick="app.openBookmarkModal('${x.id}')"><i class="fas fa-plus"></i></button><button class="btn-icon" onclick="app.openFolderModal('${x.id}')"><i class="fas fa-pen"></i></button><button class="btn-icon" onclick="app.deleteItem('bookmarks','${x.id}')"><i class="fas fa-trash"></i></button></div></div><div class="bookmark-list" id="fl_${x.id}" style="${o ? "" : "display:none;"}">${v.map((b) => `<div class="bookmark-item"><a href="${this.escapeHtml(b.url)}" target="_blank" class="bookmark-link"><img src="https://www.google.com/s2/favicons?domain=${new URL(b.url).hostname}&sz=32" width="16" height="16" onerror="this.style.display='none'"> ${this.escapeHtml(b.title)}</a><div style="display:flex;gap:2px;"><button class="btn-icon" style="width:25px;height:25px;font-size:0.8rem" onclick="app.addFavoriteFromBookmark('${x.id}','${b.id}')"><i class="fas fa-star"></i></button><button class="btn-icon" style="width:25px;height:25px;font-size:0.8rem" onclick="app.openBookmarkModal('${x.id}','${b.id}')"><i class="fas fa-pen"></i></button><button class="btn-icon" style="width:25px;height:25px;font-size:0.8rem" onclick="app.deleteBookmark('${x.id}','${b.id}')"><i class="fas fa-times"></i></button></div></div>`).join("")}</div></div>`;
+              return `<div class="bookmark-folder"><div class="bookmark-folder-header" onclick="app.toggleFolder('${x.id}')"><span><i class="fas fa-folder${o ? "-open" : ""}"></i> ${this.escapeHtml(x.name)} <small>(${x.bookmarks.length})</small></span><div onclick="event.stopPropagation()"><button class="btn-icon" onclick="app.openBookmarkModal('${x.id}')"><i class="fas fa-plus"></i></button><button class="btn-icon" onclick="app.openFolderModal('${x.id}')"><i class="fas fa-pen"></i></button><button class="btn-icon" onclick="app.deleteItem('bookmarks','${x.id}')"><i class="fas fa-trash"></i></button></div></div><div class="bookmark-list" id="fl_${x.id}" style="${o ? "" : "display:none;"}">${v.map((b) => `<div class="bookmark-item"><a href="${this.escapeHtml(b.url)}" target="_blank" class="bookmark-link"><img src="https://www.google.com/s2/favicons?domain=${getHostname(b.url)}&sz=32" width="16" height="16" onerror="this.style.display='none'"> ${this.escapeHtml(b.title)}</a><div style="display:flex;gap:2px;"><button class="btn-icon" style="width:25px;height:25px;font-size:0.8rem" onclick="app.addFavoriteFromBookmark('${x.id}','${b.id}')"><i class="fas fa-star"></i></button><button class="btn-icon" style="width:25px;height:25px;font-size:0.8rem" onclick="app.openBookmarkModal('${x.id}','${b.id}')"><i class="fas fa-pen"></i></button><button class="btn-icon" style="width:25px;height:25px;font-size:0.8rem" onclick="app.deleteBookmark('${x.id}','${b.id}')"><i class="fas fa-times"></i></button></div></div>`).join("")}</div></div>`;
             })
             .join("");
         }
+
         toggleFolder(id) {
           const l = document.getElementById(`fl_${id}`);
           const h = l.style.display === "none";
@@ -3109,15 +3485,43 @@
         async loadFeeds() {
           const g = document.getElementById("feedGrid");
           g.innerHTML = "Loading...";
-          const c = await this.db.getAll("feeds");
-          const a = [...this.feedSources, ...c];
+          const a = await this.db.getAll("feeds");
           const p = a.map(async (s) => {
             try {
-              const r = await fetch(
-                `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(s.url)}`,
-              );
-              const d = await r.json();
-              return `<div class="feed-source"><div style="display:flex;justify-content:space-between;margin-bottom:1rem;border-bottom:1px solid var(--border-color);padding-bottom:0.5rem"><strong>${this.escapeHtml(s.name)}</strong>${String(s.id).startsWith("def") ? "" : `<button class="btn-icon" style="width:25px;height:25px" onclick="app.deleteItem('feeds','${s.id}')"><i class="fas fa-trash"></i></button>`}</div>${d.items
+              let items = [];
+              try {
+                const r = await fetch(
+                  `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(s.url)}`,
+                );
+                const d = await r.json();
+                if (d.status === "ok" && d.items && d.items.length > 0)
+                  items = d.items;
+                else throw new Error("API blocked or failed");
+              } catch (e1) {
+                const res = await fetch(
+                  `https://api.allorigins.win/get?url=${encodeURIComponent(s.url)}`,
+                );
+                const pData = await res.json();
+                if (!pData.contents) throw new Error("Proxy failed");
+                const xml = new DOMParser().parseFromString(
+                  pData.contents,
+                  "text/xml",
+                );
+                const nodes = Array.from(xml.querySelectorAll("item, entry"));
+                if (nodes.length === 0) throw new Error("No feed items found");
+                items = nodes.map((n) => {
+                  const t = n.querySelector("title");
+                  const l = n.querySelector("link");
+                  return {
+                    title: t ? t.textContent.trim() : "No Title",
+                    link: l
+                      ? l.textContent.trim() || l.getAttribute("href")
+                      : "#",
+                  };
+                });
+              }
+
+              return `<div class="feed-source"><div style="display:flex;justify-content:space-between;margin-bottom:1rem;border-bottom:1px solid var(--border-color);padding-bottom:0.5rem"><strong>${this.escapeHtml(s.name)}</strong><div style="display:flex; gap:5px;"><button class="btn-icon" style="width:25px;height:25px" onclick="app.editFeed('${s.id}')" title="Edit"><i class="fas fa-pen"></i></button><button class="btn-icon" style="width:25px;height:25px" onclick="app.deleteItem('feeds','${s.id}')" title="Delete"><i class="fas fa-trash"></i></button></div></div>${items
                 .slice(0, 5)
                 .map(
                   (i) =>
@@ -3125,7 +3529,7 @@
                 )
                 .join("")}</div>`;
             } catch (e) {
-              return `<div class="feed-source"><strong>${this.escapeHtml(s.name)}</strong><br><small>Failed.</small></div>`;
+              return `<div class="feed-source"><div style="display:flex;justify-content:space-between;margin-bottom:1rem;border-bottom:1px solid var(--border-color);padding-bottom:0.5rem"><strong style="color:var(--danger-color);"><i class="fas fa-exclamation-triangle"></i> ${this.escapeHtml(s.name)}</strong><div style="display:flex; gap:5px;"><button class="btn-icon" style="width:25px;height:25px" onclick="app.editFeed('${s.id}')" title="Edit"><i class="fas fa-pen"></i></button><button class="btn-icon" style="width:25px;height:25px" onclick="app.deleteItem('feeds','${s.id}')" title="Delete"><i class="fas fa-trash"></i></button></div></div><small style="opacity:0.7">Failed to load RSS feed. The URL might be defunct or blocked.</small></div>`;
             }
           });
           const r = await Promise.all(p);
@@ -3154,24 +3558,78 @@
           if (/^\d+(\.\d+)?$/.test(id)) id = Number(id);
           const a = await this.db.getAll("automations");
           const x = a.find((i) => i.id == id);
-          if (x && x.urls) {
-            let urlsToOpen = x.urls;
-            const hasVariable = urlsToOpen.some((u) => u.includes("{TARGET}"));
+          if (x) {
+            let steps = x.steps || (x.urls ? [x.urls] : []);
+            if (steps.length === 0) return;
+
+            const hasVariable = steps.some((step) =>
+              step.some((u) => u.includes("{TARGET}")),
+            );
+            let target = "";
             if (hasVariable) {
-              const target = prompt(
+              target = prompt(
                 "Enter Target (e.g., IP, Domain, Hash) for this workflow:",
               );
-              if (!target) return;
-              urlsToOpen = urlsToOpen.map((u) =>
-                u.replace(/{TARGET}/g, target),
-              );
+              if (!target) return; // Cancelled
             }
-            if (
-              confirm(`Launch ${x.name}? Opening ${urlsToOpen.length} tabs...`)
-            ) {
-              urlsToOpen.forEach((u) => window.open(u, "_blank"));
-            }
+
+            // Process URLs and store in app state for the runner
+            app.currentRunnerSteps = steps.map((stepUrls) =>
+              stepUrls.map((u) =>
+                target ? u.replace(/{TARGET}/g, target) : u,
+              ),
+            );
+
+            document.getElementById("runnerTitle").textContent =
+              `Running: ${x.name}`;
+            document.getElementById("runnerTargetDisplay").textContent = target
+              ? `Target injected: ${target}`
+              : "";
+            this.renderRunnerSteps();
+            this.openModal("automationRunnerModal");
           }
+        }
+
+        renderRunnerSteps() {
+          const container = document.getElementById("runnerStepsContainer");
+          container.innerHTML = app.currentRunnerSteps
+            .map(
+              (urls, idx) => `
+                <div class="item-card" style="display:flex; justify-content:space-between; align-items:center;">
+                    <div>
+                        <div style="font-weight:600">Step ${idx + 1}</div>
+                        <div style="font-size:0.8rem; opacity:0.7">${urls.length} Action(s)</div>
+                    </div>
+                    <button class="btn btn-primary btn-sm" onclick="app.launchAutoStep(${idx}, this)">Launch Step</button>
+                </div>
+            `,
+            )
+            .join("");
+        }
+
+        launchAutoStep(idx, btnNode) {
+          const urls = app.currentRunnerSteps[idx];
+          urls.forEach((u) => window.open(u, "_blank"));
+          if (btnNode) {
+            btnNode.textContent = "Launched ✓";
+            btnNode.classList.remove("btn-primary");
+            btnNode.style.opacity = "0.6";
+          }
+        }
+
+        addAutoStep(content = "") {
+          const container = document.getElementById("autoStepsContainer");
+          const stepCount = container.children.length + 1;
+          const wrapper = document.createElement("div");
+          wrapper.style.position = "relative";
+          wrapper.innerHTML = `
+                <div style="font-size:0.8rem; opacity:0.8; margin-bottom:2px; display:flex; justify-content:space-between;">
+                    <span>Step ${stepCount}</span>
+                    <span style="cursor:pointer; color:var(--danger-color);" onclick="this.parentElement.parentElement.remove()">Remove</span>
+                </div>
+                <textarea class="form-input auto-step-textarea" rows="3" placeholder="https://example.com/search?q={TARGET}" required>${content}</textarea>
+            `;
+          container.appendChild(wrapper);
         }
 
         async editAutomation(id) {
@@ -3182,7 +3640,12 @@
             this.openModal("automationModal");
             document.getElementById("autoId").value = x.id;
             document.getElementById("autoName").value = x.name;
-            document.getElementById("autoUrls").value = x.urls.join("\n");
+
+            const container = document.getElementById("autoStepsContainer");
+            container.innerHTML = "";
+            let steps = x.steps || (x.urls ? [x.urls] : []);
+            if (steps.length === 0) steps = [[]];
+            steps.forEach((stepUrls) => this.addAutoStep(stepUrls.join("\n")));
           }
         }
 
@@ -3214,44 +3677,23 @@
           document.querySelector(".wallpaper-overlay").style.opacity = 1;
           this.closeModal("settingsModal");
         }
+
         openModal(id) {
           const m = document.getElementById(id);
           m.classList.add("active");
-          if (id === "automationModal") this.populateBookmarkPicker();
           const f = m.querySelector("form");
           if (f) {
             f.reset();
             const h = f.querySelector('input[type="hidden"]');
             if (h) h.value = "";
           }
-        }
-        openBookmarkModal(fid, bid = null) {
-          this.openModal("bookmarkModal");
-          document.getElementById("bmFolderId").value = fid;
-          if (bid) {
-            this.db.getAll("bookmarks").then((fs) => {
-              const f = fs.find((x) => String(x.id) === String(fid));
-              const b = f?.bookmarks.find((x) => x.id == bid);
-              if (b) {
-                document.getElementById("bmId").value = bid;
-                document.getElementById("bmTitle").value = b.title;
-                document.getElementById("bmUrl").value = b.url;
-              }
-            });
+          if (id === "automationModal") {
+            this.populateBookmarkPicker();
+            document.getElementById("autoStepsContainer").innerHTML = "";
+            this.addAutoStep();
           }
         }
-        openFolderModal(fid = null) {
-          this.openModal("folderModal");
-          if (fid) {
-            this.db.getAll("bookmarks").then((fs) => {
-              const f = fs.find((x) => String(x.id) === String(fid));
-              if (f) {
-                document.getElementById("folderId").value = fid;
-                document.getElementById("folderName").value = f.name;
-              }
-            });
-          }
-        }
+
         closeModal(id) {
           document.getElementById(id).classList.remove("active");
         }
@@ -3303,6 +3745,18 @@
           }
         }
 
+        async editFeed(id) {
+          if (/^\d+(\.\d+)?$/.test(id)) id = Number(id);
+          const f = await this.db.getAll("feeds");
+          const x = f.find((i) => i.id == id);
+          if (x) {
+            this.openModal("feedModal");
+            document.getElementById("feedId").value = x.id;
+            document.getElementById("feedName").value = x.name;
+            document.getElementById("feedUrl").value = x.url;
+          }
+        }
+
         async editTodo(id) {
           if (/^\d+(\.\d+)?$/.test(id)) id = Number(id);
           const t = await this.db.getAll("todos");
@@ -3344,6 +3798,13 @@
             this.openModal("settingsModal");
           document.getElementById("settingsBtn").onclick = () =>
             this.openModal("settingsModal");
+
+          // Open Help Modal from Settings
+          document.getElementById("helpBtn").onclick = () => {
+            this.closeModal("settingsModal");
+            this.openModal("helpModal");
+          };
+
           document.getElementById("searchForm").onsubmit = (e) => {
             const eng = document.getElementById("searchEngineToggle").checked
               ? "perplexity"
@@ -3443,8 +3904,9 @@
           };
           document.getElementById("feedForm").onsubmit = async (e) => {
             e.preventDefault();
+            const id = document.getElementById("feedId").value;
             await this.db.put("feeds", {
-              id: Date.now(),
+              id: id ? (isNaN(id) ? id : Number(id)) : Date.now(),
               name: document.getElementById("feedName").value,
               url: document.getElementById("feedUrl").value,
             });
@@ -3479,24 +3941,37 @@
           document.getElementById("automationForm").onsubmit = async (e) => {
             e.preventDefault();
             const id = document.getElementById("autoId").value;
-            const u = document
-              .getElementById("autoUrls")
-              .value.split("\n")
-              .map((x) => x.trim())
-              .filter((x) => x);
+
+            const textareas = document.querySelectorAll(".auto-step-textarea");
+            let newSteps = [];
+            textareas.forEach((ta) => {
+              const urls = ta.value
+                .split("\n")
+                .map((x) => x.trim())
+                .filter((x) => x);
+              if (urls.length > 0) newSteps.push(urls);
+            });
+
             await this.db.put("automations", {
               id: id ? (isNaN(id) ? id : Number(id)) : Date.now(),
               name: document.getElementById("autoName").value,
-              urls: u,
+              steps: newSteps,
+              urls: [],
             });
             this.closeModal("automationModal");
             this.renderAutomations();
           };
+
           document.getElementById("addBmToAutoBtn").onclick = () => {
             const p = document.getElementById("autoBmPicker");
             if (p.value) {
-              const t = document.getElementById("autoUrls");
-              t.value += (t.value ? "\n" : "") + p.value;
+              const textareas = document.querySelectorAll(
+                ".auto-step-textarea",
+              );
+              if (textareas.length > 0) {
+                const lastTa = textareas[textareas.length - 1];
+                lastTa.value += (lastTa.value ? "\n" : "") + p.value;
+              }
             }
           };
           document.getElementById("bmImportInput").onchange = (e) => {
